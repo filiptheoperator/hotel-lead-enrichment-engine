@@ -10,6 +10,8 @@ CLICKUP_DIR = Path("outputs/clickup")
 QA_DIR = Path("data/qa")
 DRY_RUN_SAMPLE_PATH = QA_DIR / "clickup_import_dry_run_sample.csv"
 DRY_RUN_NOTES_PATH = QA_DIR / "clickup_import_dry_run_notes.txt"
+HIGH_DRY_RUN_SAMPLE_PATH = QA_DIR / "clickup_import_dry_run_sample_high_only.csv"
+HIGH_DRY_RUN_NOTES_PATH = QA_DIR / "clickup_import_dry_run_notes_high_only.txt"
 
 
 def load_project_config() -> dict:
@@ -82,11 +84,38 @@ def save_dry_run_sample(sample_df: pd.DataFrame, notes: list[str]) -> tuple[Path
     return DRY_RUN_SAMPLE_PATH, DRY_RUN_NOTES_PATH
 
 
+def build_high_only_dry_run_sample() -> tuple[pd.DataFrame, list[str]]:
+    sample_df, _, _ = build_dry_run_sample()
+    high_sample_df = sample_df.copy()
+    if "Priority" in high_sample_df.columns:
+        high_sample_df = high_sample_df[
+            high_sample_df["Priority"].fillna("").astype(str).str.strip().isin(["2", "2.0"])
+        ].copy()
+    notes = [
+        "High-only dry run sample.",
+        f"Vybraná veľkosť High-only sample: {len(high_sample_df)}",
+        "Field-by-field check template platí rovnako ako pre full sample.",
+        "Neoverené: správanie konkrétneho ClickUp workspace pri importe.",
+    ]
+    return high_sample_df, notes
+
+
+def save_high_only_dry_run_sample(sample_df: pd.DataFrame, notes: list[str]) -> tuple[Path, Path]:
+    QA_DIR.mkdir(parents=True, exist_ok=True)
+    sample_df.to_csv(HIGH_DRY_RUN_SAMPLE_PATH, index=False)
+    HIGH_DRY_RUN_NOTES_PATH.write_text("\n".join(notes), encoding="utf-8")
+    return HIGH_DRY_RUN_SAMPLE_PATH, HIGH_DRY_RUN_NOTES_PATH
+
+
 def main() -> None:
     sample_df, notes, _ = build_dry_run_sample()
     sample_path, notes_path = save_dry_run_sample(sample_df, notes)
+    high_sample_df, high_notes = build_high_only_dry_run_sample()
+    high_sample_path, high_notes_path = save_high_only_dry_run_sample(high_sample_df, high_notes)
     print(f"ClickUp dry run sample uložený do: {sample_path}")
     print(f"ClickUp dry run notes uložené do: {notes_path}")
+    print(f"ClickUp high-only dry run sample uložený do: {high_sample_path}")
+    print(f"ClickUp high-only dry run notes uložené do: {high_notes_path}")
     print("\nNáhľad:\n")
     if sample_df.empty:
         print("Sample je prázdny.")

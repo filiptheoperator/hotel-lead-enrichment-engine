@@ -7,6 +7,7 @@ Prvý kontrolovaný rehearsal na malej vzorke bez ostrého batch importu.
 ## Primárne artifacty
 
 - [data/qa/clickup_import_dry_run_sample.csv](/Users/aios/Desktop/Codex/hotel-lead-enrichment-engine/data/qa/clickup_import_dry_run_sample.csv)
+- [data/qa/clickup_import_dry_run_sample_high_only.csv](/Users/aios/Desktop/Codex/hotel-lead-enrichment-engine/data/qa/clickup_import_dry_run_sample_high_only.csv)
 - [data/qa/high_leads_preimport_checklist.csv](/Users/aios/Desktop/Codex/hotel-lead-enrichment-engine/data/qa/high_leads_preimport_checklist.csv)
 - [data/qa/clickup_import_gate.txt](/Users/aios/Desktop/Codex/hotel-lead-enrichment-engine/data/qa/clickup_import_gate.txt)
 

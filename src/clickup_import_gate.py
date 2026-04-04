@@ -51,6 +51,14 @@ def compute_batch_readiness_score(
     return max(score, 0)
 
 
+def classify_batch_readiness_band(score: int) -> str:
+    if score >= 80:
+        return "green"
+    if score >= 40:
+        return "amber"
+    return "red"
+
+
 def build_clickup_import_gate() -> dict:
     manifest = load_manifest()
     qa_issues_path = Path(manifest.get("artifacts", {}).get("qa_issues_csv", ""))
@@ -107,11 +115,13 @@ def build_clickup_import_gate() -> dict:
         clickup_rows=clickup_rows,
         high_hold_count=high_hold_count,
     )
+    readiness_band = classify_batch_readiness_band(readiness_score)
 
     return {
         "decision": decision,
         "operator_action": operator_action,
         "batch_readiness_score": readiness_score,
+        "batch_readiness_band": readiness_band,
         "inputs": {
             "run_manifest_json": str(RUN_MANIFEST_PATH),
             "clickup_import_csv": manifest.get("artifacts", {}).get("clickup_import_csv", ""),
@@ -153,6 +163,7 @@ def save_clickup_import_gate(gate: dict) -> tuple[Path, Path]:
         f"- decision: {gate['decision']}",
         f"- operator_action: {gate['operator_action']}",
         f"- batch_readiness_score: {gate['batch_readiness_score']}",
+        f"- batch_readiness_band: {gate['batch_readiness_band']}",
         f"- fetch_incident_flag: {gate['checks']['fetch_incident_flag']}",
         f"- qa_blocking_rows: {gate['checks']['qa_blocking_rows']}",
         f"- clickup_rows: {gate['checks']['clickup_rows']}",
