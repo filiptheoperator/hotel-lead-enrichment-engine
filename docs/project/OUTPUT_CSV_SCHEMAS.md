@@ -181,8 +181,26 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
   - shortlist snapshot
   - import snapshot
 
+### `data/qa/clickup_import_gate.json`
+
+- Potvrdené runtime artifact pole pre ClickUp `Go / No-Go` rozhodnutie.
+- Obsahuje:
+  - `decision`
+  - `operator_action`
+  - `inputs`
+  - `checks`
+  - `stop_conditions`
+  - `go_rules`
+  - `no_go_rules`
+
+### `data/qa/clickup_import_dry_run_sample.csv`
+
+- Potvrdený suchý importný sample z aktuálneho ClickUp CSV.
+- Slúži iba na malý test vzorky, nie na ostrý import.
+
 ## Zhrnutie
 
 - Output contract pre hlavné CSV artefakty je uzamknutý podľa aktuálnych reálnych hlavičiek.
 - `run_manifest.json` je nový ne-CSV batch artifact pre operátorský workflow.
+- ClickUp gate a dry run sample sú nové operátorské artifacty pre importné rozhodovanie.
 - Neoverené ostáva len to, čo závisí od externých systémov alebo live siete.

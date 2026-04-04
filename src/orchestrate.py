@@ -5,6 +5,9 @@ from clickup_export import main as run_clickup_export
 from qa_checks import main as run_qa_checks
 from run_report import main as run_report
 from run_manifest import main as run_manifest
+from clickup_import_gate import main as run_clickup_import_gate
+from clickup_dry_run_sample import main as run_clickup_dry_run_sample
+from archive_run_artifacts import main as run_archive_run_artifacts
 
 
 PIPELINE_STEPS = [
@@ -15,6 +18,10 @@ PIPELINE_STEPS = [
     ("QA", run_qa_checks),
     ("run summary", run_report),
     ("run manifest", run_manifest),
+    ("ClickUp import gate", run_clickup_import_gate),
+    ("ClickUp dry run sample", run_clickup_dry_run_sample),
+    ("run manifest final", run_manifest),
+    ("archive run artifacts", run_archive_run_artifacts),
 ]
 
 

@@ -13,6 +13,8 @@ QA_DIR = Path("data/qa")
 RUN_REPORT_PATH = QA_DIR / "run_summary.txt"
 RUN_DELTA_REPORT_PATH = QA_DIR / "run_delta_report.txt"
 MANUAL_REVIEW_SHORTLIST_PATH = QA_DIR / "manual_review_shortlist.csv"
+RUN_MANIFEST_PATH = QA_DIR / "run_manifest.json"
+CLICKUP_GATE_TXT_PATH = QA_DIR / "clickup_import_gate.txt"
 
 
 def get_first_file(folder: Path, pattern: str) -> Optional[Path]:
@@ -234,6 +236,10 @@ def build_run_summary() -> str:
 
     lines = [
         "Hotel Lead Enrichment Engine OS - Run Summary",
+        "",
+        "Operator Start",
+        f"- primary_operator_artifact: {RUN_MANIFEST_PATH}",
+        f"- clickup_import_gate_artifact: {CLICKUP_GATE_TXT_PATH}",
         "",
         "Processed",
         f"- processed_rows: {processed_rows}",

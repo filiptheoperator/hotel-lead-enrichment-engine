@@ -12,6 +12,10 @@ EMAIL_DIR = Path("outputs/email_drafts")
 CLICKUP_DIR = Path("outputs/clickup")
 QA_DIR = Path("data/qa")
 RUN_MANIFEST_PATH = QA_DIR / "run_manifest.json"
+CLICKUP_GATE_JSON_PATH = QA_DIR / "clickup_import_gate.json"
+CLICKUP_GATE_TXT_PATH = QA_DIR / "clickup_import_gate.txt"
+CLICKUP_DRY_RUN_SAMPLE_PATH = QA_DIR / "clickup_import_dry_run_sample.csv"
+CLICKUP_DRY_RUN_NOTES_PATH = QA_DIR / "clickup_import_dry_run_notes.txt"
 
 
 def get_latest_file(folder: Path, pattern: str) -> Optional[Path]:
@@ -107,6 +111,10 @@ def build_run_manifest() -> dict:
             "manual_review_shortlist_csv": str(shortlist_path) if shortlist_path.exists() else "",
             "run_summary_txt": str(run_summary_path) if run_summary_path.exists() else "",
             "run_delta_report_txt": str(run_delta_path) if run_delta_path.exists() else "",
+            "clickup_import_gate_json": str(CLICKUP_GATE_JSON_PATH) if CLICKUP_GATE_JSON_PATH.exists() else "",
+            "clickup_import_gate_txt": str(CLICKUP_GATE_TXT_PATH) if CLICKUP_GATE_TXT_PATH.exists() else "",
+            "clickup_import_dry_run_sample_csv": str(CLICKUP_DRY_RUN_SAMPLE_PATH) if CLICKUP_DRY_RUN_SAMPLE_PATH.exists() else "",
+            "clickup_import_dry_run_notes_txt": str(CLICKUP_DRY_RUN_NOTES_PATH) if CLICKUP_DRY_RUN_NOTES_PATH.exists() else "",
         },
         "row_counts": {
             "processed_rows": len(processed_df),

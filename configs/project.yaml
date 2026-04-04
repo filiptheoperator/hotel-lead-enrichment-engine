@@ -4,11 +4,12 @@ default_country: Slovakia
 primary_crm: ClickUp
 preferred_orchestrator: local_python_first
 glue_layer: make
-current_phase: phase_8_orchestration
+current_phase: phase_3_operator_ready_workflow
 raw_input_folder: data/raw
 processed_folder: data/processed
 output_folder: outputs
 qa_folder: data/qa
+archive_folder: data/archive
 raw_inputs_are_immutable: true
 prompts_folder: prompts
 unverified_value_label: Verejne nepotvrdené
@@ -18,3 +19,4 @@ review_required_priorities:
   - Medium-High
 sample_batch_mode: false
 sample_batch_size: 10
+clickup_dry_run_sample_size: 5
