@@ -4,10 +4,15 @@ default_country: Slovakia
 primary_crm: ClickUp
 preferred_orchestrator: local_python_first
 glue_layer: make
+current_phase: phase_1_structure_configs_env_readme
 raw_input_folder: data/raw
 processed_folder: data/processed
 output_folder: outputs
 qa_folder: data/qa
+raw_inputs_are_immutable: true
+prompts_folder: prompts
+unverified_value_label: Verejne nepotvrdené
+include_public_operating_hours_when_available: true
 review_required_priorities:
   - High
   - Medium-High
