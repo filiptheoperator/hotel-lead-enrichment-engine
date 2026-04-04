@@ -1,8 +1,11 @@
 import json
 import argparse
+import os
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Optional
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 import yaml
 
@@ -47,6 +50,19 @@ def load_override_config() -> dict[str, Any]:
         return {}
     with ORCHESTRATION_OVERRIDE_CONFIG_PATH.open("r", encoding="utf-8") as file:
         return yaml.safe_load(file) or {}
+
+
+def load_env_file(path: Path = Path(".env")) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    env_values: dict[str, str] = {}
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        env_values[key.strip()] = value.strip()
+    return env_values
 
 
 def save_json(path: Path, payload: dict[str, Any]) -> Path:
@@ -494,10 +510,15 @@ def build_handoff_txt_bundle(
 def build_webhook_request_export(
     payload: dict[str, str],
     scenario_label: str,
+    webhook_url: str,
+    webhook_enabled: bool,
+    no_op_mode: bool,
 ) -> dict[str, Any]:
     return {
         "scenario_label": scenario_label,
-        "webhook_target": "UNVERIFIED_MAKE_WEBHOOK",
+        "webhook_target": webhook_url if webhook_url else "UNVERIFIED_MAKE_WEBHOOK",
+        "webhook_enabled": webhook_enabled,
+        "no_op_mode": no_op_mode,
         "method": "POST",
         "headers": {
             "Content-Type": "application/json"
@@ -517,6 +538,90 @@ def build_response_capture_template(
         "captured_at": "",
         "note": "Template pre budúce Make response capture.",
     }
+
+
+def to_bool(value: str) -> bool:
+    return str(value).strip().lower() in {"1", "true", "yes", "on"}
+
+
+def resolve_webhook_runtime(config: dict[str, Any], override_config: dict[str, Any]) -> dict[str, Any]:
+    orchestration_config = config.get("orchestration", {})
+    overrides = override_config.get("orchestration_overrides", {})
+    env_file_values = load_env_file()
+    enabled_key = str(orchestration_config.get("make_webhook_enabled_env_var", "MAKE_WEBHOOK_ENABLED")).strip()
+    url_key = str(orchestration_config.get("make_webhook_url_env_var", "MAKE_WEBHOOK_URL")).strip()
+    timeout_seconds = int(orchestration_config.get("make_webhook_timeout_seconds", 30) or 30)
+
+    enabled_value = os.environ.get(enabled_key, env_file_values.get(enabled_key, "false"))
+    webhook_url = os.environ.get(url_key, env_file_values.get(url_key, ""))
+    force_noop = bool(overrides.get("force_noop_webhook", True))
+
+    return {
+        "webhook_enabled": to_bool(enabled_value),
+        "webhook_url": str(webhook_url).strip(),
+        "timeout_seconds": timeout_seconds,
+        "force_noop": force_noop,
+    }
+
+
+def execute_make_webhook(
+    payload: dict[str, str],
+    decision_summary: dict[str, Any],
+    runtime: dict[str, Any],
+) -> dict[str, Any]:
+    captured_at = datetime.now().astimezone().isoformat(timespec="seconds")
+    response_payload = {
+        "scenario_label": decision_summary.get("scenario_label", ""),
+        "response_received": False,
+        "http_status": "",
+        "response_body": {},
+        "captured_at": captured_at,
+        "note": "",
+        "webhook_enabled": runtime["webhook_enabled"],
+        "no_op_mode": runtime["force_noop"],
+        "webhook_target": runtime["webhook_url"] if runtime["webhook_url"] else "UNVERIFIED_MAKE_WEBHOOK",
+    }
+
+    if not decision_summary.get("would_execute_make", False):
+        response_payload["note"] = "Webhook nebol spustený, lebo scenár nie je execution-ready."
+        return response_payload
+    if not runtime["webhook_enabled"]:
+        response_payload["note"] = "Webhook nebol spustený, lebo feature flag je vypnutý."
+        return response_payload
+    if not runtime["webhook_url"]:
+        response_payload["note"] = "Webhook nebol spustený, lebo chýba MAKE_WEBHOOK_URL."
+        return response_payload
+    if runtime["force_noop"]:
+        response_payload["note"] = "Webhook nebol spustený, lebo force_noop_webhook=true."
+        return response_payload
+
+    request_body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+    request = Request(
+        runtime["webhook_url"],
+        data=request_body,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urlopen(request, timeout=runtime["timeout_seconds"]) as response:
+            response_text = response.read().decode("utf-8", errors="replace")
+            response_payload["response_received"] = True
+            response_payload["http_status"] = response.getcode()
+            response_payload["response_body"] = {
+                "raw_text": response_text,
+            }
+            response_payload["note"] = "Webhook bol úspešne odoslaný."
+    except HTTPError as exc:
+        response_payload["response_received"] = True
+        response_payload["http_status"] = exc.code
+        response_payload["response_body"] = {
+            "raw_text": exc.read().decode("utf-8", errors="replace"),
+        }
+        response_payload["note"] = "Webhook request skončil HTTP chybou."
+    except URLError as exc:
+        response_payload["note"] = f"Webhook request zlyhal na sieťovej chybe: {exc.reason}"
+
+    return response_payload
 
 
 def build_launch_checklist(
@@ -607,6 +712,7 @@ def run(
     config = load_config()
     project_config = load_project_config()
     override_config = load_override_config()
+    webhook_runtime = resolve_webhook_runtime(config, override_config)
     manifest = load_json(manifest_path)
     gate = load_json(gate_path)
     rehearsal = load_json(rehearsal_path)
@@ -657,10 +763,17 @@ def run(
         handoff_bundle = build_handoff_bundle(payload, decision_summary, notification_payload, archive_crosscheck)
         handoff_txt_bundle = build_handoff_txt_bundle(decision_summary, handoff_bundle, retry_eligibility)
         progress_tracker = build_progress_tracker(decision_summary, validation_issues)
-        webhook_request_export = build_webhook_request_export(payload, scenario_label)
+        webhook_request_export = build_webhook_request_export(
+            payload,
+            scenario_label,
+            webhook_runtime["webhook_url"],
+            webhook_runtime["webhook_enabled"],
+            webhook_runtime["force_noop"],
+        )
         response_capture_template = build_response_capture_template(scenario_label)
         launch_checklist = build_launch_checklist(decision_summary, archive_crosscheck, payload_validation, retry_eligibility)
         runtime_status_board = build_runtime_status_board(decision_summary, retry_eligibility, launch_checklist)
+        response_capture = execute_make_webhook(payload, decision_summary, webhook_runtime)
     finally:
         release_execution_lock(lock_path, scenario_label)
 
@@ -701,6 +814,7 @@ def run(
     save_json(progress_tracker_path, progress_tracker)
     save_json(retry_eligibility_path, retry_eligibility)
     save_json(webhook_request_export_path, webhook_request_export)
+    response_capture_template.update(response_capture)
     save_json(response_capture_template_path, response_capture_template)
     save_text(handoff_txt_bundle_path, handoff_txt_bundle)
     save_json(launch_checklist_path, launch_checklist)
