@@ -32,6 +32,25 @@ def normalize_text(value: object) -> str:
     return str(value).strip()
 
 
+def compute_batch_readiness_score(
+    fetch_incident_flag: str,
+    qa_blocking_rows: int,
+    clickup_import_ready_rows: int,
+    clickup_rows: int,
+    high_hold_count: int,
+) -> int:
+    score = 100
+    if fetch_incident_flag == "yes":
+        score -= 40
+    if qa_blocking_rows > 0:
+        score -= 30
+    if clickup_rows > 0 and clickup_import_ready_rows < clickup_rows:
+        score -= 10
+    if high_hold_count > 0:
+        score -= 20
+    return max(score, 0)
+
+
 def build_clickup_import_gate() -> dict:
     manifest = load_manifest()
     qa_issues_path = Path(manifest.get("artifacts", {}).get("qa_issues_csv", ""))
@@ -81,9 +100,18 @@ def build_clickup_import_gate() -> dict:
         decision = "GO"
         operator_action = "Batch je pripravený na suchý alebo ostrý ClickUp import."
 
+    readiness_score = compute_batch_readiness_score(
+        fetch_incident_flag=fetch_incident_flag or "no",
+        qa_blocking_rows=qa_blocking_rows,
+        clickup_import_ready_rows=clickup_import_ready_rows,
+        clickup_rows=clickup_rows,
+        high_hold_count=high_hold_count,
+    )
+
     return {
         "decision": decision,
         "operator_action": operator_action,
+        "batch_readiness_score": readiness_score,
         "inputs": {
             "run_manifest_json": str(RUN_MANIFEST_PATH),
             "clickup_import_csv": manifest.get("artifacts", {}).get("clickup_import_csv", ""),
@@ -124,6 +152,7 @@ def save_clickup_import_gate(gate: dict) -> tuple[Path, Path]:
         "",
         f"- decision: {gate['decision']}",
         f"- operator_action: {gate['operator_action']}",
+        f"- batch_readiness_score: {gate['batch_readiness_score']}",
         f"- fetch_incident_flag: {gate['checks']['fetch_incident_flag']}",
         f"- qa_blocking_rows: {gate['checks']['qa_blocking_rows']}",
         f"- clickup_rows: {gate['checks']['clickup_rows']}",

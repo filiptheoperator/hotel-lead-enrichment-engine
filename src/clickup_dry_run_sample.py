@@ -62,6 +62,14 @@ def build_dry_run_sample() -> tuple[pd.DataFrame, list[str], str]:
         f"Požadovaná veľkosť sample: {sample_size}",
         f"Vybraná veľkosť sample: {len(sample_df)}",
         "Toto je suchý importný sample, nie ostrý import.",
+        "Field-by-field check template:",
+        "1. Task name: nie je prázdny a zodpovedá hotelu.",
+        "2. Description content: obsahuje hotel, mesto, hook a oba emaily.",
+        "3. Status: je bezpečne mapovaný na ClickUp import status.",
+        "4. Priority: je v sete 1-4 alebo prázdne podľa pravidla.",
+        "5. Hotel name / City: sedí s leadom.",
+        "6. Contact phone / Contact website: neobsahujú zjavný parsing šum.",
+        "7. Subject line: je použiteľný pre outreach task.",
         "Neoverené: správanie konkrétneho ClickUp workspace pri importe.",
     ]
     return sample_df, notes, str(clickup_path)

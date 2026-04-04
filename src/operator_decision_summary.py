@@ -9,6 +9,7 @@ RUN_MANIFEST_PATH = QA_DIR / "run_manifest.json"
 CLICKUP_GATE_PATH = QA_DIR / "clickup_import_gate.json"
 SHORTLIST_PATH = QA_DIR / "manual_review_shortlist.csv"
 OUTPUT_PATH = QA_DIR / "operator_decision_summary.txt"
+OUTPUT_CSV_PATH = QA_DIR / "operator_decision_summary.csv"
 
 
 def load_json(path: Path) -> dict:
@@ -59,6 +60,7 @@ def build_operator_decision_summary() -> str:
         f"- batch_source: {batch_sources[0] if batch_sources else 'Neoverené'}",
         f"- clickup_decision: {gate.get('decision', 'Neoverené')}",
         f"- operator_action: {gate.get('operator_action', 'Neoverené')}",
+        f"- batch_readiness_score: {gate.get('batch_readiness_score', 'Neoverené')}",
         f"- fetch_incident_flag: {fetch_health.get('fetch_incident_flag', 'Neoverené')}",
         f"- qa_blocking_rows: {import_snapshot.get('qa_blocking_rows', 'Neoverené')}",
         f"- clickup_import_ready_rows: {import_snapshot.get('clickup_import_ready_rows', 'Neoverené')}",
@@ -89,16 +91,35 @@ def build_operator_decision_summary() -> str:
     return "\n".join(lines)
 
 
-def save_operator_decision_summary(summary_text: str) -> Path:
+def build_operator_decision_summary_csv() -> pd.DataFrame:
+    manifest = load_json(RUN_MANIFEST_PATH)
+    gate = load_json(CLICKUP_GATE_PATH)
+
+    rows = [
+        {"metric": "batch_source", "value": (manifest.get("batch", {}).get("source_files", []) or ["Neoverené"])[0], "group": "batch"},
+        {"metric": "clickup_decision", "value": gate.get("decision", "Neoverené"), "group": "decision"},
+        {"metric": "operator_action", "value": gate.get("operator_action", "Neoverené"), "group": "decision"},
+        {"metric": "batch_readiness_score", "value": gate.get("batch_readiness_score", "Neoverené"), "group": "decision"},
+        {"metric": "fetch_incident_flag", "value": manifest.get("fetch_health", {}).get("fetch_incident_flag", "Neoverené"), "group": "fetch"},
+        {"metric": "qa_blocking_rows", "value": manifest.get("import_snapshot", {}).get("qa_blocking_rows", "Neoverené"), "group": "import"},
+        {"metric": "clickup_import_ready_rows", "value": manifest.get("import_snapshot", {}).get("clickup_import_ready_rows", "Neoverené"), "group": "import"},
+        {"metric": "manual_review_shortlist_rows", "value": manifest.get("row_counts", {}).get("manual_review_shortlist_rows", "Neoverené"), "group": "review"},
+    ]
+    return pd.DataFrame(rows)
+
+
+def save_operator_decision_summary(summary_text: str) -> tuple[Path, Path]:
     QA_DIR.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(summary_text, encoding="utf-8")
-    return OUTPUT_PATH
+    build_operator_decision_summary_csv().to_csv(OUTPUT_CSV_PATH, index=False)
+    return OUTPUT_PATH, OUTPUT_CSV_PATH
 
 
 def main() -> None:
     summary_text = build_operator_decision_summary()
-    output_path = save_operator_decision_summary(summary_text)
+    output_path, csv_path = save_operator_decision_summary(summary_text)
     print(f"Operator decision summary uložený do: {output_path}")
+    print(f"Operator decision summary CSV uložený do: {csv_path}")
     print("\nNáhľad:\n")
     print(summary_text)
 

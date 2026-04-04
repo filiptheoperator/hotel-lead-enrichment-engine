@@ -7,6 +7,7 @@ from run_report import main as run_report
 from run_manifest import main as run_manifest
 from clickup_import_gate import main as run_clickup_import_gate
 from clickup_dry_run_sample import main as run_clickup_dry_run_sample
+from clickup_api_mapping_preview import main as run_clickup_api_mapping_preview
 from high_leads_preimport_checklist import main as run_high_leads_preimport_checklist
 from operator_decision_summary import main as run_operator_decision_summary
 from archive_run_artifacts import main as run_archive_run_artifacts
@@ -23,6 +24,7 @@ PIPELINE_STEPS = [
     ("run manifest", run_manifest),
     ("ClickUp import gate", run_clickup_import_gate),
     ("ClickUp dry run sample", run_clickup_dry_run_sample),
+    ("ClickUp API mapping preview", run_clickup_api_mapping_preview),
     ("High leads pre-import checklist", run_high_leads_preimport_checklist),
     ("Operator decision summary", run_operator_decision_summary),
     ("run manifest final", run_manifest),

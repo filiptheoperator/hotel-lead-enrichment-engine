@@ -15,6 +15,7 @@ RUN_DELTA_REPORT_PATH = QA_DIR / "run_delta_report.txt"
 MANUAL_REVIEW_SHORTLIST_PATH = QA_DIR / "manual_review_shortlist.csv"
 RUN_MANIFEST_PATH = QA_DIR / "run_manifest.json"
 CLICKUP_GATE_TXT_PATH = QA_DIR / "clickup_import_gate.txt"
+CLICKUP_GATE_JSON_PATH = QA_DIR / "clickup_import_gate.json"
 
 
 def get_first_file(folder: Path, pattern: str) -> Optional[Path]:
@@ -47,6 +48,14 @@ def build_run_summary() -> str:
     email_df = load_csv(get_first_file(EMAIL_DIR, "*_email_drafts.csv"))
     clickup_df = load_csv(get_first_file(CLICKUP_DIR, "*_clickup_import.csv"))
     qa_df = load_csv(QA_DIR / "qa_issues.csv")
+    batch_readiness_score = "Neoverené"
+    if CLICKUP_GATE_JSON_PATH.exists():
+        try:
+            import json
+            gate_payload = json.loads(CLICKUP_GATE_JSON_PATH.read_text(encoding="utf-8"))
+            batch_readiness_score = gate_payload.get("batch_readiness_score", "Neoverené")
+        except Exception:
+            batch_readiness_score = "Neoverené"
 
     verified_public_label = "Overené vo verejnom zdroji"
     unknown_value_label = "Verejne nepotvrdené"
@@ -240,6 +249,7 @@ def build_run_summary() -> str:
         "Operator Start",
         f"- primary_operator_artifact: {RUN_MANIFEST_PATH}",
         f"- clickup_import_gate_artifact: {CLICKUP_GATE_TXT_PATH}",
+        f"- batch_readiness_score: {batch_readiness_score}",
         "",
         "Processed",
         f"- processed_rows: {processed_rows}",

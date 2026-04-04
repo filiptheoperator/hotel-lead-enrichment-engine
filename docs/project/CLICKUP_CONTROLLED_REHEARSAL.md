@@ -21,7 +21,16 @@ Prvý kontrolovaný rehearsal na malej vzorke bez ostrého batch importu.
 1. skontrolovať `clickup_import_gate.txt`
 2. ak je `NO_GO`, rehearsal je len formálny review sample, nie import
 3. otvoriť `clickup_import_dry_run_sample.csv`
-4. skontrolovať názov tasku, status, priority, description content
+4. skontrolovať field-by-field:
+   - `Task name`
+   - `Description content`
+   - `Status`
+   - `Priority`
+   - `Hotel name`
+   - `City`
+   - `Contact phone`
+   - `Contact website`
+   - `Subject line`
 5. porovnať `High` leady s `high_leads_preimport_checklist.csv`
 
 ## Neoverené

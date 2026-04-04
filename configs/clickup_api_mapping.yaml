@@ -1,0 +1,35 @@
+clickup_api_mapping:
+  task_name:
+    source_column: "Task name"
+    target_field: "name"
+  description_content:
+    source_column: "Description content"
+    target_field: "description"
+  status:
+    source_column: "Status"
+    target_field: "status"
+  priority:
+    source_column: "Priority"
+    target_field: "priority"
+  custom_fields:
+    hotel_name:
+      source_column: "Hotel name"
+      target_field: "custom.hotel_name"
+    city:
+      source_column: "City"
+      target_field: "custom.city"
+    priority_score:
+      source_column: "Priority score"
+      target_field: "custom.priority_score"
+    contact_phone:
+      source_column: "Contact phone"
+      target_field: "custom.contact_phone"
+    contact_website:
+      source_column: "Contact website"
+      target_field: "custom.contact_website"
+    subject_line:
+      source_column: "Subject line"
+      target_field: "custom.subject_line"
+    source_file:
+      source_column: "Source file"
+      target_field: "custom.source_file"

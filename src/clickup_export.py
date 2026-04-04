@@ -171,6 +171,13 @@ def save_clickup_file(df: pd.DataFrame, source_file: str) -> Path:
     return output_path
 
 
+def save_high_leads_clickup_file(df: pd.DataFrame, source_file: str) -> Path:
+    CLICKUP_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    output_path = CLICKUP_OUTPUT_DIR / f"{Path(source_file).stem}_clickup_import_high_only.csv"
+    df.to_csv(output_path, index=False)
+    return output_path
+
+
 def main() -> None:
     email_files = list_email_draft_files()
 
@@ -188,12 +195,17 @@ def main() -> None:
         return
 
     clickup_df = build_clickup_dataframe(email_df)
+    high_clickup_df = build_clickup_dataframe(
+        email_df[email_df["priority_band"].fillna("").astype(str).str.strip().eq("High")].copy()
+    )
     readiness_issues = validate_clickup_import_readiness(clickup_df)
     output_path = save_clickup_file(clickup_df, first_file.name)
+    high_output_path = save_high_leads_clickup_file(high_clickup_df, first_file.name)
 
     print(f"Načítaný email draft súbor: {first_file.name}")
     print(f"Počet riadkov: {len(clickup_df)}")
     print(f"Výstup uložený do: {output_path}")
+    print(f"High-only výstup uložený do: {high_output_path}")
     if readiness_issues:
         print("\nClickUp import readiness:\n")
         for issue in readiness_issues:

@@ -19,7 +19,9 @@ CLICKUP_DRY_RUN_NOTES_PATH = QA_DIR / "clickup_import_dry_run_notes.txt"
 HIGH_LEADS_PREIMPORT_CHECKLIST_PATH = QA_DIR / "high_leads_preimport_checklist.csv"
 HIGH_LEADS_PREIMPORT_NOTES_PATH = QA_DIR / "high_leads_preimport_checklist.txt"
 OPERATOR_DECISION_SUMMARY_PATH = QA_DIR / "operator_decision_summary.txt"
+OPERATOR_DECISION_SUMMARY_CSV_PATH = QA_DIR / "operator_decision_summary.csv"
 ARCHIVE_CLEANUP_REPORT_PATH = QA_DIR / "archive_cleanup_report.txt"
+CLICKUP_API_MAPPING_PREVIEW_PATH = QA_DIR / "clickup_api_mapping_preview.json"
 
 
 def get_latest_file(folder: Path, pattern: str) -> Optional[Path]:
@@ -60,6 +62,7 @@ def build_run_manifest() -> dict:
     enrichment_path = get_latest_file(ENRICHMENT_DIR, "*_enriched.csv")
     email_path = get_latest_file(EMAIL_DIR, "*_email_drafts.csv")
     clickup_path = get_latest_file(CLICKUP_DIR, "*_clickup_import.csv")
+    clickup_high_only_path = get_latest_file(CLICKUP_DIR, "*_clickup_import_high_only.csv")
     qa_issues_path = QA_DIR / "qa_issues.csv"
     shortlist_path = QA_DIR / "manual_review_shortlist.csv"
     run_summary_path = QA_DIR / "run_summary.txt"
@@ -111,6 +114,7 @@ def build_run_manifest() -> dict:
             "enrichment_csv": str(enrichment_path) if enrichment_path else "",
             "email_drafts_csv": str(email_path) if email_path else "",
             "clickup_import_csv": str(clickup_path) if clickup_path else "",
+            "clickup_import_high_only_csv": str(clickup_high_only_path) if clickup_high_only_path else "",
             "qa_issues_csv": str(qa_issues_path) if qa_issues_path.exists() else "",
             "manual_review_shortlist_csv": str(shortlist_path) if shortlist_path.exists() else "",
             "run_summary_txt": str(run_summary_path) if run_summary_path.exists() else "",
@@ -122,7 +126,9 @@ def build_run_manifest() -> dict:
             "high_leads_preimport_checklist_csv": str(HIGH_LEADS_PREIMPORT_CHECKLIST_PATH) if HIGH_LEADS_PREIMPORT_CHECKLIST_PATH.exists() else "",
             "high_leads_preimport_checklist_txt": str(HIGH_LEADS_PREIMPORT_NOTES_PATH) if HIGH_LEADS_PREIMPORT_NOTES_PATH.exists() else "",
             "operator_decision_summary_txt": str(OPERATOR_DECISION_SUMMARY_PATH) if OPERATOR_DECISION_SUMMARY_PATH.exists() else "",
+            "operator_decision_summary_csv": str(OPERATOR_DECISION_SUMMARY_CSV_PATH) if OPERATOR_DECISION_SUMMARY_CSV_PATH.exists() else "",
             "archive_cleanup_report_txt": str(ARCHIVE_CLEANUP_REPORT_PATH) if ARCHIVE_CLEANUP_REPORT_PATH.exists() else "",
+            "clickup_api_mapping_preview_json": str(CLICKUP_API_MAPPING_PREVIEW_PATH) if CLICKUP_API_MAPPING_PREVIEW_PATH.exists() else "",
         },
         "row_counts": {
             "processed_rows": len(processed_df),
