@@ -15,6 +15,10 @@ CLICKUP_GATE_PATH = QA_DIR / "clickup_import_gate.json"
 CLICKUP_REHEARSAL_PATH = QA_DIR / "clickup_rehearsal_execution.json"
 
 
+def is_path_like_key(key: str) -> bool:
+    return key.endswith("_json") or key.endswith("_csv") or key.endswith("_txt") or key == "archive_dir"
+
+
 def load_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
@@ -100,6 +104,7 @@ def validate_make_payload(
 ) -> tuple[list[str], list[str]]:
     orchestration_config = config.get("orchestration", {})
     required_keys = orchestration_config.get("required_artifact_keys", [])
+    payload_required_keys = orchestration_config.get("payload_required_keys", [])
     issues: list[str] = []
     missing_paths: list[str] = []
 
@@ -107,12 +112,17 @@ def validate_make_payload(
     if decision not in {"GO", "NO_GO"}:
         issues.append("invalid_decision")
 
+    for key in payload_required_keys:
+        value = str(payload.get(key, "")).strip()
+        if not value:
+            issues.append(f"missing_payload_key:{key}")
+
     for key in required_keys:
         value = str(payload.get(key, "")).strip()
         if not value:
             issues.append(f"missing_required_key:{key}")
             continue
-        if key.endswith("_json") or key.endswith("_csv") or key.endswith("_txt") or key == "archive_dir":
+        if is_path_like_key(key):
             if not Path(value).exists():
                 missing_paths.append(key)
                 issues.append(f"missing_required_artifact:{key}")
@@ -130,7 +140,7 @@ def build_artifact_check(
     checks = []
     for key, value in payload.items():
         normalized = str(value).strip()
-        path_like = key != "decision"
+        path_like = is_path_like_key(key)
         exists = Path(normalized).exists() if normalized and path_like else None
         checks.append(
             {
@@ -143,6 +153,41 @@ def build_artifact_check(
             }
         )
     return {"checks": checks}
+
+
+def build_payload_validation(
+    payload: dict[str, str],
+    validation_issues: list[str],
+    config: dict[str, Any],
+) -> dict[str, Any]:
+    orchestration_config = config.get("orchestration", {})
+    return {
+        "valid": len(validation_issues) == 0,
+        "validation_issues": validation_issues,
+        "payload_required_keys": orchestration_config.get("payload_required_keys", []),
+        "required_artifact_keys": orchestration_config.get("required_artifact_keys", []),
+        "payload_keys_present": sorted(payload.keys()),
+    }
+
+
+def build_archive_crosscheck(
+    payload: dict[str, str],
+    manifest: dict[str, Any],
+) -> dict[str, Any]:
+    archive_dir = Path(str(payload.get("archive_dir", "")).strip())
+    archive_manifest_path = archive_dir / "archive_manifest.json"
+    archive_manifest = load_json(archive_manifest_path) if archive_manifest_path.exists() else {}
+    copied_artifacts = archive_manifest.get("copied_artifacts", {})
+    copied_clickup_csv = Path(str(copied_artifacts.get("clickup_import_csv", "")).strip()).name
+    payload_clickup_csv = Path(str(payload.get("clickup_import_csv", "")).strip()).name
+    source_run_manifest = str(archive_manifest.get("source_run_manifest", "")).strip()
+    return {
+        "archive_dir": str(archive_dir),
+        "archive_manifest_exists": archive_manifest_path.exists(),
+        "clickup_csv_match": bool(copied_clickup_csv) and copied_clickup_csv == payload_clickup_csv,
+        "run_manifest_match": bool(source_run_manifest) and Path(source_run_manifest).name == Path(str(payload.get("run_manifest_json", "")).strip()).name,
+        "source_file_count": manifest.get("batch", {}).get("source_file_count", 0),
+    }
 
 
 def build_failure_notification(
@@ -220,6 +265,8 @@ def classify_runtime_status(
 ) -> str:
     if validation_issues:
         return "BLOCKED_INTERNAL"
+    if bool(rehearsal.get("partial_write_detected", False)):
+        return "BLOCKED_EXTERNAL"
     if payload.get("decision") == "NO_GO":
         return "READY_FOR_PLANNING"
     rehearsal_status = str(rehearsal.get("rehearsal_status", "")).strip()
@@ -301,6 +348,84 @@ def build_txt_summary(
     return "\n".join(lines) + "\n"
 
 
+def build_incident_summary(
+    decision_summary: dict[str, Any],
+    notification_payload: dict[str, Any],
+    evidence_log: dict[str, Any],
+) -> str:
+    lines = [
+        "Integration incident summary",
+        f"scenario_label: {decision_summary['scenario_label']}",
+        f"decision: {decision_summary['decision']}",
+        f"status: {decision_summary['status']}",
+        f"failure_type: {decision_summary['failure_type']}",
+        f"external_blocker_detected: {'yes' if decision_summary['external_blocker_detected'] else 'no'}",
+        f"partial_write_detected: {'yes' if decision_summary['partial_write_detected'] else 'no'}",
+        f"operator_action: {notification_payload['operator_action']}",
+        f"next_step: {notification_payload['next_step']}",
+        f"affected_task_ids: {', '.join(evidence_log['affected_task_ids']) if evidence_log['affected_task_ids'] else 'none'}",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def build_escalation_artifact(
+    decision_summary: dict[str, Any],
+    notification_payload: dict[str, Any],
+    evidence_log: dict[str, Any],
+) -> dict[str, Any]:
+    escalation_needed = bool(
+        decision_summary.get("external_blocker_detected") or decision_summary.get("partial_write_detected")
+    )
+    return {
+        "escalation_needed": escalation_needed,
+        "escalation_type": notification_payload.get("failure_type", ""),
+        "external_blocker_code": notification_payload.get("external_blocker_code", ""),
+        "operator_action": notification_payload.get("operator_action", ""),
+        "next_step": notification_payload.get("next_step", ""),
+        "affected_task_ids": evidence_log.get("affected_task_ids", []),
+        "affected_task_urls": evidence_log.get("affected_task_urls", []),
+    }
+
+
+def build_handoff_bundle(
+    payload: dict[str, str],
+    decision_summary: dict[str, Any],
+    notification_payload: dict[str, Any],
+    archive_crosscheck: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "decision": payload.get("decision", ""),
+        "status": decision_summary.get("status", ""),
+        "would_execute_make": decision_summary.get("would_execute_make", False),
+        "run_manifest_json": payload.get("run_manifest_json", ""),
+        "clickup_import_gate_json": payload.get("clickup_import_gate_json", ""),
+        "archive_dir": payload.get("archive_dir", ""),
+        "archive_crosscheck_ok": archive_crosscheck.get("archive_manifest_exists", False)
+        and archive_crosscheck.get("clickup_csv_match", False),
+        "notification_failure_type": notification_payload.get("failure_type", ""),
+        "next_step": notification_payload.get("next_step", ""),
+    }
+
+
+def build_progress_tracker(
+    decision_summary: dict[str, Any],
+    validation_issues: list[str],
+) -> dict[str, Any]:
+    return {
+        "phase": "phase_5_orchestration_implementation",
+        "progress_band": "implementation_active",
+        "runner_cli_modes_ready": True,
+        "artifact_checker_ready": True,
+        "decision_summary_ready": True,
+        "txt_summary_ready": True,
+        "archive_resolver_ready": True,
+        "flow_integration_ready": True,
+        "simulated_go_ready": True,
+        "open_validation_issues": validation_issues,
+        "current_status": decision_summary.get("status", ""),
+    }
+
+
 def build_status_matrix_output(
     status: str,
     payload: dict[str, str],
@@ -344,6 +469,7 @@ def run(
     payload = build_make_payload(manifest, gate, manifest_path, gate_path)
     validation_issues, _missing_paths = validate_make_payload(payload, config)
     artifact_check = build_artifact_check(payload, config)
+    payload_validation = build_payload_validation(payload, validation_issues, config)
     notification_payload = build_failure_notification(
         payload,
         gate,
@@ -375,6 +501,11 @@ def run(
         scenario_label,
     )
     txt_summary = build_txt_summary(decision_summary, payload, validation_issues)
+    archive_crosscheck = build_archive_crosscheck(payload, manifest)
+    incident_summary = build_incident_summary(decision_summary, notification_payload, evidence_log)
+    escalation_artifact = build_escalation_artifact(decision_summary, notification_payload, evidence_log)
+    handoff_bundle = build_handoff_bundle(payload, decision_summary, notification_payload, archive_crosscheck)
+    progress_tracker = build_progress_tracker(decision_summary, validation_issues)
 
     make_payload_path = resolve_output_path(config, "make_payload_path", output_dir)
     failure_notification_path = resolve_output_path(config, "failure_notification_path", output_dir)
@@ -383,6 +514,12 @@ def run(
     artifact_check_path = resolve_output_path(config, "artifact_check_path", output_dir)
     decision_summary_path = resolve_output_path(config, "decision_summary_path", output_dir)
     txt_summary_path = resolve_output_path(config, "txt_summary_path", output_dir)
+    payload_validation_path = resolve_output_path(config, "payload_validation_path", output_dir)
+    archive_crosscheck_path = resolve_output_path(config, "archive_crosscheck_path", output_dir)
+    incident_summary_path = resolve_output_path(config, "incident_summary_path", output_dir)
+    escalation_path = resolve_output_path(config, "escalation_path", output_dir)
+    handoff_bundle_path = resolve_output_path(config, "handoff_bundle_path", output_dir)
+    progress_tracker_path = resolve_output_path(config, "progress_tracker_path", output_dir)
     dry_run_result_path = resolve_output_path(config, "dry_run_result_path", output_dir)
 
     save_json(make_payload_path, payload)
@@ -392,6 +529,12 @@ def run(
     save_json(artifact_check_path, artifact_check)
     save_json(decision_summary_path, decision_summary)
     save_text(txt_summary_path, txt_summary)
+    save_json(payload_validation_path, payload_validation)
+    save_json(archive_crosscheck_path, archive_crosscheck)
+    save_text(incident_summary_path, incident_summary)
+    save_json(escalation_path, escalation_artifact)
+    save_json(handoff_bundle_path, handoff_bundle)
+    save_json(progress_tracker_path, progress_tracker)
 
     dry_run_result = {
         "mode": mode,
@@ -406,6 +549,12 @@ def run(
         "artifact_check_path": str(artifact_check_path),
         "decision_summary_path": str(decision_summary_path),
         "txt_summary_path": str(txt_summary_path),
+        "payload_validation_path": str(payload_validation_path),
+        "archive_crosscheck_path": str(archive_crosscheck_path),
+        "incident_summary_path": str(incident_summary_path),
+        "escalation_path": str(escalation_path),
+        "handoff_bundle_path": str(handoff_bundle_path),
+        "progress_tracker_path": str(progress_tracker_path),
     }
     save_json(dry_run_result_path, dry_run_result)
     return dry_run_result

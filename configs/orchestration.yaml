@@ -8,6 +8,12 @@ orchestration:
   artifact_check_path: data/qa/orchestration_artifact_check.json
   decision_summary_path: data/qa/integration_decision_summary.json
   txt_summary_path: data/qa/orchestration_run_summary.txt
+  payload_validation_path: data/qa/orchestration_payload_validation.json
+  archive_crosscheck_path: data/qa/orchestration_archive_crosscheck.json
+  incident_summary_path: data/qa/orchestration_incident_summary.txt
+  escalation_path: data/qa/external_blocker_escalation.json
+  handoff_bundle_path: data/qa/operator_handoff_bundle.json
+  progress_tracker_path: data/qa/phase_5_progress_tracker.json
   dry_run_result_path: data/qa/orchestration_dry_run.json
   required_artifact_keys:
     - run_manifest_json
@@ -22,6 +28,15 @@ orchestration:
     - operator_decision_summary_high_txt
     - batch_readiness_explanation_json
     - clickup_api_mapping_validation_json
+  payload_required_keys:
+    - decision
+    - run_manifest_json
+    - clickup_import_gate_json
+    - clickup_import_csv
+    - clickup_import_dry_run_sample_csv
+    - high_leads_preimport_checklist_csv
+    - operator_decision_summary_txt
+    - archive_dir
   failure_types:
     missing_required_artifact: missing_required_artifact
     invalid_make_payload: invalid_make_payload
