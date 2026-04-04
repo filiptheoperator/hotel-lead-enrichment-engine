@@ -1,6 +1,5 @@
-def main():
-    print("Hotel Lead Enrichment Engine OS")
-    print("Fáza 1 pripravená.")
+from orchestrate import main
+
 
 if __name__ == "__main__":
     main()
