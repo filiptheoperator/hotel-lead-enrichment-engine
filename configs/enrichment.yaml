@@ -4,3 +4,20 @@ enrichment:
   require_contact_data: true
   require_factual_summary: true
   unknown_value_label: Verejne nepotvrdené
+  verified_public_label: Overené vo verejnom zdroji
+  verified_raw_label: Overené z raw vstupu
+  partial_raw_label: Čiastočne overené z raw vstupu
+  request_timeout_seconds: 4
+  max_public_pages_per_hotel: 2
+  public_page_keywords:
+    - check
+    - arrival
+    - departure
+    - faq
+    - kontakt
+    - contact
+    - reception
+    - opening
+    - hours
+    - wellness
+    - restaurant

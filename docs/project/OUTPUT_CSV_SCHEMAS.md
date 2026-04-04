@@ -63,18 +63,22 @@ Ak niečo nie je potvrdené existujúcim súborom alebo reálnym importom, je to
 11. `priority_band`
 12. `hotel_opening_hours`
 13. `hotel_opening_hours_status`
-14. `checkin_checkout_info`
-15. `checkin_checkout_status`
-16. `contact_status`
-17. `factual_summary`
-18. `source_url`
-19. `source_file`
+14. `hotel_opening_hours_source_url`
+15. `checkin_checkout_info`
+16. `checkin_checkout_status`
+17. `checkin_checkout_source_url`
+18. `contact_status`
+19. `factual_summary`
+20. `source_url`
+21. `source_file`
 
 ### Poznámky
 
 - `hotel_opening_hours` je v aktuálnom výstupe prítomné.
 - Verejná dostupnosť a presnosť `hotel_opening_hours` je po riadkoch rôzna a musí zostať explicitne označená stavovým poľom.
+- `hotel_opening_hours_source_url` je URL verejného zdroja len keď bol údaj reálne dohľadaný na webe.
 - `checkin_checkout_info` je v aktuálnom výstupe factual minimum.
+- `checkin_checkout_source_url` je URL verejného zdroja len keď bol údaj reálne dohľadaný na webe.
 
 ### Stav
 
@@ -121,23 +125,28 @@ Ak niečo nie je potvrdené existujúcim súborom alebo reálnym importom, je to
 
 ### Potvrdené stĺpce
 
-1. `task_name`
-2. `task_priority`
-3. `task_status`
-4. `hotel_name`
-5. `city`
-6. `priority_score`
-7. `contact_phone`
-8. `contact_website`
-9. `subject_line`
-10. `task_notes`
-11. `source_file`
+1. `Task name`
+2. `Description content`
+3. `Status`
+4. `Priority`
+5. `Hotel name`
+6. `City`
+7. `Priority score`
+8. `Contact phone`
+9. `Contact website`
+10. `Subject line`
+11. `Source file`
 
 ### Poznámky
 
-- `task_notes` je multiline text pole.
-- Táto CSV schéma je potvrdená lokálnym exportom.
-- Reálny ClickUp import formát a kompatibilita s ClickUp importrom sú zatiaľ `Neoverené`.
+- `Description content` je multiline text pole.
+- Táto schéma je zarovnaná na oficiálne ClickUp import polia pre `Task name`, `Description content`, `Status`, `Priority`.
+- `Priority` je exportovaná ako ClickUp numeric priority:
+  - `2` = high
+  - `3` = normal
+  - `4` = low
+- Ostatné stĺpce sú ponechané ako pomocné mapovateľné polia.
+- Reálna end-to-end kompatibilita konkrétneho importu v cieľovom workspace je stále `Neoverené`.
 
 ### Stav
 

@@ -24,16 +24,37 @@ def build_clickup_task_name(row: pd.Series) -> str:
     return f"Lead outreach - {hotel_name}"
 
 
+def map_clickup_priority(priority_band: str) -> str:
+    normalized = normalize_text(priority_band).lower()
+    if normalized == "high":
+        return "2"
+    if normalized == "medium":
+        return "3"
+    if normalized == "low":
+        return "4"
+    return ""
+
+
+def build_clickup_status(row: pd.Series) -> str:
+    return "to do"
+
+
 def build_clickup_notes(row: pd.Series) -> str:
     parts = [
         f"Hotel: {row['hotel_name']}",
         f"Mesto: {row['city']}",
-        f"Priorita: {row['priority_band']}",
+        f"Priorita band: {row['priority_band']}",
         f"Skóre: {row['priority_score']}",
         f"Web: {row['website'] or 'Verejne nepotvrdené'}",
         f"Telefón: {row['phone'] or 'Verejne nepotvrdené'}",
         "",
         f"Hook: {row['hook']}",
+        "",
+        "Cold email:",
+        row["cold_email"],
+        "",
+        "Follow-up email:",
+        row["followup_email"],
     ]
     return "\n".join(parts)
 
@@ -46,8 +67,8 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             export_df[column] = export_df[column].apply(normalize_text)
 
     export_df["task_name"] = export_df.apply(build_clickup_task_name, axis=1)
-    export_df["task_priority"] = export_df["priority_band"]
-    export_df["task_status"] = "to do"
+    export_df["clickup_priority"] = export_df["priority_band"].apply(map_clickup_priority)
+    export_df["clickup_status"] = export_df.apply(build_clickup_status, axis=1)
     export_df["contact_phone"] = export_df["phone"]
     export_df["contact_website"] = export_df["website"]
     export_df["task_notes"] = export_df.apply(build_clickup_notes, axis=1)
@@ -55,18 +76,32 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     return export_df[
         [
             "task_name",
-            "task_priority",
-            "task_status",
+            "task_notes",
+            "clickup_status",
+            "clickup_priority",
             "hotel_name",
             "city",
             "priority_score",
             "contact_phone",
             "contact_website",
             "subject_line",
-            "task_notes",
             "source_file",
         ]
-    ].copy()
+    ].rename(
+        columns={
+            "task_name": "Task name",
+            "task_notes": "Description content",
+            "clickup_status": "Status",
+            "clickup_priority": "Priority",
+            "hotel_name": "Hotel name",
+            "city": "City",
+            "priority_score": "Priority score",
+            "contact_phone": "Contact phone",
+            "contact_website": "Contact website",
+            "subject_line": "Subject line",
+            "source_file": "Source file",
+        }
+    ).copy()
 
 
 def save_clickup_file(df: pd.DataFrame, source_file: str) -> Path:
@@ -102,9 +137,9 @@ def main() -> None:
     print(
         clickup_df[
             [
-                "task_name",
-                "task_priority",
-                "subject_line",
+                "Task name",
+                "Priority",
+                "Subject line",
             ]
         ]
         .head(5)

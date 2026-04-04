@@ -19,28 +19,72 @@ def normalize_text(value: object) -> str:
     return str(value).strip()
 
 
+def is_verified_public(value: str) -> bool:
+    return normalize_text(value) == "Overené vo verejnom zdroji"
+
+
+def format_score(value: object) -> str:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return ""
+    return f"{number:.2f}".rstrip("0").rstrip(".")
+
+
+def build_short_factual_line(row: pd.Series) -> str:
+    facts: list[str] = []
+
+    if row["city"]:
+        facts.append(f"v lokalite {row['city']}")
+    if row["priority_band"]:
+        score = format_score(row.get("priority_score"))
+        if score:
+            facts.append(f"s prioritou {row['priority_band']} ({score})")
+        else:
+            facts.append(f"s prioritou {row['priority_band']}")
+
+    try:
+        review_score = float(row.get("review_score", 0) or 0)
+    except (TypeError, ValueError):
+        review_score = 0
+    try:
+        reviews_count = int(float(row.get("reviews_count", 0) or 0))
+    except (TypeError, ValueError):
+        reviews_count = 0
+
+    if review_score > 0 and reviews_count > 0:
+        facts.append(f"s hodnotením {review_score:.1f}/5 z {reviews_count} recenzií")
+
+    if not facts:
+        return "Pozrel som si váš verejný profil a základné údaje."
+
+    return "Pozrel som si váš verejný profil " + ", ".join(facts) + "."
+
+
 def build_subject_line(row: pd.Series) -> str:
     hotel_name = row["hotel_name"] or "váš hotel"
-    return f"Krátky nápad pre {hotel_name}"
+    return f"{hotel_name}: krátky nápad"
 
 
 def build_hook(row: pd.Series) -> str:
     if row["hotel_name"] and row["city"]:
-        return f"Pozeral som sa na hotel {row['hotel_name']} v lokalite {row['city']}."
+        return f"Pozeral som sa na {row['hotel_name']} v lokalite {row['city']}."
     if row["hotel_name"]:
-        return f"Pozeral som sa na hotel {row['hotel_name']}."
-    return "Pozeral som sa na váš hotel pri rýchlom prehľade."
+        return f"Pozeral som sa na {row['hotel_name']}."
+    return "Pozeral som sa na váš hotel pri rýchlom verejnom prehľade."
 
 
 def build_cold_email(row: pd.Series) -> str:
     hook = build_hook(row)
-    summary = row["factual_summary"] or "Mám k dispozícii krátky factual prehľad."
+    factual_line = build_short_factual_line(row)
+    hotel_name = row["hotel_name"] or "váš hotel"
 
     return (
         f"Dobrý deň,\n\n"
         f"{hook}\n"
-        f"{summary}\n\n"
-        f"Ak by to bolo užitočné, rád pošlem krátky a konkrétny návrh ďalšieho postupu.\n\n"
+        f"{factual_line}\n\n"
+        f"Mám jeden stručný nápad, ako zlepšiť prvý dojem a dopyty pre {hotel_name}.\n"
+        f"Ak bude dávať zmysel, pošlem ho v 3 bodoch.\n\n"
         f"S pozdravom"
     )
 
@@ -49,8 +93,8 @@ def build_followup_email(row: pd.Series) -> str:
     hotel_name = row["hotel_name"] or "váš hotel"
     return (
         f"Dobrý deň,\n\n"
-        f"len sa jemne pripomínam k predošlej správe pre {hotel_name}.\n"
-        f"Ak to bude relevantné, pošlem stručný návrh ďalšieho postupu.\n\n"
+        f"jemne sa pripomínam k predošlej správe pre {hotel_name}.\n"
+        f"Ak je to pre vás relevantné, pošlem krátky návrh v 3 bodoch.\n\n"
         f"S pozdravom"
     )
 
