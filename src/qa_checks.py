@@ -2,12 +2,14 @@ from pathlib import Path
 from typing import Optional
 
 import pandas as pd
+import yaml
 
 
 PROCESSED_DIR = Path("data/processed")
 ENRICHMENT_DIR = Path("outputs/enrichment")
 CLICKUP_DIR = Path("outputs/clickup")
 QA_DIR = Path("data/qa")
+QA_CONFIG_PATH = Path("configs/qa.yaml")
 MANUAL_REVIEW_SHORTLIST_PATH = QA_DIR / "manual_review_shortlist.csv"
 CLICKUP_REQUIRED_COLUMNS = ["Task name"]
 CLICKUP_SUPPORTED_CORE_COLUMNS = [
@@ -35,9 +37,28 @@ def load_csv(file_path: Optional[Path]) -> pd.DataFrame:
     return pd.read_csv(file_path)
 
 
+def load_qa_config(config_path: Path = QA_CONFIG_PATH) -> dict:
+    if not config_path.exists():
+        return {}
+    with config_path.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file) or {}
+
+
 def normalize_severity(value: str) -> str:
     normalized = normalize_text(value)
     return normalized if normalized else "Info"
+
+
+def is_dns_fetch_blocked(row: pd.Series) -> bool:
+    fetch_status = normalize_text(row.get("public_source_fetch_status"))
+    return fetch_status in {"dns_resolution_failed", "dns_resolution_failed_fallback_previous"}
+
+
+def is_single_side_verified_checkin_checkout(row: pd.Series) -> bool:
+    return (
+        normalize_text(row.get("checkin_checkout_status")) == "Overené vo verejnom zdroji"
+        and normalize_text(row.get("checkin_checkout_completeness")) == "single_side"
+    )
 
 
 def build_issue(
@@ -83,6 +104,13 @@ def build_issue_rows(
     clickup_df: pd.DataFrame,
 ) -> pd.DataFrame:
     issues: list[dict[str, object]] = []
+    qa_config = load_qa_config().get("qa", {})
+    single_side_high_priority_score_threshold = float(
+        qa_config.get("single_side_high_priority_score_threshold", 9.0)
+    )
+    public_web_fetch_incident_threshold_share = float(
+        qa_config.get("public_web_fetch_incident_threshold_share", 0.5)
+    )
 
     if not processed_df.empty:
         duplicate_mask = processed_df.duplicated(
@@ -120,6 +148,29 @@ def build_issue_rows(
             )
 
     if not enrichment_df.empty:
+        website_leads_mask = enrichment_df["website"].fillna("").astype(str).str.strip().ne("")
+        dns_blocked_mask = enrichment_df.apply(is_dns_fetch_blocked, axis=1)
+        website_leads_count = int(website_leads_mask.sum())
+        dns_blocked_count = int((website_leads_mask & dns_blocked_mask).sum())
+        dns_blocked_share = (dns_blocked_count / website_leads_count) if website_leads_count else 0.0
+
+        if website_leads_count and dns_blocked_share >= public_web_fetch_incident_threshold_share:
+            issues.append(
+                build_issue(
+                    issue_type="global_public_web_fetch_incident",
+                    severity="High",
+                    hotel_name="",
+                    city="",
+                    priority_band="",
+                    details=(
+                        "Globálny incident verejného web fetchu: "
+                        f"DNS problém zasiahol {dns_blocked_count}/{website_leads_count} leadov s webom "
+                        f"(threshold {public_web_fetch_incident_threshold_share:.2f})."
+                    ),
+                    source_file="",
+                )
+            )
+
         missing_summary_mask = enrichment_df["factual_summary"].fillna("").astype(str).str.strip().eq("")
         for _, row in enrichment_df[missing_summary_mask].iterrows():
             issues.append(
@@ -152,7 +203,12 @@ def build_issue_rows(
             "Verejne nepotvrdené"
         )
         for _, row in enrichment_df[unverified_hours_mask].iterrows():
-            severity = "Medium" if normalize_text(row.get("priority_band")) == "High" else "Low"
+            if is_dns_fetch_blocked(row):
+                severity = "Low"
+                details = "Otváracie hodiny sú verejne nepotvrdené; verejný web fetch bol blokovaný DNS problémom."
+            else:
+                severity = "Medium" if normalize_text(row.get("priority_band")) == "High" else "Low"
+                details = "Otváracie hodiny sú verejne nepotvrdené."
             issues.append(
                 build_issue(
                     issue_type="unverified_opening_hours",
@@ -160,7 +216,7 @@ def build_issue_rows(
                     hotel_name=row.get("hotel_name"),
                     city=row.get("city"),
                     priority_band=row.get("priority_band"),
-                    details="Otváracie hodiny sú verejne nepotvrdené.",
+                    details=details,
                     source_file=row.get("source_file"),
                 )
             )
@@ -169,6 +225,9 @@ def build_issue_rows(
             "Verejne nepotvrdené"
         ) & enrichment_df["priority_band"].fillna("").astype(str).str.strip().eq("High")
         for _, row in enrichment_df[unverified_checkio_mask].iterrows():
+            details = "Check-in / check-out je verejne nepotvrdený pre high-priority lead."
+            if is_dns_fetch_blocked(row):
+                details = "Check-in / check-out je verejne nepotvrdený; verejný web fetch bol blokovaný DNS problémom."
             issues.append(
                 build_issue(
                     issue_type="unverified_checkin_checkout",
@@ -176,7 +235,29 @@ def build_issue_rows(
                     hotel_name=row.get("hotel_name"),
                     city=row.get("city"),
                     priority_band=row.get("priority_band"),
-                    details="Check-in / check-out je verejne nepotvrdený pre high-priority lead.",
+                    details=details,
+                    source_file=row.get("source_file"),
+                )
+            )
+
+        single_side_verified_mask = enrichment_df.apply(is_single_side_verified_checkin_checkout, axis=1) & (
+            enrichment_df["priority_band"].fillna("").astype(str).str.strip().isin(["High", "Medium-High"])
+        )
+        for _, row in enrichment_df[single_side_verified_mask].iterrows():
+            priority_score = pd.to_numeric(row.get("priority_score"), errors="coerce")
+            severity = (
+                "High"
+                if pd.notna(priority_score) and float(priority_score) >= single_side_high_priority_score_threshold
+                else "Low"
+            )
+            issues.append(
+                build_issue(
+                    issue_type="single_side_verified_checkin_checkout",
+                    severity=severity,
+                    hotel_name=row.get("hotel_name"),
+                    city=row.get("city"),
+                    priority_band=row.get("priority_band"),
+                    details="Check-in / check-out je overený len jednostranne; odporúčaný ručný spot-check.",
                     source_file=row.get("source_file"),
                 )
             )
@@ -371,9 +452,13 @@ def save_manual_review_shortlist(
                 "city",
                 "priority_band",
                 "priority_score",
+                "review_bucket",
                 "hotel_opening_hours_status",
                 "checkin_checkout_status",
+                "checkin_checkout_source_origin",
+                "checkin_checkout_completeness",
                 "public_source_reachable",
+                "public_source_fetch_status",
                 "manual_review_reason",
                 "source_file",
             ]
@@ -388,6 +473,7 @@ def save_manual_review_shortlist(
         & (
             shortlist_df["hotel_opening_hours_status"].fillna("").astype(str).str.strip().eq("Verejne nepotvrdené")
             | shortlist_df["checkin_checkout_status"].fillna("").astype(str).str.strip().eq("Verejne nepotvrdené")
+            | shortlist_df["checkin_checkout_completeness"].fillna("").astype(str).str.strip().eq("single_side")
         )
     )
 
@@ -399,9 +485,13 @@ def save_manual_review_shortlist(
                 "city",
                 "priority_band",
                 "priority_score",
+                "review_bucket",
                 "hotel_opening_hours_status",
                 "checkin_checkout_status",
+                "checkin_checkout_source_origin",
+                "checkin_checkout_completeness",
                 "public_source_reachable",
+                "public_source_fetch_status",
                 "manual_review_reason",
                 "source_file",
             ]
@@ -411,24 +501,70 @@ def save_manual_review_shortlist(
 
     def build_reason(row: pd.Series) -> str:
         reasons: list[str] = []
+        reachable = normalize_text(row.get("public_source_reachable")) == "yes"
+        dns_blocked = is_dns_fetch_blocked(row)
         if normalize_text(row.get("hotel_opening_hours_status")) == "Verejne nepotvrdené":
-            reasons.append("unverified_opening_hours")
+            reasons.append(
+                "reachable_but_missing_opening_hours" if reachable else "unverified_opening_hours"
+            )
         if normalize_text(row.get("checkin_checkout_status")) == "Verejne nepotvrdené":
-            reasons.append("unverified_checkin_checkout")
+            reasons.append(
+                "reachable_but_missing_checkin_checkout" if reachable else "unverified_checkin_checkout"
+            )
+        if is_single_side_verified_checkin_checkout(row):
+            reasons.append("single_side_verified_checkin_checkout")
         if normalize_text(row.get("public_source_reachable")) != "yes":
-            reasons.append("source_not_reachable")
+            reasons.append("source_fetch_blocked_dns" if dns_blocked else "source_not_reachable")
         return " | ".join(reasons)
 
+    def build_review_bucket(row: pd.Series) -> str:
+        reachable = normalize_text(row.get("public_source_reachable")) == "yes"
+        missing_opening = normalize_text(row.get("hotel_opening_hours_status")) == "Verejne nepotvrdené"
+        missing_checkio = normalize_text(row.get("checkin_checkout_status")) == "Verejne nepotvrdené"
+        dns_blocked = is_dns_fetch_blocked(row)
+
+        if reachable and missing_checkio:
+            return "reachable_missing_checkin_checkout"
+        if is_single_side_verified_checkin_checkout(row):
+            return "single_side_verified_needs_review"
+        if reachable and missing_opening:
+            return "reachable_missing_opening_hours"
+        if dns_blocked:
+            return "dns_fetch_blocked"
+        return "source_unreachable_or_lower_signal"
+
     shortlist_df["manual_review_reason"] = shortlist_df.apply(build_reason, axis=1)
+    shortlist_df["review_bucket"] = shortlist_df.apply(build_review_bucket, axis=1)
+    shortlist_df["_reachable_rank"] = shortlist_df["public_source_reachable"].fillna("").astype(str).str.strip().eq("yes").map(
+        {True: 0, False: 1}
+    )
+    shortlist_df["_priority_rank"] = shortlist_df["priority_band"].fillna("").astype(str).str.strip().map(
+        {"High": 0, "Medium-High": 1}
+    ).fillna(2)
+    shortlist_df["_checkio_rank"] = shortlist_df["checkin_checkout_status"].fillna("").astype(str).str.strip().eq(
+        "Verejne nepotvrdené"
+    ).map({True: 0, False: 1})
+    shortlist_df["_single_side_rank"] = shortlist_df["checkin_checkout_completeness"].fillna("").astype(str).str.strip().eq(
+        "single_side"
+    ).map({True: 0, False: 1})
+    shortlist_df = shortlist_df.sort_values(
+        by=["_reachable_rank", "_priority_rank", "_checkio_rank", "_single_side_rank", "priority_score"],
+        ascending=[True, True, True, True, False],
+        kind="stable",
+    )
     shortlist_df = shortlist_df[
         [
             "hotel_name",
             "city",
             "priority_band",
             "priority_score",
+            "review_bucket",
             "hotel_opening_hours_status",
             "checkin_checkout_status",
+            "checkin_checkout_source_origin",
+            "checkin_checkout_completeness",
             "public_source_reachable",
+            "public_source_fetch_status",
             "manual_review_reason",
             "source_file",
         ]

@@ -4,13 +4,22 @@ Jednoduchý Python-first repozitár pre stabilný workflow enrichmentu hotelový
 
 ## Aktuálna fáza
 
-Aktívna je iba **Phase 1: repo structure + configs + env + README**.
+Aktívna je **Fáza 2: Stabilization + QA hardening**.
 
-V tejto fáze repo zámerne neobsahuje produkčný pipeline runner, orchestration vrstvu ani integračné automaty. Cieľom je pripraviť čistý, reprodukovateľný základ.
+Lokálny Python-first pipeline už beží end-to-end:
+
+- `normalize + score`
+- `enrich`
+- `email drafts`
+- `ClickUp export`
+- `QA`
+- `run summary`
+
+Aktuálne sa dolaďuje stabilita enrichmentu, source attribution, fallback správanie a manuálny review workflow.
 
 ## Core workflow
 
-`raw ingest -> normalize -> score -> enrich -> email drafts -> ClickUp exports`
+`raw ingest -> normalize -> score -> enrich -> email drafts -> ClickUp export -> QA -> run summary`
 
 ## Princípy
 
@@ -35,7 +44,7 @@ V tejto fáze repo zámerne neobsahuje produkčný pipeline runner, orchestratio
 - `outputs/clickup/` - exporty pre ClickUp
 - `prompts/enrichment/` - prompty pre enrichment
 - `prompts/email/` - prompty pre email drafty
-- `src/` - minimálny Python bootstrap
+- `src/` - pipeline kroky, QA, reporting a orchestrácia
 
 ## Lokálne spustenie
 
@@ -55,7 +64,7 @@ cp .env.example .env
 
 Potom doplň lokálne tajomstvá do `.env`.
 
-### 3. Základná kontrola
+### 3. Demo run
 
 ```bash
 python3 src/main.py
@@ -63,8 +72,9 @@ python3 src/main.py
 
 Očakávaný výsledok:
 
-- vypíše názov projektu
-- potvrdí, že Phase 1 je pripravená
+- spracuje latest batch cez celý lokálny flow
+- vygeneruje enrichment, email drafty a ClickUp export
+- vytvorí QA výstupy a run summary v `data/qa/`
 
 ## Konfigurácia
 
@@ -74,6 +84,7 @@ Hlavné nastavenia sú v:
 - `configs/scoring.yaml`
 - `configs/enrichment.yaml`
 - `configs/email.yaml`
+- `configs/qa.yaml`
 
 Environment premenné sú mimo kódu v `.env`.
 
@@ -84,13 +95,22 @@ Environment premenné sú mimo kódu v `.env`.
 - všetko odvodené ukladaj do `data/processed/` alebo `outputs/`
 - každú neoverenú hodnotu označ podľa konfigurácie ako `Verejne nepotvrdené`
 
-## Mimo rozsahu tejto fázy
+## Čo už dnes funguje
 
-Zatiaľ vedome nepridávame:
+- full local demo run end-to-end
+- run summary artifact po každom behu
+- ClickUp import readiness check
+- QA issue export a manual review shortlist
+- sample batch mode
+- source attribution pre opening hours aj check-in/check-out
+- DNS fallback ochrana pri verejnom web fetchi
+- run-to-run delta report
 
-- Apify runner
-- ClickUp export logiku
+## Mimo aktuálneho rozsahu
+
+Zatiaľ ešte nie sú hotové produkčné integrácie:
+
+- živé ClickUp API prepojenie
 - Make orchestration
-- email generation engine
-- scoring engine
-- enrichment scraping workflow
+- scheduled automation
+- externé ops workflow

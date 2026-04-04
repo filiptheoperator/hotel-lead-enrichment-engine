@@ -7,7 +7,7 @@ Hotel Lead Enrichment Engine OS
 Build a stable Python workflow for independent 3–4 star hotel lead enrichment.
 
 ## Workflow target
-raw ingest → normalize → score → enrich → email drafts → ClickUp exports
+raw ingest → normalize → score → enrich → email drafts → ClickUp export → QA → run summary
 
 ## Working language
 When guiding the user, communicate in Slovak.
@@ -34,8 +34,8 @@ When guiding the user, communicate in Slovak.
 6. only then further automation
 
 ## Current phase
-Phase 1 only:
-repo structure + configs + env + README
+Fáza 2:
+stabilization + QA hardening
 
 ## Target stack
 - Python

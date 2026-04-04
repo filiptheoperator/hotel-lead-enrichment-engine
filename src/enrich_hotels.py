@@ -10,6 +10,7 @@ import yaml
 
 
 PROCESSED_DIR = Path("data/processed")
+QA_DIR = Path("data/qa")
 ENRICHMENT_OUTPUT_DIR = Path("outputs/enrichment")
 ENRICHMENT_CONFIG_PATH = Path("configs/enrichment.yaml")
 DEFAULT_HEADERS = {
@@ -39,6 +40,20 @@ NON_HTML_FILE_EXTENSIONS = {
     ".ttf",
     ".eot",
 }
+PUBLIC_WEB_COLUMNS = [
+    "hotel_opening_hours",
+    "hotel_opening_hours_status",
+    "hotel_opening_hours_source_url",
+    "hotel_opening_hours_source_type",
+    "checkin_checkout_info",
+    "checkin_checkout_status",
+    "checkin_checkout_source_url",
+    "checkin_checkout_source_type",
+    "checkin_checkout_source_origin",
+    "checkin_checkout_completeness",
+    "public_source_reachable",
+]
+PREVIOUS_ARTIFACT_KEY_COLUMNS = ["hotel_name", "city", "source_file"]
 
 
 def load_enrichment_config(config_path: Path = ENRICHMENT_CONFIG_PATH) -> dict:
@@ -81,7 +96,7 @@ def html_to_text(value: str) -> str:
 
 def normalize_time_value(value: str) -> str:
     value = value.replace(".", ":").strip()
-    match = re.fullmatch(r"(\d{1,2}):(\d{2})", value)
+    match = re.fullmatch(r"(\d{1,2}):(\d{2})(?::(\d{2}))?", value)
     if not match:
         return ""
 
@@ -361,6 +376,23 @@ def fetch_public_page(url: str, timeout_seconds: int) -> str:
     return response.text
 
 
+def classify_fetch_error(error: Exception) -> str:
+    error_text = normalize_text(str(error)).lower()
+    error_name = error.__class__.__name__.lower()
+
+    if "nameresolutionerror" in error_text or "failed to resolve" in error_text:
+        return "dns_resolution_failed"
+    if "connecttimeout" in error_name or "readtimeout" in error_name or "timed out" in error_text:
+        return "request_timeout"
+    if "ssl" in error_name or "ssl" in error_text:
+        return "ssl_error"
+    if "connectionerror" in error_name:
+        return "connection_error"
+    if "http" in error_name:
+        return "http_error"
+    return "request_failed"
+
+
 def classify_public_source_type(source_url: str) -> str:
     parsed = urlparse(normalize_text(source_url))
     path = parsed.path.lower().strip("/")
@@ -507,8 +539,8 @@ def extract_opening_hours_from_json_ld(html: str) -> str:
 def extract_checkin_checkout_from_json_ld(html: str) -> str:
     for block in extract_json_ld_blocks(html):
         for obj in iter_json_objects(block):
-            checkin = normalize_text(obj.get("checkinTime"))
-            checkout = normalize_text(obj.get("checkoutTime"))
+            checkin = normalize_time_value(normalize_text(obj.get("checkinTime")))
+            checkout = normalize_time_value(normalize_text(obj.get("checkoutTime")))
             if checkin or checkout:
                 parts = []
                 if checkin:
@@ -519,15 +551,229 @@ def extract_checkin_checkout_from_json_ld(html: str) -> str:
     return ""
 
 
+def classify_checkin_checkout_completeness(value: str) -> str:
+    normalized = normalize_text(value)
+    if not normalized or normalized == "Verejne nepotvrdené":
+        return "none"
+
+    has_checkin = "Check-in od" in normalized
+    has_checkout = "Check-out do" in normalized
+    if has_checkin and has_checkout:
+        return "paired"
+    if has_checkin or has_checkout:
+        return "single_side"
+    return "none"
+
+
+def extract_checkin_checkout_window(text: str, start_index: int) -> str:
+    plain_text = html_to_text(text)
+    window_start = max(0, start_index - 80)
+    window = plain_text[window_start : window_start + 260]
+    split_markers = [
+        " breakfast",
+        " continental breakfast",
+        " opening hours",
+        " operating hours",
+        " otváracie hodiny",
+        " prevádzkové hodiny",
+        " wellness",
+        " spa",
+        " sauna",
+        " restaurant",
+        " reštaur",
+        " restaurac",
+        " parking",
+        " parkovanie",
+        " cookies",
+        " privacy",
+        " gdpr",
+        " terms",
+        " conditions",
+        " storno",
+        " cancellation",
+        " copyright",
+    ]
+
+    lowered = window.lower()
+    cut_positions = [lowered.find(marker) for marker in split_markers if lowered.find(marker) > 0]
+    if cut_positions:
+        window = window[: min(cut_positions)]
+
+    return normalize_whitespace(window)[:200].strip(" ,;:-")
+
+
+def parse_checkin_checkout_candidate(text: str) -> str:
+    lowered = normalize_whitespace(text).lower()
+    if not lowered:
+        return ""
+
+    patterns = [
+        r"check[\s\-]?in[^0-9]{0,30}(\d{1,2}[:.]\d{2})[^a-z0-9]{0,16}check[\s\-]?out[^0-9]{0,30}(\d{1,2}[:.]\d{2})",
+        r"check[\s\-]?out[^0-9]{0,30}(\d{1,2}[:.]\d{2})[^a-z0-9]{0,16}check[\s\-]?in[^0-9]{0,30}(\d{1,2}[:.]\d{2})",
+        r"arrival[^0-9]{0,30}(\d{1,2}[:.]\d{2})[^a-z0-9]{0,16}departure[^0-9]{0,30}(\d{1,2}[:.]\d{2})",
+    ]
+
+    for pattern in patterns:
+        match = re.search(pattern, lowered, flags=re.IGNORECASE)
+        if not match:
+            continue
+        if "check out" in pattern or "check[\s\-]?out" in pattern[:20]:
+            checkout = normalize_time_value(match.group(1))
+            checkin = normalize_time_value(match.group(2))
+        else:
+            checkin = normalize_time_value(match.group(1))
+            checkout = normalize_time_value(match.group(2))
+        if checkin and checkout:
+            return f"Check-in od {checkin} / Check-out do {checkout}"
+
+    checkin_match = re.search(
+        r"(check[\s\-]?in|arrival)(?:\s+from|\s+od|\s*:)?[^0-9]{0,20}(\d{1,2}[:.]\d{2})",
+        lowered,
+        flags=re.IGNORECASE,
+    )
+    checkout_match = re.search(
+        r"(check[\s\-]?out|departure)(?:\s+until|\s+do|\s*:)?[^0-9]{0,20}(\d{1,2}[:.]\d{2})",
+        lowered,
+        flags=re.IGNORECASE,
+    )
+
+    parts = []
+    if checkin_match:
+        checkin = normalize_time_value(checkin_match.group(2))
+        if checkin:
+            parts.append(f"Check-in od {checkin}")
+    if checkout_match:
+        checkout = normalize_time_value(checkout_match.group(2))
+        if checkout:
+            parts.append(f"Check-out do {checkout}")
+
+    if len(parts) == 1:
+        time_matches = re.findall(r"\b\d{1,2}[:.]\d{2}(?::\d{2})?\b", lowered)
+        if len(time_matches) > 1:
+            return ""
+
+    return " / ".join(parts)
+
+
+def is_likely_checkin_checkout(row: pd.Series, value: str, source_url: str) -> bool:
+    cleaned = normalize_text(value)
+    if not cleaned:
+        return False
+    if not is_likely_accommodation_lead(row):
+        return False
+
+    lowered = cleaned.lower()
+    source_lowered = normalize_text(source_url).lower()
+    source_type = classify_public_source_type(source_url)
+    hotel_name_lowered = normalize_text(row.get("hotel_name")).lower()
+    path_tokens = [token for token in re.split(r"[^a-z0-9]+", urlparse(source_url).path.lower()) if token]
+
+    excluded_markers = [
+        "wellness",
+        "spa",
+        "restaurant",
+        "reštaur",
+        "restaurac",
+        "sauna",
+        "massage",
+        "masáž",
+        "masaz",
+        "breakfast",
+        "raňajky",
+        "ranajky",
+        "parking",
+        "parkovanie",
+        "storno",
+        "cancellation",
+        "privacy",
+        "cookies",
+    ]
+    strong_source_markers = [
+        "hotel",
+        "room",
+        "rooms",
+        "stay",
+        "accommodation",
+        "ubyt",
+        "apartment",
+        "apartments",
+        "faq",
+        "contact",
+        "kontakt",
+    ]
+    has_excluded_marker = any(marker in lowered for marker in excluded_markers)
+    source_is_excluded = any(marker in source_lowered for marker in excluded_markers)
+    has_checkin_marker = "check-in" in lowered or "check in" in lowered or "arrival" in lowered
+    has_checkout_marker = "check-out" in lowered or "check out" in lowered or "departure" in lowered
+    time_matches = re.findall(r"\b\d{1,2}:\d{2}\b", lowered)
+    strong_source_context = (
+        any(marker in source_lowered for marker in strong_source_markers)
+        or any(marker in hotel_name_lowered for marker in ["hotel", "hostel", "penzion", "apartm", "residence"])
+        or source_type in {"faq_page", "contact_page"}
+    )
+    single_side_path_ok = bool(
+        set(path_tokens).intersection({"hotel", "hostel", "room", "rooms", "stay", "accommodation", "contact", "faq"})
+    )
+
+    if has_excluded_marker or source_is_excluded:
+        return False
+    if source_type not in {"homepage", "subpage_general", "faq_page", "contact_page"}:
+        return False
+    if not time_matches:
+        return False
+    if has_checkin_marker and has_checkout_marker:
+        return True
+    if len(time_matches) > 1 and (has_checkin_marker ^ has_checkout_marker):
+        return False
+    if len(time_matches) >= 2 and (has_checkin_marker or has_checkout_marker) and strong_source_context:
+        return True
+    if (
+        (has_checkin_marker or has_checkout_marker)
+        and strong_source_context
+        and (
+            source_type in {"homepage", "contact_page", "faq_page"}
+            or single_side_path_ok
+        )
+    ):
+        return True
+    return False
+
+
 def extract_checkin_checkout_from_text(text: str) -> str:
     plain_text = html_to_text(text)
-    patterns = [
+    anchor_pattern = re.compile(
+        r"check[\s\-]?in|check[\s\-]?out|arrival|departure",
+        flags=re.IGNORECASE,
+    )
+    candidates: list[str] = []
+    seen: set[str] = set()
+
+    for match in anchor_pattern.finditer(plain_text):
+        snippet = extract_checkin_checkout_window(plain_text, match.start())
+        if not snippet:
+            continue
+        candidate = parse_checkin_checkout_candidate(snippet)
+        if candidate and candidate not in seen:
+            seen.add(candidate)
+            candidates.append(candidate)
+
+    if candidates:
+        paired_candidates = [
+            candidate
+            for candidate in candidates
+            if "Check-in od" in candidate and "Check-out do" in candidate
+        ]
+        if paired_candidates:
+            return paired_candidates[0]
+        return candidates[0]
+
+    fallback_patterns = [
         r"check[\s\-]?in[^0-9]{0,40}(\d{1,2}[:.]\d{2})[^a-z0-9]{0,20}check[\s\-]?out[^0-9]{0,40}(\d{1,2}[:.]\d{2})",
         r"arrival[^0-9]{0,40}(\d{1,2}[:.]\d{2})[^a-z0-9]{0,20}departure[^0-9]{0,40}(\d{1,2}[:.]\d{2})",
     ]
 
     lowered = plain_text.lower()
-    for pattern in patterns:
+    for pattern in fallback_patterns:
         match = re.search(pattern, lowered, flags=re.IGNORECASE)
         if match:
             checkin = normalize_time_value(match.group(1))
@@ -547,6 +793,9 @@ def extract_checkin_checkout_from_text(text: str) -> str:
     )
 
     if checkin_match or checkout_match:
+        all_time_matches = re.findall(r"\b\d{1,2}[:.]\d{2}(?::\d{2})?\b", lowered)
+        if len(all_time_matches) > 1 and not (checkin_match and checkout_match):
+            return ""
         parts = []
         if checkin_match:
             checkin = normalize_time_value(checkin_match.group(1))
@@ -607,17 +856,18 @@ def collect_public_pages(
     timeout_seconds: int,
     page_keywords: list[str],
     max_pages_per_hotel: int,
-) -> list[tuple[str, str]]:
+) -> tuple[list[tuple[str, str]], str]:
     if not website_url:
-        return []
+        return [], "missing_website"
 
     pages: list[tuple[str, str]] = []
     try:
         homepage_html = fetch_public_page(website_url, timeout_seconds)
-    except Exception:
-        return []
+    except Exception as error:
+        return [], classify_fetch_error(error)
 
     pages.append((website_url, homepage_html))
+    fetch_status = "ok"
 
     candidate_urls = extract_same_domain_candidate_urls(
         base_url=website_url,
@@ -635,7 +885,7 @@ def collect_public_pages(
         except Exception:
             continue
 
-    return pages
+    return pages, fetch_status
 
 
 def enrich_public_web_fields(
@@ -664,19 +914,24 @@ def enrich_public_web_fields(
         "checkin_checkout_status": verified_public_label if fallback_checkin_checkout else unknown_value_label,
         "checkin_checkout_source_url": normalize_text(row.get("website")) if fallback_checkin_checkout else "",
         "checkin_checkout_source_type": classify_public_source_type(normalize_text(row.get("website"))) if fallback_checkin_checkout else "",
+        "checkin_checkout_source_origin": "raw_input" if fallback_checkin_checkout else "",
+        "checkin_checkout_completeness": classify_checkin_checkout_completeness(fallback_checkin_checkout),
         "public_source_reachable": "no",
+        "public_source_fetch_status": "not_attempted",
     }
 
     website_url = normalize_text(row.get("website"))
     if not website_url:
+        result["public_source_fetch_status"] = "missing_website"
         return result
 
-    pages = collect_public_pages(
+    pages, fetch_status = collect_public_pages(
         website_url=website_url,
         timeout_seconds=timeout_seconds,
         page_keywords=page_keywords,
         max_pages_per_hotel=max_pages_per_hotel,
     )
+    result["public_source_fetch_status"] = fetch_status
     if pages:
         result["public_source_reachable"] = "yes"
 
@@ -690,12 +945,24 @@ def enrich_public_web_fields(
                 result["hotel_opening_hours_source_type"] = classify_public_source_type(page_url)
 
         if result["checkin_checkout_info"] == unknown_value_label:
-            checkin_checkout = extract_checkin_checkout_from_json_ld(html) or extract_checkin_checkout_from_text(html)
-            if checkin_checkout:
+            checkin_checkout = ""
+            checkin_checkout_origin = ""
+            jsonld_checkin_checkout = extract_checkin_checkout_from_json_ld(html)
+            if jsonld_checkin_checkout:
+                checkin_checkout = jsonld_checkin_checkout
+                checkin_checkout_origin = "jsonld"
+            else:
+                text_checkin_checkout = extract_checkin_checkout_from_text(html)
+                if text_checkin_checkout:
+                    checkin_checkout = text_checkin_checkout
+                    checkin_checkout_origin = "text"
+            if checkin_checkout and is_likely_checkin_checkout(row, checkin_checkout, page_url):
                 result["checkin_checkout_info"] = checkin_checkout
                 result["checkin_checkout_status"] = verified_public_label
                 result["checkin_checkout_source_url"] = page_url
                 result["checkin_checkout_source_type"] = classify_public_source_type(page_url)
+                result["checkin_checkout_source_origin"] = checkin_checkout_origin
+                result["checkin_checkout_completeness"] = classify_checkin_checkout_completeness(checkin_checkout)
 
         if (
             result["hotel_opening_hours"] != unknown_value_label
@@ -822,13 +1089,96 @@ def build_enrichment_dataframe(
             "checkin_checkout_status",
             "checkin_checkout_source_url",
             "checkin_checkout_source_type",
+            "checkin_checkout_source_origin",
+            "checkin_checkout_completeness",
             "public_source_reachable",
+            "public_source_fetch_status",
             "contact_status",
             "factual_summary",
             "source_url",
             "source_file",
         ]
     ].copy()
+
+
+def load_previous_enrichment_artifact(source_file: str) -> pd.DataFrame:
+    candidate_paths = [
+        ENRICHMENT_OUTPUT_DIR / f"{Path(source_file).stem}_enriched.csv",
+        QA_DIR / "before_enriched.csv",
+    ]
+
+    best_df = pd.DataFrame()
+    best_score = -1
+    for candidate_path in candidate_paths:
+        if not candidate_path.exists():
+            continue
+        try:
+            candidate_df = pd.read_csv(candidate_path)
+        except Exception:
+            continue
+        if "checkin_checkout_source_origin" not in candidate_df.columns:
+            candidate_df["checkin_checkout_source_origin"] = ""
+            verified_mask = candidate_df["checkin_checkout_status"].fillna("").astype(str).str.strip().eq(
+                "Overené vo verejnom zdroji"
+            )
+            candidate_df.loc[verified_mask, "checkin_checkout_source_origin"] = "text"
+        if "checkin_checkout_completeness" not in candidate_df.columns:
+            candidate_df["checkin_checkout_completeness"] = candidate_df["checkin_checkout_info"].apply(
+                classify_checkin_checkout_completeness
+            )
+        if not set(PREVIOUS_ARTIFACT_KEY_COLUMNS + PUBLIC_WEB_COLUMNS).issubset(candidate_df.columns):
+            continue
+
+        candidate_score = int(
+            candidate_df["public_source_reachable"].fillna("").astype(str).str.strip().eq("yes").sum()
+        )
+        if candidate_score > best_score:
+            best_df = candidate_df
+            best_score = candidate_score
+
+    return best_df
+
+
+def reuse_previous_public_web_fields(
+    enriched_df: pd.DataFrame,
+    previous_df: pd.DataFrame,
+) -> tuple[pd.DataFrame, int]:
+    if enriched_df.empty or previous_df.empty:
+        return enriched_df, 0
+
+    required_columns = set(PREVIOUS_ARTIFACT_KEY_COLUMNS + PUBLIC_WEB_COLUMNS)
+    if not required_columns.issubset(previous_df.columns):
+        return enriched_df, 0
+
+    fallback_source = previous_df[PREVIOUS_ARTIFACT_KEY_COLUMNS + PUBLIC_WEB_COLUMNS].copy()
+    fallback_source = fallback_source.rename(
+        columns={column: f"{column}_previous" for column in PUBLIC_WEB_COLUMNS}
+    )
+
+    merged = enriched_df.merge(
+        fallback_source,
+        on=PREVIOUS_ARTIFACT_KEY_COLUMNS,
+        how="left",
+    )
+
+    fallback_mask = (
+        merged["public_source_fetch_status"].fillna("").astype(str).str.strip().eq("dns_resolution_failed")
+        & merged["public_source_reachable_previous"].fillna("").astype(str).str.strip().eq("yes")
+    )
+
+    reused_rows = int(fallback_mask.sum())
+    if reused_rows == 0:
+        return enriched_df, 0
+
+    for column in PUBLIC_WEB_COLUMNS:
+        previous_column = f"{column}_previous"
+        merged.loc[fallback_mask, column] = merged.loc[fallback_mask, previous_column]
+
+    merged.loc[fallback_mask, "public_source_fetch_status"] = "dns_resolution_failed_fallback_previous"
+
+    cleanup_columns = [f"{column}_previous" for column in PUBLIC_WEB_COLUMNS]
+    merged = merged.drop(columns=cleanup_columns)
+    return merged, reused_rows
 
 
 def save_enriched_file(df: pd.DataFrame, source_file: str) -> Path:
@@ -879,6 +1229,7 @@ def main() -> None:
         if scored_df[column].dtype == object:
             scored_df[column] = scored_df[column].apply(normalize_text)
 
+    previous_enriched_df = load_previous_enrichment_artifact(first_file.name)
     enriched_df = build_enrichment_dataframe(
         scored_df,
         unknown_value_label=unknown_value_label,
@@ -889,11 +1240,23 @@ def main() -> None:
         page_keywords=page_keywords,
         max_pages_per_hotel=max_pages_per_hotel,
     )
+    enriched_df, reused_previous_rows = reuse_previous_public_web_fields(
+        enriched_df=enriched_df,
+        previous_df=previous_enriched_df,
+    )
+    enriched_df["factual_summary"] = enriched_df.apply(
+        lambda row: build_factual_summary(row, unknown_value_label),
+        axis=1,
+    )
     output_path = save_enriched_file(enriched_df, first_file.name)
 
     print(f"Načítaný processed súbor: {first_file.name}")
     print(f"Počet riadkov: {len(enriched_df)}")
     print(f"Výstup uložený do: {output_path}")
+    if reused_previous_rows:
+        print(
+            f"Použitý fallback z predchádzajúceho enrichment artifactu pre {reused_previous_rows} riadkov."
+        )
     print("\nNáhľad prvých 5 riadkov:\n")
     print(
         enriched_df[
