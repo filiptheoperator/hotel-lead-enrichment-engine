@@ -444,6 +444,10 @@ def save_manual_review_shortlist(
 ) -> Path:
     QA_DIR.mkdir(parents=True, exist_ok=True)
     shortlist_path = MANUAL_REVIEW_SHORTLIST_PATH
+    qa_config = load_qa_config().get("qa", {})
+    high_lead_clickup_ready_score_threshold = float(
+        qa_config.get("high_lead_clickup_ready_score_threshold", 9.0)
+    )
 
     if enrichment_df.empty:
         pd.DataFrame(
@@ -453,6 +457,8 @@ def save_manual_review_shortlist(
                 "priority_band",
                 "priority_score",
                 "review_bucket",
+                "operator_triage_priority",
+                "operator_triage_action",
                 "hotel_opening_hours_status",
                 "checkin_checkout_status",
                 "checkin_checkout_source_origin",
@@ -486,6 +492,8 @@ def save_manual_review_shortlist(
                 "priority_band",
                 "priority_score",
                 "review_bucket",
+                "operator_triage_priority",
+                "operator_triage_action",
                 "hotel_opening_hours_status",
                 "checkin_checkout_status",
                 "checkin_checkout_source_origin",
@@ -533,8 +541,36 @@ def save_manual_review_shortlist(
             return "dns_fetch_blocked"
         return "source_unreachable_or_lower_signal"
 
+    def build_operator_triage_priority(row: pd.Series) -> str:
+        priority_band = normalize_text(row.get("priority_band"))
+        if priority_band == "High":
+            return "P1"
+        if priority_band == "Medium-High":
+            return "P2"
+        return "P3"
+
+    def build_operator_triage_action(row: pd.Series) -> str:
+        priority_band = normalize_text(row.get("priority_band"))
+        review_bucket = normalize_text(row.get("review_bucket"))
+        priority_score = pd.to_numeric(row.get("priority_score"), errors="coerce")
+        top_high_lead = (
+            priority_band == "High"
+            and pd.notna(priority_score)
+            and float(priority_score) >= high_lead_clickup_ready_score_threshold
+        )
+
+        if review_bucket == "dns_fetch_blocked":
+            return "hold_batch_due_to_dns_incident" if priority_band == "High" else "hold_for_retry"
+        if review_bucket == "single_side_verified_needs_review":
+            return "manual_spotcheck_then_clickup" if top_high_lead else "manual_spotcheck"
+        if review_bucket in {"reachable_missing_checkin_checkout", "reachable_missing_opening_hours"}:
+            return "manual_review_before_clickup" if priority_band == "High" else "manual_review_if_capacity"
+        return "review_before_clickup" if priority_band == "High" else "defer_review"
+
     shortlist_df["manual_review_reason"] = shortlist_df.apply(build_reason, axis=1)
     shortlist_df["review_bucket"] = shortlist_df.apply(build_review_bucket, axis=1)
+    shortlist_df["operator_triage_priority"] = shortlist_df.apply(build_operator_triage_priority, axis=1)
+    shortlist_df["operator_triage_action"] = shortlist_df.apply(build_operator_triage_action, axis=1)
     shortlist_df["_reachable_rank"] = shortlist_df["public_source_reachable"].fillna("").astype(str).str.strip().eq("yes").map(
         {True: 0, False: 1}
     )
@@ -559,6 +595,8 @@ def save_manual_review_shortlist(
             "priority_band",
             "priority_score",
             "review_bucket",
+            "operator_triage_priority",
+            "operator_triage_action",
             "hotel_opening_hours_status",
             "checkin_checkout_status",
             "checkin_checkout_source_origin",

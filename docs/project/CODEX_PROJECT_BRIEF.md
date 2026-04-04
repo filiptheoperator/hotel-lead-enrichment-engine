@@ -34,8 +34,8 @@ When guiding the user, communicate in Slovak.
 6. only then further automation
 
 ## Current phase
-Fáza 2:
-stabilization + QA hardening
+Fáza 3:
+operator-ready workflow
 
 ## Target stack
 - Python

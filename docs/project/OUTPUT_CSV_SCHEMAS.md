@@ -1,10 +1,10 @@
 # OUTPUT CSV SCHEMAS
 
-Potvrdené podľa existujúcich lokálnych CSV súborov v repozitári k 2026-04-04.
+Potvrdené podľa existujúcich lokálnych artifactov v repozitári k 2026-04-04.
 
 ## Scope
 
-Tento dokument popisuje aktuálne potvrdené schémy pre:
+Tento dokument uzamyká aktuálny output contract pre:
 
 - `data/processed`
 - `outputs/enrichment`
@@ -12,7 +12,7 @@ Tento dokument popisuje aktuálne potvrdené schémy pre:
 - `outputs/clickup`
 - `data/qa`
 
-Ak niečo nie je potvrdené existujúcim súborom alebo reálnym importom, je to označené ako `Neoverené`.
+Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je to označené ako `Neoverené`.
 
 ## data/processed
 
@@ -37,11 +37,6 @@ Ak niečo nie je potvrdené existujúcim súborom alebo reálnym importom, je to
 13. `priority_score`
 14. `priority_band`
 
-### Stav
-
-- Potvrdené existujúcim súborom:
-  - `data/processed/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored.csv`
-
 ## outputs/enrichment
 
 ### Súborový pattern
@@ -64,26 +59,26 @@ Ak niečo nie je potvrdené existujúcim súborom alebo reálnym importom, je to
 12. `hotel_opening_hours`
 13. `hotel_opening_hours_status`
 14. `hotel_opening_hours_source_url`
-15. `checkin_checkout_info`
-16. `checkin_checkout_status`
-17. `checkin_checkout_source_url`
-18. `contact_status`
-19. `factual_summary`
-20. `source_url`
-21. `source_file`
+15. `hotel_opening_hours_source_type`
+16. `checkin_checkout_info`
+17. `checkin_checkout_status`
+18. `checkin_checkout_source_url`
+19. `checkin_checkout_source_type`
+20. `checkin_checkout_source_origin`
+21. `checkin_checkout_completeness`
+22. `public_source_reachable`
+23. `public_source_fetch_status`
+24. `contact_status`
+25. `factual_summary`
+26. `source_url`
+27. `source_file`
 
 ### Poznámky
 
-- `hotel_opening_hours` je v aktuálnom výstupe prítomné.
-- Verejná dostupnosť a presnosť `hotel_opening_hours` je po riadkoch rôzna a musí zostať explicitne označená stavovým poľom.
-- `hotel_opening_hours_source_url` je URL verejného zdroja len keď bol údaj reálne dohľadaný na webe.
-- `checkin_checkout_info` je v aktuálnom výstupe factual minimum.
-- `checkin_checkout_source_url` je URL verejného zdroja len keď bol údaj reálne dohľadaný na webe.
-
-### Stav
-
-- Potvrdené existujúcim súborom:
-  - `outputs/enrichment/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored_enriched.csv`
+- `hotel_opening_hours_status` a `checkin_checkout_status` držia explicitné označenie overenia.
+- `public_source_fetch_status` odlišuje live fetch, fallback a fetch incident.
+- `checkin_checkout_source_origin` je dnes potvrdené ako `text`, `jsonld`, `raw_input` alebo prázdne.
+- `checkin_checkout_completeness` je dnes potvrdené ako `paired`, `single_side`, `none`.
 
 ## outputs/email_drafts
 
@@ -107,16 +102,6 @@ Ak niečo nie je potvrdené existujúcim súborom alebo reálnym importom, je to
 12. `followup_email`
 13. `source_file`
 
-### Poznámky
-
-- `cold_email` a `followup_email` sú multiline text polia.
-- Schéma potvrdzuje aktuálny safe minimum export, nie kvalitatívny cieľ pre ďalšiu iteráciu.
-
-### Stav
-
-- Potvrdené existujúcim súborom:
-  - `outputs/email_drafts/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored_enriched_email_drafts.csv`
-
 ## outputs/clickup
 
 ### Súborový pattern
@@ -139,49 +124,65 @@ Ak niečo nie je potvrdené existujúcim súborom alebo reálnym importom, je to
 
 ### Poznámky
 
-- `Description content` je multiline text pole.
-- Táto schéma je zarovnaná na oficiálne ClickUp import polia pre `Task name`, `Description content`, `Status`, `Priority`.
-- `Priority` je exportovaná ako ClickUp numeric priority:
-  - `2` = high
-  - `3` = normal
-  - `4` = low
-- Ostatné stĺpce sú ponechané ako pomocné mapovateľné polia.
-- Reálna end-to-end kompatibilita konkrétneho importu v cieľovom workspace je stále `Neoverené`.
-
-### Stav
-
-- Potvrdené existujúcim súborom:
-  - `outputs/clickup/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored_enriched_email_drafts_clickup_import.csv`
+- `Task name`, `Description content`, `Status`, `Priority` sú potvrdené ako minimálny importný contract.
+- Reálna kompatibilita s cieľovým ClickUp workspace ostáva `Neoverené`.
 
 ## data/qa
 
-### Súborový pattern
+### `qa_issues.csv`
 
-- `qa_issues.csv`
-
-### Potvrdené stĺpce
+#### Potvrdené stĺpce
 
 1. `issue_type`
 2. `severity`
-3. `hotel_name`
-4. `city`
-5. `priority_band`
-6. `details`
-7. `source_file`
+3. `blocking`
+4. `hotel_name`
+5. `city`
+6. `priority_band`
+7. `details`
+8. `source_file`
+
+### `manual_review_shortlist.csv`
+
+#### Potvrdené stĺpce
+
+1. `hotel_name`
+2. `city`
+3. `priority_band`
+4. `priority_score`
+5. `review_bucket`
+6. `operator_triage_priority`
+7. `operator_triage_action`
+8. `hotel_opening_hours_status`
+9. `checkin_checkout_status`
+10. `checkin_checkout_source_origin`
+11. `checkin_checkout_completeness`
+12. `public_source_reachable`
+13. `public_source_fetch_status`
+14. `manual_review_reason`
+15. `source_file`
 
 ### Poznámky
 
-- Aktuálny QA output zachytáva issue-level záznamy.
-- Presné blocking vs warning pravidlá pre ďalšiu etapu sú zatiaľ `Neoverené`.
+- `review_bucket` je shortlist segmentácia pre review workflow.
+- `operator_triage_priority` a `operator_triage_action` sú operátorské odporúčania, nie produkčné CRM statusy.
 
-### Stav
+## Non-CSV runtime artifact
 
-- Potvrdené existujúcim súborom:
-  - `data/qa/qa_issues.csv`
+### `data/qa/run_manifest.json`
+
+- Potvrdené runtime artifact pole pre batch-level snapshot.
+- Obsahuje:
+  - batch source files
+  - artifact paths
+  - row counts
+  - quality snapshot
+  - fetch health
+  - shortlist snapshot
+  - import snapshot
 
 ## Zhrnutie
 
-- Všetkých 5 cieľových CSV schém je aktuálne potvrdených existujúcimi súbormi.
-- Neoverené ostáva iba:
-  - reálna kompatibilita `outputs/clickup` s ClickUp importom
-  - budúce pravidlá pre `blocking` vs `warning` v QA
+- Output contract pre hlavné CSV artefakty je uzamknutý podľa aktuálnych reálnych hlavičiek.
+- `run_manifest.json` je nový ne-CSV batch artifact pre operátorský workflow.
+- Neoverené ostáva len to, čo závisí od externých systémov alebo live siete.

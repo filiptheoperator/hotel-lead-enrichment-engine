@@ -1,3 +1,4 @@
 qa:
   single_side_high_priority_score_threshold: 9.0
   public_web_fetch_incident_threshold_share: 0.5
+  high_lead_clickup_ready_score_threshold: 9.0

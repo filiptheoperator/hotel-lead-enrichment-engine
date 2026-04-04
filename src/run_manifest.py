@@ -1,0 +1,190 @@
+import json
+from datetime import datetime
+from pathlib import Path
+from typing import Optional
+
+import pandas as pd
+
+
+PROCESSED_DIR = Path("data/processed")
+ENRICHMENT_DIR = Path("outputs/enrichment")
+EMAIL_DIR = Path("outputs/email_drafts")
+CLICKUP_DIR = Path("outputs/clickup")
+QA_DIR = Path("data/qa")
+RUN_MANIFEST_PATH = QA_DIR / "run_manifest.json"
+
+
+def get_latest_file(folder: Path, pattern: str) -> Optional[Path]:
+    files = sorted(folder.glob(pattern))
+    return files[-1] if files else None
+
+
+def load_csv(file_path: Optional[Path]) -> pd.DataFrame:
+    if file_path is None or not file_path.exists():
+        return pd.DataFrame()
+    return pd.read_csv(file_path)
+
+
+def normalize_series(df: pd.DataFrame, column: str) -> pd.Series:
+    if column not in df.columns:
+        return pd.Series("", index=df.index, dtype="object")
+    return df[column].fillna("").astype(str).str.strip()
+
+
+def count_value(df: pd.DataFrame, column: str, value: str) -> int:
+    return int(normalize_series(df, column).eq(value).sum())
+
+
+def normalize_clickup_priority(value: object) -> str:
+    if pd.isna(value):
+        return ""
+    text = str(value).strip()
+    if not text:
+        return ""
+    try:
+        return str(int(float(text)))
+    except ValueError:
+        return text
+
+
+def build_run_manifest() -> dict:
+    processed_path = get_latest_file(PROCESSED_DIR, "*_normalized_scored.csv")
+    enrichment_path = get_latest_file(ENRICHMENT_DIR, "*_enriched.csv")
+    email_path = get_latest_file(EMAIL_DIR, "*_email_drafts.csv")
+    clickup_path = get_latest_file(CLICKUP_DIR, "*_clickup_import.csv")
+    qa_issues_path = QA_DIR / "qa_issues.csv"
+    shortlist_path = QA_DIR / "manual_review_shortlist.csv"
+    run_summary_path = QA_DIR / "run_summary.txt"
+    run_delta_path = QA_DIR / "run_delta_report.txt"
+
+    processed_df = load_csv(processed_path)
+    enrichment_df = load_csv(enrichment_path)
+    email_df = load_csv(email_path)
+    clickup_df = load_csv(clickup_path)
+    qa_issues_df = load_csv(qa_issues_path)
+    shortlist_df = load_csv(shortlist_path)
+
+    fetch_status = normalize_series(enrichment_df, "public_source_fetch_status")
+    website_status = normalize_series(enrichment_df, "website")
+    review_bucket = normalize_series(shortlist_df, "review_bucket")
+    triage_action = normalize_series(shortlist_df, "operator_triage_action")
+    normalized_clickup_priority = (
+        clickup_df["Priority"].apply(normalize_clickup_priority)
+        if "Priority" in clickup_df.columns
+        else pd.Series("", index=clickup_df.index, dtype="object")
+    )
+
+    leads_with_website = int(website_status.ne("").sum())
+    fetch_blocked_total = int(
+        fetch_status.isin(["dns_resolution_failed", "dns_resolution_failed_fallback_previous"]).sum()
+    )
+    fetch_incident_flag = (
+        "yes" if leads_with_website and (fetch_blocked_total / leads_with_website) >= 0.5 else "no"
+    )
+
+    source_files = sorted(
+        {
+            value
+            for value in normalize_series(processed_df, "source_file").tolist()
+            if value
+        }
+    )
+
+    manifest = {
+        "project": "Hotel Lead Enrichment Engine OS",
+        "manifest_version": 1,
+        "generated_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+        "batch": {
+            "source_files": source_files,
+            "source_file_count": len(source_files),
+        },
+        "artifacts": {
+            "processed_csv": str(processed_path) if processed_path else "",
+            "enrichment_csv": str(enrichment_path) if enrichment_path else "",
+            "email_drafts_csv": str(email_path) if email_path else "",
+            "clickup_import_csv": str(clickup_path) if clickup_path else "",
+            "qa_issues_csv": str(qa_issues_path) if qa_issues_path.exists() else "",
+            "manual_review_shortlist_csv": str(shortlist_path) if shortlist_path.exists() else "",
+            "run_summary_txt": str(run_summary_path) if run_summary_path.exists() else "",
+            "run_delta_report_txt": str(run_delta_path) if run_delta_path.exists() else "",
+        },
+        "row_counts": {
+            "processed_rows": len(processed_df),
+            "enrichment_rows": len(enrichment_df),
+            "email_rows": len(email_df),
+            "clickup_rows": len(clickup_df),
+            "qa_issue_rows": len(qa_issues_df),
+            "manual_review_shortlist_rows": len(shortlist_df),
+        },
+        "quality_snapshot": {
+            "verified_opening_hours": count_value(
+                enrichment_df, "hotel_opening_hours_status", "Overené vo verejnom zdroji"
+            ),
+            "verified_checkin_checkout": count_value(
+                enrichment_df, "checkin_checkout_status", "Overené vo verejnom zdroji"
+            ),
+            "paired_checkin_checkout_verified": int(
+                (
+                    normalize_series(enrichment_df, "checkin_checkout_status").eq("Overené vo verejnom zdroji")
+                    & normalize_series(enrichment_df, "checkin_checkout_completeness").eq("paired")
+                ).sum()
+            ),
+            "single_side_checkin_checkout_verified": int(
+                (
+                    normalize_series(enrichment_df, "checkin_checkout_status").eq("Overené vo verejnom zdroji")
+                    & normalize_series(enrichment_df, "checkin_checkout_completeness").eq("single_side")
+                ).sum()
+            ),
+        },
+        "fetch_health": {
+            "fetch_incident_flag": fetch_incident_flag,
+            "fetch_live_success": int(fetch_status.eq("ok").sum()),
+            "fetch_dns_resolution_failed": int(fetch_status.eq("dns_resolution_failed").sum()),
+            "fetch_dns_resolution_failed_fallback_previous": int(
+                fetch_status.eq("dns_resolution_failed_fallback_previous").sum()
+            ),
+            "fetch_missing_website": int(fetch_status.eq("missing_website").sum()),
+        },
+        "shortlist_snapshot": {
+            "review_bucket_counts": {
+                bucket: int(count)
+                for bucket, count in review_bucket.value_counts().to_dict().items()
+            },
+            "operator_triage_action_counts": {
+                action: int(count)
+                for action, count in triage_action.value_counts().to_dict().items()
+            },
+        },
+        "import_snapshot": {
+            "clickup_import_ready_rows": int(
+                (
+                    normalize_series(clickup_df, "Task name").ne("")
+                    & normalize_series(clickup_df, "Status").ne("")
+                    & normalized_clickup_priority.isin(["", "1", "2", "3", "4"])
+                ).sum()
+            ),
+            "qa_blocking_rows": count_value(qa_issues_df, "blocking", "yes"),
+        },
+    }
+    return manifest
+
+
+def save_run_manifest(manifest: dict) -> Path:
+    QA_DIR.mkdir(parents=True, exist_ok=True)
+    RUN_MANIFEST_PATH.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    return RUN_MANIFEST_PATH
+
+
+def main() -> None:
+    manifest = build_run_manifest()
+    output_path = save_run_manifest(manifest)
+    print(f"Run manifest uložený do: {output_path}")
+    print("\nNáhľad:\n")
+    print(json.dumps(manifest, ensure_ascii=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()

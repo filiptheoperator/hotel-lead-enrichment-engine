@@ -4,7 +4,7 @@ Jednoduchý Python-first repozitár pre stabilný workflow enrichmentu hotelový
 
 ## Aktuálna fáza
 
-Aktívna je **Fáza 2: Stabilization + QA hardening**.
+Aktívna je **Fáza 3: Operator-ready workflow**.
 
 Lokálny Python-first pipeline už beží end-to-end:
 
@@ -15,7 +15,7 @@ Lokálny Python-first pipeline už beží end-to-end:
 - `QA`
 - `run summary`
 
-Aktuálne sa dolaďuje stabilita enrichmentu, source attribution, fallback správanie a manuálny review workflow.
+Aktuálne sa uzamyká output contract, operátorský checklist, run manifest a integračný handoff pre budúci ClickUp / Make krok.
 
 ## Core workflow
 
