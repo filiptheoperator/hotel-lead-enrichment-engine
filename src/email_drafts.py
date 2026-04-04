@@ -1,3 +1,9 @@
+"""Draft modul pre neskoršiu Fázu 5.
+
+Tento súbor je zámerne mimo aktívny flow.
+Aktívny hlavný entrypoint projektu momentálne nekonzumuje tento modul.
+"""
+
 from pathlib import Path
 
 import pandas as pd

@@ -5,7 +5,7 @@ from urllib.parse import urlparse
 import pandas as pd
 import yaml
 
-from ingest.raw_loader import build_raw_preview, list_raw_csv_files, load_raw_csv
+from ingest.raw_loader import list_raw_csv_files, load_raw_csv
 
 
 PROCESSED_DIR = Path("data/processed")
@@ -35,6 +35,34 @@ NORMALIZED_COLUMNS = [
     "country_code",
     "website",
     "phone",
+    "category_name",
+    "source_url",
+    "all_categories",
+    "source_file",
+]
+
+FINAL_OUTPUT_COLUMNS = [
+    "hotel_name",
+    "review_score",
+    "reviews_count",
+    "street",
+    "city",
+    "country_code",
+    "website",
+    "phone",
+    "category_name",
+    "source_url",
+    "all_categories",
+    "source_file",
+    "priority_score",
+    "priority_band",
+]
+
+TEXT_COLUMNS = [
+    "hotel_name",
+    "street",
+    "city",
+    "state",
     "category_name",
     "source_url",
     "all_categories",
@@ -95,6 +123,12 @@ def collect_categories(df: pd.DataFrame) -> pd.Series:
     )
 
 
+def count_categories(value: str) -> int:
+    if not value:
+        return 0
+    return len([item for item in value.split(" | ") if item])
+
+
 def normalize_dataframe(df: pd.DataFrame, source_file: str) -> pd.DataFrame:
     normalized = df.rename(columns=RAW_TO_NORMALIZED_COLUMNS).copy()
     normalized["all_categories"] = collect_categories(df)
@@ -105,17 +139,13 @@ def normalize_dataframe(df: pd.DataFrame, source_file: str) -> pd.DataFrame:
             normalized[column] = ""
 
     normalized = normalized[NORMALIZED_COLUMNS].copy()
-    normalized["hotel_name"] = normalized["hotel_name"].apply(normalize_text)
-    normalized["street"] = normalized["street"].apply(normalize_text)
-    normalized["city"] = normalized["city"].apply(normalize_text)
-    normalized["state"] = normalized["state"].apply(normalize_text)
+
+    for column in TEXT_COLUMNS:
+        normalized[column] = normalized[column].apply(normalize_text)
+
     normalized["country_code"] = normalized["country_code"].apply(normalize_country_code)
     normalized["website"] = normalized["website"].apply(normalize_website)
     normalized["phone"] = normalized["phone"].apply(normalize_phone)
-    normalized["category_name"] = normalized["category_name"].apply(normalize_text)
-    normalized["source_url"] = normalized["source_url"].apply(normalize_text)
-    normalized["all_categories"] = normalized["all_categories"].apply(normalize_text)
-    normalized["source_file"] = normalized["source_file"].apply(normalize_text)
 
     normalized["review_score"] = pd.to_numeric(
         normalized["review_score"], errors="coerce"
@@ -134,28 +164,22 @@ def clamp_score(value: float) -> float:
 
 
 def compute_score_components(df: pd.DataFrame) -> pd.DataFrame:
+    has_website = df["website"].apply(bool)
+    has_phone = df["phone"].apply(bool)
+    is_hotel = df["category_name"].str.lower().str.contains("hotel", na=False)
+
     review_score_component = (df["review_score"] / 5.0) * 10.0
     review_count_component = (df["reviews_count"].clip(upper=500) / 500.0) * 10.0
 
-    direct_booking_strength = df["website"].apply(lambda value: 10.0 if value else 0.0)
-    ota_dependency_signal = df["website"].apply(lambda value: 8.0 if value else 2.0)
-    digital_maturity = (
-        df["website"].apply(lambda value: 5.0 if value else 0.0)
-        + df["phone"].apply(lambda value: 5.0 if value else 0.0)
-    )
+    direct_booking_strength = has_website.apply(lambda value: 10.0 if value else 0.0)
+    ota_dependency_signal = has_website.apply(lambda value: 8.0 if value else 2.0)
+    digital_maturity = (has_website.astype(int) + has_phone.astype(int)) * 5.0
     operational_complexity = df["all_categories"].apply(
-        lambda value: clamp_score(float(min(len([item for item in value.split(" | ") if item]), 5) * 2))
+        lambda value: clamp_score(float(min(count_categories(value), 5) * 2))
     )
-    review_signal = ((review_score_component + review_count_component) / 2.0).apply(
-        clamp_score
-    )
-    contact_quality = (
-        df["website"].apply(lambda value: 5.0 if value else 0.0)
-        + df["phone"].apply(lambda value: 5.0 if value else 0.0)
-    )
-    fit_to_icp = df["category_name"].apply(
-        lambda value: 8.0 if "hotel" in value.lower() else 5.0 if value else 0.0
-    )
+    review_signal = ((review_score_component + review_count_component) / 2.0).apply(clamp_score)
+    contact_quality = (has_website.astype(int) + has_phone.astype(int)) * 5.0
+    fit_to_icp = is_hotel.apply(lambda value: 8.0 if value else 5.0)
 
     return pd.DataFrame(
         {
@@ -186,7 +210,8 @@ def apply_weighted_score(df: pd.DataFrame, scoring_config: dict) -> pd.DataFrame
     scored["priority_band"] = scored["priority_score"].apply(
         lambda value: score_to_priority_band(value, scoring_config)
     )
-    return scored.sort_values(by="priority_score", ascending=False).reset_index(drop=True)
+    scored = scored.sort_values(by="priority_score", ascending=False).reset_index(drop=True)
+    return scored[FINAL_OUTPUT_COLUMNS].copy()
 
 
 def score_to_priority_band(score: float, scoring_config: dict) -> str:
@@ -223,14 +248,13 @@ def main() -> None:
         print(f"Dôvod: {error}")
         return
 
-    raw_preview = build_raw_preview(raw_df, first_file.name)
     normalized_df = normalize_dataframe(raw_df, first_file.name)
     scoring_config = load_scoring_config()
     scored_df = apply_weighted_score(normalized_df, scoring_config)
     output_path = save_processed_file(scored_df, first_file.name)
 
     print(f"Načítaný súbor: {first_file.name}")
-    print(f"Počet raw riadkov: {len(raw_preview)}")
+    print(f"Počet raw riadkov: {len(raw_df)}")
     print(f"Počet normalizovaných riadkov: {len(scored_df)}")
     print(f"Výstup uložený do: {output_path}")
     print("\nNáhľad prvých 5 riadkov:\n")

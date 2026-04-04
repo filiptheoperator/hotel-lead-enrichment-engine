@@ -4,7 +4,7 @@ default_country: Slovakia
 primary_crm: ClickUp
 preferred_orchestrator: local_python_first
 glue_layer: make
-current_phase: phase_8_orchestration
+current_phase: phase_3_normalize_score
 raw_input_folder: data/raw
 processed_folder: data/processed
 output_folder: outputs

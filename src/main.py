@@ -1,4 +1,4 @@
-from orchestrate import main
+from normalize_score import main
 
 
 if __name__ == "__main__":
