@@ -3,6 +3,7 @@ from enrich_hotels import main as run_enrich
 from email_drafts import main as run_email_drafts
 from clickup_export import main as run_clickup_export
 from qa_checks import main as run_qa_checks
+from run_report import main as run_report
 
 
 PIPELINE_STEPS = [
@@ -11,6 +12,7 @@ PIPELINE_STEPS = [
     ("email drafts", run_email_drafts),
     ("ClickUp export", run_clickup_export),
     ("QA", run_qa_checks),
+    ("run summary", run_report),
 ]
 
 

@@ -8,6 +8,13 @@ PROCESSED_DIR = Path("data/processed")
 ENRICHMENT_DIR = Path("outputs/enrichment")
 CLICKUP_DIR = Path("outputs/clickup")
 QA_DIR = Path("data/qa")
+CLICKUP_REQUIRED_COLUMNS = ["Task name"]
+CLICKUP_SUPPORTED_CORE_COLUMNS = [
+    "Task name",
+    "Description content",
+    "Status",
+    "Priority",
+]
 
 
 def get_first_file(folder: Path, pattern: str) -> Optional[Path]:
@@ -62,6 +69,11 @@ def normalize_clickup_priority_value(value: object) -> str:
     except ValueError:
         return text
     return str(number)
+
+
+def has_clickup_required_columns(clickup_df: pd.DataFrame) -> tuple[bool, list[str]]:
+    missing_columns = [column for column in CLICKUP_REQUIRED_COLUMNS if column not in clickup_df.columns]
+    return (len(missing_columns) == 0, missing_columns)
 
 
 def build_issue_rows(
@@ -169,6 +181,50 @@ def build_issue_rows(
             )
 
     if not clickup_df.empty:
+        has_required_columns, missing_required_columns = has_clickup_required_columns(clickup_df)
+        if not has_required_columns:
+            issues.append(
+                build_issue(
+                    issue_type="missing_clickup_required_columns",
+                    severity="High",
+                    hotel_name="",
+                    city="",
+                    priority_band="",
+                    details="Chýbajú povinné ClickUp stĺpce: " + ", ".join(missing_required_columns),
+                    source_file="",
+                )
+            )
+            return pd.DataFrame(issues)
+
+        missing_core_columns = [
+            column for column in CLICKUP_SUPPORTED_CORE_COLUMNS if column not in clickup_df.columns
+        ]
+        if missing_core_columns:
+            issues.append(
+                build_issue(
+                    issue_type="missing_clickup_core_columns",
+                    severity="High",
+                    hotel_name="",
+                    city="",
+                    priority_band="",
+                    details="Chýbajú odporúčané ClickUp core stĺpce: " + ", ".join(missing_core_columns),
+                    source_file="",
+                )
+            )
+
+        if len(clickup_df) > 10000:
+            issues.append(
+                build_issue(
+                    issue_type="clickup_row_limit_exceeded",
+                    severity="High",
+                    hotel_name="",
+                    city="",
+                    priority_band="",
+                    details="ClickUp spreadsheet import limit 10 000 riadkov je prekročený.",
+                    source_file="",
+                )
+            )
+
         duplicate_task_mask = clickup_df.duplicated(subset=["Task name"], keep=False)
         for _, row in clickup_df[duplicate_task_mask].iterrows():
             issues.append(
@@ -202,7 +258,7 @@ def build_issue_rows(
             issues.append(
                 build_issue(
                     issue_type="missing_clickup_description",
-                    severity="Medium",
+                    severity="Low",
                     hotel_name=row.get("Hotel name"),
                     city=row.get("City"),
                     priority_band=row.get("Priority"),
@@ -238,6 +294,20 @@ def build_issue_rows(
                     city=row.get("City"),
                     priority_band=row.get("Priority"),
                     details="Priority nie je v očakávanom ClickUp numeric sete 1-4.",
+                    source_file=row.get("Source file"),
+                )
+            )
+
+        empty_status_mask = clickup_df["Status"].fillna("").astype(str).str.strip().eq("")
+        for _, row in clickup_df[empty_status_mask].iterrows():
+            issues.append(
+                build_issue(
+                    issue_type="missing_clickup_status",
+                    severity="Low",
+                    hotel_name=row.get("Hotel name"),
+                    city=row.get("City"),
+                    priority_band=row.get("Priority"),
+                    details="Status chýba; pri importe bude treba ručné mapovanie alebo default.",
                     source_file=row.get("Source file"),
                 )
             )
