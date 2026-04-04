@@ -12,6 +12,7 @@ from high_leads_preimport_checklist import main as run_high_leads_preimport_chec
 from operator_decision_summary import main as run_operator_decision_summary
 from archive_run_artifacts import main as run_archive_run_artifacts
 from archive_cleanup import main as run_archive_cleanup
+from make_orchestration_runner import main as run_make_orchestration_runner
 
 
 PIPELINE_STEPS = [
@@ -30,6 +31,7 @@ PIPELINE_STEPS = [
     ("run manifest final", run_manifest),
     ("archive run artifacts", run_archive_run_artifacts),
     ("archive cleanup", run_archive_cleanup),
+    ("Make orchestration dry run", run_make_orchestration_runner),
 ]
 
 

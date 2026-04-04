@@ -1,0 +1,28 @@
+orchestration:
+  contract_version: 1
+  mode_default: dry_run
+  make_payload_path: data/qa/make_execution_payload.json
+  failure_notification_path: data/qa/make_failure_notification.json
+  evidence_log_path: data/qa/integration_evidence_log.json
+  status_matrix_path: data/qa/batch_execution_status.json
+  dry_run_result_path: data/qa/orchestration_dry_run.json
+  required_artifact_keys:
+    - run_manifest_json
+    - clickup_import_gate_json
+    - clickup_import_csv
+    - clickup_import_dry_run_sample_csv
+    - high_leads_preimport_checklist_csv
+    - operator_decision_summary_txt
+    - archive_dir
+  optional_artifact_keys:
+    - clickup_import_gate_high_only_json
+    - operator_decision_summary_high_txt
+    - batch_readiness_explanation_json
+    - clickup_api_mapping_validation_json
+  failure_types:
+    missing_required_artifact: missing_required_artifact
+    invalid_make_payload: invalid_make_payload
+    no_go_batch: no_go_batch
+    clickup_external_blocker: clickup_external_blocker
+    partial_write_risk: partial_write_risk
+    unknown_external_error: unknown_external_error
