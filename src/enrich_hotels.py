@@ -18,6 +18,27 @@ DEFAULT_HEADERS = {
         "+https://github.com/filiptheoperator/hotel-lead-enrichment-engine)"
     )
 }
+NON_HTML_FILE_EXTENSIONS = {
+    ".json",
+    ".xml",
+    ".txt",
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".webp",
+    ".gif",
+    ".svg",
+    ".ico",
+    ".pdf",
+    ".zip",
+    ".css",
+    ".js",
+    ".map",
+    ".woff",
+    ".woff2",
+    ".ttf",
+    ".eot",
+}
 
 
 def load_enrichment_config(config_path: Path = ENRICHMENT_CONFIG_PATH) -> dict:
@@ -334,7 +355,27 @@ def fetch_public_page(url: str, timeout_seconds: int) -> str:
         allow_redirects=True,
     )
     response.raise_for_status()
+    content_type = normalize_text(response.headers.get("Content-Type")).lower()
+    if content_type and "text/html" not in content_type and "application/xhtml+xml" not in content_type:
+        return ""
     return response.text
+
+
+def classify_public_source_type(source_url: str) -> str:
+    parsed = urlparse(normalize_text(source_url))
+    path = parsed.path.lower().strip("/")
+
+    if not path:
+        return "homepage"
+    if any(path.endswith(extension) for extension in NON_HTML_FILE_EXTENSIONS):
+        return "asset_file"
+    if any(marker in path for marker in ["faq", "frequently-asked"]):
+        return "faq_page"
+    if any(marker in path for marker in ["contact", "kontakt"]):
+        return "contact_page"
+    if any(marker in path for marker in ["wellness", "spa", "restaurant", "restauracia", "restauracia", "bar"]):
+        return "subpage_non_hotel"
+    return "subpage_general"
 
 
 def extract_same_domain_candidate_urls(
@@ -358,9 +399,13 @@ def extract_same_domain_candidate_urls(
             continue
         if parsed_candidate.netloc != parsed_base.netloc:
             continue
+        if any(parsed_candidate.path.lower().endswith(extension) for extension in NON_HTML_FILE_EXTENSIONS):
+            continue
 
         normalized_candidate = candidate_url.split("#", 1)[0]
         lower_candidate = normalized_candidate.lower()
+        if any(marker in lower_candidate for marker in ["manifest", "favicon", "apple-touch-icon", "android-icon"]):
+            continue
         if not any(keyword in lower_candidate for keyword in keywords):
             continue
         if normalized_candidate in seen:
@@ -583,7 +628,10 @@ def collect_public_pages(
 
     for candidate_url in candidate_urls:
         try:
-            pages.append((candidate_url, fetch_public_page(candidate_url, timeout_seconds)))
+            candidate_html = fetch_public_page(candidate_url, timeout_seconds)
+            if not candidate_html:
+                continue
+            pages.append((candidate_url, candidate_html))
         except Exception:
             continue
 
@@ -611,9 +659,12 @@ def enrich_public_web_fields(
         "hotel_opening_hours": fallback_opening_hours or unknown_value_label,
         "hotel_opening_hours_status": verified_public_label if fallback_opening_hours else unknown_value_label,
         "hotel_opening_hours_source_url": normalize_text(row.get("website")) if fallback_opening_hours else "",
+        "hotel_opening_hours_source_type": classify_public_source_type(normalize_text(row.get("website"))) if fallback_opening_hours else "",
         "checkin_checkout_info": fallback_checkin_checkout or unknown_value_label,
         "checkin_checkout_status": verified_public_label if fallback_checkin_checkout else unknown_value_label,
         "checkin_checkout_source_url": normalize_text(row.get("website")) if fallback_checkin_checkout else "",
+        "checkin_checkout_source_type": classify_public_source_type(normalize_text(row.get("website"))) if fallback_checkin_checkout else "",
+        "public_source_reachable": "no",
     }
 
     website_url = normalize_text(row.get("website"))
@@ -626,6 +677,8 @@ def enrich_public_web_fields(
         page_keywords=page_keywords,
         max_pages_per_hotel=max_pages_per_hotel,
     )
+    if pages:
+        result["public_source_reachable"] = "yes"
 
     for page_url, html in pages:
         if result["hotel_opening_hours"] == unknown_value_label:
@@ -634,6 +687,7 @@ def enrich_public_web_fields(
                 result["hotel_opening_hours"] = opening_hours
                 result["hotel_opening_hours_status"] = verified_public_label
                 result["hotel_opening_hours_source_url"] = page_url
+                result["hotel_opening_hours_source_type"] = classify_public_source_type(page_url)
 
         if result["checkin_checkout_info"] == unknown_value_label:
             checkin_checkout = extract_checkin_checkout_from_json_ld(html) or extract_checkin_checkout_from_text(html)
@@ -641,6 +695,7 @@ def enrich_public_web_fields(
                 result["checkin_checkout_info"] = checkin_checkout
                 result["checkin_checkout_status"] = verified_public_label
                 result["checkin_checkout_source_url"] = page_url
+                result["checkin_checkout_source_type"] = classify_public_source_type(page_url)
 
         if (
             result["hotel_opening_hours"] != unknown_value_label
@@ -762,9 +817,12 @@ def build_enrichment_dataframe(
             "hotel_opening_hours",
             "hotel_opening_hours_status",
             "hotel_opening_hours_source_url",
+            "hotel_opening_hours_source_type",
             "checkin_checkout_info",
             "checkin_checkout_status",
             "checkin_checkout_source_url",
+            "checkin_checkout_source_type",
+            "public_source_reachable",
             "contact_status",
             "factual_summary",
             "source_url",
