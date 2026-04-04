@@ -1,0 +1,53 @@
+Hotel Lead Enrichment Engine OS - Run Summary
+
+Operator Start
+- primary_operator_artifact: data/qa/run_manifest.json
+- clickup_import_gate_artifact: data/qa/clickup_import_gate.txt
+
+Processed
+- processed_rows: 129
+- enrichment_rows: 129
+- email_rows: 129
+- clickup_rows: 129
+
+Verified
+- verified_opening_hours: 14
+- verified_checkin_checkout: 9
+- paired_checkin_checkout_verified: 7
+- single_side_checkin_checkout_verified: 2
+
+Unverified
+- unverified_opening_hours: 115
+- unverified_checkin_checkout: 120
+
+Source Coverage
+- leads_with_website: 115
+- public_source_reachable: 99
+- usable_public_source: 19
+- reachable_but_missing_opening_hours: 85
+- reachable_but_missing_checkin_checkout: 90
+- checkin_checkout_source_origin_jsonld: 0
+- checkin_checkout_source_origin_text: 9
+- checkin_checkout_source_origin_text_homepage: 6
+- checkin_checkout_source_origin_text_subpage_general: 3
+
+Fetch Health
+- fetch_incident_flag: yes
+- fetch_live_success: 0
+- fetch_blocked_total: 115
+- fetch_dns_resolution_failed: 16
+- fetch_dns_resolution_failed_fallback_previous: 99
+- fetch_blocked_without_fallback: 16
+- fetch_effective_reachable_after_fallback: 99
+- fetch_request_timeout: 0
+- fetch_missing_website: 14
+
+Import Ready
+- clickup_import_ready_rows: 129
+- clickup_not_ready_rows: 0
+
+Needs Manual Review
+- qa_needs_manual_review_rows: 150
+- qa_blocking_rows: 3
+- qa_medium_rows: 5
+- qa_low_rows: 145

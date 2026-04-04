@@ -1,0 +1,16 @@
+{
+  "archive_dir": "data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-31-15_02-00",
+  "copied_artifacts": {
+    "processed_csv": "data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-31-15_02-00/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored.csv",
+    "enrichment_csv": "data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-31-15_02-00/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored_enriched.csv",
+    "email_drafts_csv": "data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-31-15_02-00/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored_enriched_email_drafts.csv",
+    "clickup_import_csv": "data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-31-15_02-00/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored_enriched_email_drafts_clickup_import.csv",
+    "qa_issues_csv": "data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-31-15_02-00/qa_issues.csv",
+    "manual_review_shortlist_csv": "data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-31-15_02-00/manual_review_shortlist.csv",
+    "run_summary_txt": "data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-31-15_02-00/run_summary.txt",
+    "run_delta_report_txt": "data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-31-15_02-00/run_delta_report.txt",
+    "clickup_import_gate_json": "data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-31-15_02-00/clickup_import_gate.json",
+    "clickup_import_gate_txt": "data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-31-15_02-00/clickup_import_gate.txt"
+  },
+  "source_run_manifest": "data/qa/run_manifest.json"
+}

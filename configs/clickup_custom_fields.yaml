@@ -1,0 +1,77 @@
+clickup_custom_fields:
+  workspace_status: LIVE_FIELDS_PARTIALLY_CONFIRMED
+  rehearsal_sample_rows:
+  - row_ref: row_1
+    task_name: Lead outreach - Loft Hotel Bratislava
+    hotel_name: Loft Hotel Bratislava
+    city: Bratislava
+    priority_score: '9.37'
+  - row_ref: row_2
+    task_name: Lead outreach - Radisson Blu Carlton Hotel, Bratislava
+    hotel_name: Radisson Blu Carlton Hotel, Bratislava
+    city: Bratislava
+    priority_score: '9.36'
+  - row_ref: row_3
+    task_name: Lead outreach - Areál vodných športov Čunovo
+    hotel_name: Areál vodných športov Čunovo
+    city: Čunovo
+    priority_score: '9.35'
+  fields:
+    hotel_name:
+      source_column: Hotel name
+      target_field_key: custom.hotel_name
+      clickup_field_name: Hotel name
+      clickup_field_id: 8d5d2675-e51f-4e8c-a8a2-1494a8395db2
+      required_for_phase_4_cutover: true
+      clickup_field_type: short_text
+      live_clickup_field_name: Hotel Name
+    city:
+      source_column: City
+      target_field_key: custom.city
+      clickup_field_name: City
+      clickup_field_id: ff8675cf-25c9-4fc3-b9cf-32048655a6e3
+      required_for_phase_4_cutover: true
+      clickup_field_type: text
+      live_clickup_field_name: City
+    priority_score:
+      source_column: Priority score
+      target_field_key: custom.priority_score
+      clickup_field_name: Priority score
+      clickup_field_id: 51760196-c6d6-4143-bb31-0f587e603fe0
+      required_for_phase_4_cutover: true
+      clickup_field_type: short_text
+      live_clickup_field_name: Priority score
+    contact_phone:
+      source_column: Contact phone
+      target_field_key: custom.contact_phone
+      clickup_field_name: Contact phone
+      clickup_field_id: 47aef14e-21f4-4ec3-b256-5b1b12827c3d
+      required_for_phase_4_cutover: false
+      clickup_field_type: phone
+      live_clickup_field_name: Phone
+    contact_website:
+      source_column: Contact website
+      target_field_key: custom.contact_website
+      clickup_field_name: Contact website
+      clickup_field_id: ff8716e8-0bd2-4608-9297-c7617d49fcd2
+      required_for_phase_4_cutover: false
+      clickup_field_type: url
+      live_clickup_field_name: Website
+    subject_line:
+      source_column: Subject line
+      target_field_key: custom.subject_line
+      clickup_field_name: Subject line
+      clickup_field_id: f3cbaad6-fc27-4b0a-9c9b-9ffc71d0fb67
+      required_for_phase_4_cutover: true
+      clickup_field_type: short_text
+      live_clickup_field_name: Subject line
+    source_file:
+      source_column: Source file
+      target_field_key: custom.source_file
+      clickup_field_name: Source file
+      clickup_field_id: 093e51a8-0114-4a8c-910c-f7a1950a7318
+      required_for_phase_4_cutover: true
+      clickup_field_type: short_text
+      live_clickup_field_name: Source file
+  selected_test_list_id: '901216789251'
+  last_live_discovery_artifact: data/qa/clickup_live_field_discovery.json

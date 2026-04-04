@@ -1,0 +1,34 @@
+{
+  "decision": "NO_GO",
+  "operator_action": "Neimportovať do ClickUp. Najprv odstrániť stop conditions.",
+  "inputs": {
+    "run_manifest_json": "data/qa/run_manifest.json",
+    "clickup_import_csv": "outputs/clickup/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored_enriched_email_drafts_clickup_import.csv",
+    "qa_issues_csv": "data/qa/qa_issues.csv",
+    "manual_review_shortlist_csv": "data/qa/manual_review_shortlist.csv"
+  },
+  "checks": {
+    "fetch_incident_flag": "yes",
+    "qa_blocking_rows": 3,
+    "clickup_rows": 129,
+    "clickup_import_ready_rows": 129,
+    "high_leads_requiring_manual_review": 32
+  },
+  "stop_conditions": [
+    "global_fetch_incident",
+    "qa_blocking_rows_present",
+    "high_leads_require_manual_review"
+  ],
+  "go_rules": [
+    "fetch_incident_flag musí byť no",
+    "qa_blocking_rows musí byť 0",
+    "clickup_import_ready_rows musí byť rovné clickup_rows",
+    "High leady nesmú zostať v hold/manual review stave pred importom"
+  ],
+  "no_go_rules": [
+    "globálny DNS/fetch incident",
+    "akýkoľvek blocking QA issue",
+    "neúplne pripravený ClickUp CSV",
+    "High leady ešte čakajú na ručný review"
+  ]
+}

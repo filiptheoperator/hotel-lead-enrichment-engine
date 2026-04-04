@@ -1,0 +1,5 @@
+Zdrojový ClickUp CSV: outputs/clickup/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored_enriched_email_drafts_clickup_import.csv
+Požadovaná veľkosť sample: 5
+Vybraná veľkosť sample: 5
+Toto je suchý importný sample, nie ostrý import.
+Neoverené: správanie konkrétneho ClickUp workspace pri importe.

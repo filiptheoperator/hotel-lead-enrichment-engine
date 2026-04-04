@@ -1,0 +1,30 @@
+make_execution_payload_contract:
+  contract_version: 1
+  source_of_truth: "local_python_pipeline"
+  decision_gate:
+    accepted_values:
+      - "GO"
+      - "NO_GO"
+    stop_on:
+      - "fetch_incident_flag=yes"
+      - "qa_blocking_rows>0"
+      - "decision=NO_GO"
+      - "missing_required_artifact"
+  required_fields:
+    - "decision"
+    - "run_manifest_json"
+    - "clickup_import_gate_json"
+    - "clickup_import_csv"
+    - "clickup_import_dry_run_sample_csv"
+    - "high_leads_preimport_checklist_csv"
+    - "operator_decision_summary_txt"
+    - "archive_dir"
+  optional_fields:
+    - "clickup_import_gate_high_only_json"
+    - "operator_decision_summary_high_txt"
+    - "batch_readiness_explanation_json"
+    - "clickup_api_mapping_validation_json"
+  notes:
+    - "Make nesmie prepočítavať scoring ani QA logiku."
+    - "Paths ostávajú relatívne voči rootu repozitára."
+    - "Živý ClickUp execution ostáva neoverený, kým neprebehne controlled rehearsal."

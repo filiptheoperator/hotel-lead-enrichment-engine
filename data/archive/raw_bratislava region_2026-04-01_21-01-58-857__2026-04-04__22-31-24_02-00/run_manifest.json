@@ -1,0 +1,65 @@
+{
+  "project": "Hotel Lead Enrichment Engine OS",
+  "manifest_version": 1,
+  "generated_at": "2026-04-04T22:31:24+02:00",
+  "batch": {
+    "source_files": [
+      "raw_bratislava region_2026-04-01_21-01-58-857.csv"
+    ],
+    "source_file_count": 1
+  },
+  "artifacts": {
+    "processed_csv": "data/processed/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored.csv",
+    "enrichment_csv": "outputs/enrichment/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored_enriched.csv",
+    "email_drafts_csv": "outputs/email_drafts/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored_enriched_email_drafts.csv",
+    "clickup_import_csv": "outputs/clickup/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored_enriched_email_drafts_clickup_import.csv",
+    "qa_issues_csv": "data/qa/qa_issues.csv",
+    "manual_review_shortlist_csv": "data/qa/manual_review_shortlist.csv",
+    "run_summary_txt": "data/qa/run_summary.txt",
+    "run_delta_report_txt": "data/qa/run_delta_report.txt",
+    "clickup_import_gate_json": "data/qa/clickup_import_gate.json",
+    "clickup_import_gate_txt": "data/qa/clickup_import_gate.txt",
+    "clickup_import_dry_run_sample_csv": "data/qa/clickup_import_dry_run_sample.csv",
+    "clickup_import_dry_run_notes_txt": "data/qa/clickup_import_dry_run_notes.txt"
+  },
+  "row_counts": {
+    "processed_rows": 129,
+    "enrichment_rows": 129,
+    "email_rows": 129,
+    "clickup_rows": 129,
+    "qa_issue_rows": 153,
+    "manual_review_shortlist_rows": 99
+  },
+  "quality_snapshot": {
+    "verified_opening_hours": 14,
+    "verified_checkin_checkout": 9,
+    "paired_checkin_checkout_verified": 7,
+    "single_side_checkin_checkout_verified": 2
+  },
+  "fetch_health": {
+    "fetch_incident_flag": "yes",
+    "fetch_live_success": 0,
+    "fetch_dns_resolution_failed": 16,
+    "fetch_dns_resolution_failed_fallback_previous": 99,
+    "fetch_missing_website": 14
+  },
+  "shortlist_snapshot": {
+    "review_bucket_counts": {
+      "reachable_missing_checkin_checkout": 78,
+      "dns_fetch_blocked": 15,
+      "reachable_missing_opening_hours": 4,
+      "single_side_verified_needs_review": 2
+    },
+    "operator_triage_action_counts": {
+      "manual_review_if_capacity": 59,
+      "manual_review_before_clickup": 23,
+      "hold_batch_due_to_dns_incident": 9,
+      "hold_for_retry": 6,
+      "manual_spotcheck_then_clickup": 2
+    }
+  },
+  "import_snapshot": {
+    "clickup_import_ready_rows": 129,
+    "qa_blocking_rows": 3
+  }
+}
