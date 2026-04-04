@@ -16,3 +16,5 @@ include_public_operating_hours_when_available: true
 review_required_priorities:
   - High
   - Medium-High
+sample_batch_mode: false
+sample_batch_size: 10

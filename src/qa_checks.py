@@ -8,6 +8,7 @@ PROCESSED_DIR = Path("data/processed")
 ENRICHMENT_DIR = Path("outputs/enrichment")
 CLICKUP_DIR = Path("outputs/clickup")
 QA_DIR = Path("data/qa")
+MANUAL_REVIEW_SHORTLIST_PATH = QA_DIR / "manual_review_shortlist.csv"
 CLICKUP_REQUIRED_COLUMNS = ["Task name"]
 CLICKUP_SUPPORTED_CORE_COLUMNS = [
     "Task name",
@@ -356,6 +357,86 @@ def save_qa_outputs(issues_df: pd.DataFrame) -> tuple[Path, Path]:
     return issues_path, summary_path
 
 
+def save_manual_review_shortlist(
+    enrichment_df: pd.DataFrame,
+    qa_df: pd.DataFrame,
+) -> Path:
+    QA_DIR.mkdir(parents=True, exist_ok=True)
+    shortlist_path = MANUAL_REVIEW_SHORTLIST_PATH
+
+    if enrichment_df.empty:
+        pd.DataFrame(
+            columns=[
+                "hotel_name",
+                "city",
+                "priority_band",
+                "priority_score",
+                "hotel_opening_hours_status",
+                "checkin_checkout_status",
+                "public_source_reachable",
+                "manual_review_reason",
+                "source_file",
+            ]
+        ).to_csv(shortlist_path, index=False)
+        return shortlist_path
+
+    shortlist_df = enrichment_df.copy()
+    shortlist_df["manual_review_reason"] = ""
+
+    needs_review_mask = (
+        shortlist_df["priority_band"].fillna("").astype(str).str.strip().isin(["High", "Medium-High"])
+        & (
+            shortlist_df["hotel_opening_hours_status"].fillna("").astype(str).str.strip().eq("Verejne nepotvrdené")
+            | shortlist_df["checkin_checkout_status"].fillna("").astype(str).str.strip().eq("Verejne nepotvrdené")
+        )
+    )
+
+    shortlist_df = shortlist_df[needs_review_mask].copy()
+    if shortlist_df.empty:
+        shortlist_df = pd.DataFrame(
+            columns=[
+                "hotel_name",
+                "city",
+                "priority_band",
+                "priority_score",
+                "hotel_opening_hours_status",
+                "checkin_checkout_status",
+                "public_source_reachable",
+                "manual_review_reason",
+                "source_file",
+            ]
+        )
+        shortlist_df.to_csv(shortlist_path, index=False)
+        return shortlist_path
+
+    def build_reason(row: pd.Series) -> str:
+        reasons: list[str] = []
+        if normalize_text(row.get("hotel_opening_hours_status")) == "Verejne nepotvrdené":
+            reasons.append("unverified_opening_hours")
+        if normalize_text(row.get("checkin_checkout_status")) == "Verejne nepotvrdené":
+            reasons.append("unverified_checkin_checkout")
+        if normalize_text(row.get("public_source_reachable")) != "yes":
+            reasons.append("source_not_reachable")
+        return " | ".join(reasons)
+
+    shortlist_df["manual_review_reason"] = shortlist_df.apply(build_reason, axis=1)
+    shortlist_df = shortlist_df[
+        [
+            "hotel_name",
+            "city",
+            "priority_band",
+            "priority_score",
+            "hotel_opening_hours_status",
+            "checkin_checkout_status",
+            "public_source_reachable",
+            "manual_review_reason",
+            "source_file",
+        ]
+    ].copy()
+    shortlist_df.to_csv(shortlist_path, index=False)
+    return shortlist_path
+
+
 def main() -> None:
     processed_df = load_csv(get_first_file(PROCESSED_DIR, "*_normalized_scored.csv"))
     enrichment_df = load_csv(get_first_file(ENRICHMENT_DIR, "*_enriched.csv"))
@@ -367,9 +448,11 @@ def main() -> None:
         clickup_df=clickup_df,
     )
     issues_path, summary_path = save_qa_outputs(issues_df)
+    shortlist_path = save_manual_review_shortlist(enrichment_df, issues_df)
 
     print(f"QA issues uložené do: {issues_path}")
     print(f"QA summary uložené do: {summary_path}")
+    print(f"Manual review shortlist uložený do: {shortlist_path}")
     print("\nNáhľad prvých 5 riadkov:\n")
     print(issues_df.head(5).to_string(index=False))
 

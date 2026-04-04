@@ -10,6 +10,7 @@ from ingest.raw_loader import list_raw_csv_files, load_raw_csv
 
 PROCESSED_DIR = Path("data/processed")
 SCORING_CONFIG_PATH = Path("configs/scoring.yaml")
+PROJECT_CONFIG_PATH = Path("configs/project.yaml")
 
 RAW_TO_NORMALIZED_COLUMNS = {
     "title": "hotel_name",
@@ -71,6 +72,11 @@ TEXT_COLUMNS = [
 
 
 def load_scoring_config(config_path: Path = SCORING_CONFIG_PATH) -> dict:
+    with config_path.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file) or {}
+
+
+def load_project_config(config_path: Path = PROJECT_CONFIG_PATH) -> dict:
     with config_path.open("r", encoding="utf-8") as file:
         return yaml.safe_load(file) or {}
 
@@ -157,6 +163,17 @@ def normalize_dataframe(df: pd.DataFrame, source_file: str) -> pd.DataFrame:
     return normalized.drop_duplicates(
         subset=["hotel_name", "city", "street"], keep="first"
     ).reset_index(drop=True)
+
+
+def maybe_apply_sample_batch(df: pd.DataFrame, project_config: dict) -> tuple[pd.DataFrame, bool, int]:
+    sample_mode_enabled = bool(project_config.get("sample_batch_mode", False))
+    sample_batch_size = int(project_config.get("sample_batch_size", 10))
+
+    if not sample_mode_enabled:
+        return df, False, len(df)
+
+    limited_df = df.head(sample_batch_size).copy()
+    return limited_df, True, len(limited_df)
 
 
 def clamp_score(value: float) -> float:
@@ -249,12 +266,19 @@ def main() -> None:
         return
 
     normalized_df = normalize_dataframe(raw_df, first_file.name)
+    project_config = load_project_config()
+    normalized_df, sample_mode_enabled, sample_row_count = maybe_apply_sample_batch(
+        normalized_df,
+        project_config,
+    )
     scoring_config = load_scoring_config()
     scored_df = apply_weighted_score(normalized_df, scoring_config)
     output_path = save_processed_file(scored_df, first_file.name)
 
     print(f"Načítaný súbor: {first_file.name}")
     print(f"Počet raw riadkov: {len(raw_df)}")
+    if sample_mode_enabled:
+        print(f"Sample batch mode: zapnutý ({sample_row_count} riadkov)")
     print(f"Počet normalizovaných riadkov: {len(scored_df)}")
     print(f"Výstup uložený do: {output_path}")
     print("\nNáhľad prvých 5 riadkov:\n")

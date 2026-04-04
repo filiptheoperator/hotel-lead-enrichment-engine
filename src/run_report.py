@@ -46,6 +46,9 @@ def build_run_summary() -> str:
     unverified_opening_hours = 0
     verified_checkin_checkout = 0
     unverified_checkin_checkout = 0
+    source_coverage_with_website = 0
+    source_coverage_reachable = 0
+    source_coverage_with_usable_public_source = 0
     needs_manual_review = 0
     if not enrichment_df.empty:
         verified_opening_hours = safe_count(
@@ -59,6 +62,19 @@ def build_run_summary() -> str:
         )
         unverified_checkin_checkout = safe_count(
             enrichment_df["checkin_checkout_status"], unknown_value_label
+        )
+        source_coverage_with_website = int(
+            enrichment_df["website"].fillna("").astype(str).str.strip().ne("").sum()
+        )
+        if "public_source_reachable" in enrichment_df.columns:
+            source_coverage_reachable = int(
+                enrichment_df["public_source_reachable"].fillna("").astype(str).str.strip().eq("yes").sum()
+            )
+        source_coverage_with_usable_public_source = int(
+            (
+                enrichment_df["hotel_opening_hours_status"].fillna("").astype(str).str.strip().eq(verified_public_label)
+                | enrichment_df["checkin_checkout_status"].fillna("").astype(str).str.strip().eq(verified_public_label)
+            ).sum()
         )
 
     import_ready_rows = 0
@@ -124,6 +140,11 @@ def build_run_summary() -> str:
         "Unverified",
         f"- unverified_opening_hours: {unverified_opening_hours}",
         f"- unverified_checkin_checkout: {unverified_checkin_checkout}",
+        "",
+        "Source Coverage",
+        f"- leads_with_website: {source_coverage_with_website}",
+        f"- public_source_reachable: {source_coverage_reachable}",
+        f"- usable_public_source: {source_coverage_with_usable_public_source}",
         "",
         "Import Ready",
         f"- clickup_import_ready_rows: {import_ready_rows}",
