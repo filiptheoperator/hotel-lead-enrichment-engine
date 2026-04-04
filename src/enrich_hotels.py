@@ -117,6 +117,15 @@ def cleanup_opening_hours_value(value: str) -> str:
         "viac informácií",
         "viac informacii",
         "podmienky",
+        "cookies",
+        "zobraziť viac",
+        "zobrazit viac",
+        "tešíme sa na vás",
+        "tesime sa na vas",
+        "spravovať súhlas",
+        "spravovat suhlas",
+        "používame technológie",
+        "pouzivame technologie",
     ]
 
     lowered = value.lower()
@@ -126,6 +135,56 @@ def cleanup_opening_hours_value(value: str) -> str:
 
     value = re.sub(r"\s{2,}", " ", value)
     return value[:180].strip(" ,;:-")
+
+
+def extract_relevant_opening_hours_segment(value: str) -> str:
+    cleaned = cleanup_opening_hours_value(value)
+    lowered = cleaned.lower()
+
+    preferred_markers = [
+        "otváracie hodiny recepcie",
+        "reception",
+        "recepcia",
+        "front desk",
+        "hotel",
+        "nonstop",
+        "24/7",
+        "otváracie hodiny",
+        "opening hours",
+    ]
+
+    for marker in preferred_markers:
+        index = lowered.find(marker)
+        if index != -1:
+            cleaned = cleaned[index:]
+            break
+
+    cleaned = re.sub(r"^(otváracie hodiny[:\s-]*)+", "Otváracie hodiny: ", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"^(opening hours[:\s-]*)+", "Opening hours: ", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"(?i)otváracie hodiny:\s*recepcie:\s*", "Otváracie hodiny recepcie: ", cleaned)
+    cleaned = re.sub(r"(?i)opening hours:\s*reception:\s*", "Reception: ", cleaned)
+
+    sentence_breaks = [
+        " reštaurácia ",
+        " wellness ",
+        " spa ",
+        " sauna ",
+        " bar ",
+        " fitness ",
+        " squash ",
+        " kaviareň ",
+        " kaviaren ",
+    ]
+    lowered = cleaned.lower()
+    cut_positions = [lowered.find(marker) for marker in sentence_breaks if lowered.find(marker) > 0]
+    if cut_positions:
+        cleaned = cleaned[: min(cut_positions)].strip(" ,;:-")
+
+    cleaned = re.sub(r"\(\s*$", "", cleaned).strip(" ,;:-")
+    cleaned = cleaned.replace(" h.", "")
+    cleaned = cleaned.replace(" hod.", "")
+    cleaned = normalize_whitespace(cleaned)
+    return cleaned[:140].strip(" ,;:-")
 
 
 def is_likely_accommodation_lead(row: pd.Series) -> bool:
@@ -168,6 +227,7 @@ def is_likely_hotel_opening_hours(row: pd.Series, value: str, source_url: str) -
         "front desk",
         "24/7",
         "nonstop",
+        "otváracie hodiny recepcie",
     ]
     excluded_markers = [
         "wellness",
@@ -184,6 +244,10 @@ def is_likely_hotel_opening_hours(row: pd.Series, value: str, source_url: str) -
         "massage",
         "masáž",
         "masaz",
+        "kuchyňa",
+        "kuchyna",
+        "raňajky",
+        "ranajky",
     ]
 
     has_allowed_marker = any(marker in lowered for marker in allowed_markers)
@@ -191,9 +255,9 @@ def is_likely_hotel_opening_hours(row: pd.Series, value: str, source_url: str) -
     source_is_excluded = any(marker in source_lowered for marker in excluded_markers)
     has_time_signal = bool(re.search(r"\b\d{1,2}[:.]\d{2}\b", lowered)) or "24/7" in lowered
 
-    if has_excluded_marker and not has_allowed_marker:
+    if has_excluded_marker:
         return False
-    if source_is_excluded and not has_allowed_marker:
+    if source_is_excluded:
         return False
     if has_allowed_marker and has_time_signal:
         return True
@@ -202,7 +266,11 @@ def is_likely_hotel_opening_hours(row: pd.Series, value: str, source_url: str) -
     source_path = parsed_source.path.strip("/")
     source_is_homepage = not source_path
 
-    if source_is_homepage and has_time_signal and not has_excluded_marker:
+    if source_is_homepage and has_time_signal and any(
+        marker in normalize_text(row.get("category_name")).lower()
+        or marker in normalize_text(row.get("all_categories")).lower()
+        for marker in ["hotel", "hostel", "penzion", "residence", "garni", "botel"]
+    ):
         return True
 
     return False
@@ -236,6 +304,9 @@ def extract_opening_hours_window(text: str, start_index: int) -> str:
         " viac informácií",
         " viac informacii",
         " podmienky",
+        " cookies",
+        " zobraziť viac",
+        " zobrazit viac",
     ]
 
     lowered = window.lower()
@@ -243,7 +314,7 @@ def extract_opening_hours_window(text: str, start_index: int) -> str:
     if cut_positions:
         window = window[: min(cut_positions)]
 
-    return cleanup_opening_hours_value(window)
+    return extract_relevant_opening_hours_segment(window)
 
 
 def extract_first_present_value(row: pd.Series, candidate_columns: list[str]) -> str:
@@ -385,7 +456,7 @@ def extract_opening_hours_from_json_ld(html: str) -> str:
                 if spec_parts:
                     values.append("; ".join(spec_parts))
 
-    return cleanup_opening_hours_value(values[0]) if values else ""
+    return extract_relevant_opening_hours_segment(values[0]) if values else ""
 
 
 def extract_checkin_checkout_from_json_ld(html: str) -> str:
@@ -449,13 +520,16 @@ def extract_opening_hours_from_text(text: str) -> str:
     plain_text = html_to_text(text)
     lowered = plain_text.lower()
     keyword_patterns = [
+        "otváracie hodiny recepcie",
+        "opening hours reception",
+        "reception",
+        "recepcia",
         "opening hours",
         "operating hours",
-        "open daily",
-        "reception 24/7",
-        "recepcia 24/7",
         "otváracie hodiny",
         "prevádzkové hodiny",
+        "front desk",
+        "hotel",
     ]
 
     for keyword in keyword_patterns:
