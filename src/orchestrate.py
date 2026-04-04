@@ -1,9 +1,3 @@
-"""Draft modul pre neskoršiu Fázu 8.
-
-Tento súbor je zámerne mimo aktívny flow.
-Aktívny hlavný entrypoint projektu momentálne nekonzumuje tento modul.
-"""
-
 from normalize_score import main as run_normalize_score
 from enrich_hotels import main as run_enrich
 from email_drafts import main as run_email_drafts

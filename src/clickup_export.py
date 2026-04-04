@@ -1,9 +1,3 @@
-"""Draft modul pre neskoršiu Fázu 6.
-
-Tento súbor je zámerne mimo aktívny flow.
-Aktívny hlavný entrypoint projektu momentálne nekonzumuje tento modul.
-"""
-
 from pathlib import Path
 
 import pandas as pd
@@ -40,12 +34,6 @@ def build_clickup_notes(row: pd.Series) -> str:
         f"Telefón: {row['phone'] or 'Verejne nepotvrdené'}",
         "",
         f"Hook: {row['hook']}",
-        "",
-        "Cold email:",
-        row["cold_email"],
-        "",
-        "Follow-up email:",
-        row["followup_email"],
     ]
     return "\n".join(parts)
 
@@ -75,9 +63,6 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "contact_phone",
             "contact_website",
             "subject_line",
-            "hook",
-            "cold_email",
-            "followup_email",
             "task_notes",
             "source_file",
         ]

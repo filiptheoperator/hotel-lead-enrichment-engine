@@ -2,7 +2,7 @@ email:
   style: natural
   language: sk
   max_length_preference: short
-  require_personalization_line: true
+  require_factual_line: true
   require_soft_cta: true
   forbid_jargon: true
   forbid_anglicisms: true

@@ -1,9 +1,3 @@
-"""Draft modul pre neskoršiu Fázu 4.
-
-Tento súbor je zámerne mimo aktívny flow.
-Aktívny hlavný entrypoint projektu momentálne nekonzumuje tento modul.
-"""
-
 from pathlib import Path
 
 import pandas as pd
@@ -32,7 +26,7 @@ def normalize_text(value: object) -> str:
     return str(value).strip()
 
 
-def build_commercial_summary(row: pd.Series) -> str:
+def build_factual_summary(row: pd.Series) -> str:
     parts = []
 
     if row["hotel_name"]:
@@ -51,24 +45,14 @@ def build_commercial_summary(row: pd.Series) -> str:
     return ", ".join(parts)
 
 
-def build_personalization_angle(row: pd.Series) -> str:
-    if row["website"] and row["phone"] and row["priority_band"] == "High":
-        return "Má dostupný web aj telefón a vysokú prioritu pre ďalší outreach."
-    if row["website"] and not row["phone"]:
-        return "Má dostupný web, ale chýba telefónne spojenie na rýchly kontakt."
-    if row["phone"] and not row["website"]:
-        return "Má telefónne spojenie, ale chýba web ako silný digitálny signál."
-    return "Vyžaduje doplnenie verejne dostupných údajov pred ďalším krokom."
-
-
-def build_discovery_hypothesis(row: pd.Series) -> str:
-    if row["priority_band"] == "High":
-        return "Pravdepodobne vhodný kandidát na prioritný obchodný outreach."
-    if row["priority_band"] == "Medium-High":
-        return "Vyzerá ako zaujímavý lead, ale potrebuje doplniť viac verejných signálov."
-    if row["priority_band"] == "Medium":
-        return "Stredná priorita, vhodné na neskoršie doplnenie enrichmentu."
-    return "Nižšia priorita, vhodné ponechať na neskorší review."
+def build_contact_status(row: pd.Series, unknown_value_label: str) -> str:
+    if row["website"] and row["phone"]:
+        return "Overené z raw vstupu: web aj telefón"
+    if row["website"]:
+        return "Overené z raw vstupu: len web"
+    if row["phone"]:
+        return "Overené z raw vstupu: len telefón"
+    return unknown_value_label
 
 
 def build_enrichment_dataframe(df: pd.DataFrame, unknown_value_label: str) -> pd.DataFrame:
@@ -79,12 +63,10 @@ def build_enrichment_dataframe(df: pd.DataFrame, unknown_value_label: str) -> pd
     enriched["checkin_checkout_info"] = unknown_value_label
     enriched["checkin_checkout_status"] = "Verejne nepotvrdené"
     enriched["contact_status"] = enriched.apply(
-        lambda row: "Overené z raw vstupu" if row["website"] or row["phone"] else "Verejne nepotvrdené",
+        lambda row: build_contact_status(row, unknown_value_label),
         axis=1,
     )
-    enriched["commercial_summary"] = enriched.apply(build_commercial_summary, axis=1)
-    enriched["personalization_angle"] = enriched.apply(build_personalization_angle, axis=1)
-    enriched["discovery_hypothesis"] = enriched.apply(build_discovery_hypothesis, axis=1)
+    enriched["factual_summary"] = enriched.apply(build_factual_summary, axis=1)
 
     return enriched[
         [
@@ -104,9 +86,7 @@ def build_enrichment_dataframe(df: pd.DataFrame, unknown_value_label: str) -> pd
             "checkin_checkout_info",
             "checkin_checkout_status",
             "contact_status",
-            "commercial_summary",
-            "personalization_angle",
-            "discovery_hypothesis",
+            "factual_summary",
             "source_url",
             "source_file",
         ]
@@ -158,7 +138,7 @@ def main() -> None:
                 "priority_band",
                 "hotel_opening_hours",
                 "contact_status",
-                "personalization_angle",
+                "factual_summary",
             ]
         ]
         .head(5)

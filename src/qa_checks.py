@@ -1,27 +1,13 @@
-"""Draft modul pre neskoršiu Fázu 7.
-
-Tento súbor je zámerne mimo aktívny flow.
-Aktívny hlavný entrypoint projektu momentálne nekonzumuje tento modul.
-"""
-
 from pathlib import Path
 from typing import Optional
 
 import pandas as pd
-import yaml
 
 
 PROCESSED_DIR = Path("data/processed")
 ENRICHMENT_DIR = Path("outputs/enrichment")
-EMAIL_DRAFTS_DIR = Path("outputs/email_drafts")
 CLICKUP_DIR = Path("outputs/clickup")
 QA_DIR = Path("data/qa")
-PROJECT_CONFIG_PATH = Path("configs/project.yaml")
-
-
-def load_project_config(config_path: Path = PROJECT_CONFIG_PATH) -> dict:
-    with config_path.open("r", encoding="utf-8") as file:
-        return yaml.safe_load(file) or {}
 
 
 def get_first_file(folder: Path, pattern: str) -> Optional[Path]:
@@ -44,9 +30,7 @@ def load_csv(file_path: Optional[Path]) -> pd.DataFrame:
 def build_issue_rows(
     processed_df: pd.DataFrame,
     enrichment_df: pd.DataFrame,
-    email_df: pd.DataFrame,
     clickup_df: pd.DataFrame,
-    review_priorities: list[str],
 ) -> pd.DataFrame:
     issues: list[dict[str, object]] = []
 
@@ -72,15 +56,10 @@ def build_issue_rows(
             & processed_df["phone"].fillna("").astype(str).str.strip().eq("")
         )
         for _, row in processed_df[missing_contact_mask].iterrows():
-            severity = (
-                "High"
-                if normalize_text(row.get("priority_band")) in review_priorities
-                else "Medium"
-            )
             issues.append(
                 {
                     "issue_type": "missing_contact_data",
-                    "severity": severity,
+                    "severity": "Medium",
                     "hotel_name": normalize_text(row.get("hotel_name")),
                     "city": normalize_text(row.get("city")),
                     "priority_band": normalize_text(row.get("priority_band")),
@@ -94,37 +73,14 @@ def build_issue_rows(
             "Verejne nepotvrdené"
         )
         for _, row in enrichment_df[unverified_mask].iterrows():
-            severity = (
-                "High"
-                if normalize_text(row.get("priority_band")) in review_priorities
-                else "Medium"
-            )
             issues.append(
                 {
                     "issue_type": "unverified_opening_hours",
-                    "severity": severity,
+                    "severity": "Medium",
                     "hotel_name": normalize_text(row.get("hotel_name")),
                     "city": normalize_text(row.get("city")),
                     "priority_band": normalize_text(row.get("priority_band")),
                     "details": "Otváracie hodiny sú verejne nepotvrdené.",
-                    "source_file": normalize_text(row.get("source_file")),
-                }
-            )
-
-    if not email_df.empty:
-        empty_email_mask = (
-            email_df["subject_line"].fillna("").astype(str).str.strip().eq("")
-            | email_df["cold_email"].fillna("").astype(str).str.strip().eq("")
-        )
-        for _, row in email_df[empty_email_mask].iterrows():
-            issues.append(
-                {
-                    "issue_type": "missing_email_draft",
-                    "severity": "High",
-                    "hotel_name": normalize_text(row.get("hotel_name")),
-                    "city": normalize_text(row.get("city")),
-                    "priority_band": normalize_text(row.get("priority_band")),
-                    "details": "Chýba subject_line alebo cold_email.",
                     "source_file": normalize_text(row.get("source_file")),
                 }
             )
@@ -140,6 +96,20 @@ def build_issue_rows(
                     "city": normalize_text(row.get("city")),
                     "priority_band": normalize_text(row.get("task_priority")),
                     "details": "Duplicitný ClickUp task_name.",
+                    "source_file": normalize_text(row.get("source_file")),
+                }
+            )
+
+        empty_task_name_mask = clickup_df["task_name"].fillna("").astype(str).str.strip().eq("")
+        for _, row in clickup_df[empty_task_name_mask].iterrows():
+            issues.append(
+                {
+                    "issue_type": "missing_clickup_task_name",
+                    "severity": "High",
+                    "hotel_name": normalize_text(row.get("hotel_name")),
+                    "city": normalize_text(row.get("city")),
+                    "priority_band": normalize_text(row.get("task_priority")),
+                    "details": "Chýba task_name pre ClickUp export.",
                     "source_file": normalize_text(row.get("source_file")),
                 }
             )
@@ -181,20 +151,14 @@ def save_qa_outputs(issues_df: pd.DataFrame) -> tuple[Path, Path]:
 
 
 def main() -> None:
-    project_config = load_project_config()
-    review_priorities = project_config.get("review_required_priorities", [])
-
     processed_df = load_csv(get_first_file(PROCESSED_DIR, "*_normalized_scored.csv"))
     enrichment_df = load_csv(get_first_file(ENRICHMENT_DIR, "*_enriched.csv"))
-    email_df = load_csv(get_first_file(EMAIL_DRAFTS_DIR, "*_email_drafts.csv"))
     clickup_df = load_csv(get_first_file(CLICKUP_DIR, "*_clickup_import.csv"))
 
     issues_df = build_issue_rows(
         processed_df=processed_df,
         enrichment_df=enrichment_df,
-        email_df=email_df,
         clickup_df=clickup_df,
-        review_priorities=review_priorities,
     )
     issues_path, summary_path = save_qa_outputs(issues_df)
 

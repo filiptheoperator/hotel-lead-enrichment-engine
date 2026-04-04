@@ -1,9 +1,3 @@
-"""Draft modul pre neskoršiu Fázu 5.
-
-Tento súbor je zámerne mimo aktívny flow.
-Aktívny hlavný entrypoint projektu momentálne nekonzumuje tento modul.
-"""
-
 from pathlib import Path
 
 import pandas as pd
@@ -26,30 +20,27 @@ def normalize_text(value: object) -> str:
 
 
 def build_subject_line(row: pd.Series) -> str:
-    city = row["city"] or "váš hotel"
-    return f"Nápad pre {city}: jednoduchšie priame dopyty"
+    hotel_name = row["hotel_name"] or "váš hotel"
+    return f"Krátky nápad pre {hotel_name}"
 
 
 def build_hook(row: pd.Series) -> str:
-    if row["hotel_name"] and row["priority_band"] == "High":
-        return f"Zaujal ma hotel {row['hotel_name']} a jeho silný verejný profil."
+    if row["hotel_name"] and row["city"]:
+        return f"Pozeral som sa na hotel {row['hotel_name']} v lokalite {row['city']}."
     if row["hotel_name"]:
-        return f"Zaujal ma hotel {row['hotel_name']} pri rýchlom prehľade."
-    return "Zaujal ma váš hotel pri rýchlom prehľade."
+        return f"Pozeral som sa na hotel {row['hotel_name']}."
+    return "Pozeral som sa na váš hotel pri rýchlom prehľade."
 
 
 def build_cold_email(row: pd.Series) -> str:
-    hotel_name = row["hotel_name"] or "váš hotel"
     hook = build_hook(row)
-    angle = row["personalization_angle"] or "Vidím priestor na zlepšenie relevantnosti oslovenia."
+    summary = row["factual_summary"] or "Mám k dispozícii krátky factual prehľad."
 
     return (
         f"Dobrý deň,\n\n"
         f"{hook}\n"
-        f"{angle}\n\n"
-        f"Pomáhame hotelom ako {hotel_name} pripraviť prehľad leadov, enrichment a ďalšie kroky tak, "
-        f"aby bol obchodný kontakt jednoduchší a relevantnejší.\n\n"
-        f"Ak dáva zmysel, rád pošlem krátky príklad, ako by to vedelo vyzerať aj pre vás.\n\n"
+        f"{summary}\n\n"
+        f"Ak by to bolo užitočné, rád pošlem krátky a konkrétny návrh ďalšieho postupu.\n\n"
         f"S pozdravom"
     )
 
@@ -59,7 +50,7 @@ def build_followup_email(row: pd.Series) -> str:
     return (
         f"Dobrý deň,\n\n"
         f"len sa jemne pripomínam k predošlej správe pre {hotel_name}.\n"
-        f"Ak by to bolo užitočné, pošlem stručný návrh ďalšieho postupu bez zbytočnej teórie.\n\n"
+        f"Ak to bude relevantné, pošlem stručný návrh ďalšieho postupu.\n\n"
         f"S pozdravom"
     )
 
@@ -85,7 +76,7 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "website",
             "phone",
             "contact_status",
-            "personalization_angle",
+            "factual_summary",
             "subject_line",
             "hook",
             "cold_email",
