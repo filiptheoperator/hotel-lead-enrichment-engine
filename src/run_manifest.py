@@ -16,6 +16,10 @@ CLICKUP_GATE_JSON_PATH = QA_DIR / "clickup_import_gate.json"
 CLICKUP_GATE_TXT_PATH = QA_DIR / "clickup_import_gate.txt"
 CLICKUP_DRY_RUN_SAMPLE_PATH = QA_DIR / "clickup_import_dry_run_sample.csv"
 CLICKUP_DRY_RUN_NOTES_PATH = QA_DIR / "clickup_import_dry_run_notes.txt"
+HIGH_LEADS_PREIMPORT_CHECKLIST_PATH = QA_DIR / "high_leads_preimport_checklist.csv"
+HIGH_LEADS_PREIMPORT_NOTES_PATH = QA_DIR / "high_leads_preimport_checklist.txt"
+OPERATOR_DECISION_SUMMARY_PATH = QA_DIR / "operator_decision_summary.txt"
+ARCHIVE_CLEANUP_REPORT_PATH = QA_DIR / "archive_cleanup_report.txt"
 
 
 def get_latest_file(folder: Path, pattern: str) -> Optional[Path]:
@@ -115,6 +119,10 @@ def build_run_manifest() -> dict:
             "clickup_import_gate_txt": str(CLICKUP_GATE_TXT_PATH) if CLICKUP_GATE_TXT_PATH.exists() else "",
             "clickup_import_dry_run_sample_csv": str(CLICKUP_DRY_RUN_SAMPLE_PATH) if CLICKUP_DRY_RUN_SAMPLE_PATH.exists() else "",
             "clickup_import_dry_run_notes_txt": str(CLICKUP_DRY_RUN_NOTES_PATH) if CLICKUP_DRY_RUN_NOTES_PATH.exists() else "",
+            "high_leads_preimport_checklist_csv": str(HIGH_LEADS_PREIMPORT_CHECKLIST_PATH) if HIGH_LEADS_PREIMPORT_CHECKLIST_PATH.exists() else "",
+            "high_leads_preimport_checklist_txt": str(HIGH_LEADS_PREIMPORT_NOTES_PATH) if HIGH_LEADS_PREIMPORT_NOTES_PATH.exists() else "",
+            "operator_decision_summary_txt": str(OPERATOR_DECISION_SUMMARY_PATH) if OPERATOR_DECISION_SUMMARY_PATH.exists() else "",
+            "archive_cleanup_report_txt": str(ARCHIVE_CLEANUP_REPORT_PATH) if ARCHIVE_CLEANUP_REPORT_PATH.exists() else "",
         },
         "row_counts": {
             "processed_rows": len(processed_df),

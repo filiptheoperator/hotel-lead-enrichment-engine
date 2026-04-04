@@ -28,7 +28,37 @@ Pripraviť presný handoff pre budúcu Make vrstvu bez presunu business logiky m
 - notifikácia operátorovi
 - odovzdanie cesty na ClickUp CSV iba pri `GO`
 - odovzdanie cesty na dry run sample
+- odovzdanie cesty na High-only pre-import checklist
+- odovzdanie cesty na operator decision summary
 - odovzdanie cesty na archive folder
+
+## Output payload pre Make
+
+```json
+{
+  "decision": "GO | NO_GO",
+  "run_manifest_json": "data/qa/run_manifest.json",
+  "clickup_import_gate_json": "data/qa/clickup_import_gate.json",
+  "clickup_import_csv": "outputs/clickup/..._clickup_import.csv",
+  "clickup_import_dry_run_sample_csv": "data/qa/clickup_import_dry_run_sample.csv",
+  "high_leads_preimport_checklist_csv": "data/qa/high_leads_preimport_checklist.csv",
+  "operator_decision_summary_txt": "data/qa/operator_decision_summary.txt",
+  "archive_dir": "data/archive/<batch_archive_dir>"
+}
+```
+
+## Error branches
+
+- `missing_run_manifest`
+- `missing_clickup_gate`
+- `missing_clickup_csv`
+- `no_go_batch`
+- `archive_not_created`
+
+Každý error branch má skončiť:
+- notifikáciou operátorovi
+- bez pokusu o ClickUp import
+- s odkazom na relevantný QA artifact
 
 ## Notification text template
 
@@ -39,6 +69,10 @@ Pripraviť presný handoff pre budúcu Make vrstvu bez presunu business logiky m
 ### NO-GO
 
 `Batch nie je pripravený na ClickUp import. Skontroluj clickup_import_gate.txt a QA artifacty.`
+
+### Error branch
+
+`Batch zlyhal pred ClickUp handoff. Skontroluj run manifest, gate a archive artifacty.`
 
 ## Čo Make nemá robiť
 

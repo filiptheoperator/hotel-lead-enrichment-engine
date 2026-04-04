@@ -20,3 +20,4 @@ review_required_priorities:
 sample_batch_mode: false
 sample_batch_size: 10
 clickup_dry_run_sample_size: 5
+archive_keep_last_batches: 5
