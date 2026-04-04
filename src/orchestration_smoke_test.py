@@ -18,6 +18,11 @@ def save_json(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def save_text(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+
+
 def main() -> None:
     results = {
         "default_cli": run(mode="dry_run", scenario_label="smoke_default"),
@@ -48,7 +53,28 @@ def main() -> None:
         ),
     }
     output_path = QA_DIR / "orchestration_smoke_test.json"
+    comparison_path = QA_DIR / "orchestration_scenario_comparison.json"
+    comparison_txt_path = QA_DIR / "orchestration_scenario_comparison.txt"
+    comparison = {
+        scenario: {
+            "status": result["status"],
+            "would_execute_make": result["would_execute_make"],
+            "validation_issues": result["validation_issues"],
+        }
+        for scenario, result in results.items()
+    }
+    comparison_txt = "\n".join(
+        [
+            "Orchestration scenario comparison",
+            *[
+                f"{scenario}: status={result['status']}, would_execute_make={'yes' if result['would_execute_make'] else 'no'}, validation_issues={','.join(result['validation_issues']) if result['validation_issues'] else 'none'}"
+                for scenario, result in comparison.items()
+            ],
+        ]
+    ) + "\n"
     save_json(output_path, results)
+    save_json(comparison_path, comparison)
+    save_text(comparison_txt_path, comparison_txt)
     print(f"Orchestration smoke test uložený do: {output_path}")
     print(json.dumps(results, ensure_ascii=False, indent=2))
 

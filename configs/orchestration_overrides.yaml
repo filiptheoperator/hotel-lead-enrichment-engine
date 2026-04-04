@@ -1,0 +1,5 @@
+orchestration_overrides:
+  allow_go_with_external_blocker: false
+  allow_go_with_partial_write: false
+  allow_make_execution_when_no_go: false
+  operator_override_label: ""

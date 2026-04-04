@@ -14,6 +14,12 @@ orchestration:
   escalation_path: data/qa/external_blocker_escalation.json
   handoff_bundle_path: data/qa/operator_handoff_bundle.json
   progress_tracker_path: data/qa/phase_5_progress_tracker.json
+  execution_lock_path: data/qa/orchestration_execution_lock.json
+  retry_eligibility_path: data/qa/retry_eligibility.json
+  webhook_request_export_path: data/qa/make_webhook_request.json
+  response_capture_template_path: data/qa/make_response_capture_template.json
+  handoff_txt_bundle_path: data/qa/operator_handoff_bundle.txt
+  launch_checklist_path: data/qa/pre_make_launch_checklist.json
   dry_run_result_path: data/qa/orchestration_dry_run.json
   required_artifact_keys:
     - run_manifest_json

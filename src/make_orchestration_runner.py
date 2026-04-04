@@ -10,6 +10,8 @@ import yaml
 QA_DIR = Path("data/qa")
 ARCHIVE_DIR = Path("data/archive")
 ORCHESTRATION_CONFIG_PATH = Path("configs/orchestration.yaml")
+ORCHESTRATION_OVERRIDE_CONFIG_PATH = Path("configs/orchestration_overrides.yaml")
+PROJECT_CONFIG_PATH = Path("configs/project.yaml")
 RUN_MANIFEST_PATH = QA_DIR / "run_manifest.json"
 CLICKUP_GATE_PATH = QA_DIR / "clickup_import_gate.json"
 CLICKUP_REHEARSAL_PATH = QA_DIR / "clickup_rehearsal_execution.json"
@@ -33,6 +35,20 @@ def load_config() -> dict[str, Any]:
         return yaml.safe_load(file) or {}
 
 
+def load_project_config() -> dict[str, Any]:
+    if not PROJECT_CONFIG_PATH.exists():
+        return {}
+    with PROJECT_CONFIG_PATH.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file) or {}
+
+
+def load_override_config() -> dict[str, Any]:
+    if not ORCHESTRATION_OVERRIDE_CONFIG_PATH.exists():
+        return {}
+    with ORCHESTRATION_OVERRIDE_CONFIG_PATH.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file) or {}
+
+
 def save_json(path: Path, payload: dict[str, Any]) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -43,6 +59,29 @@ def save_text(path: Path, content: str) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
     return path
+
+
+def acquire_execution_lock(path: Path, scenario_label: str) -> dict[str, Any]:
+    existing = load_json(path)
+    if existing.get("active") is True:
+        raise RuntimeError(f"Execution lock už existuje pre scenario {existing.get('scenario_label', '')}")
+    payload = {
+        "active": True,
+        "scenario_label": scenario_label,
+        "acquired_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+    }
+    save_json(path, payload)
+    return payload
+
+
+def release_execution_lock(path: Path, scenario_label: str) -> dict[str, Any]:
+    payload = {
+        "active": False,
+        "scenario_label": scenario_label,
+        "released_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+    }
+    save_json(path, payload)
+    return payload
 
 
 def latest_archive_dir() -> str:
@@ -80,10 +119,15 @@ def build_make_payload(
     gate: dict[str, Any],
     manifest_path: Path,
     gate_path: Path,
+    override_config: dict[str, Any],
 ) -> dict[str, str]:
     artifacts = manifest.get("artifacts", {})
+    decision = str(gate.get("decision", "")).strip()
+    overrides = override_config.get("orchestration_overrides", {})
+    if decision == "NO_GO" and overrides.get("allow_make_execution_when_no_go", False):
+        decision = "GO"
     return {
-        "decision": str(gate.get("decision", "")).strip(),
+        "decision": decision,
         "run_manifest_json": str(manifest_path),
         "clickup_import_gate_json": str(gate_path),
         "clickup_import_csv": str(artifacts.get("clickup_import_csv", "")).strip(),
@@ -190,6 +234,17 @@ def build_archive_crosscheck(
     }
 
 
+def build_archive_retention_crosscheck(project_config: dict[str, Any]) -> dict[str, Any]:
+    keep_last_batches = int(project_config.get("archive_keep_last_batches", 0) or 0)
+    archive_dirs = sorted([path.name for path in ARCHIVE_DIR.iterdir() if path.is_dir()]) if ARCHIVE_DIR.exists() else []
+    return {
+        "archive_dir_count": len(archive_dirs),
+        "archive_keep_last_batches": keep_last_batches,
+        "within_limit": len(archive_dirs) <= keep_last_batches if keep_last_batches > 0 else True,
+        "archive_dirs": archive_dirs[-10:],
+    }
+
+
 def build_failure_notification(
     payload: dict[str, str],
     gate: dict[str, Any],
@@ -255,6 +310,16 @@ def build_failure_notification(
         "gate_operator_action": gate.get("operator_action", ""),
         "external_blocker_detected": external_blocker_detected,
         "external_blocker_code": "FIELD_033" if external_blocker_detected else "",
+    }
+
+
+def build_retry_eligibility(notification_payload: dict[str, Any]) -> dict[str, Any]:
+    failure_type = str(notification_payload.get("failure_type", "")).strip()
+    retry_allowed = failure_type in {"none"}
+    return {
+        "failure_type": failure_type,
+        "retry_allowed_now": retry_allowed,
+        "reason": "retry iba pri bezchybnom alebo explicitne povolenom stave" if retry_allowed else "retry nie je povolený pre aktuálny failure type",
     }
 
 
@@ -407,6 +472,84 @@ def build_handoff_bundle(
     }
 
 
+def build_handoff_txt_bundle(
+    decision_summary: dict[str, Any],
+    handoff_bundle: dict[str, Any],
+    retry_eligibility: dict[str, Any],
+) -> str:
+    lines = [
+        "Operator handoff bundle",
+        f"decision: {handoff_bundle['decision']}",
+        f"status: {handoff_bundle['status']}",
+        f"would_execute_make: {'yes' if handoff_bundle['would_execute_make'] else 'no'}",
+        f"archive_crosscheck_ok: {'yes' if handoff_bundle['archive_crosscheck_ok'] else 'no'}",
+        f"failure_type: {handoff_bundle['notification_failure_type']}",
+        f"retry_allowed_now: {'yes' if retry_eligibility['retry_allowed_now'] else 'no'}",
+        f"next_step: {handoff_bundle['next_step']}",
+        f"scenario_label: {decision_summary['scenario_label']}",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def build_webhook_request_export(
+    payload: dict[str, str],
+    scenario_label: str,
+) -> dict[str, Any]:
+    return {
+        "scenario_label": scenario_label,
+        "webhook_target": "UNVERIFIED_MAKE_WEBHOOK",
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": payload,
+    }
+
+
+def build_response_capture_template(
+    scenario_label: str,
+) -> dict[str, Any]:
+    return {
+        "scenario_label": scenario_label,
+        "response_received": False,
+        "http_status": "",
+        "response_body": {},
+        "captured_at": "",
+        "note": "Template pre budúce Make response capture.",
+    }
+
+
+def build_launch_checklist(
+    decision_summary: dict[str, Any],
+    archive_crosscheck: dict[str, Any],
+    payload_validation: dict[str, Any],
+    retry_eligibility: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "decision_is_go": decision_summary.get("decision") == "GO",
+        "status_ready_for_live_cutover": decision_summary.get("status") == "READY_FOR_LIVE_CUTOVER",
+        "payload_valid": payload_validation.get("valid", False),
+        "archive_crosscheck_ok": archive_crosscheck.get("archive_manifest_exists", False) and archive_crosscheck.get("clickup_csv_match", False),
+        "retry_allowed_now": retry_eligibility.get("retry_allowed_now", False),
+    }
+
+
+def build_runtime_status_board(
+    decision_summary: dict[str, Any],
+    retry_eligibility: dict[str, Any],
+    launch_checklist: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "phase": "phase_5_orchestration_implementation",
+        "scenario_label": decision_summary.get("scenario_label", ""),
+        "decision": decision_summary.get("decision", ""),
+        "status": decision_summary.get("status", ""),
+        "failure_type": decision_summary.get("failure_type", ""),
+        "retry_allowed_now": retry_eligibility.get("retry_allowed_now", False),
+        "launch_ready": all(launch_checklist.values()) if launch_checklist else False,
+    }
+
+
 def build_progress_tracker(
     decision_summary: dict[str, Any],
     validation_issues: list[str],
@@ -462,50 +605,64 @@ def run(
     scenario_label: str = "default",
 ) -> dict[str, Any]:
     config = load_config()
+    project_config = load_project_config()
+    override_config = load_override_config()
     manifest = load_json(manifest_path)
     gate = load_json(gate_path)
     rehearsal = load_json(rehearsal_path)
+    lock_path = resolve_output_path(config, "execution_lock_path", output_dir)
+    acquire_execution_lock(lock_path, scenario_label)
 
-    payload = build_make_payload(manifest, gate, manifest_path, gate_path)
-    validation_issues, _missing_paths = validate_make_payload(payload, config)
-    artifact_check = build_artifact_check(payload, config)
-    payload_validation = build_payload_validation(payload, validation_issues, config)
-    notification_payload = build_failure_notification(
-        payload,
-        gate,
-        rehearsal,
-        validation_issues,
-        config,
-        gate_path,
-        rehearsal_path,
-    )
-    status = classify_runtime_status(payload, rehearsal, validation_issues)
-    execution_path = "validate_only" if mode == "validate_only" else "dry_run"
-    evidence_log = build_evidence_log(
-        payload,
-        status,
-        validation_issues,
-        notification_payload,
-        rehearsal,
-        execution_path,
-    )
-    status_output = build_status_matrix_output(status, payload, validation_issues, rehearsal)
-    would_execute_make = payload.get("decision") == "GO" and not validation_issues and mode != "validate_only"
-    decision_summary = build_decision_summary(
-        payload,
-        status,
-        validation_issues,
-        notification_payload,
-        rehearsal,
-        would_execute_make,
-        scenario_label,
-    )
-    txt_summary = build_txt_summary(decision_summary, payload, validation_issues)
-    archive_crosscheck = build_archive_crosscheck(payload, manifest)
-    incident_summary = build_incident_summary(decision_summary, notification_payload, evidence_log)
-    escalation_artifact = build_escalation_artifact(decision_summary, notification_payload, evidence_log)
-    handoff_bundle = build_handoff_bundle(payload, decision_summary, notification_payload, archive_crosscheck)
-    progress_tracker = build_progress_tracker(decision_summary, validation_issues)
+    try:
+        payload = build_make_payload(manifest, gate, manifest_path, gate_path, override_config)
+        validation_issues, _missing_paths = validate_make_payload(payload, config)
+        artifact_check = build_artifact_check(payload, config)
+        payload_validation = build_payload_validation(payload, validation_issues, config)
+        notification_payload = build_failure_notification(
+            payload,
+            gate,
+            rehearsal,
+            validation_issues,
+            config,
+            gate_path,
+            rehearsal_path,
+        )
+        retry_eligibility = build_retry_eligibility(notification_payload)
+        status = classify_runtime_status(payload, rehearsal, validation_issues)
+        execution_path = "validate_only" if mode == "validate_only" else "dry_run"
+        evidence_log = build_evidence_log(
+            payload,
+            status,
+            validation_issues,
+            notification_payload,
+            rehearsal,
+            execution_path,
+        )
+        status_output = build_status_matrix_output(status, payload, validation_issues, rehearsal)
+        would_execute_make = payload.get("decision") == "GO" and not validation_issues and mode != "validate_only"
+        decision_summary = build_decision_summary(
+            payload,
+            status,
+            validation_issues,
+            notification_payload,
+            rehearsal,
+            would_execute_make,
+            scenario_label,
+        )
+        txt_summary = build_txt_summary(decision_summary, payload, validation_issues)
+        archive_crosscheck = build_archive_crosscheck(payload, manifest)
+        archive_retention_crosscheck = build_archive_retention_crosscheck(project_config)
+        incident_summary = build_incident_summary(decision_summary, notification_payload, evidence_log)
+        escalation_artifact = build_escalation_artifact(decision_summary, notification_payload, evidence_log)
+        handoff_bundle = build_handoff_bundle(payload, decision_summary, notification_payload, archive_crosscheck)
+        handoff_txt_bundle = build_handoff_txt_bundle(decision_summary, handoff_bundle, retry_eligibility)
+        progress_tracker = build_progress_tracker(decision_summary, validation_issues)
+        webhook_request_export = build_webhook_request_export(payload, scenario_label)
+        response_capture_template = build_response_capture_template(scenario_label)
+        launch_checklist = build_launch_checklist(decision_summary, archive_crosscheck, payload_validation, retry_eligibility)
+        runtime_status_board = build_runtime_status_board(decision_summary, retry_eligibility, launch_checklist)
+    finally:
+        release_execution_lock(lock_path, scenario_label)
 
     make_payload_path = resolve_output_path(config, "make_payload_path", output_dir)
     failure_notification_path = resolve_output_path(config, "failure_notification_path", output_dir)
@@ -520,6 +677,13 @@ def run(
     escalation_path = resolve_output_path(config, "escalation_path", output_dir)
     handoff_bundle_path = resolve_output_path(config, "handoff_bundle_path", output_dir)
     progress_tracker_path = resolve_output_path(config, "progress_tracker_path", output_dir)
+    retry_eligibility_path = resolve_output_path(config, "retry_eligibility_path", output_dir)
+    webhook_request_export_path = resolve_output_path(config, "webhook_request_export_path", output_dir)
+    response_capture_template_path = resolve_output_path(config, "response_capture_template_path", output_dir)
+    handoff_txt_bundle_path = resolve_output_path(config, "handoff_txt_bundle_path", output_dir)
+    launch_checklist_path = resolve_output_path(config, "launch_checklist_path", output_dir)
+    runtime_status_board_path = resolve_output_path(config, "status_matrix_path", output_dir).with_name("phase_5_runtime_status_board.json")
+    archive_retention_crosscheck_path = resolve_output_path(config, "archive_crosscheck_path", output_dir).with_name("archive_retention_crosscheck.json")
     dry_run_result_path = resolve_output_path(config, "dry_run_result_path", output_dir)
 
     save_json(make_payload_path, payload)
@@ -535,6 +699,14 @@ def run(
     save_json(escalation_path, escalation_artifact)
     save_json(handoff_bundle_path, handoff_bundle)
     save_json(progress_tracker_path, progress_tracker)
+    save_json(retry_eligibility_path, retry_eligibility)
+    save_json(webhook_request_export_path, webhook_request_export)
+    save_json(response_capture_template_path, response_capture_template)
+    save_text(handoff_txt_bundle_path, handoff_txt_bundle)
+    save_json(launch_checklist_path, launch_checklist)
+    save_json(runtime_status_board_path, runtime_status_board)
+    save_json(archive_retention_crosscheck_path, archive_retention_crosscheck)
+    save_json(lock_path, {"active": False, "scenario_label": scenario_label, "released_at": datetime.now().astimezone().isoformat(timespec="seconds")})
 
     dry_run_result = {
         "mode": mode,
@@ -555,6 +727,14 @@ def run(
         "escalation_path": str(escalation_path),
         "handoff_bundle_path": str(handoff_bundle_path),
         "progress_tracker_path": str(progress_tracker_path),
+        "retry_eligibility_path": str(retry_eligibility_path),
+        "webhook_request_export_path": str(webhook_request_export_path),
+        "response_capture_template_path": str(response_capture_template_path),
+        "handoff_txt_bundle_path": str(handoff_txt_bundle_path),
+        "launch_checklist_path": str(launch_checklist_path),
+        "runtime_status_board_path": str(runtime_status_board_path),
+        "archive_retention_crosscheck_path": str(archive_retention_crosscheck_path),
+        "execution_lock_path": str(lock_path),
     }
     save_json(dry_run_result_path, dry_run_result)
     return dry_run_result
