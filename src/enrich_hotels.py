@@ -1021,6 +1021,90 @@ def build_factual_summary(row: pd.Series, unknown_value_label: str) -> str:
     return " | ".join(parts)
 
 
+def is_unknown_value(value: object, unknown_value_label: str) -> bool:
+    normalized = normalize_text(value)
+    return normalized == "" or normalized == unknown_value_label
+
+
+def build_main_observed_issue(row: pd.Series, unknown_value_label: str) -> str:
+    if is_unknown_value(row.get("hotel_opening_hours"), unknown_value_label):
+        return "Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy."
+    if is_unknown_value(row.get("checkin_checkout_info"), unknown_value_label):
+        return "Na webe som nenašiel jasne uvedený check-in a check-out na prvý pohľad."
+    if not normalize_text(row.get("website")):
+        return "Vo verejnom profile chýba jasný webový kontakt."
+    if not normalize_text(row.get("phone")):
+        return "Vo verejnom profile chýba jasne uvedený telefónny kontakt."
+    return "Základné informácie sú dostupné, ale prvý kontakt môže ísť ešte stručnejšie a vecnejšie."
+
+
+def build_give_first_insight(row: pd.Series, unknown_value_label: str) -> str:
+    if is_unknown_value(row.get("hotel_opening_hours"), unknown_value_label):
+        return "Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie."
+    if is_unknown_value(row.get("checkin_checkout_info"), unknown_value_label):
+        return "Pri rýchlom pozretí webu som nenašiel jasne uvedený check-in a check-out."
+    if not normalize_text(row.get("website")):
+        return "Vo verejnom profile som nenašiel priamo uvedený web, čo vie brzdiť prvý kontakt."
+    if not normalize_text(row.get("phone")):
+        return "Vo verejnom profile som nenašiel priamo uvedený telefón, čo vie brzdiť rýchly kontakt."
+    return "Na webe som našiel základné praktické údaje, takže prvý email môže ísť rovno cez krátky konkrétny postreh."
+
+
+def build_email_hook(row: pd.Series) -> str:
+    hotel_name = normalize_text(row.get("hotel_name"))
+    city = normalize_text(row.get("city"))
+    if hotel_name and city:
+        return f"Pozeral som sa na {hotel_name} v lokalite {city}."
+    if hotel_name:
+        return f"Pozeral som sa na {hotel_name}."
+    return "Pozeral som sa na váš hotel cez verejne dostupné údaje."
+
+
+def build_micro_cta(row: pd.Series, primary_email_goal: str) -> str:
+    if primary_email_goal == "reply_with_permission":
+        return "Ak chcete, pošlem 3 stručné postrehy v krátkej forme."
+    if primary_email_goal == "reply_with_interest":
+        return "Ak to je pre vás zaujímavé, môžem poslať krátke zhrnutie."
+    return "Ak chcete, môžem to poslať stručne v pár bodoch."
+
+
+def build_proof_snippet(row: pd.Series, unknown_value_label: str) -> str:
+    if normalize_text(row.get("hotel_opening_hours_status")) == "Overené vo verejnom zdroji":
+        return f"Vychádzal som z verejne uvedených hodín: {normalize_text(row.get('hotel_opening_hours'))}."
+    if normalize_text(row.get("checkin_checkout_status")) == "Overené vo verejnom zdroji":
+        return f"Vychádzal som z verejne uvedeného check-in/check-out: {normalize_text(row.get('checkin_checkout_info'))}."
+    if normalize_text(row.get("website")) or normalize_text(row.get("phone")):
+        return "Pozeral som len verejne dostupný profil a základné kontaktné údaje."
+    return f"Nemal som viac než verejne dostupné údaje, preto držím len opatrný a krátky postreh."
+
+
+def classify_email_angle(row: pd.Series, unknown_value_label: str) -> str:
+    if is_unknown_value(row.get("hotel_opening_hours"), unknown_value_label):
+        return "opening_hours_clarity"
+    if is_unknown_value(row.get("checkin_checkout_info"), unknown_value_label):
+        return "checkin_checkout_clarity"
+    if not normalize_text(row.get("website")) or not normalize_text(row.get("phone")):
+        return "contact_clarity"
+    return "first_contact_clarity"
+
+
+def build_variant_id(email_angle: str, variant_prefix: str) -> str:
+    suffix_map = {
+        "opening_hours_clarity": "1",
+        "checkin_checkout_clarity": "2",
+        "contact_clarity": "3",
+        "first_contact_clarity": "4",
+    }
+    return f"{variant_prefix}{suffix_map.get(email_angle, '0')}"
+
+
+def build_test_batch(row: pd.Series) -> str:
+    source_file = normalize_text(row.get("source_file"))
+    if not source_file:
+        return ""
+    return Path(source_file).stem
+
+
 def build_enrichment_dataframe(
     df: pd.DataFrame,
     unknown_value_label: str,
@@ -1030,6 +1114,10 @@ def build_enrichment_dataframe(
     timeout_seconds: int,
     page_keywords: list[str],
     max_pages_per_hotel: int,
+    primary_email_goal_default: str,
+    default_cta_type: str,
+    default_reply_outcome: str,
+    default_variant_prefix: str,
 ) -> pd.DataFrame:
     enriched = df.copy()
 
@@ -1067,6 +1155,34 @@ def build_enrichment_dataframe(
         lambda row: build_factual_summary(row, unknown_value_label),
         axis=1,
     )
+    enriched["email_hook"] = enriched.apply(build_email_hook, axis=1)
+    enriched["main_observed_issue"] = enriched.apply(
+        lambda row: build_main_observed_issue(row, unknown_value_label),
+        axis=1,
+    )
+    enriched["give_first_insight"] = enriched.apply(
+        lambda row: build_give_first_insight(row, unknown_value_label),
+        axis=1,
+    )
+    enriched["primary_email_goal"] = primary_email_goal_default
+    enriched["micro_cta"] = enriched.apply(
+        lambda row: build_micro_cta(row, primary_email_goal_default),
+        axis=1,
+    )
+    enriched["proof_snippet"] = enriched.apply(
+        lambda row: build_proof_snippet(row, unknown_value_label),
+        axis=1,
+    )
+    enriched["email_angle"] = enriched.apply(
+        lambda row: classify_email_angle(row, unknown_value_label),
+        axis=1,
+    )
+    enriched["cta_type"] = default_cta_type
+    enriched["variant_id"] = enriched["email_angle"].apply(
+        lambda value: build_variant_id(normalize_text(value), default_variant_prefix)
+    )
+    enriched["test_batch"] = enriched.apply(build_test_batch, axis=1)
+    enriched["reply_outcome"] = default_reply_outcome
 
     return enriched[
         [
@@ -1095,6 +1211,17 @@ def build_enrichment_dataframe(
             "public_source_fetch_status",
             "contact_status",
             "factual_summary",
+            "give_first_insight",
+            "main_observed_issue",
+            "email_hook",
+            "micro_cta",
+            "primary_email_goal",
+            "proof_snippet",
+            "email_angle",
+            "cta_type",
+            "variant_id",
+            "test_batch",
+            "reply_outcome",
             "source_url",
             "source_file",
         ]
@@ -1210,6 +1337,18 @@ def main() -> None:
     partial_raw_label = enrichment_config.get(
         "partial_raw_label", "Čiastočne overené z raw vstupu"
     )
+    primary_email_goal_default = str(
+        enrichment_config.get("primary_email_goal_default", "reply_with_permission")
+    ).strip()
+    default_cta_type = str(
+        enrichment_config.get("default_cta_type", "low_friction_permission")
+    ).strip()
+    default_reply_outcome = str(
+        enrichment_config.get("default_reply_outcome", "")
+    ).strip()
+    default_variant_prefix = str(
+        enrichment_config.get("default_variant_prefix", "A")
+    ).strip() or "A"
     timeout_seconds = int(enrichment_config.get("request_timeout_seconds", 12))
     max_pages_per_hotel = int(enrichment_config.get("max_public_pages_per_hotel", 3))
     page_keywords = [
@@ -1239,6 +1378,10 @@ def main() -> None:
         timeout_seconds=timeout_seconds,
         page_keywords=page_keywords,
         max_pages_per_hotel=max_pages_per_hotel,
+        primary_email_goal_default=primary_email_goal_default,
+        default_cta_type=default_cta_type,
+        default_reply_outcome=default_reply_outcome,
+        default_variant_prefix=default_variant_prefix,
     )
     enriched_df, reused_previous_rows = reuse_previous_public_web_fields(
         enriched_df=enriched_df,

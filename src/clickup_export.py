@@ -49,20 +49,30 @@ def build_clickup_status(row: pd.Series) -> str:
 
 def build_clickup_notes(row: pd.Series) -> str:
     parts = [
-        f"Hotel: {row['hotel_name']}",
-        f"Mesto: {row['city']}",
-        f"Priorita band: {row['priority_band']}",
-        f"Skóre: {row['priority_score']}",
-        f"Web: {row['website'] or 'Verejne nepotvrdené'}",
-        f"Telefón: {row['phone'] or 'Verejne nepotvrdené'}",
+        f"Hotel: {normalize_text(row.get('hotel_name', ''))}",
+        f"Mesto: {normalize_text(row.get('city', ''))}",
+        f"Priorita band: {normalize_text(row.get('priority_band', ''))}",
+        f"Skóre: {normalize_text(row.get('priority_score', ''))}",
+        f"Web: {normalize_text(row.get('website', '')) or 'Verejne nepotvrdené'}",
+        f"Telefón: {normalize_text(row.get('phone', '')) or 'Verejne nepotvrdené'}",
+        f"Email angle: {normalize_text(row.get('email_angle', ''))}",
+        f"CTA type: {normalize_text(row.get('cta_type', ''))}",
+        f"Variant ID: {normalize_text(row.get('variant_id', ''))}",
+        f"Test batch: {normalize_text(row.get('test_batch', ''))}",
+        f"Reply outcome: {normalize_text(row.get('reply_outcome', ''))}",
         "",
-        f"Hook: {row['hook']}",
+        f"Email hook: {normalize_text(row.get('email_hook', row.get('hook', '')))}",
+        f"Give-first insight: {normalize_text(row.get('give_first_insight', ''))}",
+        f"Main observed issue: {normalize_text(row.get('main_observed_issue', ''))}",
+        f"Proof snippet: {normalize_text(row.get('proof_snippet', ''))}",
+        f"Micro CTA: {normalize_text(row.get('micro_cta', ''))}",
+        f"Primary email goal: {normalize_text(row.get('primary_email_goal', ''))}",
         "",
         "Cold email:",
-        row["cold_email"],
+        normalize_text(row.get("cold_email", "")),
         "",
         "Follow-up email:",
-        row["followup_email"],
+        normalize_text(row.get("followup_email", "")),
     ]
     return "\n".join(parts)
 
@@ -72,6 +82,22 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
 
     for column in export_df.columns:
         if export_df[column].dtype == object:
+            export_df[column] = export_df[column].apply(normalize_text)
+
+    for column in [
+        "email_angle",
+        "cta_type",
+        "variant_id",
+        "test_batch",
+        "reply_outcome",
+        "give_first_insight",
+        "main_observed_issue",
+        "email_hook",
+        "micro_cta",
+        "proof_snippet",
+        "primary_email_goal",
+    ]:
+        if column in export_df.columns:
             export_df[column] = export_df[column].apply(normalize_text)
 
     export_df["task_name"] = export_df.apply(build_clickup_task_name, axis=1)
@@ -94,6 +120,17 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "contact_website",
             "subject_line",
             "source_file",
+            "email_angle",
+            "cta_type",
+            "variant_id",
+            "test_batch",
+            "reply_outcome",
+            "give_first_insight",
+            "main_observed_issue",
+            "email_hook",
+            "micro_cta",
+            "proof_snippet",
+            "primary_email_goal",
         ]
     ].rename(
         columns={
@@ -108,6 +145,17 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "contact_website": "Contact website",
             "subject_line": "Subject line",
             "source_file": "Source file",
+            "email_angle": "Email angle",
+            "cta_type": "CTA type",
+            "variant_id": "Variant ID",
+            "test_batch": "Test batch",
+            "reply_outcome": "Reply outcome",
+            "give_first_insight": "Give-first insight",
+            "main_observed_issue": "Main observed issue",
+            "email_hook": "Email hook",
+            "micro_cta": "Micro CTA",
+            "proof_snippet": "Proof snippet",
+            "primary_email_goal": "Primary email goal",
         }
     ).copy()
 

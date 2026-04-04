@@ -3,11 +3,49 @@ email:
   language: sk
   max_length_preference: short
   require_factual_line: true
+  require_give_first_insight: true
   require_soft_cta: true
+  one_email_one_goal: true
+  primary_email_goal: reply_with_permission
+  default_cta_type: low_friction_permission
   forbid_jargon: true
   forbid_anglicisms: true
+  forbid_corporate_tone: true
+  forbid_ai_jargon: true
+  forbid_startup_language: true
+  forbid_fake_scarcity: true
+  forbid_exaggerated_promises: true
+  required_blocks:
+    - personalization_line
+    - give_first_line
+    - relevance_line
+    - low_friction_cta
+  optional_blocks:
+    - proof_line
+  tracking_fields:
+    - email_angle
+    - cta_type
+    - variant_id
+    - test_batch
+    - reply_outcome
   outputs:
     - cold_email
     - followup_email
     - subject_line
     - hook
+    - give_first_insight
+    - main_observed_issue
+    - email_hook
+    - micro_cta
+    - primary_email_goal
+    - proof_snippet
+    - email_angle
+    - cta_type
+    - variant_id
+    - test_batch
+    - reply_outcome
+    - personalization_line
+    - give_first_line
+    - relevance_line
+    - low_friction_cta
+    - proof_line

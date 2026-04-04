@@ -24,6 +24,11 @@ When guiding the user, communicate in Slovak.
 - Keep prompts separate from code.
 - Do not overwrite raw input files.
 - Mark unverified data clearly.
+- Outreach copy musí byť krátke, ľudské a po slovensky.
+- One email = one goal.
+- Najprv daj malú hodnotu, až potom jemný CTA krok.
+- CTA má byť low-friction.
+- AI nepíše celé emaily od nuly bez dátovej opory.
 
 ## Priorities
 1. pipeline stability
@@ -32,6 +37,7 @@ When guiding the user, communicate in Slovak.
 4. email relevance
 5. CRM cleanliness
 6. only then further automation
+7. outreach testing by data, not gut feeling
 
 ## Current phase
 Fáza 3:
@@ -49,3 +55,4 @@ operator-ready workflow
 ## Enrichment rule
 If publicly available, include opening hours.
 If something is unverified, label it clearly.
+Enrichment má dodať aj copy-ready insight, issue, hook, CTA a test fields.

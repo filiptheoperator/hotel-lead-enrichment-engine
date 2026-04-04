@@ -9,7 +9,10 @@
 5. pri partial write risk sa flow zastaví
 6. archive evidence ostane dostupná
 7. Make nepridáva business logiku enrichmentu ani QA
+8. Make nemení outbound copy discipliny, iba prenáša existujúce artifacty
+9. testing polia pre outreach varianty ostanú zachované v exportoch
+10. pri `NO_GO` nevznikne live send ani agresívny CTA push
 
 ## Pass condition
 
-Všetkých 7 bodov je potvrdených v test alebo operator scenári.
+Všetkých 10 bodov je potvrdených v test alebo operator scenári.

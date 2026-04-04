@@ -1,10 +1,12 @@
 from pathlib import Path
 
 import pandas as pd
+import yaml
 
 
 ENRICHMENT_OUTPUT_DIR = Path("outputs/enrichment")
 EMAIL_OUTPUT_DIR = Path("outputs/email_drafts")
+EMAIL_CONFIG_PATH = Path("configs/email.yaml")
 
 
 def list_enriched_files(enrichment_dir: Path = ENRICHMENT_OUTPUT_DIR) -> list[Path]:
@@ -17,6 +19,13 @@ def normalize_text(value: object) -> str:
     if pd.isna(value):
         return ""
     return str(value).strip()
+
+
+def load_email_config() -> dict:
+    if not EMAIL_CONFIG_PATH.exists():
+        return {}
+    with EMAIL_CONFIG_PATH.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file) or {}
 
 
 def is_verified_public(value: str) -> bool:
@@ -63,10 +72,17 @@ def build_short_factual_line(row: pd.Series) -> str:
 
 def build_subject_line(row: pd.Series) -> str:
     hotel_name = row["hotel_name"] or "váš hotel"
+    email_angle = normalize_text(row.get("email_angle"))
+    if email_angle == "opening_hours_clarity":
+        return f"{hotel_name}: krátky postreh"
+    if email_angle == "checkin_checkout_clarity":
+        return f"{hotel_name}: krátky postreh"
     return f"{hotel_name}: krátky nápad"
 
 
 def build_hook(row: pd.Series) -> str:
+    if normalize_text(row.get("email_hook")):
+        return normalize_text(row.get("email_hook"))
     if row["hotel_name"] and row["city"]:
         return f"Pozeral som sa na {row['hotel_name']} v lokalite {row['city']}."
     if row["hotel_name"]:
@@ -75,39 +91,106 @@ def build_hook(row: pd.Series) -> str:
 
 
 def build_cold_email(row: pd.Series) -> str:
-    hook = build_hook(row)
-    factual_line = build_short_factual_line(row)
-    hotel_name = row["hotel_name"] or "váš hotel"
-
-    return (
-        f"Dobrý deň,\n\n"
-        f"{hook}\n"
-        f"{factual_line}\n\n"
-        f"Mám jeden stručný nápad, ako zlepšiť prvý dojem a dopyty pre {hotel_name}.\n"
-        f"Ak bude dávať zmysel, pošlem ho v 3 bodoch.\n\n"
-        f"S pozdravom"
+    parts = [
+        "Dobrý deň,",
+        "",
+        normalize_text(row.get("personalization_line")),
+        normalize_text(row.get("give_first_line")),
+        normalize_text(row.get("relevance_line")),
+    ]
+    proof_line = normalize_text(row.get("proof_line"))
+    if proof_line:
+        parts.append(proof_line)
+    parts.extend(
+        [
+            "",
+            normalize_text(row.get("low_friction_cta")),
+            "",
+            "S pozdravom",
+        ]
     )
+    return "\n".join(parts)
 
 
 def build_followup_email(row: pd.Series) -> str:
     hotel_name = row["hotel_name"] or "váš hotel"
+    low_friction_cta = normalize_text(row.get("low_friction_cta")) or "Ak chcete, pošlem to stručne v pár bodoch."
     return (
         f"Dobrý deň,\n\n"
         f"jemne sa pripomínam k predošlej správe pre {hotel_name}.\n"
-        f"Ak je to pre vás relevantné, pošlem krátky návrh v 3 bodoch.\n\n"
+        f"{low_friction_cta}\n\n"
         f"S pozdravom"
     )
 
 
+def ensure_column(df: pd.DataFrame, column: str, default_value: str = "") -> None:
+    if column not in df.columns:
+        df[column] = default_value
+
+
+def build_personalization_line(row: pd.Series) -> str:
+    return build_hook(row)
+
+
+def build_give_first_line(row: pd.Series) -> str:
+    insight = normalize_text(row.get("give_first_insight"))
+    if insight:
+        return insight
+    return "Pri rýchlom pozretí verejných údajov som si všimol jeden stručný praktický detail."
+
+
+def build_relevance_line(row: pd.Series) -> str:
+    factual_line = build_short_factual_line(row)
+    main_issue = normalize_text(row.get("main_observed_issue"))
+    if main_issue:
+        return f"{main_issue} {factual_line}"
+    return factual_line
+
+
+def build_low_friction_cta(row: pd.Series) -> str:
+    micro_cta = normalize_text(row.get("micro_cta"))
+    if micro_cta:
+        return micro_cta
+    return "Ak chcete, pošlem 3 stručné postrehy v krátkej forme."
+
+
+def build_proof_line(row: pd.Series) -> str:
+    return normalize_text(row.get("proof_snippet"))
+
+
 def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     emails = df.copy()
+    email_config = load_email_config().get("email", {})
 
     for column in emails.columns:
         if emails[column].dtype == object:
             emails[column] = emails[column].apply(normalize_text)
 
+    for column in [
+        "give_first_insight",
+        "main_observed_issue",
+        "email_hook",
+        "micro_cta",
+        "primary_email_goal",
+        "proof_snippet",
+        "email_angle",
+        "cta_type",
+        "variant_id",
+        "test_batch",
+        "reply_outcome",
+    ]:
+        ensure_column(emails, column, "")
+
     emails["subject_line"] = emails.apply(build_subject_line, axis=1)
     emails["hook"] = emails.apply(build_hook, axis=1)
+    emails["personalization_line"] = emails.apply(build_personalization_line, axis=1)
+    emails["give_first_line"] = emails.apply(build_give_first_line, axis=1)
+    emails["relevance_line"] = emails.apply(build_relevance_line, axis=1)
+    emails["low_friction_cta"] = emails.apply(build_low_friction_cta, axis=1)
+    emails["proof_line"] = emails.apply(build_proof_line, axis=1)
+    if email_config.get("one_email_one_goal", True):
+        emails["primary_email_goal"] = emails["primary_email_goal"].replace("", email_config.get("primary_email_goal", "reply_with_permission"))
+    emails["cta_type"] = emails["cta_type"].replace("", email_config.get("default_cta_type", "low_friction_permission"))
     emails["cold_email"] = emails.apply(build_cold_email, axis=1)
     emails["followup_email"] = emails.apply(build_followup_email, axis=1)
 
@@ -123,6 +206,22 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "factual_summary",
             "subject_line",
             "hook",
+            "give_first_insight",
+            "main_observed_issue",
+            "email_hook",
+            "micro_cta",
+            "primary_email_goal",
+            "proof_snippet",
+            "email_angle",
+            "cta_type",
+            "variant_id",
+            "test_batch",
+            "reply_outcome",
+            "personalization_line",
+            "give_first_line",
+            "relevance_line",
+            "low_friction_cta",
+            "proof_line",
             "cold_email",
             "followup_email",
             "source_file",
@@ -165,7 +264,7 @@ def main() -> None:
             [
                 "hotel_name",
                 "subject_line",
-                "hook",
+                "give_first_insight",
             ]
         ]
         .head(5)

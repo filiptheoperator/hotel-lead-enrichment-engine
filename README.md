@@ -4,7 +4,7 @@ Jednoduchý Python-first repozitár pre stabilný workflow enrichmentu hotelový
 
 ## Aktuálna fáza
 
-Aktívna je **Fáza 3: Operator-ready workflow**.
+Aktívna je **Fáza 5: Orchestration implementation**.
 
 Lokálny Python-first pipeline už beží end-to-end:
 
@@ -31,6 +31,12 @@ Aktuálne sa uzamyká output contract, operátorský checklist, run manifest a i
 - neoverené údaje musia byť jasne označené
 - ak sú verejne dostupné, enrichment má obsahovať aj otváracie / prevádzkové hodiny
 - Make je až neskoršia glue vrstva, nie súčasť tejto fázy
+- outreach vrstva má najprv dať malú hodnotu, nie pitch
+- jeden email má mať len jeden cieľ
+- CTA musí byť nízkotlakové a ľudské
+- relevancia je dôležitejšia než clever copy
+- AI sa má použiť len na malé copy bloky opreté o dáta
+- zmeny v outreach sa majú vyhodnocovať podľa dát, nie podľa pocitu
 
 ## Štruktúra repozitára
 
@@ -105,6 +111,9 @@ Environment premenné sú mimo kódu v `.env`.
 - source attribution pre opening hours aj check-in/check-out
 - DNS fallback ochrana pri verejnom web fetchi
 - run-to-run delta report
+- copy-ready enrichment polia pre give-first outreach
+- blokový email drafting pre krátky slovenský outreach
+- tracking polia pre variant, angle, CTA a reply outcome
 
 ## Mimo aktuálneho rozsahu
 

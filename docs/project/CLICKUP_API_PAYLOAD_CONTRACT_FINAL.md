@@ -62,6 +62,24 @@ Kompatibilita s reálnym ClickUp workspace je stále čiastočne `Neoverené`, k
 - `custom_fields.custom.contact_phone`
 - `custom_fields.custom.contact_website`
 
+## CSV extra columns mimo API payload
+
+Tieto stĺpce môžu byť v ClickUp import CSV prítomné, ale nie sú súčasťou uzamknutého API payload contractu:
+
+- `Email angle`
+- `CTA type`
+- `Variant ID`
+- `Test batch`
+- `Reply outcome`
+- `Give-first insight`
+- `Main observed issue`
+- `Email hook`
+- `Micro CTA`
+- `Proof snippet`
+- `Primary email goal`
+
+Slúžia pre operator review a outreach testing, nie pre zmenu top-level API shape.
+
 ## Validation rules
 
 - payload musí obsahovať rovnaké top-level keys ako preview artifact

@@ -53,6 +53,8 @@ Tento dokument uzamyká payload, ktorý má lokálny Python workflow odovzdať d
 - Make iba číta artifacty, nič neprepočítava
 - pri `decision = NO_GO` nesmie nastať pokus o live ClickUp execution
 - chýbajúci required artifact je hard stop
+- Make nevymýšľa outbound copy, iba pracuje s artifactmi pripravenými lokálnym Python flow
+- outreach testing polia cestujú v `clickup_import_csv`, nie ako samostatná Make business logika
 
 ## Neoverené
 

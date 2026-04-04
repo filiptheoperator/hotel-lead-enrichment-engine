@@ -3,6 +3,7 @@ enrichment:
   require_checkin_checkout: true
   require_contact_data: true
   require_factual_summary: true
+  require_copy_ready_fields: true
   unknown_value_label: Verejne nepotvrdené
   verified_public_label: Overené vo verejnom zdroji
   verified_raw_label: Overené z raw vstupu
@@ -21,3 +22,15 @@ enrichment:
     - opening
     - hours
     - hotel
+  copy_disciplines:
+    give_first: true
+    one_email_one_goal: true
+    low_friction_cta_only: true
+    relevance_over_cleverness: true
+    human_tone_only: true
+    ai_for_small_components_only: true
+    test_by_data_not_gut_feeling: true
+  primary_email_goal_default: reply_with_permission
+  default_cta_type: low_friction_permission
+  default_reply_outcome: ""
+  default_variant_prefix: A

@@ -70,8 +70,19 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 23. `public_source_fetch_status`
 24. `contact_status`
 25. `factual_summary`
-26. `source_url`
-27. `source_file`
+26. `give_first_insight`
+27. `main_observed_issue`
+28. `email_hook`
+29. `micro_cta`
+30. `primary_email_goal`
+31. `proof_snippet`
+32. `email_angle`
+33. `cta_type`
+34. `variant_id`
+35. `test_batch`
+36. `reply_outcome`
+37. `source_url`
+38. `source_file`
 
 ### Poznámky
 
@@ -79,6 +90,8 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 - `public_source_fetch_status` odlišuje live fetch, fallback a fetch incident.
 - `checkin_checkout_source_origin` je dnes potvrdené ako `text`, `jsonld`, `raw_input` alebo prázdne.
 - `checkin_checkout_completeness` je dnes potvrdené ako `paired`, `single_side`, `none`.
+- nové outreach polia slúžia len na krátke copy-ready bloky, nie na vymýšľanie neoverených tvrdení
+- `reply_outcome` je tracking pole a pri prvom exporte môže zostať prázdne
 
 ## outputs/email_drafts
 
@@ -98,9 +111,31 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 8. `factual_summary`
 9. `subject_line`
 10. `hook`
-11. `cold_email`
-12. `followup_email`
-13. `source_file`
+11. `give_first_insight`
+12. `main_observed_issue`
+13. `email_hook`
+14. `micro_cta`
+15. `primary_email_goal`
+16. `proof_snippet`
+17. `email_angle`
+18. `cta_type`
+19. `variant_id`
+20. `test_batch`
+21. `reply_outcome`
+22. `personalization_line`
+23. `give_first_line`
+24. `relevance_line`
+25. `low_friction_cta`
+26. `proof_line`
+27. `cold_email`
+28. `followup_email`
+29. `source_file`
+
+### Poznámky
+
+- email drafting používa blokový systém `personalization_line -> give_first_line -> relevance_line -> low_friction_cta`
+- `proof_line` je voliteľný a má byť prázdny, ak nemáme krátky grounded proof
+- jeden email má mať len jeden cieľ a jeden CTA krok
 
 ## outputs/clickup
 
@@ -121,11 +156,23 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 9. `Contact website`
 10. `Subject line`
 11. `Source file`
+12. `Email angle`
+13. `CTA type`
+14. `Variant ID`
+15. `Test batch`
+16. `Reply outcome`
+17. `Give-first insight`
+18. `Main observed issue`
+19. `Email hook`
+20. `Micro CTA`
+21. `Proof snippet`
+22. `Primary email goal`
 
 ### Poznámky
 
 - `Task name`, `Description content`, `Status`, `Priority` sú potvrdené ako minimálny importný contract.
 - Reálna kompatibilita s cieľovým ClickUp workspace ostáva `Neoverené`.
+- nové testing a copy polia sú určené pre operator review, reporting a neskoršie meranie reply kvality
 
 ## data/qa
 
