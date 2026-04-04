@@ -11,10 +11,16 @@ CONFIG_PATH = Path("configs/clickup_api_mapping.yaml")
 QA_DIR = Path("data/qa")
 OUTPUT_PATH = QA_DIR / "clickup_api_mapping_preview.json"
 VALIDATION_PATH = QA_DIR / "clickup_api_mapping_validation.json"
+DIFF_PATH = QA_DIR / "clickup_api_payload_diff.json"
 
 
 def get_latest_clickup_file() -> Optional[Path]:
     files = sorted(CLICKUP_DIR.glob("*_clickup_import.csv"))
+    return files[-1] if files else None
+
+
+def get_latest_high_only_clickup_file() -> Optional[Path]:
+    files = sorted(CLICKUP_DIR.glob("*_clickup_import_high_only.csv"))
     return files[-1] if files else None
 
 
@@ -61,6 +67,41 @@ def build_mapping_preview() -> dict:
     }
 
 
+def build_high_only_mapping_preview() -> dict:
+    clickup_path = get_latest_high_only_clickup_file()
+    mapping_config = load_mapping_config().get("clickup_api_mapping", {})
+    clickup_df = pd.read_csv(clickup_path) if clickup_path and clickup_path.exists() else pd.DataFrame()
+
+    if clickup_df.empty:
+        return {
+            "source_csv": str(clickup_path) if clickup_path else "",
+            "preview_rows": [],
+            "note": "Neoverené: chýba High-only ClickUp CSV.",
+        }
+
+    preview_rows = []
+    for _, row in clickup_df.head(3).iterrows():
+        mapped = {}
+        for mapping_name, mapping_def in mapping_config.items():
+            if mapping_name == "custom_fields":
+                custom_payload = {}
+                for _, custom_def in mapping_def.items():
+                    source_column = custom_def.get("source_column", "")
+                    target_field = custom_def.get("target_field", "")
+                    custom_payload[target_field] = str(row.get(source_column, "")).strip()
+                mapped["custom_fields"] = custom_payload
+                continue
+            source_column = mapping_def.get("source_column", "")
+            target_field = mapping_def.get("target_field", "")
+            mapped[target_field] = str(row.get(source_column, "")).strip()
+        preview_rows.append(mapped)
+    return {
+        "source_csv": str(clickup_path),
+        "preview_rows": preview_rows,
+        "note": "Návrh High-only mapping preview bez ostrej ClickUp API integrácie.",
+    }
+
+
 def validate_mapping_preview(preview: dict) -> dict:
     required_top_fields = ["name", "description", "status", "priority", "custom_fields"]
     required_custom_fields = [
@@ -93,6 +134,19 @@ def validate_mapping_preview(preview: dict) -> dict:
     }
 
 
+def build_payload_diff(full_preview: dict, high_preview: dict) -> dict:
+    full_rows = full_preview.get("preview_rows", [])
+    high_rows = high_preview.get("preview_rows", [])
+    full_keys = set(full_rows[0].keys()) if full_rows else set()
+    high_keys = set(high_rows[0].keys()) if high_rows else set()
+    return {
+        "full_preview_row_count": len(full_rows),
+        "high_only_preview_row_count": len(high_rows),
+        "same_top_level_keys": sorted(list(full_keys & high_keys)),
+        "note": "Diff porovnáva shape payloadu, nie business obsah všetkých riadkov.",
+    }
+
+
 def save_mapping_preview(preview: dict) -> Path:
     QA_DIR.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(preview, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -105,13 +159,23 @@ def save_mapping_validation(validation: dict) -> Path:
     return VALIDATION_PATH
 
 
+def save_payload_diff(diff: dict) -> Path:
+    QA_DIR.mkdir(parents=True, exist_ok=True)
+    DIFF_PATH.write_text(json.dumps(diff, ensure_ascii=False, indent=2), encoding="utf-8")
+    return DIFF_PATH
+
+
 def main() -> None:
     preview = build_mapping_preview()
     output_path = save_mapping_preview(preview)
+    high_preview = build_high_only_mapping_preview()
     validation = validate_mapping_preview(preview)
     validation_path = save_mapping_validation(validation)
+    diff = build_payload_diff(preview, high_preview)
+    diff_path = save_payload_diff(diff)
     print(f"ClickUp API mapping preview uložený do: {output_path}")
     print(f"ClickUp API mapping validation uložený do: {validation_path}")
+    print(f"ClickUp API payload diff uložený do: {diff_path}")
     print("\nNáhľad:\n")
     print(json.dumps(preview, ensure_ascii=False, indent=2))
 

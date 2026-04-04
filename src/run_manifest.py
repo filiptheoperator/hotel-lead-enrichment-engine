@@ -14,6 +14,10 @@ QA_DIR = Path("data/qa")
 RUN_MANIFEST_PATH = QA_DIR / "run_manifest.json"
 CLICKUP_GATE_JSON_PATH = QA_DIR / "clickup_import_gate.json"
 CLICKUP_GATE_TXT_PATH = QA_DIR / "clickup_import_gate.txt"
+CLICKUP_GATE_HIGH_ONLY_JSON_PATH = QA_DIR / "clickup_import_gate_high_only.json"
+CLICKUP_GATE_HIGH_ONLY_TXT_PATH = QA_DIR / "clickup_import_gate_high_only.txt"
+READINESS_EXPLANATION_JSON_PATH = QA_DIR / "batch_readiness_explanation.json"
+READINESS_EXPLANATION_TXT_PATH = QA_DIR / "batch_readiness_explanation.txt"
 CLICKUP_DRY_RUN_SAMPLE_PATH = QA_DIR / "clickup_import_dry_run_sample.csv"
 CLICKUP_DRY_RUN_NOTES_PATH = QA_DIR / "clickup_import_dry_run_notes.txt"
 CLICKUP_DRY_RUN_HIGH_ONLY_SAMPLE_PATH = QA_DIR / "clickup_import_dry_run_sample_high_only.csv"
@@ -27,6 +31,7 @@ OPERATOR_DECISION_SUMMARY_HIGH_CSV_PATH = QA_DIR / "operator_decision_summary_hi
 ARCHIVE_CLEANUP_REPORT_PATH = QA_DIR / "archive_cleanup_report.txt"
 CLICKUP_API_MAPPING_PREVIEW_PATH = QA_DIR / "clickup_api_mapping_preview.json"
 CLICKUP_API_MAPPING_VALIDATION_PATH = QA_DIR / "clickup_api_mapping_validation.json"
+CLICKUP_API_PAYLOAD_DIFF_PATH = QA_DIR / "clickup_api_payload_diff.json"
 
 
 def get_latest_file(folder: Path, pattern: str) -> Optional[Path]:
@@ -126,6 +131,10 @@ def build_run_manifest() -> dict:
             "run_delta_report_txt": str(run_delta_path) if run_delta_path.exists() else "",
             "clickup_import_gate_json": str(CLICKUP_GATE_JSON_PATH) if CLICKUP_GATE_JSON_PATH.exists() else "",
             "clickup_import_gate_txt": str(CLICKUP_GATE_TXT_PATH) if CLICKUP_GATE_TXT_PATH.exists() else "",
+            "clickup_import_gate_high_only_json": str(CLICKUP_GATE_HIGH_ONLY_JSON_PATH) if CLICKUP_GATE_HIGH_ONLY_JSON_PATH.exists() else "",
+            "clickup_import_gate_high_only_txt": str(CLICKUP_GATE_HIGH_ONLY_TXT_PATH) if CLICKUP_GATE_HIGH_ONLY_TXT_PATH.exists() else "",
+            "batch_readiness_explanation_json": str(READINESS_EXPLANATION_JSON_PATH) if READINESS_EXPLANATION_JSON_PATH.exists() else "",
+            "batch_readiness_explanation_txt": str(READINESS_EXPLANATION_TXT_PATH) if READINESS_EXPLANATION_TXT_PATH.exists() else "",
             "clickup_import_dry_run_sample_csv": str(CLICKUP_DRY_RUN_SAMPLE_PATH) if CLICKUP_DRY_RUN_SAMPLE_PATH.exists() else "",
             "clickup_import_dry_run_notes_txt": str(CLICKUP_DRY_RUN_NOTES_PATH) if CLICKUP_DRY_RUN_NOTES_PATH.exists() else "",
             "clickup_import_dry_run_sample_high_only_csv": str(CLICKUP_DRY_RUN_HIGH_ONLY_SAMPLE_PATH) if CLICKUP_DRY_RUN_HIGH_ONLY_SAMPLE_PATH.exists() else "",
@@ -139,6 +148,7 @@ def build_run_manifest() -> dict:
             "archive_cleanup_report_txt": str(ARCHIVE_CLEANUP_REPORT_PATH) if ARCHIVE_CLEANUP_REPORT_PATH.exists() else "",
             "clickup_api_mapping_preview_json": str(CLICKUP_API_MAPPING_PREVIEW_PATH) if CLICKUP_API_MAPPING_PREVIEW_PATH.exists() else "",
             "clickup_api_mapping_validation_json": str(CLICKUP_API_MAPPING_VALIDATION_PATH) if CLICKUP_API_MAPPING_VALIDATION_PATH.exists() else "",
+            "clickup_api_payload_diff_json": str(CLICKUP_API_PAYLOAD_DIFF_PATH) if CLICKUP_API_PAYLOAD_DIFF_PATH.exists() else "",
         },
         "row_counts": {
             "processed_rows": len(processed_df),
