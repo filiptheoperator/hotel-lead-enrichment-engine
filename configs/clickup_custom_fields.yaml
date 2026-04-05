@@ -26,7 +26,7 @@ clickup_custom_fields:
       clickup_field_type: short_text
       live_clickup_field_name: Hotel Name
     city:
-      source_column: City
+      source_column: City / Region
       target_field_key: custom.city
       clickup_field_name: City
       clickup_field_id: ff8675cf-25c9-4fc3-b9cf-32048655a6e3
@@ -73,5 +73,75 @@ clickup_custom_fields:
       required_for_phase_4_cutover: true
       clickup_field_type: short_text
       live_clickup_field_name: Source file
+    account_status:
+      source_column: Account Status
+      target_field_key: custom.account_status
+      clickup_field_name: Account Status
+      clickup_field_id: a733d0e0-3b71-42c2-ba5a-9867fd7575c3
+      required_for_phase_4_cutover: false
+      clickup_field_type: drop_down
+      clickup_option_ids:
+        Parked: UNVERIFIED_TBD
+        Prioritized: UNVERIFIED_TBD
+        Researching: UNVERIFIED_TBD
+        Activated: UNVERIFIED_TBD
+        Not a Fit: UNVERIFIED_TBD
+      live_clickup_field_name: Account Status
+    country:
+      source_column: Country
+      target_field_key: custom.country
+      clickup_field_name: Country
+      clickup_field_id: eb471169-c9ea-4f0a-9eec-f83719a0be4a
+      required_for_phase_4_cutover: false
+      clickup_field_type: drop_down
+      live_clickup_field_name: Country
+    hotel_type:
+      source_column: Hotel Type
+      target_field_key: custom.hotel_type
+      clickup_field_name: Hotel Type
+      clickup_field_id: 0629365f-f1f5-40f7-ae76-2c017f88842d
+      required_for_phase_4_cutover: false
+      clickup_field_type: drop_down
+      live_clickup_field_name: Hotel Type
+    rooms_range:
+      source_column: Rooms Range
+      target_field_key: custom.rooms_range
+      clickup_field_name: Rooms Range
+      clickup_field_id: f4e1bf90-9c0e-4ced-b800-8387d25c26f4
+      required_for_phase_4_cutover: false
+      clickup_field_type: drop_down
+      live_clickup_field_name: Rooms Range
+    source:
+      source_column: Source
+      target_field_key: custom.source
+      clickup_field_name: Source
+      clickup_field_id: 46afd81e-5e4f-4c0c-b3a4-a93e55004f5c
+      required_for_phase_4_cutover: false
+      clickup_field_type: drop_down
+      live_clickup_field_name: Source
+    priority_level:
+      source_column: Priority Level
+      target_field_key: custom.priority_level
+      clickup_field_name: Priority Level
+      clickup_field_id: ccf927f7-efa7-446f-b803-e87c250e8597
+      required_for_phase_4_cutover: false
+      clickup_field_type: drop_down
+      live_clickup_field_name: Priority Level
+    icp_fit:
+      source_column: ICP Fit
+      target_field_key: custom.icp_fit
+      clickup_field_name: ICP Fit
+      clickup_field_id: 210d68e5-184f-47d5-9b65-8d147d90d9e2
+      required_for_phase_4_cutover: false
+      clickup_field_type: drop_down
+      live_clickup_field_name: ICP Fit
+    main_pain_hypothesis:
+      source_column: Main Pain Hypothesis
+      target_field_key: custom.main_pain_hypothesis
+      clickup_field_name: Main Pain Hypothesis
+      clickup_field_id: 9bebaa26-fa39-4662-b6ff-eb89e1efb6e5
+      required_for_phase_4_cutover: false
+      clickup_field_type: drop_down
+      live_clickup_field_name: Main Pain Hypothesis
   selected_test_list_id: '901216789251'
   last_live_discovery_artifact: data/qa/clickup_live_field_discovery.json

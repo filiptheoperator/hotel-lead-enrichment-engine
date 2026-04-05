@@ -106,8 +106,16 @@ def create_task(list_id: str, token: str, row: dict[str, str]) -> dict[str, Any]
     return clickup_request("POST", f"/list/{list_id}/task", token, payload)
 
 
-def set_custom_field(task_id: str, field_id: str, token: str, value: str) -> dict[str, Any]:
+def set_custom_field(task_id: str, token: str, field: dict[str, Any]) -> dict[str, Any]:
+    field_id = str(field.get("field_id", "")).strip()
+    value = str(field.get("value", ""))
     payload = {"value": value}
+    field_type = str(field.get("field_type", "")).strip()
+    option_ids = field.get("option_ids", {}) or {}
+    if field_type == "drop_down":
+        mapped_option_id = str(option_ids.get(value, "")).strip()
+        if mapped_option_id and mapped_option_id != "UNVERIFIED_TBD":
+            payload = {"value": mapped_option_id}
     return clickup_request("POST", f"/task/{task_id}/field/{field_id}", token, payload)
 
 
@@ -118,7 +126,7 @@ def get_task(task_id: str, token: str) -> dict[str, Any]:
 
 def build_custom_field_values(row: dict[str, str], config: dict[str, Any]) -> list[dict[str, str]]:
     fields = config["clickup_custom_fields"]["fields"]
-    mapping = [
+    required_mapping = [
         ("hotel_name", "Hotel name"),
         ("city", "City / Region"),
         ("priority_score", "Priority score"),
@@ -127,8 +135,18 @@ def build_custom_field_values(row: dict[str, str], config: dict[str, Any]) -> li
         ("subject_line", "Subject line"),
         ("source_file", "Source file"),
     ]
+    optional_mapping = [
+        ("account_status", "Account Status"),
+        ("country", "Country"),
+        ("hotel_type", "Hotel Type"),
+        ("rooms_range", "Rooms Range"),
+        ("source", "Source"),
+        ("priority_level", "Priority Level"),
+        ("icp_fit", "ICP Fit"),
+        ("main_pain_hypothesis", "Main Pain Hypothesis"),
+    ]
     values: list[dict[str, str]] = []
-    for field_key, csv_column in mapping:
+    for field_key, csv_column in required_mapping:
         field_id = str(fields[field_key].get("clickup_field_id", "")).strip()
         if not field_id or field_id == "UNVERIFIED_TBD":
             raise RuntimeError(f"Field ID nie je potvrdený pre: {field_key}")
@@ -137,7 +155,24 @@ def build_custom_field_values(row: dict[str, str], config: dict[str, Any]) -> li
                 "field_key": field_key,
                 "field_id": field_id,
                 "field_name": str(fields[field_key].get("live_clickup_field_name") or fields[field_key].get("clickup_field_name")),
+                "field_type": str(fields[field_key].get("clickup_field_type", "")),
+                "option_ids": fields[field_key].get("clickup_option_ids", {}) or {},
                 "value": row.get(csv_column, row.get("City", "")) if field_key == "city" else row.get(csv_column, ""),
+            }
+        )
+    for field_key, csv_column in optional_mapping:
+        item = fields.get(field_key, {})
+        field_id = str(item.get("clickup_field_id", "")).strip()
+        if not field_id or field_id == "UNVERIFIED_TBD":
+            continue
+        values.append(
+            {
+                "field_key": field_key,
+                "field_id": field_id,
+                "field_name": str(item.get("live_clickup_field_name") or item.get("clickup_field_name")),
+                "field_type": str(item.get("clickup_field_type", "")),
+                "option_ids": item.get("clickup_option_ids", {}) or {},
+                "value": row.get(csv_column, ""),
             }
         )
     return values
@@ -259,7 +294,7 @@ def main() -> None:
             custom_field_values = build_custom_field_values(row, config)
 
             for item in custom_field_values:
-                set_custom_field(task_id, item["field_id"], token, item["value"])
+                set_custom_field(task_id, token, item)
 
             row_payload: dict[str, Any] = {
                 "row_ref": f"row_{index}",

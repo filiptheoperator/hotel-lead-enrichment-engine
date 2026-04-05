@@ -21,11 +21,19 @@ REQUIRED_FIELD_NAMES = {
     "Source file",
 }
 FIELD_NAME_ALIASES = {
+    "Account Status": ["Account Status"],
     "Hotel name": ["Hotel name", "Hotel Name"],
+    "Country": ["Country"],
     "City": ["City", "City / Region"],
+    "Hotel Type": ["Hotel Type"],
+    "Rooms Range": ["Rooms Range"],
+    "Source": ["Source"],
     "Priority score": ["Priority score"],
+    "Priority Level": ["Priority Level"],
+    "ICP Fit": ["ICP Fit"],
     "Contact phone": ["Contact phone", "Phone"],
     "Contact website": ["Contact website", "Website"],
+    "Main Pain Hypothesis": ["Main Pain Hypothesis"],
     "Subject line": ["Subject line"],
     "Source file": ["Source file"],
 }
@@ -234,18 +242,29 @@ def main() -> None:
 
     load_dotenv()
     token = get_required_env("CLICKUP_API_TOKEN")
-    workspace_id = get_required_env("CLICKUP_WORKSPACE_ID")
-
-    workspace_snapshot = build_workspace_snapshot(workspace_id, token)
 
     if not args.list_id:
+        workspace_id = get_required_env("CLICKUP_WORKSPACE_ID")
+        workspace_snapshot = build_workspace_snapshot(workspace_id, token)
         output_path = QA_DIR / "clickup_workspace_discovery.json"
         save_json(output_path, workspace_snapshot)
         print(f"Workspace discovery uložený do: {output_path}")
         print("Pre ďalší krok spusti script s --list-id <ID>.")
         return
 
-    field_snapshot = build_field_snapshot(workspace_snapshot, args.list_id, token)
+    field_snapshot = {
+        "workspace_snapshot": {},
+        "selected_list_id": args.list_id,
+        "fields": [
+            {
+                "id": str(field.get("id", "")).strip(),
+                "name": str(field.get("name", "")).strip(),
+                "type": str(field.get("type", "")).strip(),
+                "required_for_phase_4_cutover": str(field.get("name", "")).strip() in REQUIRED_FIELD_NAMES,
+            }
+            for field in fetch_list_fields(args.list_id, token)
+        ],
+    }
     output_path = QA_DIR / "clickup_live_field_discovery.json"
     save_json(output_path, field_snapshot)
     print(f"Live field discovery uložený do: {output_path}")

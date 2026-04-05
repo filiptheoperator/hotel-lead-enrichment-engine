@@ -93,6 +93,8 @@ def map_clickup_priority(priority_band: str) -> str:
     normalized = normalize_text(priority_band).lower()
     if normalized == "high":
         return "2"
+    if normalized in {"medium-high", "medium high"}:
+        return "2"
     if normalized == "medium":
         return "3"
     if normalized == "low":
