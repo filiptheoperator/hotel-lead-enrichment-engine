@@ -34,6 +34,8 @@ OPERATOR_DECISION_SUMMARY_HIGH_PATH = QA_DIR / "operator_decision_summary_high.t
 OPERATOR_DECISION_SUMMARY_HIGH_CSV_PATH = QA_DIR / "operator_decision_summary_high.csv"
 ARCHIVE_CLEANUP_REPORT_PATH = QA_DIR / "archive_cleanup_report.txt"
 CLICKUP_API_MAPPING_PREVIEW_PATH = QA_DIR / "clickup_api_mapping_preview.json"
+CLICKUP_API_MAPPING_PREVIEW_PHASE1_PATH = QA_DIR / "clickup_api_mapping_preview_phase1_minimal.json"
+CLICKUP_API_MAPPING_PREVIEW_FULL_PATH = QA_DIR / "clickup_api_mapping_preview_full_ranked.json"
 CLICKUP_API_MAPPING_VALIDATION_PATH = QA_DIR / "clickup_api_mapping_validation.json"
 CLICKUP_API_PAYLOAD_DIFF_PATH = QA_DIR / "clickup_api_payload_diff.json"
 CLICKUP_API_MAPPING_VALIDATION_PHASE1_PATH = QA_DIR / "clickup_api_mapping_validation_phase1_minimal.json"
@@ -44,6 +46,11 @@ FULL_RANKED_REVIEW_CHECKLIST_PATH = QA_DIR / "full_ranked_review_checklist.json"
 TOP20_REASONS_SUMMARY_PATH = QA_DIR / "top_20_reasons_summary.txt"
 REVIEW_BUCKET_REASONS_SUMMARY_PATH = QA_DIR / "review_bucket_reasons_summary.txt"
 OPERATOR_IMPORT_COMMAND_SHEET_PATH = QA_DIR / "operator_import_command_sheet.txt"
+PHASE1_IMPORT_PASS_FAIL_SUMMARY_PATH = QA_DIR / "phase1_import_pass_fail_summary.txt"
+FULL_RANKED_REVIEW_PASS_FAIL_SUMMARY_PATH = QA_DIR / "full_ranked_review_pass_fail_summary.txt"
+RANK_BUCKET_SUMMARY_PATH = QA_DIR / "rank_bucket_summary.json"
+WEBSITE_QUALITY_SUMMARY_PATH = QA_DIR / "website_quality_summary.json"
+CONTACT_GAP_SUMMARY_PATH = QA_DIR / "contact_gap_summary.json"
 CLICKUP_OPERATOR_PACK_MANIFEST_PATH = QA_DIR / "clickup_operator_pack" / "clickup_operator_pack_manifest.json"
 CLICKUP_DRY_RUN_PACKET_MANIFEST_PATH = QA_DIR / "clickup_dry_run_packet" / "clickup_dry_run_packet_manifest.json"
 PROJECT_CONFIG_PATH = Path("configs/project.yaml")
@@ -256,6 +263,8 @@ def build_run_manifest() -> dict:
             "operator_decision_summary_high_csv": str(OPERATOR_DECISION_SUMMARY_HIGH_CSV_PATH) if OPERATOR_DECISION_SUMMARY_HIGH_CSV_PATH.exists() else "",
             "archive_cleanup_report_txt": str(ARCHIVE_CLEANUP_REPORT_PATH) if ARCHIVE_CLEANUP_REPORT_PATH.exists() else "",
             "clickup_api_mapping_preview_json": str(CLICKUP_API_MAPPING_PREVIEW_PATH) if CLICKUP_API_MAPPING_PREVIEW_PATH.exists() else "",
+            "clickup_api_mapping_preview_phase1_json": str(CLICKUP_API_MAPPING_PREVIEW_PHASE1_PATH) if CLICKUP_API_MAPPING_PREVIEW_PHASE1_PATH.exists() else "",
+            "clickup_api_mapping_preview_full_json": str(CLICKUP_API_MAPPING_PREVIEW_FULL_PATH) if CLICKUP_API_MAPPING_PREVIEW_FULL_PATH.exists() else "",
             "clickup_api_mapping_validation_json": str(CLICKUP_API_MAPPING_VALIDATION_PATH) if CLICKUP_API_MAPPING_VALIDATION_PATH.exists() else "",
             "clickup_api_mapping_validation_phase1_json": str(CLICKUP_API_MAPPING_VALIDATION_PHASE1_PATH) if CLICKUP_API_MAPPING_VALIDATION_PHASE1_PATH.exists() else "",
             "clickup_api_mapping_validation_full_json": str(CLICKUP_API_MAPPING_VALIDATION_FULL_PATH) if CLICKUP_API_MAPPING_VALIDATION_FULL_PATH.exists() else "",
@@ -266,6 +275,11 @@ def build_run_manifest() -> dict:
             "top_20_reasons_summary_txt": str(TOP20_REASONS_SUMMARY_PATH) if TOP20_REASONS_SUMMARY_PATH.exists() else "",
             "review_bucket_reasons_summary_txt": str(REVIEW_BUCKET_REASONS_SUMMARY_PATH) if REVIEW_BUCKET_REASONS_SUMMARY_PATH.exists() else "",
             "operator_import_command_sheet_txt": str(OPERATOR_IMPORT_COMMAND_SHEET_PATH) if OPERATOR_IMPORT_COMMAND_SHEET_PATH.exists() else "",
+            "phase1_import_pass_fail_summary_txt": str(PHASE1_IMPORT_PASS_FAIL_SUMMARY_PATH) if PHASE1_IMPORT_PASS_FAIL_SUMMARY_PATH.exists() else "",
+            "full_ranked_review_pass_fail_summary_txt": str(FULL_RANKED_REVIEW_PASS_FAIL_SUMMARY_PATH) if FULL_RANKED_REVIEW_PASS_FAIL_SUMMARY_PATH.exists() else "",
+            "rank_bucket_summary_json": str(RANK_BUCKET_SUMMARY_PATH) if RANK_BUCKET_SUMMARY_PATH.exists() else "",
+            "website_quality_summary_json": str(WEBSITE_QUALITY_SUMMARY_PATH) if WEBSITE_QUALITY_SUMMARY_PATH.exists() else "",
+            "contact_gap_summary_json": str(CONTACT_GAP_SUMMARY_PATH) if CONTACT_GAP_SUMMARY_PATH.exists() else "",
             "clickup_operator_pack_manifest_json": str(CLICKUP_OPERATOR_PACK_MANIFEST_PATH) if CLICKUP_OPERATOR_PACK_MANIFEST_PATH.exists() else "",
             "clickup_dry_run_packet_manifest_json": str(CLICKUP_DRY_RUN_PACKET_MANIFEST_PATH) if CLICKUP_DRY_RUN_PACKET_MANIFEST_PATH.exists() else "",
         },

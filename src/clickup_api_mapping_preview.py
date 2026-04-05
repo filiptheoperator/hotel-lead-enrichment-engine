@@ -11,6 +11,8 @@ EMAIL_DIR = Path("outputs/email_drafts")
 CONFIG_PATH = Path("configs/clickup_api_mapping.yaml")
 QA_DIR = Path("data/qa")
 OUTPUT_PATH = QA_DIR / "clickup_api_mapping_preview.json"
+PHASE1_PREVIEW_PATH = QA_DIR / "clickup_api_mapping_preview_phase1_minimal.json"
+FULL_PREVIEW_PATH = QA_DIR / "clickup_api_mapping_preview_full_ranked.json"
 VALIDATION_PATH = QA_DIR / "clickup_api_mapping_validation.json"
 DIFF_PATH = QA_DIR / "clickup_api_payload_diff.json"
 SIDE_BY_SIDE_DIFF_PATH = QA_DIR / "clickup_export_mode_diff.json"
@@ -212,6 +214,13 @@ def save_mapping_preview(preview: dict) -> Path:
     return OUTPUT_PATH
 
 
+def save_mode_mapping_preview(preview: dict, mode: str) -> Path:
+    QA_DIR.mkdir(parents=True, exist_ok=True)
+    target = PHASE1_PREVIEW_PATH if mode == "phase1_minimal" else FULL_PREVIEW_PATH
+    target.write_text(json.dumps(preview, ensure_ascii=False, indent=2), encoding="utf-8")
+    return target
+
+
 def save_mapping_validation(validation: dict) -> Path:
     QA_DIR.mkdir(parents=True, exist_ok=True)
     VALIDATION_PATH.write_text(json.dumps(validation, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -246,6 +255,8 @@ def main() -> None:
     high_preview = build_high_only_mapping_preview()
     full_preview = build_mapping_preview(full_ranked_path, "Full ranked preview bez ostrej ClickUp API integrácie.")
     phase1_preview = build_mapping_preview(phase1_path, "Phase1 minimal preview bez ostrej ClickUp API integrácie.")
+    phase1_preview_path = save_mode_mapping_preview(phase1_preview, "phase1_minimal")
+    full_preview_path = save_mode_mapping_preview(full_preview, "full_ranked")
     validation = validate_mapping_preview(full_preview, "full_ranked")
     validation_path = save_mapping_validation(validation)
     phase1_validation = validate_mapping_preview(phase1_preview, "phase1_minimal")
@@ -256,6 +267,8 @@ def main() -> None:
     export_mode_diff = build_export_mode_diff()
     export_mode_diff_path = save_export_mode_diff(export_mode_diff)
     print(f"ClickUp API mapping preview uložený do: {output_path}")
+    print(f"ClickUp phase1 preview uložený do: {phase1_preview_path}")
+    print(f"ClickUp full ranked preview uložený do: {full_preview_path}")
     print(f"ClickUp API mapping validation uložený do: {validation_path}")
     print(f"ClickUp phase1 validation uložený do: {phase1_validation_path}")
     print(f"ClickUp full ranked validation uložený do: {full_validation_path}")

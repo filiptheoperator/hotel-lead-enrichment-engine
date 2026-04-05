@@ -14,6 +14,11 @@ FULL_REVIEW_CHECKLIST_PATH = QA_DIR / "full_ranked_review_checklist.json"
 TOP20_REASONS_PATH = QA_DIR / "top_20_reasons_summary.txt"
 REVIEW_BUCKET_REASONS_PATH = QA_DIR / "review_bucket_reasons_summary.txt"
 COMMAND_SHEET_PATH = QA_DIR / "operator_import_command_sheet.txt"
+PHASE1_PASS_FAIL_PATH = QA_DIR / "phase1_import_pass_fail_summary.txt"
+FULL_REVIEW_PASS_FAIL_PATH = QA_DIR / "full_ranked_review_pass_fail_summary.txt"
+RANK_BUCKET_SUMMARY_PATH = QA_DIR / "rank_bucket_summary.json"
+WEBSITE_QUALITY_SUMMARY_PATH = QA_DIR / "website_quality_summary.json"
+CONTACT_GAP_SUMMARY_PATH = QA_DIR / "contact_gap_summary.json"
 
 
 def get_latest(folder: Path, pattern: str) -> Optional[Path]:
@@ -83,12 +88,38 @@ def build_operator_import_command_sheet() -> str:
         "python3 src/clickup_dry_run_sample.py",
         "python3 src/clickup_api_mapping_preview.py",
         "python3 src/clickup_import_support_artifacts.py",
+        "python3 src/clickup_import_preflight.py",
         "python3 src/clickup_import_operator_pack.py",
         "python3 src/run_report.py",
         "python3 src/run_manifest.py",
         "python3 src/clickup_import_gate.py",
     ]
     return "\n".join(commands)
+
+
+def build_pass_fail_summary(title: str, checks: list[dict]) -> str:
+    passed = sum(1 for item in checks if item.get("result") is True)
+    failed = sum(1 for item in checks if item.get("result") is not True)
+    status = "PASS" if failed == 0 else "FAIL"
+    lines = [title, "", f"status: {status}", f"passed_checks: {passed}", f"failed_checks: {failed}", ""]
+    for item in checks:
+        lines.append(f"- {item.get('check')}: {'pass' if item.get('result') is True else 'fail'}")
+    return "\n".join(lines)
+
+
+def build_distribution_summary(df: pd.DataFrame, column: str) -> dict:
+    if df.empty or column not in df.columns:
+        return {"column": column, "counts": {}, "note": "Neoverené"}
+    counts = (
+        df[column]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+        .replace("", "blank")
+        .value_counts()
+        .to_dict()
+    )
+    return {"column": column, "counts": {str(key): int(value) for key, value in counts.items()}}
 
 
 def main() -> None:
@@ -102,6 +133,14 @@ def main() -> None:
     full_review_checklist = build_full_ranked_review_checklist(full_ranked_path)
     PHASE1_CHECKLIST_PATH.write_text(json.dumps(phase1_checklist, ensure_ascii=False, indent=2), encoding="utf-8")
     FULL_REVIEW_CHECKLIST_PATH.write_text(json.dumps(full_review_checklist, ensure_ascii=False, indent=2), encoding="utf-8")
+    PHASE1_PASS_FAIL_PATH.write_text(
+        build_pass_fail_summary("Phase1 import pass/fail summary", phase1_checklist["required_checks"]),
+        encoding="utf-8",
+    )
+    FULL_REVIEW_PASS_FAIL_PATH.write_text(
+        build_pass_fail_summary("Full ranked review pass/fail summary", full_review_checklist["required_checks"]),
+        encoding="utf-8",
+    )
 
     top20_df = load_csv(top20_path)
     accounts_master_df = load_csv(accounts_master_path)
@@ -114,12 +153,26 @@ def main() -> None:
         encoding="utf-8",
     )
     COMMAND_SHEET_PATH.write_text(build_operator_import_command_sheet(), encoding="utf-8")
+    RANK_BUCKET_SUMMARY_PATH.write_text(
+        json.dumps(build_distribution_summary(accounts_master_df, "rank_bucket"), ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    WEBSITE_QUALITY_SUMMARY_PATH.write_text(
+        json.dumps(build_distribution_summary(accounts_master_df, "website_quality"), ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    CONTACT_GAP_SUMMARY_PATH.write_text(
+        json.dumps(build_distribution_summary(accounts_master_df, "contact_gap_count"), ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
 
     print(f"Phase1 checklist uložený do: {PHASE1_CHECKLIST_PATH}")
     print(f"Full ranked checklist uložený do: {FULL_REVIEW_CHECKLIST_PATH}")
     print(f"Top 20 reasons summary uložený do: {TOP20_REASONS_PATH}")
     print(f"Review bucket reasons summary uložený do: {REVIEW_BUCKET_REASONS_PATH}")
     print(f"Operator import command sheet uložený do: {COMMAND_SHEET_PATH}")
+    print(f"Phase1 pass/fail summary uložený do: {PHASE1_PASS_FAIL_PATH}")
+    print(f"Full ranked pass/fail summary uložený do: {FULL_REVIEW_PASS_FAIL_PATH}")
 
 
 if __name__ == "__main__":
