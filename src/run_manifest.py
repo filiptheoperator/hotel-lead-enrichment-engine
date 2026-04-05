@@ -48,6 +48,16 @@ REVIEW_BUCKET_REASONS_SUMMARY_PATH = QA_DIR / "review_bucket_reasons_summary.txt
 OPERATOR_IMPORT_COMMAND_SHEET_PATH = QA_DIR / "operator_import_command_sheet.txt"
 PHASE1_IMPORT_PASS_FAIL_SUMMARY_PATH = QA_DIR / "phase1_import_pass_fail_summary.txt"
 FULL_RANKED_REVIEW_PASS_FAIL_SUMMARY_PATH = QA_DIR / "full_ranked_review_pass_fail_summary.txt"
+PHASE1_IMPORT_DECISION_PATH = QA_DIR / "phase1_import_decision.json"
+FULL_RANKED_REVIEW_DECISION_PATH = QA_DIR / "full_ranked_review_decision.json"
+TOP20_OPERATOR_NOTES_TEMPLATE_PATH = QA_DIR / "top_20_operator_notes_template.csv"
+REVIEW_FOLLOWUP_QUEUE_PATH = QA_DIR / "review_followup_queue.csv"
+CLICKUP_IMPORT_PACKET_INDEX_PATH = QA_DIR / "clickup_import_packet_index.txt"
+OPERATOR_PACK_HEALTH_PATH = QA_DIR / "operator_pack_health.json"
+PHASE1_IMPORT_ROW_SAMPLE_PATH = QA_DIR / "phase1_import_row_sample.json"
+FULL_RANKED_ROW_SAMPLE_PATH = QA_DIR / "full_ranked_row_sample.json"
+RANK_BUCKET_TOP_EXAMPLES_PATH = QA_DIR / "rank_bucket_top_examples.txt"
+REVIEW_BUCKET_TOP_EXAMPLES_PATH = QA_DIR / "review_bucket_top_examples.txt"
 RANK_BUCKET_SUMMARY_PATH = QA_DIR / "rank_bucket_summary.json"
 WEBSITE_QUALITY_SUMMARY_PATH = QA_DIR / "website_quality_summary.json"
 CONTACT_GAP_SUMMARY_PATH = QA_DIR / "contact_gap_summary.json"
@@ -272,11 +282,21 @@ def build_run_manifest() -> dict:
             "clickup_export_mode_diff_json": str(CLICKUP_EXPORT_MODE_DIFF_PATH) if CLICKUP_EXPORT_MODE_DIFF_PATH.exists() else "",
             "phase1_import_checklist_json": str(PHASE1_IMPORT_CHECKLIST_PATH) if PHASE1_IMPORT_CHECKLIST_PATH.exists() else "",
             "full_ranked_review_checklist_json": str(FULL_RANKED_REVIEW_CHECKLIST_PATH) if FULL_RANKED_REVIEW_CHECKLIST_PATH.exists() else "",
+            "phase1_import_decision_json": str(PHASE1_IMPORT_DECISION_PATH) if PHASE1_IMPORT_DECISION_PATH.exists() else "",
+            "full_ranked_review_decision_json": str(FULL_RANKED_REVIEW_DECISION_PATH) if FULL_RANKED_REVIEW_DECISION_PATH.exists() else "",
             "top_20_reasons_summary_txt": str(TOP20_REASONS_SUMMARY_PATH) if TOP20_REASONS_SUMMARY_PATH.exists() else "",
             "review_bucket_reasons_summary_txt": str(REVIEW_BUCKET_REASONS_SUMMARY_PATH) if REVIEW_BUCKET_REASONS_SUMMARY_PATH.exists() else "",
             "operator_import_command_sheet_txt": str(OPERATOR_IMPORT_COMMAND_SHEET_PATH) if OPERATOR_IMPORT_COMMAND_SHEET_PATH.exists() else "",
             "phase1_import_pass_fail_summary_txt": str(PHASE1_IMPORT_PASS_FAIL_SUMMARY_PATH) if PHASE1_IMPORT_PASS_FAIL_SUMMARY_PATH.exists() else "",
             "full_ranked_review_pass_fail_summary_txt": str(FULL_RANKED_REVIEW_PASS_FAIL_SUMMARY_PATH) if FULL_RANKED_REVIEW_PASS_FAIL_SUMMARY_PATH.exists() else "",
+            "top_20_operator_notes_template_csv": str(TOP20_OPERATOR_NOTES_TEMPLATE_PATH) if TOP20_OPERATOR_NOTES_TEMPLATE_PATH.exists() else "",
+            "review_followup_queue_csv": str(REVIEW_FOLLOWUP_QUEUE_PATH) if REVIEW_FOLLOWUP_QUEUE_PATH.exists() else "",
+            "clickup_import_packet_index_txt": str(CLICKUP_IMPORT_PACKET_INDEX_PATH) if CLICKUP_IMPORT_PACKET_INDEX_PATH.exists() else "",
+            "operator_pack_health_json": str(OPERATOR_PACK_HEALTH_PATH) if OPERATOR_PACK_HEALTH_PATH.exists() else "",
+            "phase1_import_row_sample_json": str(PHASE1_IMPORT_ROW_SAMPLE_PATH) if PHASE1_IMPORT_ROW_SAMPLE_PATH.exists() else "",
+            "full_ranked_row_sample_json": str(FULL_RANKED_ROW_SAMPLE_PATH) if FULL_RANKED_ROW_SAMPLE_PATH.exists() else "",
+            "rank_bucket_top_examples_txt": str(RANK_BUCKET_TOP_EXAMPLES_PATH) if RANK_BUCKET_TOP_EXAMPLES_PATH.exists() else "",
+            "review_bucket_top_examples_txt": str(REVIEW_BUCKET_TOP_EXAMPLES_PATH) if REVIEW_BUCKET_TOP_EXAMPLES_PATH.exists() else "",
             "rank_bucket_summary_json": str(RANK_BUCKET_SUMMARY_PATH) if RANK_BUCKET_SUMMARY_PATH.exists() else "",
             "website_quality_summary_json": str(WEBSITE_QUALITY_SUMMARY_PATH) if WEBSITE_QUALITY_SUMMARY_PATH.exists() else "",
             "contact_gap_summary_json": str(CONTACT_GAP_SUMMARY_PATH) if CONTACT_GAP_SUMMARY_PATH.exists() else "",
