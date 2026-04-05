@@ -10,6 +10,7 @@ PROCESSED_DIR = Path("data/processed")
 ENRICHMENT_DIR = Path("outputs/enrichment")
 EMAIL_DIR = Path("outputs/email_drafts")
 CLICKUP_DIR = Path("outputs/clickup")
+MASTER_DIR = Path("outputs/master")
 QA_DIR = Path("data/qa")
 RUN_MANIFEST_PATH = QA_DIR / "run_manifest.json"
 CLICKUP_GATE_JSON_PATH = QA_DIR / "clickup_import_gate.json"
@@ -64,12 +65,22 @@ def get_current_batch_artifacts() -> dict[str, Optional[Path]]:
     if clickup_high_only_path is None:
         clickup_high_only_path = get_latest_file(CLICKUP_DIR, "*_clickup_import_high_only.csv")
 
+    batch_stem = processed_path.stem.replace("_normalized_scored", "") if processed_path else ""
+    accounts_master_path = (MASTER_DIR / f"{batch_stem}_accounts_master.csv") if batch_stem else None
+    enrichment_master_path = (MASTER_DIR / f"{batch_stem}_enrichment_master.csv") if batch_stem else None
+    outreach_drafts_path = (MASTER_DIR / f"{batch_stem}_outreach_drafts.csv") if batch_stem else None
+    dedupe_review_path = (MASTER_DIR / f"{batch_stem}_dedupe_review.csv") if batch_stem else None
+
     return {
         "processed": processed_path,
         "enrichment": enrichment_path,
         "email": email_path,
         "clickup": clickup_path,
         "clickup_high_only": clickup_high_only_path,
+        "accounts_master": accounts_master_path if accounts_master_path and accounts_master_path.exists() else None,
+        "enrichment_master": enrichment_master_path if enrichment_master_path and enrichment_master_path.exists() else None,
+        "outreach_drafts": outreach_drafts_path if outreach_drafts_path and outreach_drafts_path.exists() else None,
+        "dedupe_review": dedupe_review_path if dedupe_review_path and dedupe_review_path.exists() else None,
     }
 
 
@@ -108,6 +119,10 @@ def build_run_manifest() -> dict:
     email_path = artifacts["email"]
     clickup_path = artifacts["clickup"]
     clickup_high_only_path = artifacts["clickup_high_only"]
+    accounts_master_path = artifacts["accounts_master"]
+    enrichment_master_path = artifacts["enrichment_master"]
+    outreach_drafts_path = artifacts["outreach_drafts"]
+    dedupe_review_path = artifacts["dedupe_review"]
     qa_issues_path = QA_DIR / "qa_issues.csv"
     shortlist_path = QA_DIR / "manual_review_shortlist.csv"
     run_summary_path = QA_DIR / "run_summary.txt"
@@ -160,6 +175,10 @@ def build_run_manifest() -> dict:
             "email_drafts_csv": str(email_path) if email_path else "",
             "clickup_import_csv": str(clickup_path) if clickup_path else "",
             "clickup_import_high_only_csv": str(clickup_high_only_path) if clickup_high_only_path else "",
+            "accounts_master_csv": str(accounts_master_path) if accounts_master_path else "",
+            "enrichment_master_csv": str(enrichment_master_path) if enrichment_master_path else "",
+            "outreach_drafts_csv": str(outreach_drafts_path) if outreach_drafts_path else "",
+            "dedupe_review_csv": str(dedupe_review_path) if dedupe_review_path else "",
             "qa_issues_csv": str(qa_issues_path) if qa_issues_path.exists() else "",
             "manual_review_shortlist_csv": str(shortlist_path) if shortlist_path.exists() else "",
             "run_summary_txt": str(run_summary_path) if run_summary_path.exists() else "",

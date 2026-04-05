@@ -3,6 +3,7 @@ from functools import partial
 
 from enrich_hotels import main as run_enrich
 from email_drafts import main as run_email_drafts
+from master_exports import main as run_master_exports
 from clickup_export import main as run_clickup_export
 from qa_checks import main as run_qa_checks
 from run_report import main as run_report
@@ -25,6 +26,7 @@ def build_pipeline_steps(
         ("normalize + score", run_normalize_score),
         ("enrich", run_enrich),
         ("email drafts", run_email_drafts),
+        ("master exports", run_master_exports),
         ("ClickUp export", run_clickup_export),
         ("QA", run_qa_checks),
         ("run summary", run_report),

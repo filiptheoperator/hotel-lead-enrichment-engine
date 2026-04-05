@@ -9,6 +9,7 @@ Tento dokument uzamyká aktuálny output contract pre:
 - `data/processed`
 - `outputs/enrichment`
 - `outputs/email_drafts`
+- `outputs/master`
 - `outputs/clickup`
 - `data/qa`
 
@@ -235,6 +236,135 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 - ClickUp export má držať broad lead coverage a radenie `best -> worst`, nie skorý discard.
 - Reálna kompatibilita s cieľovým ClickUp workspace ostáva `Neoverené`.
 - nové testing a copy polia sú určené pre operator review, reporting a neskoršie meranie reply kvality
+
+## outputs/master
+
+### Súborové patterny
+
+- `*_accounts_master.csv`
+- `*_enrichment_master.csv`
+- `*_outreach_drafts.csv`
+- `*_dedupe_review.csv`
+
+### `accounts_master.csv`
+
+1. `account_id`
+2. `record_rank`
+3. `source_file`
+4. `hotel_name`
+5. `hotel_name_normalized`
+6. `country_code`
+7. `city`
+8. `state`
+9. `street`
+10. `website`
+11. `website_domain`
+12. `phone`
+13. `category_name`
+14. `hotel_type_class`
+15. `geography_fit`
+16. `independent_chain_class`
+17. `ownership_type`
+18. `review_score`
+19. `reviews_count`
+20. `icp_fit_score`
+21. `icp_fit_class`
+22. `fit_confidence`
+23. `ranking_score`
+24. `priority_score`
+25. `priority_band`
+26. `dedupe_status`
+27. `duplicate_group_id`
+28. `contact_duplicate_flag`
+29. `review_flag`
+30. `review_reason`
+31. `source_url`
+
+### `enrichment_master.csv`
+
+1. `account_id`
+2. `hotel_name`
+3. `country_code`
+4. `city`
+5. `website`
+6. `phone`
+7. `hotel_type_class`
+8. `independent_chain_class`
+9. `direct_booking_weakness`
+10. `ota_dependency_signal_label`
+11. `hotel_opening_hours`
+12. `hotel_opening_hours_status`
+13. `hotel_opening_hours_source_url`
+14. `checkin_checkout_info`
+15. `checkin_checkout_status`
+16. `checkin_checkout_source_url`
+17. `checkin_checkout_completeness`
+18. `public_source_reachable`
+19. `public_source_fetch_status`
+20. `contact_status`
+21. `factual_summary`
+22. `give_first_insight`
+23. `main_observed_issue`
+24. `proof_snippet`
+25. `primary_email_goal`
+26. `email_angle`
+27. `cta_type`
+28. `variant_id`
+29. `test_batch`
+30. `reply_outcome`
+31. `review_flag`
+32. `review_reason`
+33. `source_file`
+
+### `outreach_drafts.csv`
+
+1. `account_id`
+2. `hotel_name`
+3. `city`
+4. `subject_line`
+5. `hook`
+6. `personalization_line`
+7. `give_first_line`
+8. `relevance_line`
+9. `proof_line`
+10. `low_friction_cta`
+11. `cold_email`
+12. `followup_email`
+13. `primary_email_goal`
+14. `email_angle`
+15. `cta_type`
+16. `variant_id`
+17. `test_batch`
+18. `reply_outcome`
+19. `ranking_score`
+20. `priority_band`
+21. `review_flag`
+22. `review_reason`
+23. `source_file`
+
+### `dedupe_review.csv`
+
+1. `account_id`
+2. `hotel_name`
+3. `city`
+4. `website_domain`
+5. `source_file`
+6. `dedupe_status`
+7. `duplicate_group_id`
+8. `contact_duplicate_flag`
+9. `dedupe_type`
+10. `match_basis`
+11. `merge_recommended`
+12. `manual_review_needed`
+13. `manual_review_reason`
+
+### Poznámky
+
+- `outputs/master` je nový štruktúrovaný layer nad existujúcou pipeline.
+- `accounts_master` drží broad retention a ranking.
+- `enrichment_master` drží research a public-source zistenia.
+- `outreach_drafts` drží email bloky a drafty.
+- `dedupe_review` drží len dedupe-relevantné alebo kontakt-duplicitné prípady.
 
 ## data/qa
 
