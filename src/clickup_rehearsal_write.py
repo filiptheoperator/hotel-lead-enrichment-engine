@@ -16,6 +16,7 @@ from clickup_export import get_clickup_export_mode
 ENV_PATH = Path(".env")
 DRY_RUN_SAMPLE_PATH = Path("data/qa/clickup_import_dry_run_sample.csv")
 CUSTOM_FIELDS_CONFIG_PATH = Path("configs/clickup_custom_fields.yaml")
+DROPDOWN_NORMALIZATION_CONFIG_PATH = Path("configs/clickup_dropdown_normalization.yaml")
 OUTPUT_PATH = Path("data/qa/clickup_rehearsal_execution.json")
 API_BASE = "https://api.clickup.com/api/v2"
 MAX_ROWS = 3
@@ -74,6 +75,14 @@ def clickup_request(method: str, path: str, token: str, body: Optional[dict[str,
 def load_config(config_path: Path = CUSTOM_FIELDS_CONFIG_PATH) -> dict[str, Any]:
     if not config_path.exists():
         raise RuntimeError(f"Chýba config súbor: {config_path}")
+    return yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
+
+
+def load_dropdown_normalization_config(
+    config_path: Path = DROPDOWN_NORMALIZATION_CONFIG_PATH,
+) -> dict[str, Any]:
+    if not config_path.exists():
+        return {}
     return yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
 
 
@@ -157,6 +166,7 @@ def build_custom_field_values(row: dict[str, str], config: dict[str, Any]) -> li
                 "field_name": str(fields[field_key].get("live_clickup_field_name") or fields[field_key].get("clickup_field_name")),
                 "field_type": str(fields[field_key].get("clickup_field_type", "")),
                 "option_ids": fields[field_key].get("clickup_option_ids", {}) or {},
+                "option_orderindex": fields[field_key].get("clickup_option_orderindex", {}) or {},
                 "value": row.get(csv_column, row.get("City", "")) if field_key == "city" else row.get(csv_column, ""),
             }
         )
@@ -172,10 +182,36 @@ def build_custom_field_values(row: dict[str, str], config: dict[str, Any]) -> li
                 "field_name": str(item.get("live_clickup_field_name") or item.get("clickup_field_name")),
                 "field_type": str(item.get("clickup_field_type", "")),
                 "option_ids": item.get("clickup_option_ids", {}) or {},
+                "option_orderindex": item.get("clickup_option_orderindex", {}) or {},
                 "value": row.get(csv_column, ""),
             }
         )
     return values
+
+
+def normalize_dropdown_value(field: dict[str, Any], normalization_root: dict[str, Any]) -> Optional[str]:
+    field_key = str(field.get("field_key", "")).strip()
+    field_type = str(field.get("field_type", "")).strip()
+    raw_value = str(field.get("value", "")).strip()
+    if field_type != "drop_down":
+        return raw_value
+
+    field_rules = (normalization_root.get("clickup_dropdown_normalization", {}) or {}).get(field_key, {}) or {}
+    mappings = field_rules.get("mappings", {}) or {}
+    fallback = str(field_rules.get("fallback", "")).strip()
+    option_ids = field.get("option_ids", {}) or {}
+
+    if raw_value in mappings:
+        normalized_value = str(mappings.get(raw_value, "")).strip()
+    elif raw_value and raw_value in option_ids:
+        normalized_value = raw_value
+    else:
+        normalized_value = ""
+    if normalized_value:
+        return normalized_value
+    if fallback:
+        return fallback
+    return None
 
 
 def verify_custom_fields(task_payload: dict[str, Any], expected_fields: list[dict[str, str]]) -> list[dict[str, Any]]:
@@ -187,6 +223,14 @@ def verify_custom_fields(task_payload: dict[str, Any], expected_fields: list[dic
         if found is not None and "value" in found and found["value"] is not None:
             actual_value = str(found["value"])
         expected_value = str(expected["value"])
+        field_type = str(expected.get("field_type", "")).strip()
+        option_ids = expected.get("option_ids", {}) or {}
+        option_orderindex = expected.get("option_orderindex", {}) or {}
+        match = actual_value == expected_value
+        if field_type == "drop_down":
+            expected_option_id = str(option_ids.get(expected_value, "")).strip()
+            expected_orderindex = str(option_orderindex.get(expected_value, "")).strip()
+            match = actual_value in {expected_value, expected_option_id, expected_orderindex}
         results.append(
             {
                 "field_key": expected["field_key"],
@@ -194,7 +238,7 @@ def verify_custom_fields(task_payload: dict[str, Any], expected_fields: list[dic
                 "field_name": expected["field_name"],
                 "expected_value": expected_value,
                 "actual_value": actual_value,
-                "match": actual_value == expected_value,
+                "match": match,
             }
         )
     return results
@@ -265,6 +309,7 @@ def main() -> None:
     load_dotenv()
     token = get_required_env("CLICKUP_API_TOKEN")
     config = load_config()
+    dropdown_normalization = load_dropdown_normalization_config()
     export_mode = get_clickup_export_mode()
     list_id = str(config["clickup_custom_fields"].get("selected_test_list_id", "")).strip()
     if not list_id:
@@ -294,6 +339,10 @@ def main() -> None:
             custom_field_values = build_custom_field_values(row, config)
 
             for item in custom_field_values:
+                normalized_value = normalize_dropdown_value(item, dropdown_normalization)
+                if normalized_value is None:
+                    continue
+                item["value"] = normalized_value
                 set_custom_field(task_id, token, item)
 
             row_payload: dict[str, Any] = {

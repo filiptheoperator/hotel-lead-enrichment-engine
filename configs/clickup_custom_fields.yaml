@@ -81,12 +81,18 @@ clickup_custom_fields:
       required_for_phase_4_cutover: false
       clickup_field_type: drop_down
       clickup_option_ids:
-        Parked: UNVERIFIED_TBD
-        Prioritized: UNVERIFIED_TBD
-        Researching: UNVERIFIED_TBD
-        Activated: UNVERIFIED_TBD
-        Not a Fit: UNVERIFIED_TBD
+        Parked: db2a7ceb-4f7f-43ff-bae1-264676ac9e2f
+        Prioritized: 4450117e-34e8-47a7-85d5-37cbbb0ffb3a
+        Researching: f8dbedda-a163-45f2-be01-7013dbe65797
+        Activated: 957f567a-40b8-42b2-aff5-dab4282d663f
+        Not a Fit: 69d60079-6858-4976-aeec-523a838009f3
       live_clickup_field_name: Account Status
+      clickup_option_orderindex:
+        Parked: '0'
+        Prioritized: '1'
+        Researching: '2'
+        Activated: '3'
+        Not a Fit: '4'
     country:
       source_column: Country
       target_field_key: custom.country
@@ -95,6 +101,20 @@ clickup_custom_fields:
       required_for_phase_4_cutover: false
       clickup_field_type: drop_down
       live_clickup_field_name: Country
+      clickup_option_ids:
+        Slovakia: 9c55ff44-2174-4871-95bb-726bdb5c235f
+        Czech Republic: 7f21f50f-d4b5-4afb-942f-f42f138e4268
+        Austria: a76815ad-618e-4a9c-b732-613fa39f0ce6
+        Germany: 25c1962d-7ca6-48e3-9bea-8ce7cf89d7ee
+        US: e78e03ab-4982-476a-9fa6-9d7d8bdd8d05
+        UK: 40fc57fe-4524-4de1-816c-04adad17e254
+      clickup_option_orderindex:
+        Slovakia: '0'
+        Czech Republic: '1'
+        Austria: '2'
+        Germany: '3'
+        US: '4'
+        UK: '5'
     hotel_type:
       source_column: Hotel Type
       target_field_key: custom.hotel_type
@@ -103,6 +123,20 @@ clickup_custom_fields:
       required_for_phase_4_cutover: false
       clickup_field_type: drop_down
       live_clickup_field_name: Hotel Type
+      clickup_option_ids:
+        City Hotel: ec3057ae-3151-46d7-be85-4e1643d107fb
+        Boutique: 5742b070-786f-44e1-9968-b69c888bb1f3
+        Wellness: b674ba45-b2cd-44bc-9803-4063ddf30d37
+        Resort: 76370684-9d54-4dee-b75a-af8536540b75
+        Business Hotel: 21edecae-d59c-47a6-9664-73b5054c0a2c
+        Family Hotel: 7e22f84d-a565-421c-8c66-2ce700490689
+      clickup_option_orderindex:
+        City Hotel: '0'
+        Boutique: '1'
+        Wellness: '2'
+        Resort: '3'
+        Business Hotel: '4'
+        Family Hotel: '5'
     rooms_range:
       source_column: Rooms Range
       target_field_key: custom.rooms_range
@@ -111,6 +145,18 @@ clickup_custom_fields:
       required_for_phase_4_cutover: false
       clickup_field_type: drop_down
       live_clickup_field_name: Rooms Range
+      clickup_option_ids:
+        15-30: b51c7f4a-611b-4559-b909-a35bcde149de
+        31–50: bdc1004f-d62b-49b3-9ed7-8a2483445859
+        51–80: 3fed1774-63f3-405b-9747-322914958a99
+        81–100: 7b623ebd-0cc3-4de8-b29d-ab7ac46f43d1
+        100+: 2563df4d-8bbc-4793-aa9c-dbc5888ad6d9
+      clickup_option_orderindex:
+        15-30: '0'
+        31–50: '1'
+        51–80: '2'
+        81–100: '3'
+        100+: '4'
     source:
       source_column: Source
       target_field_key: custom.source
@@ -119,6 +165,32 @@ clickup_custom_fields:
       required_for_phase_4_cutover: false
       clickup_field_type: drop_down
       live_clickup_field_name: Source
+      clickup_option_ids:
+        Google Maps: 126c1a75-4975-41ff-ab0a-f09a0790640b
+        Booking.com: 75ca0ef4-f39e-45bb-90de-d6a3896c53c3
+        Direct Website: 4234b4ef-39d0-4aad-a9c2-df6952e8419e
+        Referral: d6f155a3-e877-4979-8361-3c7f5717eaee
+        Facebook Group: 25536300-52ed-4bbc-b03c-fe0c784d379b
+        Community: 49286d00-3499-4254-b44f-7dc572df4733
+        Partner Referral: ecf18fbe-592a-4ef9-92f7-4c87a941c77f
+        Personal Network: 2c919ee2-f53d-46dc-85fa-485afef86ed8
+        Manual Entry: 80427318-f912-4ff7-b0aa-1eb979a3f962
+        Manual Research: fa37e126-4068-4f18-928f-999646fbe4af
+        Instagram: c21f087b-671d-4b05-81ad-9a29ee6319e5
+        LinkedIn: eaea0d6c-6da0-4e51-b315-72bfe5bbf856
+      clickup_option_orderindex:
+        Google Maps: '0'
+        Booking.com: '1'
+        Direct Website: '2'
+        Referral: '3'
+        Facebook Group: '4'
+        Community: '5'
+        Partner Referral: '6'
+        Personal Network: '7'
+        Manual Entry: '8'
+        Manual Research: '9'
+        Instagram: '10'
+        LinkedIn: '11'
     priority_level:
       source_column: Priority Level
       target_field_key: custom.priority_level
@@ -127,6 +199,14 @@ clickup_custom_fields:
       required_for_phase_4_cutover: false
       clickup_field_type: drop_down
       live_clickup_field_name: Priority Level
+      clickup_option_ids:
+        High: 8abe2235-3386-4685-9c49-4d64ac06fcfe
+        Medium: cf73c351-5419-456a-a7bb-68507815116b
+        Low: 341bdac9-8469-4dee-bea3-75b3664314fb
+      clickup_option_orderindex:
+        High: '0'
+        Medium: '1'
+        Low: '2'
     icp_fit:
       source_column: ICP Fit
       target_field_key: custom.icp_fit
@@ -135,6 +215,52 @@ clickup_custom_fields:
       required_for_phase_4_cutover: false
       clickup_field_type: drop_down
       live_clickup_field_name: ICP Fit
+      clickup_option_ids:
+        Strong Fit: 6700c1ec-af58-4a01-9070-32f473c82dc4
+        Possible Fit: b91019a4-8118-46c4-b1ad-1b7baf8a9029
+        Weak Fit: 66a71796-d496-4680-8a9f-a85fbf201e4b
+        No Fit: a8062985-dfbb-4d19-aef4-80ed8de1362d
+      clickup_option_orderindex:
+        Strong Fit: '0'
+        Possible Fit: '1'
+        Weak Fit: '2'
+        No Fit: '3'
+    direct_booking_weakness:
+      source_column: Direct Booking Weakness
+      target_field_key: custom.direct_booking_weakness
+      clickup_field_name: Direct Booking Weakness
+      clickup_field_id: b81cee2f-ba02-419d-8162-07f8e61f5262
+      required_for_phase_4_cutover: false
+      clickup_field_type: drop_down
+      live_clickup_field_name: Direct Booking Weakness
+      clickup_option_ids:
+        Strong: 01cf16d0-f75b-4067-9671-5b03f3585a13
+        Medium: 0b62e8e5-0093-46a8-932d-6f959261a8ed
+        Low: 30f61164-958a-4e19-bec4-da92c6890172
+        Unknown: 229c3f24-cbff-4348-a3f9-4b1d650eec4b
+      clickup_option_orderindex:
+        Strong: '0'
+        Medium: '1'
+        Low: '2'
+        Unknown: '3'
+    ota_dependency_signal:
+      source_column: OTA Dependency Signal
+      target_field_key: custom.ota_dependency_signal
+      clickup_field_name: OTA Dependency Signal
+      clickup_field_id: 0734f221-97ab-4510-bdb4-9abcea434d19
+      required_for_phase_4_cutover: false
+      clickup_field_type: drop_down
+      live_clickup_field_name: OTA Dependency Signal
+      clickup_option_ids:
+        High: 28a3a566-7147-41ec-82d7-991b6ee85f85
+        Medium: 868f8a8e-1338-4495-b14f-8ea93bf97718
+        Low: 61898d24-70b4-4aa6-b28e-e521bf47aaa9
+        Unknown: 5bada7b5-1564-4cb2-8376-65136e947540
+      clickup_option_orderindex:
+        High: '0'
+        Medium: '1'
+        Low: '2'
+        Unknown: '3'
     main_pain_hypothesis:
       source_column: Main Pain Hypothesis
       target_field_key: custom.main_pain_hypothesis
@@ -143,5 +269,19 @@ clickup_custom_fields:
       required_for_phase_4_cutover: false
       clickup_field_type: drop_down
       live_clickup_field_name: Main Pain Hypothesis
+      clickup_option_ids:
+        OTA dependency: 3ee7005d-aceb-4d84-945b-441919440166
+        Direct booking weakness: e02c48c5-5368-428b-a2bc-16ddcc9732fc
+        Manual guest communication: a06474cf-6b0a-44be-80dc-55e9f1cfab58
+        AI confusion / prioritization gap: 3ca281d6-5129-4f67-9b8a-3e0e3ad5e852
+        Operational bottleneck: 7590cadd-eda6-485b-bb0a-331542cf6bb9
+        Unknown: e12559aa-2ba5-4f66-9c4b-47f1027b3024
+      clickup_option_orderindex:
+        OTA dependency: '0'
+        Direct booking weakness: '1'
+        Manual guest communication: '2'
+        AI confusion / prioritization gap: '3'
+        Operational bottleneck: '4'
+        Unknown: '5'
   selected_test_list_id: '901216789251'
   last_live_discovery_artifact: data/qa/clickup_live_field_discovery.json

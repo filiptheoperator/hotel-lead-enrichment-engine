@@ -1,0 +1,80 @@
+clickup_dropdown_normalization:
+  country:
+    mappings:
+      SK: Slovakia
+      CZ: Czech Republic
+      AT: Austria
+      DE: Germany
+      US: US
+      UK: UK
+      AU: ""
+    fallback: ""
+  hotel_type:
+    mappings:
+      Preferred hotel: Business Hotel
+      Resort hotel: Resort
+      Boutique hotel: Boutique
+      Wellness hotel: Wellness
+      Family hotel: Family Hotel
+      City hotel: City Hotel
+    fallback: ""
+  rooms_range:
+    mappings:
+      15-30: 15-30
+      31-50: 31–50
+      51-80: 51–80
+      81-100: 81–100
+      100+: 100+
+      Verejne nepotvrdené: ""
+    fallback: ""
+  source:
+    mappings:
+      Google Maps: Google Maps
+      Booking.com: Booking.com
+      Direct Website: Direct Website
+      Manual Research: Manual Research
+      Manual Entry: Manual Entry
+      "Raw lead sheet": Manual Research
+      "Raw lead sheet: Sydney 100.csv": Manual Research
+      "Raw lead sheet: Paris 100.csv": Manual Research
+      "Raw lead sheet: raw_bratislava region_2026-04-01_21-01-58-857.csv": Manual Research
+    fallback: Manual Research
+  priority_level:
+    mappings:
+      High: High
+      Medium-High: High
+      Medium: Medium
+      Low: Low
+    fallback: ""
+  icp_fit:
+    mappings:
+      Strong Fit: Strong Fit
+      Possible Fit: Possible Fit
+      Weak Fit: Weak Fit
+      No Fit: No Fit
+      Keep: Possible Fit
+    fallback: ""
+  direct_booking_weakness:
+    mappings:
+      Strong: Strong
+      Medium: Medium
+      Low: Low
+      Unknown: Unknown
+      Needs direct booking clarity: Medium
+    fallback: Unknown
+  ota_dependency_signal:
+    mappings:
+      High: High
+      Medium: Medium
+      Low: Low
+      Unknown: Unknown
+      Low visible: Low
+    fallback: Unknown
+  main_pain_hypothesis:
+    mappings:
+      OTA dependency: OTA dependency
+      Direct booking weakness: Direct booking weakness
+      Manual guest communication: Manual guest communication
+      AI confusion / prioritization gap: AI confusion / prioritization gap
+      Operational bottleneck: Operational bottleneck
+    fallback: Unknown

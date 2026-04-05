@@ -106,6 +106,39 @@ def build_clickup_status(row: pd.Series) -> str:
     return "to do"
 
 
+def normalize_rooms_range(row: pd.Series) -> str:
+    raw_value = normalize_text(row.get("rooms_range"))
+    return raw_value
+
+
+def normalize_ota_dependency_signal(value: object) -> str:
+    text = normalize_text(value)
+    normalized = text.lower()
+    if normalized == "high":
+        return "High"
+    if normalized == "medium":
+        return "Medium"
+    if normalized in {"low", "low visible"}:
+        return "Low"
+    if normalized in {"", "unknown", "unknown / likely higher ota reliance"}:
+        return "Unknown"
+    return "Unknown"
+
+
+def normalize_direct_booking_weakness(value: object) -> str:
+    text = normalize_text(value)
+    normalized = text.lower()
+    if normalized == "strong":
+        return "Strong"
+    if normalized in {"medium", "needs direct booking clarity"}:
+        return "Medium"
+    if normalized == "low":
+        return "Low"
+    if normalized in {"", "unknown", "website missing"}:
+        return "Unknown"
+    return "Unknown"
+
+
 def build_account_status(row: pd.Series) -> str:
     reply_outcome = normalize_text(row.get("reply_outcome")).lower()
     if reply_outcome not in {"", "no_reply", "pending"}:
@@ -223,11 +256,12 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         lambda value: f"Raw lead sheet: {value}" if normalize_text(value) else "Raw lead sheet"
     )
     export_df["task_notes"] = export_df.apply(build_clickup_notes, axis=1)
-    export_df["rooms_range"] = "Verejne nepotvrdené"
+    export_df["rooms_range"] = export_df.apply(normalize_rooms_range, axis=1)
     export_df["priority_level"] = export_df["priority_band"]
     export_df["icp_fit"] = export_df["icp_fit_class"]
-    export_df["ota_dependency_signal"] = export_df["ota_dependency_signal_label"]
+    export_df["ota_dependency_signal"] = export_df["ota_dependency_signal_label"].apply(normalize_ota_dependency_signal)
     export_df["city_region"] = export_df["city"]
+    export_df["direct_booking_weakness"] = export_df["direct_booking_weakness"].apply(normalize_direct_booking_weakness)
     export_df["main_pain_hypothesis"] = export_df["main_observed_issue"]
     export_df = export_df.sort_values(
         by=["ranking_score", "priority_score", "hotel_name"],
