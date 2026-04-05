@@ -108,7 +108,35 @@ def build_clickup_status(row: pd.Series) -> str:
 
 def normalize_rooms_range(row: pd.Series) -> str:
     raw_value = normalize_text(row.get("rooms_range"))
-    return raw_value
+    if raw_value:
+        return raw_value
+    room_count = pd.to_numeric(row.get("room_count"), errors="coerce")
+    if pd.isna(room_count) or room_count <= 0:
+        return ""
+    room_count = int(room_count)
+    if 15 <= room_count <= 30:
+        return "15-30"
+    if 31 <= room_count <= 50:
+        return "31-50"
+    if 51 <= room_count <= 80:
+        return "51-80"
+    if 81 <= room_count <= 100:
+        return "81-100"
+    if room_count > 100:
+        return "100+"
+    return ""
+
+
+def normalize_city_region(row: pd.Series) -> str:
+    city = normalize_text(row.get("city"))
+    state = normalize_text(row.get("state"))
+    if city and state and city.lower() != state.lower():
+        return f"{city}, {state}"
+    if city:
+        return city
+    if state:
+        return state
+    return ""
 
 
 def normalize_ota_dependency_signal(value: object) -> str:
@@ -260,7 +288,7 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     export_df["priority_level"] = export_df["priority_band"]
     export_df["icp_fit"] = export_df["icp_fit_class"]
     export_df["ota_dependency_signal"] = export_df["ota_dependency_signal_label"].apply(normalize_ota_dependency_signal)
-    export_df["city_region"] = export_df["city"]
+    export_df["city_region"] = export_df.apply(normalize_city_region, axis=1)
     export_df["direct_booking_weakness"] = export_df["direct_booking_weakness"].apply(normalize_direct_booking_weakness)
     export_df["main_pain_hypothesis"] = export_df["main_observed_issue"]
     export_df = export_df.sort_values(

@@ -7,7 +7,7 @@ clickup_dropdown_normalization:
       DE: Germany
       US: US
       UK: UK
-      AU: ""
+      AU: AU
     fallback: ""
   hotel_type:
     mappings:

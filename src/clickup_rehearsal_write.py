@@ -152,6 +152,8 @@ def build_custom_field_values(row: dict[str, str], config: dict[str, Any]) -> li
         ("source", "Source"),
         ("priority_level", "Priority Level"),
         ("icp_fit", "ICP Fit"),
+        ("direct_booking_weakness", "Direct Booking Weakness"),
+        ("ota_dependency_signal", "OTA Dependency Signal"),
         ("main_pain_hypothesis", "Main Pain Hypothesis"),
     ]
     values: list[dict[str, str]] = []

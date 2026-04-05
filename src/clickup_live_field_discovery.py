@@ -15,7 +15,7 @@ CUSTOM_FIELDS_CONFIG_PATH = Path("configs/clickup_custom_fields.yaml")
 API_BASE = "https://api.clickup.com/api/v2"
 REQUIRED_FIELD_NAMES = {
     "Hotel name",
-    "City",
+    "City / Region",
     "Priority score",
     "Subject line",
     "Source file",
@@ -36,7 +36,8 @@ FIELD_NAME_ALIASES = {
     "Account Status": ["Account Status"],
     "Hotel name": ["Hotel name", "Hotel Name"],
     "Country": ["Country"],
-    "City": ["City", "City / Region"],
+    "City / Region": ["City / Region"],
+    "City": ["City / Region", "City"],
     "Hotel Type": ["Hotel Type"],
     "Rooms Range": ["Rooms Range"],
     "Source": ["Source"],

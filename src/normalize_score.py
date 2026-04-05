@@ -20,6 +20,10 @@ RAW_TO_NORMALIZED_COLUMNS = {
     "title": "hotel_name",
     "totalScore": "review_score",
     "reviewsCount": "reviews_count",
+    "roomCount": "room_count",
+    "roomsCount": "room_count",
+    "rooms": "room_count",
+    "numberOfRooms": "room_count",
     "street": "street",
     "city": "city",
     "state": "state",
@@ -34,6 +38,7 @@ NORMALIZED_COLUMNS = [
     "hotel_name",
     "review_score",
     "reviews_count",
+    "room_count",
     "street",
     "city",
     "state",
@@ -52,6 +57,7 @@ FINAL_OUTPUT_COLUMNS = [
     "hotel_name_normalized",
     "review_score",
     "reviews_count",
+    "room_count",
     "street",
     "city",
     "state",
@@ -244,6 +250,9 @@ def normalize_dataframe(df: pd.DataFrame, source_file: str) -> pd.DataFrame:
     ).fillna(0.0)
     normalized["reviews_count"] = pd.to_numeric(
         normalized["reviews_count"], errors="coerce"
+    ).fillna(0).astype(int)
+    normalized["room_count"] = pd.to_numeric(
+        normalized["room_count"], errors="coerce"
     ).fillna(0).astype(int)
 
     normalized["duplicate_group_id"] = normalized.apply(build_duplicate_group_id, axis=1)
