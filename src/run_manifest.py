@@ -39,6 +39,13 @@ CLICKUP_API_PAYLOAD_DIFF_PATH = QA_DIR / "clickup_api_payload_diff.json"
 CLICKUP_API_MAPPING_VALIDATION_PHASE1_PATH = QA_DIR / "clickup_api_mapping_validation_phase1_minimal.json"
 CLICKUP_API_MAPPING_VALIDATION_FULL_PATH = QA_DIR / "clickup_api_mapping_validation_full_ranked.json"
 CLICKUP_EXPORT_MODE_DIFF_PATH = QA_DIR / "clickup_export_mode_diff.json"
+PHASE1_IMPORT_CHECKLIST_PATH = QA_DIR / "phase1_import_checklist.json"
+FULL_RANKED_REVIEW_CHECKLIST_PATH = QA_DIR / "full_ranked_review_checklist.json"
+TOP20_REASONS_SUMMARY_PATH = QA_DIR / "top_20_reasons_summary.txt"
+REVIEW_BUCKET_REASONS_SUMMARY_PATH = QA_DIR / "review_bucket_reasons_summary.txt"
+OPERATOR_IMPORT_COMMAND_SHEET_PATH = QA_DIR / "operator_import_command_sheet.txt"
+CLICKUP_OPERATOR_PACK_MANIFEST_PATH = QA_DIR / "clickup_operator_pack" / "clickup_operator_pack_manifest.json"
+CLICKUP_DRY_RUN_PACKET_MANIFEST_PATH = QA_DIR / "clickup_dry_run_packet" / "clickup_dry_run_packet_manifest.json"
 PROJECT_CONFIG_PATH = Path("configs/project.yaml")
 RANKING_TUNING_CONFIG_PATH = Path("configs/ranking_tuning.yaml")
 
@@ -254,6 +261,13 @@ def build_run_manifest() -> dict:
             "clickup_api_mapping_validation_full_json": str(CLICKUP_API_MAPPING_VALIDATION_FULL_PATH) if CLICKUP_API_MAPPING_VALIDATION_FULL_PATH.exists() else "",
             "clickup_api_payload_diff_json": str(CLICKUP_API_PAYLOAD_DIFF_PATH) if CLICKUP_API_PAYLOAD_DIFF_PATH.exists() else "",
             "clickup_export_mode_diff_json": str(CLICKUP_EXPORT_MODE_DIFF_PATH) if CLICKUP_EXPORT_MODE_DIFF_PATH.exists() else "",
+            "phase1_import_checklist_json": str(PHASE1_IMPORT_CHECKLIST_PATH) if PHASE1_IMPORT_CHECKLIST_PATH.exists() else "",
+            "full_ranked_review_checklist_json": str(FULL_RANKED_REVIEW_CHECKLIST_PATH) if FULL_RANKED_REVIEW_CHECKLIST_PATH.exists() else "",
+            "top_20_reasons_summary_txt": str(TOP20_REASONS_SUMMARY_PATH) if TOP20_REASONS_SUMMARY_PATH.exists() else "",
+            "review_bucket_reasons_summary_txt": str(REVIEW_BUCKET_REASONS_SUMMARY_PATH) if REVIEW_BUCKET_REASONS_SUMMARY_PATH.exists() else "",
+            "operator_import_command_sheet_txt": str(OPERATOR_IMPORT_COMMAND_SHEET_PATH) if OPERATOR_IMPORT_COMMAND_SHEET_PATH.exists() else "",
+            "clickup_operator_pack_manifest_json": str(CLICKUP_OPERATOR_PACK_MANIFEST_PATH) if CLICKUP_OPERATOR_PACK_MANIFEST_PATH.exists() else "",
+            "clickup_dry_run_packet_manifest_json": str(CLICKUP_DRY_RUN_PACKET_MANIFEST_PATH) if CLICKUP_DRY_RUN_PACKET_MANIFEST_PATH.exists() else "",
         },
         "row_counts": {
             "processed_rows": len(processed_df),
@@ -315,6 +329,8 @@ def build_run_manifest() -> dict:
                 if clickup_phase1_minimal_path and clickup_full_ranked_path
                 else False
             ),
+            "clickup_operator_pack_ready": CLICKUP_OPERATOR_PACK_MANIFEST_PATH.exists(),
+            "clickup_dry_run_packet_ready": CLICKUP_DRY_RUN_PACKET_MANIFEST_PATH.exists(),
             "qa_blocking_rows": count_value(qa_issues_df, "blocking", "yes"),
         },
     }

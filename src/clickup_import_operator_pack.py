@@ -7,6 +7,7 @@ from typing import Optional
 QA_DIR = Path("data/qa")
 CLICKUP_DIR = Path("outputs/clickup")
 PACK_DIR = QA_DIR / "clickup_operator_pack"
+PACK_MANIFEST_PATH = PACK_DIR / "clickup_operator_pack_manifest.json"
 
 
 def safe_copy(path: Path, target_dir: Path) -> None:
@@ -36,6 +37,11 @@ def build_operator_pack() -> dict:
         QA_DIR / "clickup_api_mapping_validation_full_ranked.json",
         QA_DIR / "clickup_export_mode_diff.json",
         QA_DIR / "clickup_import_gate.json",
+        QA_DIR / "phase1_import_checklist.json",
+        QA_DIR / "full_ranked_review_checklist.json",
+        QA_DIR / "top_20_reasons_summary.txt",
+        QA_DIR / "review_bucket_reasons_summary.txt",
+        QA_DIR / "operator_import_command_sheet.txt",
         QA_DIR / "run_summary.txt",
     ]
 
@@ -50,8 +56,7 @@ def build_operator_pack() -> dict:
         "default_import_csv": str(default_import) if default_import else "",
         "included_files": sorted([item.name for item in PACK_DIR.iterdir() if item.is_file()]),
     }
-    manifest_path = PACK_DIR / "clickup_operator_pack_manifest.json"
-    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    PACK_MANIFEST_PATH.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     return manifest
 
 

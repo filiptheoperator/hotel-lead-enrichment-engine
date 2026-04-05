@@ -20,6 +20,7 @@ MANUAL_REVIEW_SHORTLIST_PATH = QA_DIR / "manual_review_shortlist.csv"
 RUN_MANIFEST_PATH = QA_DIR / "run_manifest.json"
 CLICKUP_GATE_TXT_PATH = QA_DIR / "clickup_import_gate.txt"
 CLICKUP_GATE_JSON_PATH = QA_DIR / "clickup_import_gate.json"
+CLICKUP_OPERATOR_PACK_MANIFEST_PATH = QA_DIR / "clickup_operator_pack" / "clickup_operator_pack_manifest.json"
 PROJECT_CONFIG_PATH = Path("configs/project.yaml")
 
 
@@ -391,6 +392,7 @@ def build_run_summary() -> str:
         "Import Ready",
         f"- clickup_export_mode: {clickup_export_mode}",
         f"- phase1_vs_full_row_parity: {'yes' if phase1_vs_full_row_parity else 'no'}",
+        f"- operator_pack_ready: {'yes' if CLICKUP_OPERATOR_PACK_MANIFEST_PATH.exists() else 'no'}",
         f"- clickup_import_ready_rows: {import_ready_rows}",
         f"- clickup_not_ready_rows: {max(clickup_rows - import_ready_rows, 0)}",
         "",
