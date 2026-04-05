@@ -2,11 +2,13 @@ from pathlib import Path
 from typing import Optional
 
 import pandas as pd
+import yaml
 
 
 EMAIL_OUTPUT_DIR = Path("outputs/email_drafts")
 CLICKUP_OUTPUT_DIR = Path("outputs/clickup")
 ENRICHMENT_OUTPUT_DIR = Path("outputs/enrichment")
+PROJECT_CONFIG_PATH = Path("configs/project.yaml")
 CLICKUP_REQUIRED_COLUMNS = ["Task name"]
 CLICKUP_SUPPORTED_CORE_COLUMNS = [
     "Task name",
@@ -40,6 +42,13 @@ def normalize_text(value: object) -> str:
     if pd.isna(value):
         return ""
     return str(value).strip()
+
+
+def load_project_config(config_path: Path = PROJECT_CONFIG_PATH) -> dict:
+    if not config_path.exists():
+        return {}
+    with config_path.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file) or {}
 
 
 def build_clickup_task_name(row: pd.Series) -> str:
@@ -374,13 +383,17 @@ def main() -> None:
         email_df[email_df["priority_band"].fillna("").astype(str).str.strip().eq("High")].copy()
     )
     readiness_issues = validate_clickup_import_readiness(clickup_df)
-    output_path = save_clickup_file(clickup_df, first_file.name)
+    project_config = load_project_config()
+    clickup_export_mode = normalize_text(project_config.get("clickup_export_mode")) or "phase1_minimal"
+    default_export_df = clickup_phase1_minimal_df if clickup_export_mode == "phase1_minimal" else clickup_df
+    output_path = save_clickup_file(default_export_df, first_file.name)
     full_ranked_output_path = save_clickup_full_ranked_file(clickup_df, first_file.name)
     minimal_output_path = save_clickup_phase1_minimal_file(clickup_phase1_minimal_df, first_file.name)
     high_output_path = save_high_leads_clickup_file(high_clickup_df, first_file.name)
 
     print(f"Načítaný email draft súbor: {first_file.name}")
     print(f"Počet riadkov: {len(clickup_df)}")
+    print(f"Default export mode: {clickup_export_mode}")
     print(f"Výstup uložený do: {output_path}")
     print(f"Full ranked výstup uložený do: {full_ranked_output_path}")
     print(f"Phase 1 minimal výstup uložený do: {minimal_output_path}")

@@ -3,12 +3,14 @@ from pathlib import Path
 from typing import Optional
 
 import pandas as pd
+import yaml
 
 
 PROCESSED_DIR = Path("data/processed")
 ENRICHMENT_DIR = Path("outputs/enrichment")
 EMAIL_DIR = Path("outputs/email_drafts")
 MASTER_DIR = Path("outputs/master")
+RANKING_TUNING_CONFIG_PATH = Path("configs/ranking_tuning.yaml")
 
 
 def get_latest_file(folder: Path, pattern: str) -> Optional[Path]:
@@ -80,6 +82,13 @@ def ensure_column(df: pd.DataFrame, column: str, default: object = "") -> None:
         df[column] = default
 
 
+def load_ranking_tuning_config(config_path: Path = RANKING_TUNING_CONFIG_PATH) -> dict:
+    if not config_path.exists():
+        return {}
+    with config_path.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file) or {}
+
+
 def build_master_exports(
     processed_df: pd.DataFrame,
     enrichment_df: pd.DataFrame,
@@ -120,7 +129,13 @@ def build_master_exports(
             "reviews_count",
             "icp_fit_score",
             "icp_fit_class",
+            "non_icp_but_keep",
             "fit_confidence",
+            "confidence_reason",
+            "review_bucket",
+            "owner_gm_decision_cycle_signal",
+            "contact_discovery_likelihood",
+            "ota_visibility_signal",
             "ranking_reason",
             "ranking_score",
             "priority_score",
@@ -164,6 +179,11 @@ def build_master_exports(
             "main_observed_issue",
             "proof_snippet",
             "primary_email_goal",
+            "confidence_reason",
+            "review_bucket",
+            "owner_gm_decision_cycle_signal",
+            "contact_discovery_likelihood",
+            "ota_visibility_signal",
             "email_angle",
             "cta_type",
             "variant_id",
@@ -201,6 +221,7 @@ def build_master_exports(
             "ranking_score",
             "priority_band",
             "ranking_reason",
+            "review_bucket",
             "review_flag",
             "review_reason",
             "active_icp_profile",
@@ -266,11 +287,22 @@ def build_master_exports(
             ]
         ].copy()
 
+    ranking_tuning = load_ranking_tuning_config().get("ranking_tuning", {})
+    shortlist_bands = {
+        normalize_text(value) for value in ranking_tuning.get("operator_shortlist_priority_bands", ["High", "Medium-High"])
+    }
+    include_review_flag = bool(ranking_tuning.get("operator_shortlist_include_review_flag", True))
+    shortlist_mask = accounts_master["priority_band"].fillna("").astype(str).str.strip().isin(shortlist_bands)
+    if include_review_flag:
+        shortlist_mask = shortlist_mask | accounts_master["review_flag"].fillna("").astype(str).str.strip().eq("yes")
+    operator_shortlist = accounts_master[shortlist_mask].copy()
+
     return {
         "accounts_master": accounts_master.sort_values("ranking_score", ascending=False).reset_index(drop=True),
         "enrichment_master": enrichment_master.sort_values("account_id").reset_index(drop=True),
         "outreach_drafts": outreach_drafts.sort_values("ranking_score", ascending=False).reset_index(drop=True),
         "dedupe_review": dedupe_review.reset_index(drop=True),
+        "operator_shortlist": operator_shortlist.sort_values(["priority_score", "ranking_score"], ascending=[False, False]).reset_index(drop=True),
     }
 
 

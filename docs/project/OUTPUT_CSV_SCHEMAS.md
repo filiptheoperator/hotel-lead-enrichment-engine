@@ -50,13 +50,19 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 25. `review_reason`
 26. `icp_fit_score`
 27. `icp_fit_class`
-28. `fit_confidence`
-29. `ranking_reason`
-30. `ranking_score`
-31. `priority_score`
-32. `priority_band`
-33. `manual_merge_candidate`
-34. `active_icp_profile`
+28. `non_icp_but_keep`
+29. `fit_confidence`
+30. `confidence_reason`
+31. `review_bucket`
+32. `owner_gm_decision_cycle_signal`
+33. `contact_discovery_likelihood`
+34. `ota_visibility_signal`
+35. `ranking_reason`
+36. `ranking_score`
+37. `priority_score`
+38. `priority_band`
+39. `manual_merge_candidate`
+40. `active_icp_profile`
 
 ## outputs/enrichment
 
@@ -91,14 +97,20 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 23. `review_reason`
 24. `icp_fit_score`
 25. `icp_fit_class`
-26. `fit_confidence`
-27. `ranking_reason`
-28. `ranking_score`
-29. `priority_score`
-30. `priority_band`
-31. `manual_merge_candidate`
-32. `active_icp_profile`
-33. `hotel_opening_hours`
+26. `non_icp_but_keep`
+27. `fit_confidence`
+28. `confidence_reason`
+29. `review_bucket`
+30. `owner_gm_decision_cycle_signal`
+31. `contact_discovery_likelihood`
+32. `ota_visibility_signal`
+33. `ranking_reason`
+34. `ranking_score`
+35. `priority_score`
+36. `priority_band`
+37. `manual_merge_candidate`
+38. `active_icp_profile`
+39. `hotel_opening_hours`
 34. `hotel_opening_hours_status`
 35. `hotel_opening_hours_source_url`
 36. `hotel_opening_hours_source_type`
@@ -153,26 +165,32 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 8. `ranking_score`
 9. `icp_fit_score`
 10. `icp_fit_class`
-11. `fit_confidence`
-12. `ranking_reason`
-13. `review_flag`
-14. `review_reason`
-15. `website`
-16. `website_domain`
-17. `phone`
-18. `contact_status`
-19. `hotel_type_class`
-20. `geography_fit`
-21. `independent_chain_class`
-22. `ownership_type`
-23. `direct_booking_weakness`
-24. `ota_dependency_signal_label`
-25. `dedupe_status`
-26. `duplicate_group_id`
-27. `contact_duplicate_flag`
-28. `manual_merge_candidate`
-29. `active_icp_profile`
-30. `factual_summary`
+11. `non_icp_but_keep`
+12. `fit_confidence`
+13. `confidence_reason`
+14. `review_bucket`
+15. `owner_gm_decision_cycle_signal`
+16. `contact_discovery_likelihood`
+17. `ota_visibility_signal`
+18. `ranking_reason`
+19. `review_flag`
+20. `review_reason`
+21. `website`
+22. `website_domain`
+23. `phone`
+24. `contact_status`
+25. `hotel_type_class`
+26. `geography_fit`
+27. `independent_chain_class`
+28. `ownership_type`
+29. `direct_booking_weakness`
+30. `ota_dependency_signal_label`
+31. `dedupe_status`
+32. `duplicate_group_id`
+33. `contact_duplicate_flag`
+34. `manual_merge_candidate`
+35. `active_icp_profile`
+36. `factual_summary`
 31. `subject_line`
 32. `hook`
 33. `give_first_insight`
@@ -262,6 +280,7 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 - `*_enrichment_master.csv`
 - `*_outreach_drafts.csv`
 - `*_dedupe_review.csv`
+- `*_operator_shortlist.csv`
 
 ### `accounts_master.csv`
 
@@ -286,18 +305,24 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 19. `reviews_count`
 20. `icp_fit_score`
 21. `icp_fit_class`
-22. `fit_confidence`
-23. `ranking_reason`
-24. `ranking_score`
-25. `priority_score`
-26. `priority_band`
-27. `dedupe_status`
-28. `duplicate_group_id`
-29. `contact_duplicate_flag`
-30. `review_flag`
-31. `review_reason`
-32. `manual_merge_candidate`
-33. `source_url`
+22. `non_icp_but_keep`
+23. `fit_confidence`
+24. `confidence_reason`
+25. `review_bucket`
+26. `owner_gm_decision_cycle_signal`
+27. `contact_discovery_likelihood`
+28. `ota_visibility_signal`
+29. `ranking_reason`
+30. `ranking_score`
+31. `priority_score`
+32. `priority_band`
+33. `dedupe_status`
+34. `duplicate_group_id`
+35. `contact_duplicate_flag`
+36. `review_flag`
+37. `review_reason`
+38. `manual_merge_candidate`
+39. `source_url`
 
 ### `enrichment_master.csv`
 
@@ -335,6 +360,21 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 32. `review_reason`
 33. `active_icp_profile`
 34. `source_file`
+
+### `operator_shortlist.csv`
+
+1. `account_id`
+2. `record_rank`
+3. `source_file`
+4. `hotel_name`
+5. `country_code`
+6. `city`
+7. `priority_score`
+8. `priority_band`
+9. `review_bucket`
+10. `ranking_reason`
+11. `review_flag`
+12. `review_reason`
 
 ### `outreach_drafts.csv`
 
@@ -388,6 +428,7 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 - `enrichment_master` drží research a public-source zistenia.
 - `outreach_drafts` drží email bloky a drafty.
 - `dedupe_review` drží len dedupe-relevantné alebo kontakt-duplicitné prípady.
+- `operator_shortlist` drží prvý operator-ready výber bez mazania zvyšku datasetu.
 
 ## data/qa
 

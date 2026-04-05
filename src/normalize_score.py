@@ -13,6 +13,7 @@ PROCESSED_DIR = Path("data/processed")
 SCORING_CONFIG_PATH = Path("configs/scoring.yaml")
 PROJECT_CONFIG_PATH = Path("configs/project.yaml")
 ICP_PROFILES_CONFIG_PATH = Path("configs/icp_profiles.yaml")
+RANKING_TUNING_CONFIG_PATH = Path("configs/ranking_tuning.yaml")
 
 RAW_TO_NORMALIZED_COLUMNS = {
     "title": "hotel_name",
@@ -74,7 +75,13 @@ FINAL_OUTPUT_COLUMNS = [
     "review_reason",
     "icp_fit_score",
     "icp_fit_class",
+    "non_icp_but_keep",
     "fit_confidence",
+    "confidence_reason",
+    "review_bucket",
+    "owner_gm_decision_cycle_signal",
+    "contact_discovery_likelihood",
+    "ota_visibility_signal",
     "ranking_reason",
     "ranking_score",
     "priority_score",
@@ -106,6 +113,11 @@ def load_project_config(config_path: Path = PROJECT_CONFIG_PATH) -> dict:
 
 
 def load_icp_profiles_config(config_path: Path = ICP_PROFILES_CONFIG_PATH) -> dict:
+    with config_path.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file) or {}
+
+
+def load_ranking_tuning_config(config_path: Path = RANKING_TUNING_CONFIG_PATH) -> dict:
     with config_path.open("r", encoding="utf-8") as file:
         return yaml.safe_load(file) or {}
 
@@ -366,6 +378,23 @@ def build_fit_confidence(row: pd.Series) -> float:
     return clamp_score(score)
 
 
+def build_confidence_reason(row: pd.Series) -> str:
+    reasons: list[str] = []
+    if normalize_text(row.get("website")):
+        reasons.append("website_present")
+    else:
+        reasons.append("website_missing")
+    if normalize_text(row.get("phone")):
+        reasons.append("phone_present")
+    else:
+        reasons.append("phone_missing")
+    if normalize_text(row.get("category_name")):
+        reasons.append("category_present")
+    if int(row.get("reviews_count", 0) or 0) > 0:
+        reasons.append("reviews_present")
+    return " | ".join(reasons[:4])
+
+
 def build_icp_fit_class(score_100: float) -> str:
     if score_100 >= 75:
         return "Keep"
@@ -415,6 +444,32 @@ def build_ranking_reason(row: pd.Series) -> str:
     if normalize_text(row.get("phone")):
         reasons.append("has_phone")
     return " | ".join(reasons[:4])
+
+
+def build_review_bucket(row: pd.Series) -> str:
+    if normalize_text(row.get("dedupe_status")) != "unique" or normalize_text(row.get("contact_duplicate_flag")) == "yes":
+        return "dedupe_review"
+    if normalize_text(row.get("review_flag")) == "yes":
+        return "manual_review"
+    if normalize_text(row.get("icp_fit_class")) == "Low-fit":
+        return "kept_low_fit"
+    return "ready_ranked"
+
+
+def build_owner_gm_decision_cycle_signal(row: pd.Series) -> str:
+    if normalize_text(row.get("independent_chain_class")) == "Independent candidate":
+        return "Likely shorter owner_gm_cycle"
+    return "Likely layered decision_cycle"
+
+
+def build_contact_discovery_likelihood(row: pd.Series) -> str:
+    has_website = bool(normalize_text(row.get("website")))
+    has_phone = bool(normalize_text(row.get("phone")))
+    if has_website and has_phone:
+        return "High"
+    if has_website or has_phone:
+        return "Medium"
+    return "Low"
 
 
 def compute_score_components(df: pd.DataFrame) -> pd.DataFrame:
@@ -491,7 +546,7 @@ def compute_score_components(df: pd.DataFrame) -> pd.DataFrame:
     )
 
 
-def apply_weighted_score(df: pd.DataFrame, scoring_config: dict) -> pd.DataFrame:
+def apply_weighted_score(df: pd.DataFrame, scoring_config: dict, ranking_tuning_config: dict) -> pd.DataFrame:
     scored = df.copy()
     components = compute_score_components(scored)
     weights = scoring_config.get("scoring", {}).get("weights", {})
@@ -533,6 +588,10 @@ def apply_weighted_score(df: pd.DataFrame, scoring_config: dict) -> pd.DataFrame
     scored["icp_fit_score"] = (scored["icp_fit"] * 10.0).round(2)
     scored["fit_confidence"] = scored["fit_confidence"].round(2)
     scored["icp_fit_class"] = scored["icp_fit_score"].apply(build_icp_fit_class)
+    low_fit_threshold = float(ranking_tuning_config.get("ranking_tuning", {}).get("non_icp_keep_threshold", 45))
+    scored["non_icp_but_keep"] = scored["icp_fit_score"].apply(
+        lambda value: "yes" if float(value or 0) < low_fit_threshold else "no"
+    )
     scored["hotel_type_class"] = hotel_type.apply(lambda item: item[0])
     scored["geography_fit"] = geography.apply(lambda item: item[0])
     scored["independent_chain_class"] = independence.apply(lambda item: item[0])
@@ -540,8 +599,11 @@ def apply_weighted_score(df: pd.DataFrame, scoring_config: dict) -> pd.DataFrame
     scored["direct_booking_weakness"] = scored["website"].apply(
         lambda value: "Needs direct booking clarity" if normalize_text(value) else "Website missing"
     )
+    scored["ota_visibility_signal"] = scored["website"].apply(
+        lambda value: 3.0 if normalize_text(value) else 7.0
+    )
     scored["ota_dependency_signal_label"] = scored["website"].apply(
-        lambda value: "Low visible" if normalize_text(value) else "Unknown"
+        lambda value: "Low visible" if normalize_text(value) else "Unknown / likely higher OTA reliance"
     )
     scored["priority_score"] = (scored["ranking_score"] / 10.0).round(2)
     scored["priority_band"] = scored["priority_score"].apply(
@@ -553,6 +615,10 @@ def apply_weighted_score(df: pd.DataFrame, scoring_config: dict) -> pd.DataFrame
     scored["manual_merge_candidate"] = scored["duplicate_group_id"].apply(
         lambda value: "yes" if value and duplicate_group_counts.get(value, 0) > 1 else "no"
     )
+    scored["confidence_reason"] = scored.apply(build_confidence_reason, axis=1)
+    scored["review_bucket"] = scored.apply(build_review_bucket, axis=1)
+    scored["owner_gm_decision_cycle_signal"] = scored.apply(build_owner_gm_decision_cycle_signal, axis=1)
+    scored["contact_discovery_likelihood"] = scored.apply(build_contact_discovery_likelihood, axis=1)
     scored["ranking_reason"] = scored.apply(build_ranking_reason, axis=1)
     if "active_icp_profile" not in scored.columns:
         scored["active_icp_profile"] = ""
@@ -604,9 +670,10 @@ def main() -> None:
         project_config,
     )
     scoring_config = load_scoring_config()
+    ranking_tuning_config = load_ranking_tuning_config()
     icp_profiles_config = load_icp_profiles_config()
     active_icp_profile = validate_icp_profile(project_config, scoring_config, icp_profiles_config)
-    scored_df = apply_weighted_score(normalized_df, scoring_config)
+    scored_df = apply_weighted_score(normalized_df, scoring_config, ranking_tuning_config)
     scored_df["active_icp_profile"] = active_icp_profile
     output_path = save_processed_file(scored_df, first_file.name)
 

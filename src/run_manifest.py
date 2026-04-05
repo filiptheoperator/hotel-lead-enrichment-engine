@@ -72,6 +72,7 @@ def get_current_batch_artifacts() -> dict[str, Optional[Path]]:
     enrichment_master_path = (MASTER_DIR / f"{batch_stem}_enrichment_master.csv") if batch_stem else None
     outreach_drafts_path = (MASTER_DIR / f"{batch_stem}_outreach_drafts.csv") if batch_stem else None
     dedupe_review_path = (MASTER_DIR / f"{batch_stem}_dedupe_review.csv") if batch_stem else None
+    operator_shortlist_path = (MASTER_DIR / f"{batch_stem}_operator_shortlist.csv") if batch_stem else None
 
     return {
         "processed": processed_path,
@@ -85,6 +86,7 @@ def get_current_batch_artifacts() -> dict[str, Optional[Path]]:
         "enrichment_master": enrichment_master_path if enrichment_master_path and enrichment_master_path.exists() else None,
         "outreach_drafts": outreach_drafts_path if outreach_drafts_path and outreach_drafts_path.exists() else None,
         "dedupe_review": dedupe_review_path if dedupe_review_path and dedupe_review_path.exists() else None,
+        "operator_shortlist": operator_shortlist_path if operator_shortlist_path and operator_shortlist_path.exists() else None,
     }
 
 
@@ -129,6 +131,7 @@ def build_run_manifest() -> dict:
     enrichment_master_path = artifacts["enrichment_master"]
     outreach_drafts_path = artifacts["outreach_drafts"]
     dedupe_review_path = artifacts["dedupe_review"]
+    operator_shortlist_path = artifacts["operator_shortlist"]
     qa_issues_path = QA_DIR / "qa_issues.csv"
     shortlist_path = QA_DIR / "manual_review_shortlist.csv"
     run_summary_path = QA_DIR / "run_summary.txt"
@@ -187,6 +190,7 @@ def build_run_manifest() -> dict:
             "enrichment_master_csv": str(enrichment_master_path) if enrichment_master_path else "",
             "outreach_drafts_csv": str(outreach_drafts_path) if outreach_drafts_path else "",
             "dedupe_review_csv": str(dedupe_review_path) if dedupe_review_path else "",
+            "operator_shortlist_csv": str(operator_shortlist_path) if operator_shortlist_path else "",
             "qa_issues_csv": str(qa_issues_path) if qa_issues_path.exists() else "",
             "manual_review_shortlist_csv": str(shortlist_path) if shortlist_path.exists() else "",
             "run_summary_txt": str(run_summary_path) if run_summary_path.exists() else "",
