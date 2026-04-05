@@ -1,6 +1,7 @@
 ranking_tuning:
   enabled: true
   non_icp_keep_threshold: 45
+  operator_shortlist_limit: 100
   operator_shortlist_priority_bands:
     - High
     - Medium-High

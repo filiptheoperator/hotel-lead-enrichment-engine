@@ -52,6 +52,7 @@ def get_current_batch_artifacts() -> dict[str, Optional[Path]]:
     accounts_master_path = (MASTER_DIR / f"{batch_stem}_accounts_master.csv") if batch_stem else None
     dedupe_review_path = (MASTER_DIR / f"{batch_stem}_dedupe_review.csv") if batch_stem else None
     operator_shortlist_path = (MASTER_DIR / f"{batch_stem}_operator_shortlist.csv") if batch_stem else None
+    top_20_export_path = (MASTER_DIR / f"{batch_stem}_top_20_export.csv") if batch_stem else None
 
     return {
         "processed": processed_path,
@@ -61,6 +62,7 @@ def get_current_batch_artifacts() -> dict[str, Optional[Path]]:
         "accounts_master": accounts_master_path if accounts_master_path and accounts_master_path.exists() else None,
         "dedupe_review": dedupe_review_path if dedupe_review_path and dedupe_review_path.exists() else None,
         "operator_shortlist": operator_shortlist_path if operator_shortlist_path and operator_shortlist_path.exists() else None,
+        "top_20_export": top_20_export_path if top_20_export_path and top_20_export_path.exists() else None,
     }
 
 
@@ -99,6 +101,7 @@ def build_run_summary() -> str:
     accounts_master_df = load_csv(artifacts["accounts_master"])
     dedupe_review_df = load_csv(artifacts["dedupe_review"])
     operator_shortlist_df = load_csv(artifacts["operator_shortlist"])
+    top_20_export_df = load_csv(artifacts["top_20_export"])
     qa_df = load_csv(QA_DIR / "qa_issues.csv")
     batch_readiness_score = "Neoverené"
     if CLICKUP_GATE_JSON_PATH.exists():
@@ -119,6 +122,7 @@ def build_run_summary() -> str:
     accounts_master_rows = len(accounts_master_df)
     dedupe_review_rows = len(dedupe_review_df)
     operator_shortlist_rows = len(operator_shortlist_df)
+    top_20_export_rows = len(top_20_export_df)
 
     verified_opening_hours = 0
     unverified_opening_hours = 0
@@ -324,6 +328,7 @@ def build_run_summary() -> str:
         f"- accounts_master_rows: {accounts_master_rows}",
         f"- dedupe_review_rows: {dedupe_review_rows}",
         f"- operator_shortlist_rows: {operator_shortlist_rows}",
+        f"- top_20_export_rows: {top_20_export_rows}",
         "",
         "Verified",
         f"- verified_opening_hours: {verified_opening_hours}",

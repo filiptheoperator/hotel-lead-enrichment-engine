@@ -4,6 +4,8 @@ from typing import Optional
 import pandas as pd
 import yaml
 
+from clickup_export import get_clickup_export_mode, get_clickup_required_columns_for_mode
+
 
 PROJECT_CONFIG_PATH = Path("configs/project.yaml")
 CLICKUP_DIR = Path("outputs/clickup")
@@ -40,6 +42,8 @@ def normalize_priority(value: object) -> str:
 
 def build_dry_run_sample() -> tuple[pd.DataFrame, list[str], str]:
     config = load_project_config()
+    export_mode = get_clickup_export_mode(config)
+    required_columns = set(get_clickup_required_columns_for_mode(export_mode))
     sample_size = int(config.get("clickup_dry_run_sample_size", 5))
     clickup_path = get_latest_clickup_file()
     if clickup_path is None or not clickup_path.exists():
@@ -57,16 +61,19 @@ def build_dry_run_sample() -> tuple[pd.DataFrame, list[str], str]:
         & clickup_df["Status"].fillna("").astype(str).str.strip().ne("")
         & normalized_priority.isin(["", "1", "2", "3", "4"])
     )
+    if "Description content" in required_columns and "Description content" in clickup_df.columns:
+        ready_mask = ready_mask & clickup_df["Description content"].fillna("").astype(str).str.strip().ne("")
     sample_df = clickup_df[ready_mask].head(sample_size).copy()
 
     notes = [
         f"Zdrojový ClickUp CSV: {clickup_path}",
+        f"ClickUp export mode: {export_mode}",
         f"Požadovaná veľkosť sample: {sample_size}",
         f"Vybraná veľkosť sample: {len(sample_df)}",
         "Toto je suchý importný sample, nie ostrý import.",
         "Field-by-field check template:",
         "1. Task name: nie je prázdny a zodpovedá hotelu.",
-        "2. Description content: obsahuje hotel, mesto, hook a oba emaily.",
+        "2. Description content: kontroluj len pri full_ranked režime.",
         "3. Status: je bezpečne mapovaný na ClickUp import status.",
         "4. Priority: je v sete 1-4 alebo prázdne podľa pravidla.",
         "5. Hotel name / City: sedí s leadom.",

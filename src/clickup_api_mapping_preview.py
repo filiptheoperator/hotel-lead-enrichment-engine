@@ -13,6 +13,7 @@ QA_DIR = Path("data/qa")
 OUTPUT_PATH = QA_DIR / "clickup_api_mapping_preview.json"
 VALIDATION_PATH = QA_DIR / "clickup_api_mapping_validation.json"
 DIFF_PATH = QA_DIR / "clickup_api_payload_diff.json"
+SIDE_BY_SIDE_DIFF_PATH = QA_DIR / "clickup_export_mode_diff.json"
 
 
 def get_latest_clickup_file() -> Optional[Path]:
@@ -32,6 +33,26 @@ def get_latest_high_only_clickup_file() -> Optional[Path]:
         if expected.exists():
             return expected
     files = sorted(CLICKUP_DIR.glob("*_clickup_import_high_only.csv"), key=lambda path: path.stat().st_mtime)
+    return files[-1] if files else None
+
+
+def get_latest_phase1_minimal_file() -> Optional[Path]:
+    email_files = sorted(EMAIL_DIR.glob("*_email_drafts.csv"), key=lambda path: path.stat().st_mtime)
+    if email_files:
+        expected = CLICKUP_DIR / f"{Path(email_files[-1].name).stem}_clickup_phase1_minimal.csv"
+        if expected.exists():
+            return expected
+    files = sorted(CLICKUP_DIR.glob("*_clickup_phase1_minimal.csv"), key=lambda path: path.stat().st_mtime)
+    return files[-1] if files else None
+
+
+def get_latest_full_ranked_file() -> Optional[Path]:
+    email_files = sorted(EMAIL_DIR.glob("*_email_drafts.csv"), key=lambda path: path.stat().st_mtime)
+    if email_files:
+        expected = CLICKUP_DIR / f"{Path(email_files[-1].name).stem}_clickup_full_ranked.csv"
+        if expected.exists():
+            return expected
+    files = sorted(CLICKUP_DIR.glob("*_clickup_full_ranked.csv"), key=lambda path: path.stat().st_mtime)
     return files[-1] if files else None
 
 
@@ -158,6 +179,25 @@ def build_payload_diff(full_preview: dict, high_preview: dict) -> dict:
     }
 
 
+def build_export_mode_diff() -> dict:
+    phase1_path = get_latest_phase1_minimal_file()
+    full_ranked_path = get_latest_full_ranked_file()
+    phase1_df = pd.read_csv(phase1_path) if phase1_path and phase1_path.exists() else pd.DataFrame()
+    full_ranked_df = pd.read_csv(full_ranked_path) if full_ranked_path and full_ranked_path.exists() else pd.DataFrame()
+    return {
+        "phase1_minimal_csv": str(phase1_path) if phase1_path else "",
+        "full_ranked_csv": str(full_ranked_path) if full_ranked_path else "",
+        "phase1_minimal_columns": list(phase1_df.columns),
+        "full_ranked_columns": list(full_ranked_df.columns),
+        "phase1_minimal_row_count": len(phase1_df),
+        "full_ranked_row_count": len(full_ranked_df),
+        "phase1_only_columns": sorted(list(set(phase1_df.columns) - set(full_ranked_df.columns))),
+        "full_only_columns": sorted(list(set(full_ranked_df.columns) - set(phase1_df.columns))),
+        "shared_columns": sorted(list(set(phase1_df.columns) & set(full_ranked_df.columns))),
+        "note": "Side-by-side diff medzi full_ranked a phase1_minimal export shape.",
+    }
+
+
 def save_mapping_preview(preview: dict) -> Path:
     QA_DIR.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(preview, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -176,6 +216,12 @@ def save_payload_diff(diff: dict) -> Path:
     return DIFF_PATH
 
 
+def save_export_mode_diff(diff: dict) -> Path:
+    QA_DIR.mkdir(parents=True, exist_ok=True)
+    SIDE_BY_SIDE_DIFF_PATH.write_text(json.dumps(diff, ensure_ascii=False, indent=2), encoding="utf-8")
+    return SIDE_BY_SIDE_DIFF_PATH
+
+
 def main() -> None:
     preview = build_mapping_preview()
     output_path = save_mapping_preview(preview)
@@ -184,9 +230,12 @@ def main() -> None:
     validation_path = save_mapping_validation(validation)
     diff = build_payload_diff(preview, high_preview)
     diff_path = save_payload_diff(diff)
+    export_mode_diff = build_export_mode_diff()
+    export_mode_diff_path = save_export_mode_diff(export_mode_diff)
     print(f"ClickUp API mapping preview uložený do: {output_path}")
     print(f"ClickUp API mapping validation uložený do: {validation_path}")
     print(f"ClickUp API payload diff uložený do: {diff_path}")
+    print(f"ClickUp export mode diff uložený do: {export_mode_diff_path}")
     print("\nNáhľad:\n")
     print(json.dumps(preview, ensure_ascii=False, indent=2))
 

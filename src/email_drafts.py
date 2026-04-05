@@ -158,6 +158,29 @@ def build_proof_line(row: pd.Series) -> str:
     return normalize_text(row.get("proof_snippet"))
 
 
+def fallback_contact_gap_count(row: pd.Series) -> int:
+    try:
+        value = int(float(row.get("contact_gap_count", 0)))
+        return value
+    except (TypeError, ValueError):
+        pass
+    gap_reason = normalize_text(row.get("contact_gap_reason"))
+    if gap_reason == "website_and_phone_missing":
+        return 2
+    if gap_reason in {"phone_missing", "website_missing"}:
+        return 1
+    return 0
+
+
+def fallback_rank_bucket_reason(row: pd.Series) -> str:
+    current = normalize_text(row.get("rank_bucket_reason"))
+    if current:
+        return current
+    if normalize_text(row.get("rank_bucket")) == "A":
+        return normalize_text(row.get("ranking_reason")) or "top_ranked"
+    return normalize_text(row.get("why_not_top_tier")) or normalize_text(row.get("ranking_reason")) or "lower_rank_bucket"
+
+
 def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     emails = df.copy()
     email_config = load_email_config().get("email", {})
@@ -183,8 +206,10 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         "website_quality",
         "chain_signal_confidence",
         "contact_gap_reason",
+        "contact_gap_count",
         "why_not_top_tier",
         "rank_bucket",
+        "rank_bucket_reason",
         "ranking_reason",
         "review_flag",
         "review_reason",
@@ -224,6 +249,8 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     if email_config.get("one_email_one_goal", True):
         emails["primary_email_goal"] = emails["primary_email_goal"].replace("", email_config.get("primary_email_goal", "reply_with_permission"))
     emails["cta_type"] = emails["cta_type"].replace("", email_config.get("default_cta_type", "low_friction_permission"))
+    emails["contact_gap_count"] = emails.apply(fallback_contact_gap_count, axis=1)
+    emails["rank_bucket_reason"] = emails.apply(fallback_rank_bucket_reason, axis=1)
     emails["cold_email"] = emails.apply(build_cold_email, axis=1)
     emails["followup_email"] = emails.apply(build_followup_email, axis=1)
 
@@ -249,8 +276,10 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "website_quality",
             "chain_signal_confidence",
             "contact_gap_reason",
+            "contact_gap_count",
             "why_not_top_tier",
             "rank_bucket",
+            "rank_bucket_reason",
             "ranking_reason",
             "review_flag",
             "review_reason",

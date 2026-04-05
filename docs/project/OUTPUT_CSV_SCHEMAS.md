@@ -285,6 +285,7 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 - `*_outreach_drafts.csv`
 - `*_dedupe_review.csv`
 - `*_operator_shortlist.csv`
+- `*_top_20_export.csv`
 
 ### `accounts_master.csv`
 
@@ -319,19 +320,21 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 29. `website_quality`
 30. `chain_signal_confidence`
 31. `contact_gap_reason`
-32. `why_not_top_tier`
-33. `rank_bucket`
-34. `ranking_reason`
-35. `ranking_score`
-36. `priority_score`
-37. `priority_band`
-38. `dedupe_status`
-39. `duplicate_group_id`
-40. `contact_duplicate_flag`
-41. `review_flag`
-42. `review_reason`
-43. `manual_merge_candidate`
-44. `source_url`
+32. `contact_gap_count`
+33. `why_not_top_tier`
+34. `rank_bucket`
+35. `rank_bucket_reason`
+36. `ranking_reason`
+37. `ranking_score`
+38. `priority_score`
+39. `priority_band`
+40. `dedupe_status`
+41. `duplicate_group_id`
+42. `contact_duplicate_flag`
+43. `review_flag`
+44. `review_reason`
+45. `manual_merge_candidate`
+46. `source_url`
 
 ### `enrichment_master.csv`
 
@@ -368,12 +371,14 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 31. `website_quality`
 32. `chain_signal_confidence`
 33. `contact_gap_reason`
-34. `why_not_top_tier`
-35. `rank_bucket`
-36. `review_flag`
-37. `review_reason`
-38. `active_icp_profile`
-39. `source_file`
+34. `contact_gap_count`
+35. `why_not_top_tier`
+36. `rank_bucket`
+37. `rank_bucket_reason`
+38. `review_flag`
+39. `review_reason`
+40. `active_icp_profile`
+41. `source_file`
 
 ### `operator_shortlist.csv`
 
@@ -389,8 +394,9 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 10. `rank_bucket`
 11. `ranking_reason`
 12. `shortlist_reason`
-13. `review_flag`
-14. `review_reason`
+13. `rank_bucket_reason`
+14. `review_flag`
+15. `review_reason`
 
 ### `outreach_drafts.csv`
 
@@ -416,11 +422,12 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 20. `priority_band`
 21. `why_not_top_tier`
 22. `rank_bucket`
-23. `ranking_reason`
-24. `review_flag`
-25. `review_reason`
-26. `active_icp_profile`
-27. `source_file`
+23. `rank_bucket_reason`
+24. `ranking_reason`
+25. `review_flag`
+26. `review_reason`
+27. `active_icp_profile`
+28. `source_file`
 
 ### `dedupe_review.csv`
 
@@ -448,6 +455,7 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 - `outreach_drafts` drží email bloky a drafty.
 - `dedupe_review` drží len dedupe-relevantné alebo kontakt-duplicitné prípady.
 - `operator_shortlist` drží prvý operator-ready výber bez mazania zvyšku datasetu.
+- `top_20_export` je len pracovný top slice, nie discard vrstva.
 
 ## data/qa
 

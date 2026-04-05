@@ -9,6 +9,8 @@ from urllib.request import Request, urlopen
 
 import yaml
 
+from clickup_export import get_clickup_export_mode
+
 
 ENV_PATH = Path(".env")
 DRY_RUN_SAMPLE_PATH = Path("data/qa/clickup_import_dry_run_sample.csv")
@@ -91,9 +93,11 @@ def normalize_priority(value: str) -> Optional[int]:
 def create_task(list_id: str, token: str, row: dict[str, str]) -> dict[str, Any]:
     payload: dict[str, Any] = {
         "name": row["Task name"],
-        "description": row["Description content"],
         "status": row["Status"],
     }
+    description = str(row.get("Description content", "")).strip()
+    if description:
+        payload["description"] = description
     priority = normalize_priority(row["Priority"])
     if priority is not None:
         payload["priority"] = priority
@@ -163,6 +167,7 @@ def main() -> None:
     load_dotenv()
     token = get_required_env("CLICKUP_API_TOKEN")
     config = load_config()
+    export_mode = get_clickup_export_mode()
     list_id = str(config["clickup_custom_fields"].get("selected_test_list_id", "")).strip()
     if not list_id:
         raise RuntimeError("Chýba selected_test_list_id v clickup_custom_fields.yaml")
@@ -172,6 +177,7 @@ def main() -> None:
 
     payload: dict[str, Any] = {
         "list_id": list_id,
+        "clickup_export_mode": export_mode,
         "rehearsal_status": "PASS",
         "rows": execution_rows,
     }
@@ -197,7 +203,12 @@ def main() -> None:
                     "status_sent": row["Status"],
                     "priority_sent": row["Priority"],
                     "name_match": str(fetched_task.get("name", "")).strip() == row["Task name"],
-                    "description_match": str(fetched_task.get("description", "")).strip() == row["Description content"],
+                    "description_expected": str(row.get("Description content", "")).strip(),
+                    "description_match": (
+                        str(fetched_task.get("description", "")).strip() == str(row.get("Description content", "")).strip()
+                        if str(row.get("Description content", "")).strip()
+                        else True
+                    ),
                     "field_verification": field_verification,
                 }
             )

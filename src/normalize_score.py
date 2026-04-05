@@ -85,8 +85,10 @@ FINAL_OUTPUT_COLUMNS = [
     "website_quality",
     "chain_signal_confidence",
     "contact_gap_reason",
+    "contact_gap_count",
     "why_not_top_tier",
     "rank_bucket",
+    "rank_bucket_reason",
     "ranking_reason",
     "ranking_score",
     "priority_score",
@@ -489,6 +491,15 @@ def build_contact_gap_reason(row: pd.Series) -> str:
     return "website_and_phone_missing"
 
 
+def build_contact_gap_count(row: pd.Series) -> int:
+    missing = 0
+    if not normalize_text(row.get("website")):
+        missing += 1
+    if not normalize_text(row.get("phone")):
+        missing += 1
+    return missing
+
+
 def build_chain_signal_confidence(row: pd.Series) -> str:
     chain_class = normalize_text(row.get("independent_chain_class"))
     website_domain = normalize_text(row.get("website_domain"))
@@ -502,12 +513,18 @@ def build_chain_signal_confidence(row: pd.Series) -> str:
 
 def build_website_quality(row: pd.Series) -> str:
     website = normalize_text(row.get("website"))
+    website_domain = normalize_text(row.get("website_domain"))
+    parsed = urlparse(website) if website else None
+    path = normalize_text(parsed.path if parsed else "")
+    query = normalize_text(parsed.query if parsed else "")
     reviews_count = int(row.get("reviews_count", 0) or 0)
-    if website and reviews_count >= 20:
+    if not website:
+        return "Missing"
+    if website_domain and (path in {"", "/"} and not query) and reviews_count >= 20:
         return "Strong"
-    if website:
+    if website_domain and path in {"", "/"}:
         return "Basic"
-    return "Missing"
+    return "Weak"
 
 
 def build_why_not_top_tier(row: pd.Series) -> str:
@@ -533,6 +550,15 @@ def build_rank_bucket(ranking_score: float) -> str:
     if ranking_score >= 50:
         return "C"
     return "D"
+
+
+def build_rank_bucket_reason(row: pd.Series) -> str:
+    bucket = normalize_text(row.get("rank_bucket"))
+    why_not = normalize_text(row.get("why_not_top_tier"))
+    ranking_reason = normalize_text(row.get("ranking_reason"))
+    if bucket == "A":
+        return ranking_reason or "top_ranked"
+    return why_not or ranking_reason or "lower_rank_bucket"
 
 
 def compute_score_components(df: pd.DataFrame) -> pd.DataFrame:
@@ -678,6 +704,7 @@ def apply_weighted_score(df: pd.DataFrame, scoring_config: dict, ranking_tuning_
     scored["website_quality"] = scored.apply(build_website_quality, axis=1)
     scored["chain_signal_confidence"] = scored.apply(build_chain_signal_confidence, axis=1)
     scored["contact_gap_reason"] = scored.apply(build_contact_gap_reason, axis=1)
+    scored["contact_gap_count"] = scored.apply(build_contact_gap_count, axis=1)
     scored["priority_score"] = (scored["ranking_score"] / 10.0).round(2)
     scored["priority_band"] = scored["priority_score"].apply(
         lambda value: score_to_priority_band(value, scoring_config)
@@ -694,6 +721,7 @@ def apply_weighted_score(df: pd.DataFrame, scoring_config: dict, ranking_tuning_
     scored["contact_discovery_likelihood"] = scored.apply(build_contact_discovery_likelihood, axis=1)
     scored["why_not_top_tier"] = scored.apply(build_why_not_top_tier, axis=1)
     scored["rank_bucket"] = scored["ranking_score"].apply(build_rank_bucket)
+    scored["rank_bucket_reason"] = scored.apply(build_rank_bucket_reason, axis=1)
     scored["ranking_reason"] = scored.apply(build_ranking_reason, axis=1)
     if "active_icp_profile" not in scored.columns:
         scored["active_icp_profile"] = ""

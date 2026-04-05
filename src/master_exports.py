@@ -139,8 +139,10 @@ def build_master_exports(
             "website_quality",
             "chain_signal_confidence",
             "contact_gap_reason",
+            "contact_gap_count",
             "why_not_top_tier",
             "rank_bucket",
+            "rank_bucket_reason",
             "ranking_reason",
             "ranking_score",
             "priority_score",
@@ -192,8 +194,10 @@ def build_master_exports(
             "website_quality",
             "chain_signal_confidence",
             "contact_gap_reason",
+            "contact_gap_count",
             "why_not_top_tier",
             "rank_bucket",
+            "rank_bucket_reason",
             "email_angle",
             "cta_type",
             "variant_id",
@@ -232,6 +236,7 @@ def build_master_exports(
             "priority_band",
             "why_not_top_tier",
             "rank_bucket",
+            "rank_bucket_reason",
             "ranking_reason",
             "review_bucket",
             "review_flag",
@@ -317,6 +322,7 @@ def build_master_exports(
     shortlist_mask = accounts_master["priority_band"].fillna("").astype(str).str.strip().isin(shortlist_bands)
     if include_review_flag:
         shortlist_mask = shortlist_mask | accounts_master["review_flag"].fillna("").astype(str).str.strip().eq("yes")
+    shortlist_limit = int(ranking_tuning.get("operator_shortlist_limit", 100) or 100)
     operator_shortlist = accounts_master[shortlist_mask].copy()
     operator_shortlist["shortlist_reason"] = operator_shortlist.apply(
         lambda row: " | ".join(
@@ -328,13 +334,18 @@ def build_master_exports(
         ).strip(" |"),
         axis=1,
     )
+    operator_shortlist = operator_shortlist.sort_values(
+        ["priority_score", "ranking_score"], ascending=[False, False]
+    ).head(shortlist_limit).reset_index(drop=True)
+    top_20_export = accounts_master.sort_values("ranking_score", ascending=False).head(20).reset_index(drop=True)
 
     return {
         "accounts_master": accounts_master.sort_values("ranking_score", ascending=False).reset_index(drop=True),
         "enrichment_master": enrichment_master.sort_values("account_id").reset_index(drop=True),
         "outreach_drafts": outreach_drafts.sort_values("ranking_score", ascending=False).reset_index(drop=True),
         "dedupe_review": dedupe_review.reset_index(drop=True),
-        "operator_shortlist": operator_shortlist.sort_values(["priority_score", "ranking_score"], ascending=[False, False]).reset_index(drop=True),
+        "operator_shortlist": operator_shortlist,
+        "top_20_export": top_20_export,
     }
 
 
