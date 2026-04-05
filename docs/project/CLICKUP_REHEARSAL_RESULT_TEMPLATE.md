@@ -7,6 +7,7 @@
 - workspace_name: `90121598651`
 - test_list_or_folder: `Acquisition / Pipeline / Target Accounts`
 - source_sample_file: `data/qa/clickup_import_dry_run_sample.csv`
+- clickup_export_mode: `phase1_minimal`
 - rehearsal_status: `BLOCKED`
 - workspace_confirmed: `yes`
 

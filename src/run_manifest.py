@@ -36,10 +36,21 @@ ARCHIVE_CLEANUP_REPORT_PATH = QA_DIR / "archive_cleanup_report.txt"
 CLICKUP_API_MAPPING_PREVIEW_PATH = QA_DIR / "clickup_api_mapping_preview.json"
 CLICKUP_API_MAPPING_VALIDATION_PATH = QA_DIR / "clickup_api_mapping_validation.json"
 CLICKUP_API_PAYLOAD_DIFF_PATH = QA_DIR / "clickup_api_payload_diff.json"
+CLICKUP_API_MAPPING_VALIDATION_PHASE1_PATH = QA_DIR / "clickup_api_mapping_validation_phase1_minimal.json"
+CLICKUP_API_MAPPING_VALIDATION_FULL_PATH = QA_DIR / "clickup_api_mapping_validation_full_ranked.json"
+CLICKUP_EXPORT_MODE_DIFF_PATH = QA_DIR / "clickup_export_mode_diff.json"
 PROJECT_CONFIG_PATH = Path("configs/project.yaml")
+RANKING_TUNING_CONFIG_PATH = Path("configs/ranking_tuning.yaml")
 
 
 def load_project_config(config_path: Path = PROJECT_CONFIG_PATH) -> dict:
+    if not config_path.exists():
+        return {}
+    with config_path.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file) or {}
+
+
+def load_ranking_tuning_config(config_path: Path = RANKING_TUNING_CONFIG_PATH) -> dict:
     if not config_path.exists():
         return {}
     with config_path.open("r", encoding="utf-8") as file:
@@ -168,6 +179,7 @@ def build_run_manifest() -> dict:
         else pd.Series("", index=clickup_df.index, dtype="object")
     )
     clickup_export_mode = get_clickup_export_mode(load_project_config())
+    ranking_tuning = load_ranking_tuning_config().get("ranking_tuning", {})
     required_clickup_columns = set(get_clickup_required_columns_for_mode(clickup_export_mode))
     clickup_ready_mask = (
         normalize_series(clickup_df, "Task name").ne("")
@@ -238,7 +250,10 @@ def build_run_manifest() -> dict:
             "archive_cleanup_report_txt": str(ARCHIVE_CLEANUP_REPORT_PATH) if ARCHIVE_CLEANUP_REPORT_PATH.exists() else "",
             "clickup_api_mapping_preview_json": str(CLICKUP_API_MAPPING_PREVIEW_PATH) if CLICKUP_API_MAPPING_PREVIEW_PATH.exists() else "",
             "clickup_api_mapping_validation_json": str(CLICKUP_API_MAPPING_VALIDATION_PATH) if CLICKUP_API_MAPPING_VALIDATION_PATH.exists() else "",
+            "clickup_api_mapping_validation_phase1_json": str(CLICKUP_API_MAPPING_VALIDATION_PHASE1_PATH) if CLICKUP_API_MAPPING_VALIDATION_PHASE1_PATH.exists() else "",
+            "clickup_api_mapping_validation_full_json": str(CLICKUP_API_MAPPING_VALIDATION_FULL_PATH) if CLICKUP_API_MAPPING_VALIDATION_FULL_PATH.exists() else "",
             "clickup_api_payload_diff_json": str(CLICKUP_API_PAYLOAD_DIFF_PATH) if CLICKUP_API_PAYLOAD_DIFF_PATH.exists() else "",
+            "clickup_export_mode_diff_json": str(CLICKUP_EXPORT_MODE_DIFF_PATH) if CLICKUP_EXPORT_MODE_DIFF_PATH.exists() else "",
         },
         "row_counts": {
             "processed_rows": len(processed_df),
@@ -278,6 +293,7 @@ def build_run_manifest() -> dict:
             "fetch_missing_website": int(fetch_status.eq("missing_website").sum()),
         },
         "shortlist_snapshot": {
+            "operator_shortlist_limit": int(ranking_tuning.get("operator_shortlist_limit", 100) or 100),
             "review_bucket_counts": {
                 bucket: int(count)
                 for bucket, count in review_bucket.value_counts().to_dict().items()
@@ -294,6 +310,11 @@ def build_run_manifest() -> dict:
         "import_snapshot": {
             "clickup_export_mode": clickup_export_mode,
             "clickup_import_ready_rows": int(clickup_ready_mask.sum()),
+            "phase1_vs_full_row_parity": (
+                int(load_csv(clickup_phase1_minimal_path).shape[0]) == int(load_csv(clickup_full_ranked_path).shape[0])
+                if clickup_phase1_minimal_path and clickup_full_ranked_path
+                else False
+            ),
             "qa_blocking_rows": count_value(qa_issues_df, "blocking", "yes"),
         },
     }

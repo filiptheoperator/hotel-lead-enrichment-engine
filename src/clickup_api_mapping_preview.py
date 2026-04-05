@@ -14,6 +14,8 @@ OUTPUT_PATH = QA_DIR / "clickup_api_mapping_preview.json"
 VALIDATION_PATH = QA_DIR / "clickup_api_mapping_validation.json"
 DIFF_PATH = QA_DIR / "clickup_api_payload_diff.json"
 SIDE_BY_SIDE_DIFF_PATH = QA_DIR / "clickup_export_mode_diff.json"
+PHASE1_VALIDATION_PATH = QA_DIR / "clickup_api_mapping_validation_phase1_minimal.json"
+FULL_VALIDATION_PATH = QA_DIR / "clickup_api_mapping_validation_full_ranked.json"
 
 
 def get_latest_clickup_file() -> Optional[Path]:
@@ -63,8 +65,8 @@ def load_mapping_config() -> dict:
         return yaml.safe_load(file) or {}
 
 
-def build_mapping_preview() -> dict:
-    clickup_path = get_latest_clickup_file()
+def build_mapping_preview(clickup_path: Optional[Path] = None, note: str = "") -> dict:
+    clickup_path = clickup_path or get_latest_clickup_file()
     mapping_config = load_mapping_config().get("clickup_api_mapping", {})
     clickup_df = pd.read_csv(clickup_path) if clickup_path and clickup_path.exists() else pd.DataFrame()
 
@@ -95,7 +97,7 @@ def build_mapping_preview() -> dict:
     return {
         "source_csv": str(clickup_path),
         "preview_rows": preview_rows,
-        "note": "Návrh mapping preview bez ostrej ClickUp API integrácie.",
+        "note": note or "Návrh mapping preview bez ostrej ClickUp API integrácie.",
     }
 
 
@@ -134,8 +136,10 @@ def build_high_only_mapping_preview() -> dict:
     }
 
 
-def validate_mapping_preview(preview: dict) -> dict:
-    required_top_fields = ["name", "description", "status", "priority", "custom_fields"]
+def validate_mapping_preview(preview: dict, mode: str = "full_ranked") -> dict:
+    required_top_fields = ["name", "status", "priority", "custom_fields"]
+    if mode != "phase1_minimal":
+        required_top_fields.insert(1, "description")
     required_custom_fields = [
         "custom.hotel_name",
         "custom.city",
@@ -153,6 +157,8 @@ def validate_mapping_preview(preview: dict) -> dict:
         for field in required_top_fields:
             if field not in row:
                 issues.append(f"row_{index}_missing_{field}")
+            elif field == "description" and mode != "phase1_minimal" and not str(row.get(field, "")).strip():
+                issues.append(f"row_{index}_blank_description")
         custom_fields = row.get("custom_fields", {})
         for field in required_custom_fields:
             if field not in custom_fields:
@@ -160,6 +166,7 @@ def validate_mapping_preview(preview: dict) -> dict:
 
     return {
         "valid": len(issues) == 0,
+        "validation_mode": mode,
         "preview_row_count": len(preview_rows),
         "issues": issues,
         "note": "Validation len nad preview payloadom, nie nad živou ClickUp API odpoveďou.",
@@ -191,6 +198,7 @@ def build_export_mode_diff() -> dict:
         "full_ranked_columns": list(full_ranked_df.columns),
         "phase1_minimal_row_count": len(phase1_df),
         "full_ranked_row_count": len(full_ranked_df),
+        "row_parity_ok": len(phase1_df) == len(full_ranked_df),
         "phase1_only_columns": sorted(list(set(phase1_df.columns) - set(full_ranked_df.columns))),
         "full_only_columns": sorted(list(set(full_ranked_df.columns) - set(phase1_df.columns))),
         "shared_columns": sorted(list(set(phase1_df.columns) & set(full_ranked_df.columns))),
@@ -210,6 +218,13 @@ def save_mapping_validation(validation: dict) -> Path:
     return VALIDATION_PATH
 
 
+def save_mode_mapping_validation(validation: dict, mode: str) -> Path:
+    QA_DIR.mkdir(parents=True, exist_ok=True)
+    target = PHASE1_VALIDATION_PATH if mode == "phase1_minimal" else FULL_VALIDATION_PATH
+    target.write_text(json.dumps(validation, ensure_ascii=False, indent=2), encoding="utf-8")
+    return target
+
+
 def save_payload_diff(diff: dict) -> Path:
     QA_DIR.mkdir(parents=True, exist_ok=True)
     DIFF_PATH.write_text(json.dumps(diff, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -223,17 +238,27 @@ def save_export_mode_diff(diff: dict) -> Path:
 
 
 def main() -> None:
-    preview = build_mapping_preview()
+    default_clickup_path = get_latest_clickup_file()
+    phase1_path = get_latest_phase1_minimal_file()
+    full_ranked_path = get_latest_full_ranked_file()
+    preview = build_mapping_preview(default_clickup_path)
     output_path = save_mapping_preview(preview)
     high_preview = build_high_only_mapping_preview()
-    validation = validate_mapping_preview(preview)
+    full_preview = build_mapping_preview(full_ranked_path, "Full ranked preview bez ostrej ClickUp API integrácie.")
+    phase1_preview = build_mapping_preview(phase1_path, "Phase1 minimal preview bez ostrej ClickUp API integrácie.")
+    validation = validate_mapping_preview(full_preview, "full_ranked")
     validation_path = save_mapping_validation(validation)
+    phase1_validation = validate_mapping_preview(phase1_preview, "phase1_minimal")
+    phase1_validation_path = save_mode_mapping_validation(phase1_validation, "phase1_minimal")
+    full_validation_path = save_mode_mapping_validation(validation, "full_ranked")
     diff = build_payload_diff(preview, high_preview)
     diff_path = save_payload_diff(diff)
     export_mode_diff = build_export_mode_diff()
     export_mode_diff_path = save_export_mode_diff(export_mode_diff)
     print(f"ClickUp API mapping preview uložený do: {output_path}")
     print(f"ClickUp API mapping validation uložený do: {validation_path}")
+    print(f"ClickUp phase1 validation uložený do: {phase1_validation_path}")
+    print(f"ClickUp full ranked validation uložený do: {full_validation_path}")
     print(f"ClickUp API payload diff uložený do: {diff_path}")
     print(f"ClickUp export mode diff uložený do: {export_mode_diff_path}")
     print("\nNáhľad:\n")

@@ -92,6 +92,23 @@ def normalize_series(df: pd.DataFrame, column: str) -> pd.Series:
     return df[column].fillna("").astype(str).str.strip()
 
 
+def build_distribution_lines(df: pd.DataFrame, column: str, label: str) -> list[str]:
+    if df.empty or column not in df.columns:
+        return [f"- {label}: Neoverené"]
+    counts = (
+        df[column]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+        .replace("", "blank")
+        .value_counts()
+        .to_dict()
+    )
+    if not counts:
+        return [f"- {label}: Neoverené"]
+    return [f"- {label}_{key}: {int(value)}" for key, value in counts.items()]
+
+
 def build_run_summary() -> str:
     artifacts = get_current_batch_artifacts()
     processed_df = load_csv(artifacts["processed"])
@@ -123,6 +140,9 @@ def build_run_summary() -> str:
     dedupe_review_rows = len(dedupe_review_df)
     operator_shortlist_rows = len(operator_shortlist_df)
     top_20_export_rows = len(top_20_export_df)
+    top_20_high_count = int(
+        top_20_export_df["priority_band"].fillna("").astype(str).str.strip().eq("High").sum()
+    ) if not top_20_export_df.empty and "priority_band" in top_20_export_df.columns else 0
 
     verified_opening_hours = 0
     unverified_opening_hours = 0
@@ -257,6 +277,11 @@ def build_run_summary() -> str:
         )
 
     clickup_export_mode = get_clickup_export_mode(load_project_config())
+    phase1_path = get_expected_artifact_path(artifacts["email"], CLICKUP_DIR, "_clickup_phase1_minimal.csv")
+    full_ranked_path = get_expected_artifact_path(artifacts["email"], CLICKUP_DIR, "_clickup_full_ranked.csv")
+    phase1_vs_full_row_parity = False
+    if phase1_path and full_ranked_path and phase1_path.exists() and full_ranked_path.exists():
+        phase1_vs_full_row_parity = len(load_csv(phase1_path)) == len(load_csv(full_ranked_path))
     import_ready_rows = 0
     if not clickup_df.empty:
         required_columns = set(get_clickup_required_columns_for_mode(clickup_export_mode))
@@ -329,6 +354,7 @@ def build_run_summary() -> str:
         f"- dedupe_review_rows: {dedupe_review_rows}",
         f"- operator_shortlist_rows: {operator_shortlist_rows}",
         f"- top_20_export_rows: {top_20_export_rows}",
+        f"- top_20_high_rows: {top_20_high_count}",
         "",
         "Verified",
         f"- verified_opening_hours: {verified_opening_hours}",
@@ -364,6 +390,7 @@ def build_run_summary() -> str:
         "",
         "Import Ready",
         f"- clickup_export_mode: {clickup_export_mode}",
+        f"- phase1_vs_full_row_parity: {'yes' if phase1_vs_full_row_parity else 'no'}",
         f"- clickup_import_ready_rows: {import_ready_rows}",
         f"- clickup_not_ready_rows: {max(clickup_rows - import_ready_rows, 0)}",
         "",
@@ -373,7 +400,14 @@ def build_run_summary() -> str:
         f"- qa_blocking_rows: {qa_blocking}",
         f"- qa_medium_rows: {qa_medium}",
         f"- qa_low_rows: {qa_low}",
+        "",
+        "Rank Bucket Distribution",
     ]
+    lines.extend(build_distribution_lines(accounts_master_df, "rank_bucket", "rank_bucket"))
+    lines.extend(["", "Website Quality Distribution"])
+    lines.extend(build_distribution_lines(accounts_master_df, "website_quality", "website_quality"))
+    lines.extend(["", "Contact Gap Count Distribution"])
+    lines.extend(build_distribution_lines(accounts_master_df, "contact_gap_count", "contact_gap_count"))
     return "\n".join(lines)
 
 
