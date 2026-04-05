@@ -1,3 +1,4 @@
+import argparse
 from pathlib import Path
 import hashlib
 import re
@@ -750,14 +751,30 @@ def save_processed_file(df: pd.DataFrame, source_file: str) -> Path:
     return output_path
 
 
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Normalize and score one raw hotel CSV.")
+    parser.add_argument(
+        "--input",
+        dest="input_path",
+        help="Voliteľná cesta ku konkrétnemu raw CSV súboru.",
+    )
+    return parser
+
+
 def main() -> None:
+    args = build_parser().parse_args()
     csv_files = list_raw_csv_files()
 
-    if not csv_files:
+    if args.input_path:
+        first_file = Path(args.input_path)
+        if not first_file.exists():
+            print(f"Zadaný raw CSV súbor neexistuje: {first_file}")
+            return
+    elif not csv_files:
         print("V priečinku data/raw nie je žiadny CSV súbor.")
         return
-
-    first_file = csv_files[-1]
+    else:
+        first_file = csv_files[-1]
 
     try:
         raw_df = load_raw_csv(first_file)

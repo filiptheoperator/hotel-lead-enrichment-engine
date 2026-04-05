@@ -1,3 +1,4 @@
+import argparse
 import csv
 import json
 import os
@@ -18,6 +19,7 @@ CUSTOM_FIELDS_CONFIG_PATH = Path("configs/clickup_custom_fields.yaml")
 OUTPUT_PATH = Path("data/qa/clickup_rehearsal_execution.json")
 API_BASE = "https://api.clickup.com/api/v2"
 MAX_ROWS = 3
+VERIFY_MODES = {"full", "sample", "none"}
 
 
 def load_dotenv(env_path: Path = ENV_PATH) -> None:
@@ -80,7 +82,7 @@ def load_sample_rows(csv_path: Path = DRY_RUN_SAMPLE_PATH, max_rows: int = MAX_R
         raise RuntimeError(f"Chýba sample CSV: {csv_path}")
     with csv_path.open(newline="", encoding="utf-8") as file:
         rows = list(csv.DictReader(file))
-    return rows[:max_rows]
+    return rows if max_rows <= 0 else rows[:max_rows]
 
 
 def normalize_priority(value: str) -> Optional[int]:
@@ -163,7 +165,68 @@ def verify_custom_fields(task_payload: dict[str, Any], expected_fields: list[dic
     return results
 
 
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Controlled ClickUp write for demo or rehearsal.")
+    parser.add_argument(
+        "--csv",
+        dest="csv_path",
+        default=str(DRY_RUN_SAMPLE_PATH),
+        help="Vstupný ClickUp-ready CSV súbor.",
+    )
+    parser.add_argument(
+        "--max-rows",
+        dest="max_rows",
+        type=int,
+        default=MAX_ROWS,
+        help="Počet riadkov na zápis. 0 = všetky riadky.",
+    )
+    parser.add_argument(
+        "--output",
+        dest="output_path",
+        default=str(OUTPUT_PATH),
+        help="Kam uložiť JSON výsledok.",
+    )
+    parser.add_argument(
+        "--verify-mode",
+        dest="verify_mode",
+        default="full",
+        choices=sorted(VERIFY_MODES),
+        help="Režim overenia: full / sample / none.",
+    )
+    parser.add_argument(
+        "--verify-sample-size",
+        dest="verify_sample_size",
+        type=int,
+        default=5,
+        help="Koľko riadkov overiť pri sample režime.",
+    )
+    parser.add_argument(
+        "--progress-every",
+        dest="progress_every",
+        type=int,
+        default=25,
+        help="Po koľkých riadkoch vypísať progress.",
+    )
+    return parser
+
+
+def build_verify_index_set(row_count: int, verify_mode: str, verify_sample_size: int) -> set[int]:
+    if verify_mode == "full":
+        return set(range(1, row_count + 1))
+    if verify_mode == "none" or row_count <= 0:
+        return set()
+    sample_size = max(1, min(verify_sample_size, row_count))
+    if sample_size >= row_count:
+        return set(range(1, row_count + 1))
+    first_half = max(1, sample_size // 2)
+    last_half = sample_size - first_half
+    indices = set(range(1, first_half + 1))
+    indices.update(range(row_count - last_half + 1, row_count + 1))
+    return indices
+
+
 def main() -> None:
+    args = build_parser().parse_args()
     load_dotenv()
     token = get_required_env("CLICKUP_API_TOKEN")
     config = load_config()
@@ -172,15 +235,22 @@ def main() -> None:
     if not list_id:
         raise RuntimeError("Chýba selected_test_list_id v clickup_custom_fields.yaml")
 
-    rows = load_sample_rows()
+    input_csv_path = Path(args.csv_path)
+    output_path = Path(args.output_path)
+    rows = load_sample_rows(input_csv_path, args.max_rows)
     execution_rows: list[dict[str, Any]] = []
 
     payload: dict[str, Any] = {
         "list_id": list_id,
         "clickup_export_mode": export_mode,
+        "source_csv": str(input_csv_path),
+        "requested_rows": len(rows),
+        "verify_mode": args.verify_mode,
+        "verify_sample_size": args.verify_sample_size,
         "rehearsal_status": "PASS",
         "rows": execution_rows,
     }
+    verify_indices = build_verify_index_set(len(rows), args.verify_mode, args.verify_sample_size)
 
     try:
         for index, row in enumerate(rows, start=1):
@@ -191,42 +261,64 @@ def main() -> None:
             for item in custom_field_values:
                 set_custom_field(task_id, item["field_id"], token, item["value"])
 
-            fetched_task = get_task(task_id, token)
-            field_verification = verify_custom_fields(fetched_task, custom_field_values)
+            row_payload: dict[str, Any] = {
+                "row_ref": f"row_{index}",
+                "task_id": task_id,
+                "task_name": row["Task name"],
+                "status_sent": row["Status"],
+                "priority_sent": row["Priority"],
+                "verified": index in verify_indices,
+            }
 
-            execution_rows.append(
-                {
-                    "row_ref": f"row_{index}",
-                    "task_id": task_id,
-                    "task_name": row["Task name"],
-                    "task_url": str(fetched_task.get("url", "")).strip(),
-                    "status_sent": row["Status"],
-                    "priority_sent": row["Priority"],
-                    "name_match": str(fetched_task.get("name", "")).strip() == row["Task name"],
-                    "description_expected": str(row.get("Description content", "")).strip(),
-                    "description_match": (
-                        str(fetched_task.get("description", "")).strip() == str(row.get("Description content", "")).strip()
-                        if str(row.get("Description content", "")).strip()
-                        else True
-                    ),
-                    "field_verification": field_verification,
-                }
-            )
+            if index in verify_indices:
+                fetched_task = get_task(task_id, token)
+                field_verification = verify_custom_fields(fetched_task, custom_field_values)
+                row_payload.update(
+                    {
+                        "task_url": str(fetched_task.get("url", "")).strip(),
+                        "name_match": str(fetched_task.get("name", "")).strip() == row["Task name"],
+                        "description_expected": str(row.get("Description content", "")).strip(),
+                        "description_match": (
+                            str(fetched_task.get("description", "")).strip() == str(row.get("Description content", "")).strip()
+                            if str(row.get("Description content", "")).strip()
+                            else True
+                        ),
+                        "field_verification": field_verification,
+                    }
+                )
+            else:
+                row_payload.update(
+                    {
+                        "task_url": "",
+                        "name_match": None,
+                        "description_expected": str(row.get("Description content", "")).strip(),
+                        "description_match": None,
+                        "field_verification": [],
+                    }
+                )
 
+            execution_rows.append(row_payload)
+
+            if args.progress_every > 0 and index % args.progress_every == 0:
+                print(f"Progress: {index}/{len(rows)}")
+
+        verified_rows = [row for row in execution_rows if row.get("verified")]
+        payload["verified_row_count"] = len(verified_rows)
+        payload["created_task_count"] = len(execution_rows)
         payload["rehearsal_status"] = "PASS" if all(
             row["name_match"]
             and row["description_match"]
             and all(item["match"] for item in row["field_verification"])
-            for row in execution_rows
+            for row in verified_rows
         ) else "FAIL"
     except Exception as error:
         payload["rehearsal_status"] = "BLOCKED"
         payload["error"] = str(error)
         payload["partial_write_detected"] = len(execution_rows) > 0
 
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_PATH.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Rehearsal execution uložený do: {OUTPUT_PATH}")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"Rehearsal execution uložený do: {output_path}")
     print(f"Rehearsal status: {payload['rehearsal_status']}")
 
 
