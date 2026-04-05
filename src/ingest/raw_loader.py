@@ -8,7 +8,7 @@ RAW_DIR = Path("data/raw")
 def list_raw_csv_files(raw_dir: Path = RAW_DIR) -> list[Path]:
     if not raw_dir.exists():
         return []
-    return sorted(raw_dir.glob("*.csv"))
+    return sorted(raw_dir.glob("*.csv"), key=lambda path: path.stat().st_mtime)
 
 
 def load_raw_csv(file_path: Path) -> pd.DataFrame:

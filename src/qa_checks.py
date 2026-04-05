@@ -21,8 +21,33 @@ CLICKUP_SUPPORTED_CORE_COLUMNS = [
 
 
 def get_first_file(folder: Path, pattern: str) -> Optional[Path]:
-    files = sorted(folder.glob(pattern))
-    return files[0] if files else None
+    files = sorted(folder.glob(pattern), key=lambda path: path.stat().st_mtime)
+    return files[-1] if files else None
+
+
+def get_expected_artifact_path(base_file: Optional[Path], folder: Path, suffix: str) -> Optional[Path]:
+    if base_file is None:
+        return None
+    expected = folder / f"{base_file.stem}{suffix}"
+    return expected if expected.exists() else None
+
+
+def get_current_batch_artifacts() -> dict[str, Optional[Path]]:
+    processed_path = get_first_file(PROCESSED_DIR, "*_normalized_scored.csv")
+    enrichment_path = get_expected_artifact_path(processed_path, ENRICHMENT_DIR, "_enriched.csv")
+    if enrichment_path is None:
+        enrichment_path = get_first_file(ENRICHMENT_DIR, "*_enriched.csv")
+
+    email_like_clickup_base = get_expected_artifact_path(enrichment_path, CLICKUP_DIR.parent / "email_drafts", "_email_drafts.csv")
+    clickup_path = get_expected_artifact_path(email_like_clickup_base, CLICKUP_DIR, "_clickup_import.csv")
+    if clickup_path is None:
+        clickup_path = get_first_file(CLICKUP_DIR, "*_clickup_import.csv")
+
+    return {
+        "processed": processed_path,
+        "enrichment": enrichment_path,
+        "clickup": clickup_path,
+    }
 
 
 def normalize_text(value: object) -> str:
@@ -612,9 +637,10 @@ def save_manual_review_shortlist(
 
 
 def main() -> None:
-    processed_df = load_csv(get_first_file(PROCESSED_DIR, "*_normalized_scored.csv"))
-    enrichment_df = load_csv(get_first_file(ENRICHMENT_DIR, "*_enriched.csv"))
-    clickup_df = load_csv(get_first_file(CLICKUP_DIR, "*_clickup_import.csv"))
+    artifacts = get_current_batch_artifacts()
+    processed_df = load_csv(artifacts["processed"])
+    enrichment_df = load_csv(artifacts["enrichment"])
+    clickup_df = load_csv(artifacts["clickup"])
 
     issues_df = build_issue_rows(
         processed_df=processed_df,

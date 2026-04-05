@@ -1,12 +1,53 @@
 scoring:
   weights:
-    direct_booking_strength: 0.20
-    ota_dependency_signal: 0.20
-    digital_maturity: 0.15
-    operational_complexity: 0.15
-    review_signal: 0.10
-    contact_quality: 0.10
-    fit_to_icp: 0.10
+    icp_fit: 0.25
+    independence_signal: 0.15
+    geography_fit: 0.10
+    hotel_type_relevance: 0.10
+    direct_booking_strength: 0.10
+    ota_dependency_signal: 0.10
+    operational_complexity: 0.10
+    contact_quality: 0.05
+    review_signal: 0.03
+    fit_confidence: 0.02
+  heuristics:
+    target_country_codes:
+      - SK
+    target_city_keywords:
+      - bratislava
+    preferred_hotel_type_keywords:
+      - hotel
+      - city hotel
+      - boutique hotel
+      - business hotel
+      - leisure hotel
+      - residence hotel
+    review_hotel_type_keywords:
+      - apartment hotel
+      - boutique apartments
+      - residence-heavy property
+      - penzion
+      - pension
+      - event-heavy mixed property
+      - apartment
+      - hostel
+      - ubytovanie
+    chain_keywords:
+      - radisson
+      - hilton
+      - marriott
+      - accor
+      - ibis
+      - mercure
+      - nh
+      - clarion
+      - holiday inn
+      - crowne plaza
+      - best western
+      - wyndham
+      - intercontinental
+      - doubletree
+      - park inn
 priority_bands:
   high_min: 8.5
   medium_high_min: 7.5

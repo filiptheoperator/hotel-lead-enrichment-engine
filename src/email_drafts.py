@@ -12,7 +12,7 @@ EMAIL_CONFIG_PATH = Path("configs/email.yaml")
 def list_enriched_files(enrichment_dir: Path = ENRICHMENT_OUTPUT_DIR) -> list[Path]:
     if not enrichment_dir.exists():
         return []
-    return sorted(enrichment_dir.glob("*_enriched.csv"))
+    return sorted(enrichment_dir.glob("*_enriched.csv"), key=lambda path: path.stat().st_mtime)
 
 
 def normalize_text(value: object) -> str:
@@ -167,6 +167,24 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             emails[column] = emails[column].apply(normalize_text)
 
     for column in [
+        "hotel_name_normalized",
+        "country_code",
+        "ranking_score",
+        "icp_fit_score",
+        "icp_fit_class",
+        "fit_confidence",
+        "review_flag",
+        "review_reason",
+        "website_domain",
+        "hotel_type_class",
+        "geography_fit",
+        "independent_chain_class",
+        "ownership_type",
+        "direct_booking_weakness",
+        "ota_dependency_signal_label",
+        "dedupe_status",
+        "duplicate_group_id",
+        "contact_duplicate_flag",
         "give_first_insight",
         "main_observed_issue",
         "email_hook",
@@ -197,12 +215,30 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     return emails[
         [
             "hotel_name",
+            "hotel_name_normalized",
             "city",
+            "country_code",
             "priority_band",
             "priority_score",
+            "ranking_score",
+            "icp_fit_score",
+            "icp_fit_class",
+            "fit_confidence",
+            "review_flag",
+            "review_reason",
             "website",
+            "website_domain",
             "phone",
             "contact_status",
+            "hotel_type_class",
+            "geography_fit",
+            "independent_chain_class",
+            "ownership_type",
+            "direct_booking_weakness",
+            "ota_dependency_signal_label",
+            "dedupe_status",
+            "duplicate_group_id",
+            "contact_duplicate_flag",
             "factual_summary",
             "subject_line",
             "hook",
@@ -243,7 +279,7 @@ def main() -> None:
         print("V priečinku outputs/enrichment nie je žiadny enriched CSV súbor.")
         return
 
-    first_file = enriched_files[0]
+    first_file = enriched_files[-1]
 
     try:
         enriched_df = pd.read_csv(first_file)

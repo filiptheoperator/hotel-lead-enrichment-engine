@@ -1,10 +1,12 @@
 from pathlib import Path
+from typing import Optional
 
 import pandas as pd
 
 
 EMAIL_OUTPUT_DIR = Path("outputs/email_drafts")
 CLICKUP_OUTPUT_DIR = Path("outputs/clickup")
+ENRICHMENT_OUTPUT_DIR = Path("outputs/enrichment")
 CLICKUP_REQUIRED_COLUMNS = ["Task name"]
 CLICKUP_SUPPORTED_CORE_COLUMNS = [
     "Task name",
@@ -18,7 +20,20 @@ CLICKUP_ALLOWED_PRIORITY_VALUES = {"", "1", "2", "3", "4"}
 def list_email_draft_files(email_dir: Path = EMAIL_OUTPUT_DIR) -> list[Path]:
     if not email_dir.exists():
         return []
-    return sorted(email_dir.glob("*_email_drafts.csv"))
+    return sorted(email_dir.glob("*_email_drafts.csv"), key=lambda path: path.stat().st_mtime)
+
+
+def get_preferred_email_draft_file() -> Optional[Path]:
+    enrichment_files = sorted(
+        ENRICHMENT_OUTPUT_DIR.glob("*_enriched.csv"),
+        key=lambda path: path.stat().st_mtime,
+    )
+    if enrichment_files:
+        expected = EMAIL_OUTPUT_DIR / f"{Path(enrichment_files[-1].name).stem}_email_drafts.csv"
+        if expected.exists():
+            return expected
+    email_files = list_email_draft_files()
+    return email_files[-1] if email_files else None
 
 
 def normalize_text(value: object) -> str:
@@ -47,14 +62,34 @@ def build_clickup_status(row: pd.Series) -> str:
     return "to do"
 
 
+def build_account_status(row: pd.Series) -> str:
+    if normalize_text(row.get("review_flag")) == "yes":
+        return "Researching"
+    if normalize_text(row.get("priority_band")) in {"High", "Medium-High"}:
+        return "Prioritized"
+    return "Backlog"
+
+
 def build_clickup_notes(row: pd.Series) -> str:
     parts = [
         f"Hotel: {normalize_text(row.get('hotel_name', ''))}",
+        f"Krajina: {normalize_text(row.get('country_code', ''))}",
         f"Mesto: {normalize_text(row.get('city', ''))}",
+        f"Hotel type: {normalize_text(row.get('hotel_type_class', ''))}",
+        f"Independent / Chain: {normalize_text(row.get('independent_chain_class', ''))}",
         f"Priorita band: {normalize_text(row.get('priority_band', ''))}",
         f"Skóre: {normalize_text(row.get('priority_score', ''))}",
+        f"Ranking score: {normalize_text(row.get('ranking_score', ''))}",
+        f"ICP fit score: {normalize_text(row.get('icp_fit_score', ''))}",
+        f"ICP fit class: {normalize_text(row.get('icp_fit_class', ''))}",
+        f"Fit confidence: {normalize_text(row.get('fit_confidence', ''))}",
+        f"Review flag: {normalize_text(row.get('review_flag', ''))}",
+        f"Review reason: {normalize_text(row.get('review_reason', ''))}",
+        f"Dedupe status: {normalize_text(row.get('dedupe_status', ''))}",
         f"Web: {normalize_text(row.get('website', '')) or 'Verejne nepotvrdené'}",
         f"Telefón: {normalize_text(row.get('phone', '')) or 'Verejne nepotvrdené'}",
+        f"OTA dependency signal: {normalize_text(row.get('ota_dependency_signal_label', ''))}",
+        f"Direct booking weakness: {normalize_text(row.get('direct_booking_weakness', ''))}",
         f"Email angle: {normalize_text(row.get('email_angle', ''))}",
         f"CTA type: {normalize_text(row.get('cta_type', ''))}",
         f"Variant ID: {normalize_text(row.get('variant_id', ''))}",
@@ -85,6 +120,21 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             export_df[column] = export_df[column].apply(normalize_text)
 
     for column in [
+        "country_code",
+        "hotel_type_class",
+        "ranking_score",
+        "icp_fit_score",
+        "icp_fit_class",
+        "fit_confidence",
+        "review_flag",
+        "review_reason",
+        "direct_booking_weakness",
+        "ota_dependency_signal_label",
+    ]:
+        if column not in export_df.columns:
+            export_df[column] = ""
+
+    for column in [
         "email_angle",
         "cta_type",
         "variant_id",
@@ -103,9 +153,20 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     export_df["task_name"] = export_df.apply(build_clickup_task_name, axis=1)
     export_df["clickup_priority"] = export_df["priority_band"].apply(map_clickup_priority)
     export_df["clickup_status"] = export_df.apply(build_clickup_status, axis=1)
+    export_df["account_status"] = export_df.apply(build_account_status, axis=1)
     export_df["contact_phone"] = export_df["phone"]
     export_df["contact_website"] = export_df["website"]
     export_df["task_notes"] = export_df.apply(build_clickup_notes, axis=1)
+    export_df["rooms_range"] = "Verejne nepotvrdené"
+    export_df["priority_level"] = export_df["priority_band"]
+    export_df["icp_fit"] = export_df["icp_fit_class"]
+    export_df["ota_dependency_signal"] = export_df["ota_dependency_signal_label"]
+    export_df["city_region"] = export_df["city"]
+    export_df["main_pain_hypothesis"] = export_df["main_observed_issue"]
+    export_df = export_df.sort_values(
+        by=["ranking_score", "priority_score", "hotel_name"],
+        ascending=[False, False, True],
+    ).reset_index(drop=True)
 
     return export_df[
         [
@@ -113,9 +174,19 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "task_notes",
             "clickup_status",
             "clickup_priority",
+            "account_status",
             "hotel_name",
+            "country_code",
+            "city_region",
+            "hotel_type_class",
+            "rooms_range",
             "city",
             "priority_score",
+            "priority_level",
+            "icp_fit",
+            "ota_dependency_signal",
+            "direct_booking_weakness",
+            "main_pain_hypothesis",
             "contact_phone",
             "contact_website",
             "subject_line",
@@ -138,9 +209,19 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "task_notes": "Description content",
             "clickup_status": "Status",
             "clickup_priority": "Priority",
+            "account_status": "Account Status",
             "hotel_name": "Hotel name",
+            "country_code": "Country",
+            "city_region": "City / Region",
+            "hotel_type_class": "Hotel Type",
+            "rooms_range": "Rooms Range",
             "city": "City",
             "priority_score": "Priority score",
+            "priority_level": "Priority Level",
+            "icp_fit": "ICP Fit",
+            "ota_dependency_signal": "OTA Dependency Signal",
+            "direct_booking_weakness": "Direct Booking Weakness",
+            "main_pain_hypothesis": "Main Pain Hypothesis",
             "contact_phone": "Contact phone",
             "contact_website": "Contact website",
             "subject_line": "Subject line",
@@ -227,13 +308,11 @@ def save_high_leads_clickup_file(df: pd.DataFrame, source_file: str) -> Path:
 
 
 def main() -> None:
-    email_files = list_email_draft_files()
+    first_file = get_preferred_email_draft_file()
 
-    if not email_files:
+    if first_file is None:
         print("V priečinku outputs/email_drafts nie je žiadny email draft CSV súbor.")
         return
-
-    first_file = email_files[0]
 
     try:
         email_df = pd.read_csv(first_file)

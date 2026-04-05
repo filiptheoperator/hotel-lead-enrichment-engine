@@ -35,8 +35,42 @@ CLICKUP_API_PAYLOAD_DIFF_PATH = QA_DIR / "clickup_api_payload_diff.json"
 
 
 def get_latest_file(folder: Path, pattern: str) -> Optional[Path]:
-    files = sorted(folder.glob(pattern))
+    files = sorted(folder.glob(pattern), key=lambda path: path.stat().st_mtime)
     return files[-1] if files else None
+
+
+def get_expected_artifact_path(base_file: Optional[Path], folder: Path, suffix: str) -> Optional[Path]:
+    if base_file is None:
+        return None
+    expected = folder / f"{base_file.stem}{suffix}"
+    return expected if expected.exists() else None
+
+
+def get_current_batch_artifacts() -> dict[str, Optional[Path]]:
+    processed_path = get_latest_file(PROCESSED_DIR, "*_normalized_scored.csv")
+    enrichment_path = get_expected_artifact_path(processed_path, ENRICHMENT_DIR, "_enriched.csv")
+    if enrichment_path is None:
+        enrichment_path = get_latest_file(ENRICHMENT_DIR, "*_enriched.csv")
+
+    email_path = get_expected_artifact_path(enrichment_path, EMAIL_DIR, "_email_drafts.csv")
+    if email_path is None:
+        email_path = get_latest_file(EMAIL_DIR, "*_email_drafts.csv")
+
+    clickup_path = get_expected_artifact_path(email_path, CLICKUP_DIR, "_clickup_import.csv")
+    if clickup_path is None:
+        clickup_path = get_latest_file(CLICKUP_DIR, "*_clickup_import.csv")
+
+    clickup_high_only_path = get_expected_artifact_path(email_path, CLICKUP_DIR, "_clickup_import_high_only.csv")
+    if clickup_high_only_path is None:
+        clickup_high_only_path = get_latest_file(CLICKUP_DIR, "*_clickup_import_high_only.csv")
+
+    return {
+        "processed": processed_path,
+        "enrichment": enrichment_path,
+        "email": email_path,
+        "clickup": clickup_path,
+        "clickup_high_only": clickup_high_only_path,
+    }
 
 
 def load_csv(file_path: Optional[Path]) -> pd.DataFrame:
@@ -68,11 +102,12 @@ def normalize_clickup_priority(value: object) -> str:
 
 
 def build_run_manifest() -> dict:
-    processed_path = get_latest_file(PROCESSED_DIR, "*_normalized_scored.csv")
-    enrichment_path = get_latest_file(ENRICHMENT_DIR, "*_enriched.csv")
-    email_path = get_latest_file(EMAIL_DIR, "*_email_drafts.csv")
-    clickup_path = get_latest_file(CLICKUP_DIR, "*_clickup_import.csv")
-    clickup_high_only_path = get_latest_file(CLICKUP_DIR, "*_clickup_import_high_only.csv")
+    artifacts = get_current_batch_artifacts()
+    processed_path = artifacts["processed"]
+    enrichment_path = artifacts["enrichment"]
+    email_path = artifacts["email"]
+    clickup_path = artifacts["clickup"]
+    clickup_high_only_path = artifacts["clickup_high_only"]
     qa_issues_path = QA_DIR / "qa_issues.csv"
     shortlist_path = QA_DIR / "manual_review_shortlist.csv"
     run_summary_path = QA_DIR / "run_summary.txt"

@@ -19,8 +19,37 @@ CLICKUP_GATE_JSON_PATH = QA_DIR / "clickup_import_gate.json"
 
 
 def get_first_file(folder: Path, pattern: str) -> Optional[Path]:
-    files = sorted(folder.glob(pattern))
-    return files[0] if files else None
+    files = sorted(folder.glob(pattern), key=lambda path: path.stat().st_mtime)
+    return files[-1] if files else None
+
+
+def get_expected_artifact_path(base_file: Optional[Path], folder: Path, suffix: str) -> Optional[Path]:
+    if base_file is None:
+        return None
+    expected = folder / f"{base_file.stem}{suffix}"
+    return expected if expected.exists() else None
+
+
+def get_current_batch_artifacts() -> dict[str, Optional[Path]]:
+    processed_path = get_first_file(PROCESSED_DIR, "*_normalized_scored.csv")
+    enrichment_path = get_expected_artifact_path(processed_path, ENRICHMENT_DIR, "_enriched.csv")
+    if enrichment_path is None:
+        enrichment_path = get_first_file(ENRICHMENT_DIR, "*_enriched.csv")
+
+    email_path = get_expected_artifact_path(enrichment_path, EMAIL_DIR, "_email_drafts.csv")
+    if email_path is None:
+        email_path = get_first_file(EMAIL_DIR, "*_email_drafts.csv")
+
+    clickup_path = get_expected_artifact_path(email_path, CLICKUP_DIR, "_clickup_import.csv")
+    if clickup_path is None:
+        clickup_path = get_first_file(CLICKUP_DIR, "*_clickup_import.csv")
+
+    return {
+        "processed": processed_path,
+        "enrichment": enrichment_path,
+        "email": email_path,
+        "clickup": clickup_path,
+    }
 
 
 def load_csv(file_path: Optional[Path]) -> pd.DataFrame:
@@ -43,10 +72,11 @@ def normalize_series(df: pd.DataFrame, column: str) -> pd.Series:
 
 
 def build_run_summary() -> str:
-    processed_df = load_csv(get_first_file(PROCESSED_DIR, "*_normalized_scored.csv"))
-    enrichment_df = load_csv(get_first_file(ENRICHMENT_DIR, "*_enriched.csv"))
-    email_df = load_csv(get_first_file(EMAIL_DIR, "*_email_drafts.csv"))
-    clickup_df = load_csv(get_first_file(CLICKUP_DIR, "*_clickup_import.csv"))
+    artifacts = get_current_batch_artifacts()
+    processed_df = load_csv(artifacts["processed"])
+    enrichment_df = load_csv(artifacts["enrichment"])
+    email_df = load_csv(artifacts["email"])
+    clickup_df = load_csv(artifacts["clickup"])
     qa_df = load_csv(QA_DIR / "qa_issues.csv")
     batch_readiness_score = "Neoverené"
     if CLICKUP_GATE_JSON_PATH.exists():
@@ -305,7 +335,7 @@ def build_run_summary() -> str:
 def build_run_delta_report() -> str:
     before_enriched_path = QA_DIR / "before_enriched.csv"
     before_shortlist_path = QA_DIR / "before_manual_review_shortlist.csv"
-    current_enriched = load_csv(get_first_file(ENRICHMENT_DIR, "*_enriched.csv"))
+    current_enriched = load_csv(get_current_batch_artifacts()["enrichment"])
     current_shortlist = load_csv(MANUAL_REVIEW_SHORTLIST_PATH)
     before_enriched = load_csv(before_enriched_path)
     before_shortlist = load_csv(before_shortlist_path)

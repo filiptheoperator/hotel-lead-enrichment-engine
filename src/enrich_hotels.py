@@ -64,7 +64,7 @@ def load_enrichment_config(config_path: Path = ENRICHMENT_CONFIG_PATH) -> dict:
 def list_processed_files(processed_dir: Path = PROCESSED_DIR) -> list[Path]:
     if not processed_dir.exists():
         return []
-    return sorted(processed_dir.glob("*_normalized_scored.csv"))
+    return sorted(processed_dir.glob("*_normalized_scored.csv"), key=lambda path: path.stat().st_mtime)
 
 
 def normalize_text(value: object) -> str:
@@ -1187,14 +1187,31 @@ def build_enrichment_dataframe(
     return enriched[
         [
             "hotel_name",
+            "hotel_name_normalized",
             "city",
             "country_code",
             "website",
+            "website_domain",
             "phone",
             "category_name",
+            "hotel_type_class",
+            "geography_fit",
+            "independent_chain_class",
+            "ownership_type",
+            "direct_booking_weakness",
+            "ota_dependency_signal_label",
             "all_categories",
             "review_score",
             "reviews_count",
+            "dedupe_status",
+            "duplicate_group_id",
+            "contact_duplicate_flag",
+            "review_flag",
+            "review_reason",
+            "icp_fit_score",
+            "icp_fit_class",
+            "fit_confidence",
+            "ranking_score",
             "priority_score",
             "priority_band",
             "hotel_opening_hours",
@@ -1322,7 +1339,7 @@ def main() -> None:
         print("V priečinku data/processed nie je žiadny normalized_scored CSV súbor.")
         return
 
-    first_file = processed_files[0]
+    first_file = processed_files[-1]
     config = load_enrichment_config()
     enrichment_config = config.get("enrichment", {})
     unknown_value_label = enrichment_config.get(

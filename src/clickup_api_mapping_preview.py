@@ -7,6 +7,7 @@ import yaml
 
 
 CLICKUP_DIR = Path("outputs/clickup")
+EMAIL_DIR = Path("outputs/email_drafts")
 CONFIG_PATH = Path("configs/clickup_api_mapping.yaml")
 QA_DIR = Path("data/qa")
 OUTPUT_PATH = QA_DIR / "clickup_api_mapping_preview.json"
@@ -15,12 +16,22 @@ DIFF_PATH = QA_DIR / "clickup_api_payload_diff.json"
 
 
 def get_latest_clickup_file() -> Optional[Path]:
-    files = sorted(CLICKUP_DIR.glob("*_clickup_import.csv"))
+    email_files = sorted(EMAIL_DIR.glob("*_email_drafts.csv"), key=lambda path: path.stat().st_mtime)
+    if email_files:
+        expected = CLICKUP_DIR / f"{Path(email_files[-1].name).stem}_clickup_import.csv"
+        if expected.exists():
+            return expected
+    files = sorted(CLICKUP_DIR.glob("*_clickup_import.csv"), key=lambda path: path.stat().st_mtime)
     return files[-1] if files else None
 
 
 def get_latest_high_only_clickup_file() -> Optional[Path]:
-    files = sorted(CLICKUP_DIR.glob("*_clickup_import_high_only.csv"))
+    email_files = sorted(EMAIL_DIR.glob("*_email_drafts.csv"), key=lambda path: path.stat().st_mtime)
+    if email_files:
+        expected = CLICKUP_DIR / f"{Path(email_files[-1].name).stem}_clickup_import_high_only.csv"
+        if expected.exists():
+            return expected
+    files = sorted(CLICKUP_DIR.glob("*_clickup_import_high_only.csv"), key=lambda path: path.stat().st_mtime)
     return files[-1] if files else None
 
 

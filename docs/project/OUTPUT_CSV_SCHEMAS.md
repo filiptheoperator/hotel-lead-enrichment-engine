@@ -23,19 +23,35 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 ### Potvrdené stĺpce
 
 1. `hotel_name`
-2. `review_score`
-3. `reviews_count`
-4. `street`
-5. `city`
-6. `country_code`
-7. `website`
-8. `phone`
-9. `category_name`
-10. `source_url`
-11. `all_categories`
-12. `source_file`
-13. `priority_score`
-14. `priority_band`
+2. `hotel_name_normalized`
+3. `review_score`
+4. `reviews_count`
+5. `street`
+6. `city`
+7. `state`
+8. `country_code`
+9. `website`
+10. `website_domain`
+11. `phone`
+12. `category_name`
+13. `hotel_type_class`
+14. `geography_fit`
+15. `independent_chain_class`
+16. `ownership_type`
+17. `source_url`
+18. `all_categories`
+19. `source_file`
+20. `dedupe_status`
+21. `duplicate_group_id`
+22. `contact_duplicate_flag`
+23. `review_flag`
+24. `review_reason`
+25. `icp_fit_score`
+26. `icp_fit_class`
+27. `fit_confidence`
+28. `ranking_score`
+29. `priority_score`
+30. `priority_band`
 
 ## outputs/enrichment
 
@@ -46,43 +62,60 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 ### Potvrdené stĺpce
 
 1. `hotel_name`
-2. `city`
-3. `country_code`
-4. `website`
-5. `phone`
-6. `category_name`
-7. `all_categories`
-8. `review_score`
-9. `reviews_count`
-10. `priority_score`
-11. `priority_band`
-12. `hotel_opening_hours`
-13. `hotel_opening_hours_status`
-14. `hotel_opening_hours_source_url`
-15. `hotel_opening_hours_source_type`
-16. `checkin_checkout_info`
-17. `checkin_checkout_status`
-18. `checkin_checkout_source_url`
-19. `checkin_checkout_source_type`
-20. `checkin_checkout_source_origin`
-21. `checkin_checkout_completeness`
-22. `public_source_reachable`
-23. `public_source_fetch_status`
-24. `contact_status`
-25. `factual_summary`
-26. `give_first_insight`
-27. `main_observed_issue`
-28. `email_hook`
-29. `micro_cta`
-30. `primary_email_goal`
-31. `proof_snippet`
-32. `email_angle`
-33. `cta_type`
-34. `variant_id`
-35. `test_batch`
-36. `reply_outcome`
-37. `source_url`
-38. `source_file`
+2. `hotel_name_normalized`
+3. `city`
+4. `country_code`
+5. `website`
+6. `website_domain`
+7. `phone`
+8. `category_name`
+9. `hotel_type_class`
+10. `geography_fit`
+11. `independent_chain_class`
+12. `ownership_type`
+13. `direct_booking_weakness`
+14. `ota_dependency_signal_label`
+15. `all_categories`
+16. `review_score`
+17. `reviews_count`
+18. `dedupe_status`
+19. `duplicate_group_id`
+20. `contact_duplicate_flag`
+21. `review_flag`
+22. `review_reason`
+23. `icp_fit_score`
+24. `icp_fit_class`
+25. `fit_confidence`
+26. `ranking_score`
+27. `priority_score`
+28. `priority_band`
+29. `hotel_opening_hours`
+30. `hotel_opening_hours_status`
+31. `hotel_opening_hours_source_url`
+32. `hotel_opening_hours_source_type`
+33. `checkin_checkout_info`
+34. `checkin_checkout_status`
+35. `checkin_checkout_source_url`
+36. `checkin_checkout_source_type`
+37. `checkin_checkout_source_origin`
+38. `checkin_checkout_completeness`
+39. `public_source_reachable`
+40. `public_source_fetch_status`
+41. `contact_status`
+42. `factual_summary`
+43. `give_first_insight`
+44. `main_observed_issue`
+45. `email_hook`
+46. `micro_cta`
+47. `primary_email_goal`
+48. `proof_snippet`
+49. `email_angle`
+50. `cta_type`
+51. `variant_id`
+52. `test_batch`
+53. `reply_outcome`
+54. `source_url`
+55. `source_file`
 
 ### Poznámky
 
@@ -102,34 +135,52 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 ### Potvrdené stĺpce
 
 1. `hotel_name`
-2. `city`
-3. `priority_band`
-4. `priority_score`
-5. `website`
-6. `phone`
-7. `contact_status`
-8. `factual_summary`
-9. `subject_line`
-10. `hook`
-11. `give_first_insight`
-12. `main_observed_issue`
-13. `email_hook`
-14. `micro_cta`
-15. `primary_email_goal`
-16. `proof_snippet`
-17. `email_angle`
-18. `cta_type`
-19. `variant_id`
-20. `test_batch`
-21. `reply_outcome`
-22. `personalization_line`
-23. `give_first_line`
-24. `relevance_line`
-25. `low_friction_cta`
-26. `proof_line`
-27. `cold_email`
-28. `followup_email`
-29. `source_file`
+2. `hotel_name_normalized`
+3. `city`
+4. `country_code`
+5. `priority_band`
+6. `priority_score`
+7. `ranking_score`
+8. `icp_fit_score`
+9. `icp_fit_class`
+10. `fit_confidence`
+11. `review_flag`
+12. `review_reason`
+13. `website`
+14. `website_domain`
+15. `phone`
+16. `contact_status`
+17. `hotel_type_class`
+18. `geography_fit`
+19. `independent_chain_class`
+20. `ownership_type`
+21. `direct_booking_weakness`
+22. `ota_dependency_signal_label`
+23. `dedupe_status`
+24. `duplicate_group_id`
+25. `contact_duplicate_flag`
+26. `factual_summary`
+27. `subject_line`
+28. `hook`
+29. `give_first_insight`
+30. `main_observed_issue`
+31. `email_hook`
+32. `micro_cta`
+33. `primary_email_goal`
+34. `proof_snippet`
+35. `email_angle`
+36. `cta_type`
+37. `variant_id`
+38. `test_batch`
+39. `reply_outcome`
+40. `personalization_line`
+41. `give_first_line`
+42. `relevance_line`
+43. `low_friction_cta`
+44. `proof_line`
+45. `cold_email`
+46. `followup_email`
+47. `source_file`
 
 ### Poznámky
 
@@ -149,28 +200,39 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 2. `Description content`
 3. `Status`
 4. `Priority`
-5. `Hotel name`
-6. `City`
-7. `Priority score`
-8. `Contact phone`
-9. `Contact website`
-10. `Subject line`
-11. `Source file`
-12. `Email angle`
-13. `CTA type`
-14. `Variant ID`
-15. `Test batch`
-16. `Reply outcome`
-17. `Give-first insight`
-18. `Main observed issue`
-19. `Email hook`
-20. `Micro CTA`
-21. `Proof snippet`
-22. `Primary email goal`
+5. `Account Status`
+6. `Hotel name`
+7. `Country`
+8. `City / Region`
+9. `Hotel Type`
+10. `Rooms Range`
+11. `City`
+12. `Priority score`
+13. `Priority Level`
+14. `ICP Fit`
+15. `OTA Dependency Signal`
+16. `Direct Booking Weakness`
+17. `Main Pain Hypothesis`
+18. `Contact phone`
+19. `Contact website`
+20. `Subject line`
+21. `Source file`
+22. `Email angle`
+23. `CTA type`
+24. `Variant ID`
+25. `Test batch`
+26. `Reply outcome`
+27. `Give-first insight`
+28. `Main observed issue`
+29. `Email hook`
+30. `Micro CTA`
+31. `Proof snippet`
+32. `Primary email goal`
 
 ### Poznámky
 
 - `Task name`, `Description content`, `Status`, `Priority` sú potvrdené ako minimálny importný contract.
+- ClickUp export má držať broad lead coverage a radenie `best -> worst`, nie skorý discard.
 - Reálna kompatibilita s cieľovým ClickUp workspace ostáva `Neoverené`.
 - nové testing a copy polia sú určené pre operator review, reporting a neskoršie meranie reply kvality
 
