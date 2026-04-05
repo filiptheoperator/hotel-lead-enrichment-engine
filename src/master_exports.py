@@ -136,6 +136,11 @@ def build_master_exports(
             "owner_gm_decision_cycle_signal",
             "contact_discovery_likelihood",
             "ota_visibility_signal",
+            "website_quality",
+            "chain_signal_confidence",
+            "contact_gap_reason",
+            "why_not_top_tier",
+            "rank_bucket",
             "ranking_reason",
             "ranking_score",
             "priority_score",
@@ -184,6 +189,11 @@ def build_master_exports(
             "owner_gm_decision_cycle_signal",
             "contact_discovery_likelihood",
             "ota_visibility_signal",
+            "website_quality",
+            "chain_signal_confidence",
+            "contact_gap_reason",
+            "why_not_top_tier",
+            "rank_bucket",
             "email_angle",
             "cta_type",
             "variant_id",
@@ -220,6 +230,8 @@ def build_master_exports(
             "reply_outcome",
             "ranking_score",
             "priority_band",
+            "why_not_top_tier",
+            "rank_bucket",
             "ranking_reason",
             "review_bucket",
             "review_flag",
@@ -251,6 +263,7 @@ def build_master_exports(
                 "match_basis",
                 "merge_recommended",
                 "manual_merge_candidate",
+                "account_merge_notes",
                 "manual_review_needed",
                 "manual_review_reason",
             ]
@@ -264,6 +277,14 @@ def build_master_exports(
         )
         dedupe_review["merge_recommended"] = "yes"
         dedupe_review["manual_merge_candidate"] = dedupe_review["manual_merge_candidate"]
+        dedupe_review["account_merge_notes"] = dedupe_review.apply(
+            lambda row: (
+                "Skontrolovať merge účtu a kontaktov."
+                if normalize_text(row.get("manual_merge_candidate")) == "yes"
+                else "Skontrolovať iba kontakt duplicitneho záznamu."
+            ),
+            axis=1,
+        )
         dedupe_review["manual_review_needed"] = dedupe_review["review_flag"].apply(
             lambda value: "yes" if normalize_text(value) == "yes" else "no"
         )
@@ -282,6 +303,7 @@ def build_master_exports(
                 "match_basis",
                 "merge_recommended",
                 "manual_merge_candidate",
+                "account_merge_notes",
                 "manual_review_needed",
                 "manual_review_reason",
             ]
@@ -296,6 +318,16 @@ def build_master_exports(
     if include_review_flag:
         shortlist_mask = shortlist_mask | accounts_master["review_flag"].fillna("").astype(str).str.strip().eq("yes")
     operator_shortlist = accounts_master[shortlist_mask].copy()
+    operator_shortlist["shortlist_reason"] = operator_shortlist.apply(
+        lambda row: " | ".join(
+            [
+                normalize_text(row.get("priority_band")),
+                normalize_text(row.get("rank_bucket")),
+                normalize_text(row.get("ranking_reason")),
+            ]
+        ).strip(" |"),
+        axis=1,
+    )
 
     return {
         "accounts_master": accounts_master.sort_values("ranking_score", ascending=False).reset_index(drop=True),

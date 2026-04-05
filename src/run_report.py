@@ -2,7 +2,10 @@ from pathlib import Path
 from typing import Optional
 
 import pandas as pd
+import yaml
 from pandas.errors import EmptyDataError
+
+from clickup_export import get_clickup_export_mode, get_clickup_required_columns_for_mode
 
 
 PROCESSED_DIR = Path("data/processed")
@@ -17,6 +20,7 @@ MANUAL_REVIEW_SHORTLIST_PATH = QA_DIR / "manual_review_shortlist.csv"
 RUN_MANIFEST_PATH = QA_DIR / "run_manifest.json"
 CLICKUP_GATE_TXT_PATH = QA_DIR / "clickup_import_gate.txt"
 CLICKUP_GATE_JSON_PATH = QA_DIR / "clickup_import_gate.json"
+PROJECT_CONFIG_PATH = Path("configs/project.yaml")
 
 
 def get_first_file(folder: Path, pattern: str) -> Optional[Path]:
@@ -67,6 +71,13 @@ def load_csv(file_path: Optional[Path]) -> pd.DataFrame:
         return pd.read_csv(file_path)
     except EmptyDataError:
         return pd.DataFrame()
+
+
+def load_project_config(config_path: Path = PROJECT_CONFIG_PATH) -> dict:
+    if not config_path.exists():
+        return {}
+    with config_path.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file) or {}
 
 
 def safe_count(series: pd.Series, expected_value: str) -> int:
@@ -241,9 +252,10 @@ def build_run_summary() -> str:
             ).sum()
         )
 
+    clickup_export_mode = get_clickup_export_mode(load_project_config())
     import_ready_rows = 0
     if not clickup_df.empty:
-        required_columns = {"Task name", "Description content", "Status", "Priority"}
+        required_columns = set(get_clickup_required_columns_for_mode(clickup_export_mode))
         if required_columns.issubset(set(clickup_df.columns)):
             task_name_ok = ~clickup_df["Task name"].fillna("").astype(str).str.strip().eq("")
             status_ok = ~clickup_df["Status"].fillna("").astype(str).str.strip().eq("")
@@ -255,7 +267,11 @@ def build_run_summary() -> str:
                 .map(lambda value: str(int(float(value))) if value not in {"", "nan"} else "")
             )
             priority_ok = normalized_priority.isin(["", "1", "2", "3", "4"])
-            import_ready_rows = int((task_name_ok & status_ok & priority_ok).sum())
+            ready_mask = task_name_ok & status_ok & priority_ok
+            if "Description content" in required_columns:
+                description_ok = ~clickup_df["Description content"].fillna("").astype(str).str.strip().eq("")
+                ready_mask = ready_mask & description_ok
+            import_ready_rows = int(ready_mask.sum())
 
     qa_blocking = 0
     qa_medium = 0
@@ -342,6 +358,7 @@ def build_run_summary() -> str:
         f"- fetch_missing_website: {fetch_missing_website}",
         "",
         "Import Ready",
+        f"- clickup_export_mode: {clickup_export_mode}",
         f"- clickup_import_ready_rows: {import_ready_rows}",
         f"- clickup_not_ready_rows: {max(clickup_rows - import_ready_rows, 0)}",
         "",

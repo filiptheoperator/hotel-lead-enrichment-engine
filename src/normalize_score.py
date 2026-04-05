@@ -82,6 +82,11 @@ FINAL_OUTPUT_COLUMNS = [
     "owner_gm_decision_cycle_signal",
     "contact_discovery_likelihood",
     "ota_visibility_signal",
+    "website_quality",
+    "chain_signal_confidence",
+    "contact_gap_reason",
+    "why_not_top_tier",
+    "rank_bucket",
     "ranking_reason",
     "ranking_score",
     "priority_score",
@@ -472,6 +477,64 @@ def build_contact_discovery_likelihood(row: pd.Series) -> str:
     return "Low"
 
 
+def build_contact_gap_reason(row: pd.Series) -> str:
+    has_website = bool(normalize_text(row.get("website")))
+    has_phone = bool(normalize_text(row.get("phone")))
+    if has_website and has_phone:
+        return "no_major_gap"
+    if has_website and not has_phone:
+        return "phone_missing"
+    if has_phone and not has_website:
+        return "website_missing"
+    return "website_and_phone_missing"
+
+
+def build_chain_signal_confidence(row: pd.Series) -> str:
+    chain_class = normalize_text(row.get("independent_chain_class"))
+    website_domain = normalize_text(row.get("website_domain"))
+    hotel_name = normalize_text(row.get("hotel_name"))
+    if chain_class == "Chain candidate" and website_domain and hotel_name:
+        return "High"
+    if chain_class == "Chain candidate":
+        return "Medium"
+    return "Low"
+
+
+def build_website_quality(row: pd.Series) -> str:
+    website = normalize_text(row.get("website"))
+    reviews_count = int(row.get("reviews_count", 0) or 0)
+    if website and reviews_count >= 20:
+        return "Strong"
+    if website:
+        return "Basic"
+    return "Missing"
+
+
+def build_why_not_top_tier(row: pd.Series) -> str:
+    reasons: list[str] = []
+    if normalize_text(row.get("independent_chain_class")) == "Chain candidate":
+        reasons.append("chain_signal")
+    if normalize_text(row.get("geography_fit")) == "Out-of-profile geography":
+        reasons.append("geo_mismatch")
+    if normalize_text(row.get("contact_gap_reason")) != "no_major_gap":
+        reasons.append(normalize_text(row.get("contact_gap_reason")))
+    if normalize_text(row.get("website_quality")) == "Missing":
+        reasons.append("website_missing")
+    if normalize_text(row.get("hotel_type_class")) == "Review type":
+        reasons.append("review_type")
+    return " | ".join(reasons[:3]) or "top_tier_candidate"
+
+
+def build_rank_bucket(ranking_score: float) -> str:
+    if ranking_score >= 80:
+        return "A"
+    if ranking_score >= 65:
+        return "B"
+    if ranking_score >= 50:
+        return "C"
+    return "D"
+
+
 def compute_score_components(df: pd.DataFrame) -> pd.DataFrame:
     scoring_config = load_scoring_config()
     has_website = df["website"].apply(bool)
@@ -488,6 +551,12 @@ def compute_score_components(df: pd.DataFrame) -> pd.DataFrame:
     review_signal = ((review_score_component + review_count_component) / 2.0).apply(clamp_score)
     contact_quality = (has_website.astype(int) + has_phone.astype(int)) * 5.0
     fit_confidence = df.apply(build_fit_confidence, axis=1)
+    website_quality_component = df.apply(
+        lambda row: 10.0 if normalize_text(row.get("website")) and int(row.get("reviews_count", 0) or 0) >= 20
+        else 6.0 if normalize_text(row.get("website"))
+        else 0.0,
+        axis=1,
+    )
 
     hotel_type = df.apply(
         lambda row: classify_hotel_type(
@@ -542,6 +611,7 @@ def compute_score_components(df: pd.DataFrame) -> pd.DataFrame:
             "review_signal": review_signal,
             "contact_quality": contact_quality,
             "fit_confidence": fit_confidence,
+            "website_quality_component": website_quality_component,
         }
     )
 
@@ -605,6 +675,9 @@ def apply_weighted_score(df: pd.DataFrame, scoring_config: dict, ranking_tuning_
     scored["ota_dependency_signal_label"] = scored["website"].apply(
         lambda value: "Low visible" if normalize_text(value) else "Unknown / likely higher OTA reliance"
     )
+    scored["website_quality"] = scored.apply(build_website_quality, axis=1)
+    scored["chain_signal_confidence"] = scored.apply(build_chain_signal_confidence, axis=1)
+    scored["contact_gap_reason"] = scored.apply(build_contact_gap_reason, axis=1)
     scored["priority_score"] = (scored["ranking_score"] / 10.0).round(2)
     scored["priority_band"] = scored["priority_score"].apply(
         lambda value: score_to_priority_band(value, scoring_config)
@@ -619,6 +692,8 @@ def apply_weighted_score(df: pd.DataFrame, scoring_config: dict, ranking_tuning_
     scored["review_bucket"] = scored.apply(build_review_bucket, axis=1)
     scored["owner_gm_decision_cycle_signal"] = scored.apply(build_owner_gm_decision_cycle_signal, axis=1)
     scored["contact_discovery_likelihood"] = scored.apply(build_contact_discovery_likelihood, axis=1)
+    scored["why_not_top_tier"] = scored.apply(build_why_not_top_tier, axis=1)
+    scored["rank_bucket"] = scored["ranking_score"].apply(build_rank_bucket)
     scored["ranking_reason"] = scored.apply(build_ranking_reason, axis=1)
     if "active_icp_profile" not in scored.columns:
         scored["active_icp_profile"] = ""

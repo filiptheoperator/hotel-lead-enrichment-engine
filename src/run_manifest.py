@@ -4,6 +4,9 @@ from pathlib import Path
 from typing import Optional
 
 import pandas as pd
+import yaml
+
+from clickup_export import get_clickup_export_mode, get_clickup_required_columns_for_mode
 
 
 PROCESSED_DIR = Path("data/processed")
@@ -33,6 +36,14 @@ ARCHIVE_CLEANUP_REPORT_PATH = QA_DIR / "archive_cleanup_report.txt"
 CLICKUP_API_MAPPING_PREVIEW_PATH = QA_DIR / "clickup_api_mapping_preview.json"
 CLICKUP_API_MAPPING_VALIDATION_PATH = QA_DIR / "clickup_api_mapping_validation.json"
 CLICKUP_API_PAYLOAD_DIFF_PATH = QA_DIR / "clickup_api_payload_diff.json"
+PROJECT_CONFIG_PATH = Path("configs/project.yaml")
+
+
+def load_project_config(config_path: Path = PROJECT_CONFIG_PATH) -> dict:
+    if not config_path.exists():
+        return {}
+    with config_path.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file) or {}
 
 
 def get_latest_file(folder: Path, pattern: str) -> Optional[Path]:
@@ -153,6 +164,15 @@ def build_run_manifest() -> dict:
         if "Priority" in clickup_df.columns
         else pd.Series("", index=clickup_df.index, dtype="object")
     )
+    clickup_export_mode = get_clickup_export_mode(load_project_config())
+    required_clickup_columns = set(get_clickup_required_columns_for_mode(clickup_export_mode))
+    clickup_ready_mask = (
+        normalize_series(clickup_df, "Task name").ne("")
+        & normalize_series(clickup_df, "Status").ne("")
+        & normalized_clickup_priority.isin(["", "1", "2", "3", "4"])
+    )
+    if "Description content" in required_clickup_columns:
+        clickup_ready_mask = clickup_ready_mask & normalize_series(clickup_df, "Description content").ne("")
 
     leads_with_website = int(website_status.ne("").sum())
     fetch_blocked_total = int(
@@ -264,13 +284,8 @@ def build_run_manifest() -> dict:
             },
         },
         "import_snapshot": {
-            "clickup_import_ready_rows": int(
-                (
-                    normalize_series(clickup_df, "Task name").ne("")
-                    & normalize_series(clickup_df, "Status").ne("")
-                    & normalized_clickup_priority.isin(["", "1", "2", "3", "4"])
-                ).sum()
-            ),
+            "clickup_export_mode": clickup_export_mode,
+            "clickup_import_ready_rows": int(clickup_ready_mask.sum()),
             "qa_blocking_rows": count_value(qa_issues_df, "blocking", "yes"),
         },
     }

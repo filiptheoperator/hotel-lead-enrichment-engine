@@ -6,10 +6,11 @@ scoring:
     hotel_type_relevance: 0.10
     direct_booking_strength: 0.10
     ota_dependency_signal: 0.10
-    operational_complexity: 0.10
-    contact_quality: 0.05
-    review_signal: 0.03
+    operational_complexity: 0.08
+    contact_quality: 0.03
+    review_signal: 0.02
     fit_confidence: 0.02
+    website_quality_component: 0.05
   heuristics:
     target_country_codes:
       - SK

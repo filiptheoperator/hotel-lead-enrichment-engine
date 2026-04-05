@@ -264,7 +264,11 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 
 ### Poznámky
 
-- `Task name`, `Description content`, `Status`, `Priority` sú potvrdené ako minimálny importný contract.
+- pri `clickup_export_mode: phase1_minimal` je minimálny contract:
+  - `Task name`
+  - `Status`
+  - `Priority`
+- `Description content` ostáva povinný len pre `full_ranked`
 - ClickUp export má držať broad lead coverage a radenie `best -> worst`, nie skorý discard.
 - Reálna kompatibilita s cieľovým ClickUp workspace ostáva `Neoverené`.
 - nové testing a copy polia sú určené pre operator review, reporting a neskoršie meranie reply kvality
@@ -312,17 +316,22 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 26. `owner_gm_decision_cycle_signal`
 27. `contact_discovery_likelihood`
 28. `ota_visibility_signal`
-29. `ranking_reason`
-30. `ranking_score`
-31. `priority_score`
-32. `priority_band`
-33. `dedupe_status`
-34. `duplicate_group_id`
-35. `contact_duplicate_flag`
-36. `review_flag`
-37. `review_reason`
-38. `manual_merge_candidate`
-39. `source_url`
+29. `website_quality`
+30. `chain_signal_confidence`
+31. `contact_gap_reason`
+32. `why_not_top_tier`
+33. `rank_bucket`
+34. `ranking_reason`
+35. `ranking_score`
+36. `priority_score`
+37. `priority_band`
+38. `dedupe_status`
+39. `duplicate_group_id`
+40. `contact_duplicate_flag`
+41. `review_flag`
+42. `review_reason`
+43. `manual_merge_candidate`
+44. `source_url`
 
 ### `enrichment_master.csv`
 
@@ -356,10 +365,15 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 28. `variant_id`
 29. `test_batch`
 30. `reply_outcome`
-31. `review_flag`
-32. `review_reason`
-33. `active_icp_profile`
-34. `source_file`
+31. `website_quality`
+32. `chain_signal_confidence`
+33. `contact_gap_reason`
+34. `why_not_top_tier`
+35. `rank_bucket`
+36. `review_flag`
+37. `review_reason`
+38. `active_icp_profile`
+39. `source_file`
 
 ### `operator_shortlist.csv`
 
@@ -372,9 +386,11 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 7. `priority_score`
 8. `priority_band`
 9. `review_bucket`
-10. `ranking_reason`
-11. `review_flag`
-12. `review_reason`
+10. `rank_bucket`
+11. `ranking_reason`
+12. `shortlist_reason`
+13. `review_flag`
+14. `review_reason`
 
 ### `outreach_drafts.csv`
 
@@ -398,11 +414,13 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 18. `reply_outcome`
 19. `ranking_score`
 20. `priority_band`
-21. `ranking_reason`
-22. `review_flag`
-23. `review_reason`
-24. `active_icp_profile`
-25. `source_file`
+21. `why_not_top_tier`
+22. `rank_bucket`
+23. `ranking_reason`
+24. `review_flag`
+25. `review_reason`
+26. `active_icp_profile`
+27. `source_file`
 
 ### `dedupe_review.csv`
 
@@ -418,8 +436,9 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 10. `match_basis`
 11. `merge_recommended`
 12. `manual_merge_candidate`
-13. `manual_review_needed`
-14. `manual_review_reason`
+13. `account_merge_notes`
+14. `manual_review_needed`
+15. `manual_review_reason`
 
 ### Poznámky
 

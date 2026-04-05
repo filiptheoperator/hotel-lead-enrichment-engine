@@ -4,6 +4,8 @@ from typing import Optional
 import pandas as pd
 import yaml
 
+from clickup_export import get_clickup_export_mode, get_clickup_required_columns_for_mode
+
 
 PROCESSED_DIR = Path("data/processed")
 ENRICHMENT_DIR = Path("outputs/enrichment")
@@ -130,6 +132,8 @@ def build_issue_rows(
 ) -> pd.DataFrame:
     issues: list[dict[str, object]] = []
     qa_config = load_qa_config().get("qa", {})
+    clickup_export_mode = get_clickup_export_mode()
+    required_clickup_columns = set(get_clickup_required_columns_for_mode(clickup_export_mode))
     single_side_high_priority_score_threshold = float(
         qa_config.get("single_side_high_priority_score_threshold", 9.0)
     )
@@ -360,19 +364,20 @@ def build_issue_rows(
                 )
             )
 
-        empty_description_mask = clickup_df["Description content"].fillna("").astype(str).str.strip().eq("")
-        for _, row in clickup_df[empty_description_mask].iterrows():
-            issues.append(
-                build_issue(
-                    issue_type="missing_clickup_description",
-                    severity="Low",
-                    hotel_name=row.get("Hotel name"),
-                    city=row.get("City"),
-                    priority_band=row.get("Priority"),
-                    details="Chýba Description content pre ClickUp export.",
-                    source_file=row.get("Source file"),
+        if "Description content" in required_clickup_columns and "Description content" in clickup_df.columns:
+            empty_description_mask = clickup_df["Description content"].fillna("").astype(str).str.strip().eq("")
+            for _, row in clickup_df[empty_description_mask].iterrows():
+                issues.append(
+                    build_issue(
+                        issue_type="missing_clickup_description",
+                        severity="Low",
+                        hotel_name=row.get("Hotel name"),
+                        city=row.get("City"),
+                        priority_band=row.get("Priority"),
+                        details="Chýba Description content pre ClickUp export.",
+                        source_file=row.get("Source file"),
+                    )
                 )
-            )
 
         invalid_status_mask = ~clickup_df["Status"].fillna("").astype(str).str.strip().str.lower().isin(
             ["to do", "todo", "open", "backlog", "in progress", "complete", "done"]

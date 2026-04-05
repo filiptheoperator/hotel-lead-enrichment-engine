@@ -17,6 +17,7 @@ CLICKUP_SUPPORTED_CORE_COLUMNS = [
     "Priority",
 ]
 CLICKUP_ALLOWED_PRIORITY_VALUES = {"", "1", "2", "3", "4"}
+CLICKUP_EXPORT_MODES = {"phase1_minimal", "full_ranked"}
 
 
 def list_email_draft_files(email_dir: Path = EMAIL_OUTPUT_DIR) -> list[Path]:
@@ -49,6 +50,24 @@ def load_project_config(config_path: Path = PROJECT_CONFIG_PATH) -> dict:
         return {}
     with config_path.open("r", encoding="utf-8") as file:
         return yaml.safe_load(file) or {}
+
+
+def get_clickup_export_mode(project_config: Optional[dict] = None) -> str:
+    config = project_config or load_project_config()
+    export_mode = normalize_text(config.get("clickup_export_mode")) or "phase1_minimal"
+    return export_mode if export_mode in CLICKUP_EXPORT_MODES else "phase1_minimal"
+
+
+def get_clickup_required_columns_for_mode(export_mode: str) -> list[str]:
+    if export_mode == "phase1_minimal":
+        return ["Task name", "Status", "Priority"]
+    return ["Task name", "Description content", "Status", "Priority"]
+
+
+def build_clickup_mode_notes(export_mode: str) -> str:
+    if export_mode == "phase1_minimal":
+        return "Phase 1 minimal export: krátky import bez Description content."
+    return "Full ranked export: obsahuje aj Description content."
 
 
 def build_clickup_task_name(row: pd.Series) -> str:
@@ -90,9 +109,12 @@ def build_clickup_notes(row: pd.Series) -> str:
         f"Priorita band: {normalize_text(row.get('priority_band', ''))}",
         f"Skóre: {normalize_text(row.get('priority_score', ''))}",
         f"Ranking score: {normalize_text(row.get('ranking_score', ''))}",
+        f"Rank bucket: {normalize_text(row.get('rank_bucket', ''))}",
         f"ICP fit score: {normalize_text(row.get('icp_fit_score', ''))}",
         f"ICP fit class: {normalize_text(row.get('icp_fit_class', ''))}",
         f"Fit confidence: {normalize_text(row.get('fit_confidence', ''))}",
+        f"Why not top tier: {normalize_text(row.get('why_not_top_tier', ''))}",
+        f"Chain signal confidence: {normalize_text(row.get('chain_signal_confidence', ''))}",
         f"Review flag: {normalize_text(row.get('review_flag', ''))}",
         f"Review reason: {normalize_text(row.get('review_reason', ''))}",
         f"Dedupe status: {normalize_text(row.get('dedupe_status', ''))}",
@@ -146,6 +168,9 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         "ota_dependency_signal_label",
         "manual_merge_candidate",
         "active_icp_profile",
+        "rank_bucket",
+        "why_not_top_tier",
+        "chain_signal_confidence",
     ]:
         if column not in export_df.columns:
             export_df[column] = ""
@@ -201,6 +226,9 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "priority_score",
             "priority_level",
             "icp_fit",
+            "rank_bucket",
+            "why_not_top_tier",
+            "chain_signal_confidence",
             "ranking_reason",
             "ota_dependency_signal",
             "direct_booking_weakness",
@@ -238,6 +266,9 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "priority_score": "Priority score",
             "priority_level": "Priority Level",
             "icp_fit": "ICP Fit",
+            "rank_bucket": "Rank bucket",
+            "why_not_top_tier": "Why not top tier",
+            "chain_signal_confidence": "Chain signal confidence",
             "ranking_reason": "Ranking reason",
             "ota_dependency_signal": "OTA Dependency Signal",
             "direct_booking_weakness": "Direct Booking Weakness",
@@ -275,6 +306,8 @@ def build_clickup_phase1_minimal_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         "Priority score",
         "Priority Level",
         "ICP Fit",
+        "Rank bucket",
+        "Why not top tier",
         "Ranking reason",
         "Main Pain Hypothesis",
         "Subject line",
@@ -283,12 +316,11 @@ def build_clickup_phase1_minimal_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     return full_df[[column for column in minimal_columns if column in full_df.columns]].copy()
 
 
-def validate_clickup_import_readiness(df: pd.DataFrame) -> list[str]:
+def validate_clickup_import_readiness(df: pd.DataFrame, export_mode: str = "phase1_minimal") -> list[str]:
     issues: list[str] = []
 
-    missing_required_columns = [
-        column for column in CLICKUP_REQUIRED_COLUMNS if column not in df.columns
-    ]
+    required_columns = get_clickup_required_columns_for_mode(export_mode)
+    missing_required_columns = [column for column in required_columns if column not in df.columns]
     if missing_required_columns:
         issues.append(
             "Chýbajú povinné ClickUp stĺpce: " + ", ".join(missing_required_columns)
@@ -298,7 +330,7 @@ def validate_clickup_import_readiness(df: pd.DataFrame) -> list[str]:
     missing_supported_core_columns = [
         column for column in CLICKUP_SUPPORTED_CORE_COLUMNS if column not in df.columns
     ]
-    if missing_supported_core_columns:
+    if export_mode != "phase1_minimal" and missing_supported_core_columns:
         issues.append(
             "Chýbajú odporúčané ClickUp core stĺpce: "
             + ", ".join(missing_supported_core_columns)
@@ -382,10 +414,10 @@ def main() -> None:
     high_clickup_df = build_clickup_dataframe(
         email_df[email_df["priority_band"].fillna("").astype(str).str.strip().eq("High")].copy()
     )
-    readiness_issues = validate_clickup_import_readiness(clickup_df)
     project_config = load_project_config()
-    clickup_export_mode = normalize_text(project_config.get("clickup_export_mode")) or "phase1_minimal"
+    clickup_export_mode = get_clickup_export_mode(project_config)
     default_export_df = clickup_phase1_minimal_df if clickup_export_mode == "phase1_minimal" else clickup_df
+    readiness_issues = validate_clickup_import_readiness(default_export_df, clickup_export_mode)
     output_path = save_clickup_file(default_export_df, first_file.name)
     full_ranked_output_path = save_clickup_full_ranked_file(clickup_df, first_file.name)
     minimal_output_path = save_clickup_phase1_minimal_file(clickup_phase1_minimal_df, first_file.name)
@@ -394,6 +426,7 @@ def main() -> None:
     print(f"Načítaný email draft súbor: {first_file.name}")
     print(f"Počet riadkov: {len(clickup_df)}")
     print(f"Default export mode: {clickup_export_mode}")
+    print(build_clickup_mode_notes(clickup_export_mode))
     print(f"Výstup uložený do: {output_path}")
     print(f"Full ranked výstup uložený do: {full_ranked_output_path}")
     print(f"Phase 1 minimal výstup uložený do: {minimal_output_path}")
