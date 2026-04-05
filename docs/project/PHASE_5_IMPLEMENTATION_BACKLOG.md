@@ -2,21 +2,21 @@
 
 ## Priorita 1
 
-- Make execution entrypoint
-- Make payload builder
-- Make failure notifier
+- Make execution entrypoint `DONE`
+- Make payload builder `DONE`
+- Make failure notifier `DONE`
 
 ## Priorita 2
 
-- incident evidence logger
-- archive verification step
-- execution status updater
+- incident evidence logger `DONE`
+- archive verification step `DONE`
+- execution status updater `DONE`
 
 ## Priorita 3
 
-- post-run summary generator
-- operator status board refresh
-- blocker state synchronization
+- post-run summary generator `DONE`
+- operator status board refresh `DONE`
+- blocker state synchronization `DONE_INTERNAL`
 
 ## Poznámka
 
