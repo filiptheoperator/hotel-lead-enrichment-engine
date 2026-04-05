@@ -64,6 +64,8 @@ def get_current_batch_artifacts() -> dict[str, Optional[Path]]:
     clickup_high_only_path = get_expected_artifact_path(email_path, CLICKUP_DIR, "_clickup_import_high_only.csv")
     if clickup_high_only_path is None:
         clickup_high_only_path = get_latest_file(CLICKUP_DIR, "*_clickup_import_high_only.csv")
+    clickup_phase1_minimal_path = get_expected_artifact_path(email_path, CLICKUP_DIR, "_clickup_phase1_minimal.csv")
+    clickup_full_ranked_path = get_expected_artifact_path(email_path, CLICKUP_DIR, "_clickup_full_ranked.csv")
 
     batch_stem = processed_path.stem.replace("_normalized_scored", "") if processed_path else ""
     accounts_master_path = (MASTER_DIR / f"{batch_stem}_accounts_master.csv") if batch_stem else None
@@ -77,6 +79,8 @@ def get_current_batch_artifacts() -> dict[str, Optional[Path]]:
         "email": email_path,
         "clickup": clickup_path,
         "clickup_high_only": clickup_high_only_path,
+        "clickup_phase1_minimal": clickup_phase1_minimal_path if clickup_phase1_minimal_path and clickup_phase1_minimal_path.exists() else None,
+        "clickup_full_ranked": clickup_full_ranked_path if clickup_full_ranked_path and clickup_full_ranked_path.exists() else None,
         "accounts_master": accounts_master_path if accounts_master_path and accounts_master_path.exists() else None,
         "enrichment_master": enrichment_master_path if enrichment_master_path and enrichment_master_path.exists() else None,
         "outreach_drafts": outreach_drafts_path if outreach_drafts_path and outreach_drafts_path.exists() else None,
@@ -119,6 +123,8 @@ def build_run_manifest() -> dict:
     email_path = artifacts["email"]
     clickup_path = artifacts["clickup"]
     clickup_high_only_path = artifacts["clickup_high_only"]
+    clickup_phase1_minimal_path = artifacts["clickup_phase1_minimal"]
+    clickup_full_ranked_path = artifacts["clickup_full_ranked"]
     accounts_master_path = artifacts["accounts_master"]
     enrichment_master_path = artifacts["enrichment_master"]
     outreach_drafts_path = artifacts["outreach_drafts"]
@@ -175,6 +181,8 @@ def build_run_manifest() -> dict:
             "email_drafts_csv": str(email_path) if email_path else "",
             "clickup_import_csv": str(clickup_path) if clickup_path else "",
             "clickup_import_high_only_csv": str(clickup_high_only_path) if clickup_high_only_path else "",
+            "clickup_phase1_minimal_csv": str(clickup_phase1_minimal_path) if clickup_phase1_minimal_path else "",
+            "clickup_full_ranked_csv": str(clickup_full_ranked_path) if clickup_full_ranked_path else "",
             "accounts_master_csv": str(accounts_master_path) if accounts_master_path else "",
             "enrichment_master_csv": str(enrichment_master_path) if enrichment_master_path else "",
             "outreach_drafts_csv": str(outreach_drafts_path) if outreach_drafts_path else "",

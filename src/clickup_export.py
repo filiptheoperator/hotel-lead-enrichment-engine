@@ -72,6 +72,7 @@ def build_account_status(row: pd.Series) -> str:
 
 def build_clickup_notes(row: pd.Series) -> str:
     parts = [
+        f"Account ID: {normalize_text(row.get('account_id', ''))}",
         f"Hotel: {normalize_text(row.get('hotel_name', ''))}",
         f"Krajina: {normalize_text(row.get('country_code', ''))}",
         f"Mesto: {normalize_text(row.get('city', ''))}",
@@ -86,6 +87,8 @@ def build_clickup_notes(row: pd.Series) -> str:
         f"Review flag: {normalize_text(row.get('review_flag', ''))}",
         f"Review reason: {normalize_text(row.get('review_reason', ''))}",
         f"Dedupe status: {normalize_text(row.get('dedupe_status', ''))}",
+        f"Manual merge candidate: {normalize_text(row.get('manual_merge_candidate', ''))}",
+        f"Ranking reason: {normalize_text(row.get('ranking_reason', ''))}",
         f"Web: {normalize_text(row.get('website', '')) or 'Verejne nepotvrdené'}",
         f"Telefón: {normalize_text(row.get('phone', '')) or 'Verejne nepotvrdené'}",
         f"OTA dependency signal: {normalize_text(row.get('ota_dependency_signal_label', ''))}",
@@ -120,16 +123,20 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             export_df[column] = export_df[column].apply(normalize_text)
 
     for column in [
+        "account_id",
         "country_code",
         "hotel_type_class",
         "ranking_score",
         "icp_fit_score",
         "icp_fit_class",
         "fit_confidence",
+        "ranking_reason",
         "review_flag",
         "review_reason",
         "direct_booking_weakness",
         "ota_dependency_signal_label",
+        "manual_merge_candidate",
+        "active_icp_profile",
     ]:
         if column not in export_df.columns:
             export_df[column] = ""
@@ -174,6 +181,7 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "task_notes",
             "clickup_status",
             "clickup_priority",
+            "account_id",
             "account_status",
             "hotel_name",
             "country_code",
@@ -184,6 +192,7 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "priority_score",
             "priority_level",
             "icp_fit",
+            "ranking_reason",
             "ota_dependency_signal",
             "direct_booking_weakness",
             "main_pain_hypothesis",
@@ -209,6 +218,7 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "task_notes": "Description content",
             "clickup_status": "Status",
             "clickup_priority": "Priority",
+            "account_id": "Account ID",
             "account_status": "Account Status",
             "hotel_name": "Hotel name",
             "country_code": "Country",
@@ -219,6 +229,7 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "priority_score": "Priority score",
             "priority_level": "Priority Level",
             "icp_fit": "ICP Fit",
+            "ranking_reason": "Ranking reason",
             "ota_dependency_signal": "OTA Dependency Signal",
             "direct_booking_weakness": "Direct Booking Weakness",
             "main_pain_hypothesis": "Main Pain Hypothesis",
@@ -239,6 +250,28 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "primary_email_goal": "Primary email goal",
         }
     ).copy()
+
+
+def build_clickup_phase1_minimal_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    full_df = build_clickup_dataframe(df)
+    minimal_columns = [
+        "Task name",
+        "Status",
+        "Priority",
+        "Account ID",
+        "Account Status",
+        "Hotel name",
+        "Country",
+        "City / Region",
+        "Priority score",
+        "Priority Level",
+        "ICP Fit",
+        "Ranking reason",
+        "Main Pain Hypothesis",
+        "Subject line",
+        "Source file",
+    ]
+    return full_df[[column for column in minimal_columns if column in full_df.columns]].copy()
 
 
 def validate_clickup_import_readiness(df: pd.DataFrame) -> list[str]:
@@ -300,6 +333,20 @@ def save_clickup_file(df: pd.DataFrame, source_file: str) -> Path:
     return output_path
 
 
+def save_clickup_full_ranked_file(df: pd.DataFrame, source_file: str) -> Path:
+    CLICKUP_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    output_path = CLICKUP_OUTPUT_DIR / f"{Path(source_file).stem}_clickup_full_ranked.csv"
+    df.to_csv(output_path, index=False)
+    return output_path
+
+
+def save_clickup_phase1_minimal_file(df: pd.DataFrame, source_file: str) -> Path:
+    CLICKUP_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    output_path = CLICKUP_OUTPUT_DIR / f"{Path(source_file).stem}_clickup_phase1_minimal.csv"
+    df.to_csv(output_path, index=False)
+    return output_path
+
+
 def save_high_leads_clickup_file(df: pd.DataFrame, source_file: str) -> Path:
     CLICKUP_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     output_path = CLICKUP_OUTPUT_DIR / f"{Path(source_file).stem}_clickup_import_high_only.csv"
@@ -322,16 +369,21 @@ def main() -> None:
         return
 
     clickup_df = build_clickup_dataframe(email_df)
+    clickup_phase1_minimal_df = build_clickup_phase1_minimal_dataframe(email_df)
     high_clickup_df = build_clickup_dataframe(
         email_df[email_df["priority_band"].fillna("").astype(str).str.strip().eq("High")].copy()
     )
     readiness_issues = validate_clickup_import_readiness(clickup_df)
     output_path = save_clickup_file(clickup_df, first_file.name)
+    full_ranked_output_path = save_clickup_full_ranked_file(clickup_df, first_file.name)
+    minimal_output_path = save_clickup_phase1_minimal_file(clickup_phase1_minimal_df, first_file.name)
     high_output_path = save_high_leads_clickup_file(high_clickup_df, first_file.name)
 
     print(f"Načítaný email draft súbor: {first_file.name}")
     print(f"Počet riadkov: {len(clickup_df)}")
     print(f"Výstup uložený do: {output_path}")
+    print(f"Full ranked výstup uložený do: {full_ranked_output_path}")
+    print(f"Phase 1 minimal výstup uložený do: {minimal_output_path}")
     print(f"High-only výstup uložený do: {high_output_path}")
     if readiness_issues:
         print("\nClickUp import readiness:\n")

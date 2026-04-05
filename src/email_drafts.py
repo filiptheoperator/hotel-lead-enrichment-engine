@@ -169,10 +169,12 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     for column in [
         "hotel_name_normalized",
         "country_code",
+        "account_id",
         "ranking_score",
         "icp_fit_score",
         "icp_fit_class",
         "fit_confidence",
+        "ranking_reason",
         "review_flag",
         "review_reason",
         "website_domain",
@@ -185,6 +187,8 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         "dedupe_status",
         "duplicate_group_id",
         "contact_duplicate_flag",
+        "manual_merge_candidate",
+        "active_icp_profile",
         "give_first_insight",
         "main_observed_issue",
         "email_hook",
@@ -214,6 +218,7 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
 
     return emails[
         [
+            "account_id",
             "hotel_name",
             "hotel_name_normalized",
             "city",
@@ -224,6 +229,7 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "icp_fit_score",
             "icp_fit_class",
             "fit_confidence",
+            "ranking_reason",
             "review_flag",
             "review_reason",
             "website",
@@ -239,6 +245,8 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "dedupe_status",
             "duplicate_group_id",
             "contact_duplicate_flag",
+            "manual_merge_candidate",
+            "active_icp_profile",
             "factual_summary",
             "subject_line",
             "hook",

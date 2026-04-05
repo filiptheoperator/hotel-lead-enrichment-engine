@@ -9,6 +9,7 @@ PROCESSED_DIR = Path("data/processed")
 ENRICHMENT_DIR = Path("outputs/enrichment")
 EMAIL_DIR = Path("outputs/email_drafts")
 CLICKUP_DIR = Path("outputs/clickup")
+MASTER_DIR = Path("outputs/master")
 QA_DIR = Path("data/qa")
 RUN_REPORT_PATH = QA_DIR / "run_summary.txt"
 RUN_DELTA_REPORT_PATH = QA_DIR / "run_delta_report.txt"
@@ -43,12 +44,17 @@ def get_current_batch_artifacts() -> dict[str, Optional[Path]]:
     clickup_path = get_expected_artifact_path(email_path, CLICKUP_DIR, "_clickup_import.csv")
     if clickup_path is None:
         clickup_path = get_first_file(CLICKUP_DIR, "*_clickup_import.csv")
+    batch_stem = processed_path.stem.replace("_normalized_scored", "") if processed_path else ""
+    accounts_master_path = (MASTER_DIR / f"{batch_stem}_accounts_master.csv") if batch_stem else None
+    dedupe_review_path = (MASTER_DIR / f"{batch_stem}_dedupe_review.csv") if batch_stem else None
 
     return {
         "processed": processed_path,
         "enrichment": enrichment_path,
         "email": email_path,
         "clickup": clickup_path,
+        "accounts_master": accounts_master_path if accounts_master_path and accounts_master_path.exists() else None,
+        "dedupe_review": dedupe_review_path if dedupe_review_path and dedupe_review_path.exists() else None,
     }
 
 
@@ -77,6 +83,8 @@ def build_run_summary() -> str:
     enrichment_df = load_csv(artifacts["enrichment"])
     email_df = load_csv(artifacts["email"])
     clickup_df = load_csv(artifacts["clickup"])
+    accounts_master_df = load_csv(artifacts["accounts_master"])
+    dedupe_review_df = load_csv(artifacts["dedupe_review"])
     qa_df = load_csv(QA_DIR / "qa_issues.csv")
     batch_readiness_score = "Neoverené"
     if CLICKUP_GATE_JSON_PATH.exists():
@@ -94,6 +102,8 @@ def build_run_summary() -> str:
     enrichment_rows = len(enrichment_df)
     email_rows = len(email_df)
     clickup_rows = len(clickup_df)
+    accounts_master_rows = len(accounts_master_df)
+    dedupe_review_rows = len(dedupe_review_df)
 
     verified_opening_hours = 0
     unverified_opening_hours = 0
@@ -120,6 +130,7 @@ def build_run_summary() -> str:
     fetch_effective_reachable_after_fallback = 0
     fetch_incident_flag = "no"
     needs_manual_review = 0
+    manual_merge_candidates = 0
     if not enrichment_df.empty:
         opening_status = normalize_series(enrichment_df, "hotel_opening_hours_status")
         checkio_status = normalize_series(enrichment_df, "checkin_checkout_status")
@@ -272,6 +283,10 @@ def build_run_summary() -> str:
             )
             .sum()
         )
+    if not dedupe_review_df.empty and "manual_merge_candidate" in dedupe_review_df.columns:
+        manual_merge_candidates = int(
+            dedupe_review_df["manual_merge_candidate"].fillna("").astype(str).str.strip().eq("yes").sum()
+        )
 
     lines = [
         "Hotel Lead Enrichment Engine OS - Run Summary",
@@ -286,6 +301,8 @@ def build_run_summary() -> str:
         f"- enrichment_rows: {enrichment_rows}",
         f"- email_rows: {email_rows}",
         f"- clickup_rows: {clickup_rows}",
+        f"- accounts_master_rows: {accounts_master_rows}",
+        f"- dedupe_review_rows: {dedupe_review_rows}",
         "",
         "Verified",
         f"- verified_opening_hours: {verified_opening_hours}",
@@ -325,6 +342,7 @@ def build_run_summary() -> str:
         "",
         "Needs Manual Review",
         f"- qa_needs_manual_review_rows: {needs_manual_review}",
+        f"- manual_merge_candidates: {manual_merge_candidates}",
         f"- qa_blocking_rows: {qa_blocking}",
         f"- qa_medium_rows: {qa_medium}",
         f"- qa_low_rows: {qa_low}",

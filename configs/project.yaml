@@ -14,6 +14,8 @@ raw_inputs_are_immutable: true
 prompts_folder: prompts
 unverified_value_label: Verejne nepotvrdené
 include_public_operating_hours_when_available: true
+active_icp_profile: slovakia_independent_3_4_star
+enforce_single_icp_profile_per_run: true
 review_required_priorities:
   - High
   - Medium-High

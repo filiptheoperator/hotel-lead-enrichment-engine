@@ -1186,6 +1186,7 @@ def build_enrichment_dataframe(
 
     return enriched[
         [
+            "account_id",
             "hotel_name",
             "hotel_name_normalized",
             "city",
@@ -1211,9 +1212,12 @@ def build_enrichment_dataframe(
             "icp_fit_score",
             "icp_fit_class",
             "fit_confidence",
+            "ranking_reason",
             "ranking_score",
             "priority_score",
             "priority_band",
+            "manual_merge_candidate",
+            "active_icp_profile",
             "hotel_opening_hours",
             "hotel_opening_hours_status",
             "hotel_opening_hours_source_url",

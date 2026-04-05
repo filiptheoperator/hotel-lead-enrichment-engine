@@ -121,6 +121,7 @@ def build_master_exports(
             "icp_fit_score",
             "icp_fit_class",
             "fit_confidence",
+            "ranking_reason",
             "ranking_score",
             "priority_score",
             "priority_band",
@@ -129,6 +130,7 @@ def build_master_exports(
             "contact_duplicate_flag",
             "review_flag",
             "review_reason",
+            "manual_merge_candidate",
             "source_url",
         ]
     ].copy()
@@ -169,6 +171,7 @@ def build_master_exports(
             "reply_outcome",
             "review_flag",
             "review_reason",
+            "active_icp_profile",
             "source_file",
         ]
     ].copy()
@@ -197,8 +200,10 @@ def build_master_exports(
             "reply_outcome",
             "ranking_score",
             "priority_band",
+            "ranking_reason",
             "review_flag",
             "review_reason",
+            "active_icp_profile",
             "source_file",
         ]
     ].copy()
@@ -224,6 +229,7 @@ def build_master_exports(
                 "dedupe_type",
                 "match_basis",
                 "merge_recommended",
+                "manual_merge_candidate",
                 "manual_review_needed",
                 "manual_review_reason",
             ]
@@ -236,6 +242,7 @@ def build_master_exports(
             lambda value: "account_identity_plus_contact" if value == "contact_duplicate" else "hotel_name_city_street_or_domain"
         )
         dedupe_review["merge_recommended"] = "yes"
+        dedupe_review["manual_merge_candidate"] = dedupe_review["manual_merge_candidate"]
         dedupe_review["manual_review_needed"] = dedupe_review["review_flag"].apply(
             lambda value: "yes" if normalize_text(value) == "yes" else "no"
         )
@@ -253,6 +260,7 @@ def build_master_exports(
                 "dedupe_type",
                 "match_basis",
                 "merge_recommended",
+                "manual_merge_candidate",
                 "manual_review_needed",
                 "manual_review_reason",
             ]

@@ -1,4 +1,5 @@
 from pathlib import Path
+import hashlib
 import re
 from urllib.parse import urlparse
 
@@ -11,6 +12,7 @@ from ingest.raw_loader import list_raw_csv_files, load_raw_csv
 PROCESSED_DIR = Path("data/processed")
 SCORING_CONFIG_PATH = Path("configs/scoring.yaml")
 PROJECT_CONFIG_PATH = Path("configs/project.yaml")
+ICP_PROFILES_CONFIG_PATH = Path("configs/icp_profiles.yaml")
 
 RAW_TO_NORMALIZED_COLUMNS = {
     "title": "hotel_name",
@@ -43,6 +45,7 @@ NORMALIZED_COLUMNS = [
 ]
 
 FINAL_OUTPUT_COLUMNS = [
+    "account_id",
     "hotel_name",
     "hotel_name_normalized",
     "review_score",
@@ -72,9 +75,12 @@ FINAL_OUTPUT_COLUMNS = [
     "icp_fit_score",
     "icp_fit_class",
     "fit_confidence",
+    "ranking_reason",
     "ranking_score",
     "priority_score",
     "priority_band",
+    "manual_merge_candidate",
+    "active_icp_profile",
 ]
 
 TEXT_COLUMNS = [
@@ -95,6 +101,11 @@ def load_scoring_config(config_path: Path = SCORING_CONFIG_PATH) -> dict:
 
 
 def load_project_config(config_path: Path = PROJECT_CONFIG_PATH) -> dict:
+    with config_path.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file) or {}
+
+
+def load_icp_profiles_config(config_path: Path = ICP_PROFILES_CONFIG_PATH) -> dict:
     with config_path.open("r", encoding="utf-8") as file:
         return yaml.safe_load(file) or {}
 
@@ -150,6 +161,19 @@ def normalize_website_domain(value: object) -> str:
     return domain
 
 
+def build_account_id(row: pd.Series) -> str:
+    raw = "|".join(
+        [
+            normalize_text(row.get("hotel_name_normalized")).lower(),
+            normalize_text(row.get("city_normalized")).lower(),
+            normalize_text(row.get("website_domain")).lower(),
+            normalize_text(row.get("source_file")).lower(),
+        ]
+    )
+    digest = hashlib.md5(raw.encode("utf-8")).hexdigest()[:12]
+    return f"acc_{digest}"
+
+
 def collect_categories(df: pd.DataFrame) -> pd.Series:
     category_columns = sorted(
         [column for column in df.columns if column.startswith("categories/")]
@@ -193,6 +217,7 @@ def normalize_dataframe(df: pd.DataFrame, source_file: str) -> pd.DataFrame:
     normalized["city_normalized"] = normalized["city"].apply(normalize_match_text)
     normalized["street_normalized"] = normalized["street"].apply(normalize_match_text)
     normalized["website_domain"] = normalized["website"].apply(normalize_website_domain)
+    normalized["account_id"] = normalized.apply(build_account_id, axis=1)
 
     normalized["review_score"] = pd.to_numeric(
         normalized["review_score"], errors="coerce"
@@ -229,6 +254,25 @@ def maybe_apply_sample_batch(df: pd.DataFrame, project_config: dict) -> tuple[pd
 
     limited_df = df.head(sample_batch_size).copy()
     return limited_df, True, len(limited_df)
+
+
+def validate_icp_profile(project_config: dict, scoring_config: dict, icp_profiles_config: dict) -> str:
+    active_profile = normalize_text(project_config.get("active_icp_profile"))
+    enforce = bool(project_config.get("enforce_single_icp_profile_per_run", True))
+    if not enforce:
+        return active_profile or "unlocked_profile"
+    if not active_profile:
+        raise ValueError("Chýba active_icp_profile v configs/project.yaml.")
+    known_profiles = icp_profiles_config.get("icp_profiles", {})
+    if active_profile not in known_profiles:
+        raise ValueError(f"Neznámy ICP profil: {active_profile}")
+    profile = known_profiles.get(active_profile, {})
+    heuristics = scoring_config.get("scoring", {}).get("heuristics", {})
+    profile_country_codes = [normalize_text(value).upper() for value in profile.get("target_country_codes", [])]
+    scoring_country_codes = [normalize_text(value).upper() for value in heuristics.get("target_country_codes", [])]
+    if profile_country_codes != scoring_country_codes:
+        raise ValueError("ICP profile guard zlyhal: target_country_codes v scoring.yaml nesedia s active_icp_profile.")
+    return active_profile
 
 
 def clamp_score(value: float) -> float:
@@ -300,11 +344,11 @@ def build_exact_row_key(row: pd.Series) -> str:
 
 
 def build_contact_identity_key(row: pd.Series) -> str:
-    website_domain = normalize_text(row.get("website_domain"))
     phone = normalize_text(row.get("phone"))
-    if not website_domain and not phone:
+    duplicate_group_id = normalize_text(row.get("duplicate_group_id"))
+    if not duplicate_group_id or not phone:
         return ""
-    return "|".join([website_domain, phone])
+    return "|".join([duplicate_group_id, phone])
 
 
 def build_fit_confidence(row: pd.Series) -> float:
@@ -347,6 +391,30 @@ def build_review_reason(row: pd.Series) -> str:
     if duplicate_group_id and duplicate_group_id != exact_row_key and normalize_text(row.get("dedupe_status")) == "merged_exact_duplicate":
         reasons.append("exact_duplicate_merged")
     return " | ".join(reasons)
+
+
+def build_ranking_reason(row: pd.Series) -> str:
+    reasons: list[str] = []
+    icp_fit_class = normalize_text(row.get("icp_fit_class"))
+    if icp_fit_class == "Keep":
+        reasons.append("strong_icp_fit")
+    elif icp_fit_class == "Review":
+        reasons.append("review_fit")
+    else:
+        reasons.append("low_fit")
+    if normalize_text(row.get("independent_chain_class")) == "Independent candidate":
+        reasons.append("independent_signal")
+    if normalize_text(row.get("hotel_type_class")) == "Preferred hotel":
+        reasons.append("preferred_hotel_type")
+    if normalize_text(row.get("geography_fit")) == "Core geography":
+        reasons.append("core_geography")
+    elif normalize_text(row.get("geography_fit")) == "Out-of-profile geography":
+        reasons.append("out_of_profile_geography")
+    if normalize_text(row.get("website")):
+        reasons.append("has_website")
+    if normalize_text(row.get("phone")):
+        reasons.append("has_phone")
+    return " | ".join(reasons[:4])
 
 
 def compute_score_components(df: pd.DataFrame) -> pd.DataFrame:
@@ -481,6 +549,13 @@ def apply_weighted_score(df: pd.DataFrame, scoring_config: dict) -> pd.DataFrame
     )
     scored["review_reason"] = scored.apply(build_review_reason, axis=1)
     scored["review_flag"] = scored["review_reason"].apply(lambda value: "yes" if normalize_text(value) else "no")
+    duplicate_group_counts = scored["duplicate_group_id"].value_counts()
+    scored["manual_merge_candidate"] = scored["duplicate_group_id"].apply(
+        lambda value: "yes" if value and duplicate_group_counts.get(value, 0) > 1 else "no"
+    )
+    scored["ranking_reason"] = scored.apply(build_ranking_reason, axis=1)
+    if "active_icp_profile" not in scored.columns:
+        scored["active_icp_profile"] = ""
     scored = scored.sort_values(
         by=["ranking_score", "review_score", "reviews_count"],
         ascending=[False, False, False],
@@ -529,7 +604,10 @@ def main() -> None:
         project_config,
     )
     scoring_config = load_scoring_config()
+    icp_profiles_config = load_icp_profiles_config()
+    active_icp_profile = validate_icp_profile(project_config, scoring_config, icp_profiles_config)
     scored_df = apply_weighted_score(normalized_df, scoring_config)
+    scored_df["active_icp_profile"] = active_icp_profile
     output_path = save_processed_file(scored_df, first_file.name)
 
     print(f"Načítaný súbor: {first_file.name}")

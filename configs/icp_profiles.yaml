@@ -1,0 +1,8 @@
+icp_profiles:
+  slovakia_independent_3_4_star:
+    label: Slovakia independent 3-4 star
+    target_country_codes:
+      - SK
+    target_city_keywords:
+      - bratislava
+    notes: 1 file = 1 run = 1 ICP profile
