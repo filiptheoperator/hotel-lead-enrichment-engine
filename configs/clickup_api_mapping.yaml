@@ -16,7 +16,7 @@ clickup_api_mapping:
       source_column: "Hotel name"
       target_field: "custom.hotel_name"
     city:
-      source_column: "City"
+      source_column: "City / Region"
       target_field: "custom.city"
     priority_score:
       source_column: "Priority score"

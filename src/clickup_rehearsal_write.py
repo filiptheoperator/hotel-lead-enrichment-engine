@@ -120,7 +120,7 @@ def build_custom_field_values(row: dict[str, str], config: dict[str, Any]) -> li
     fields = config["clickup_custom_fields"]["fields"]
     mapping = [
         ("hotel_name", "Hotel name"),
-        ("city", "City"),
+        ("city", "City / Region"),
         ("priority_score", "Priority score"),
         ("contact_phone", "Contact phone"),
         ("contact_website", "Contact website"),
@@ -137,7 +137,7 @@ def build_custom_field_values(row: dict[str, str], config: dict[str, Any]) -> li
                 "field_key": field_key,
                 "field_id": field_id,
                 "field_name": str(fields[field_key].get("live_clickup_field_name") or fields[field_key].get("clickup_field_name")),
-                "value": row[csv_column],
+                "value": row.get(csv_column, row.get("City", "")) if field_key == "city" else row.get(csv_column, ""),
             }
         )
     return values

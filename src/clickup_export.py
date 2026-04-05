@@ -18,6 +18,20 @@ CLICKUP_SUPPORTED_CORE_COLUMNS = [
 ]
 CLICKUP_ALLOWED_PRIORITY_VALUES = {"", "1", "2", "3", "4"}
 CLICKUP_EXPORT_MODES = {"phase1_minimal", "full_ranked"}
+CLICKUP_PHASE1_REQUIRED_FIELDS = [
+    "Task name",
+    "Status",
+    "Priority",
+    "Account Status",
+    "Hotel name",
+    "Country",
+    "City / Region",
+    "Priority score",
+    "Priority Level",
+    "ICP Fit",
+    "Subject line",
+    "Source file",
+]
 
 
 def list_email_draft_files(email_dir: Path = EMAIL_OUTPUT_DIR) -> list[Path]:
@@ -60,14 +74,14 @@ def get_clickup_export_mode(project_config: Optional[dict] = None) -> str:
 
 def get_clickup_required_columns_for_mode(export_mode: str) -> list[str]:
     if export_mode == "phase1_minimal":
-        return ["Task name", "Status", "Priority"]
+        return CLICKUP_PHASE1_REQUIRED_FIELDS
     return ["Task name", "Description content", "Status", "Priority"]
 
 
 def build_clickup_mode_notes(export_mode: str) -> str:
     if export_mode == "phase1_minimal":
-        return "Phase 1 minimal export: krátky import bez Description content."
-    return "Full ranked export: obsahuje aj Description content."
+        return "Phase 1 minimal export: jednoduchý ClickUp account layer bez dlhého enrichment textu."
+    return "Full ranked export: bohatší review export s Description content."
 
 
 def build_clickup_task_name(row: pd.Series) -> str:
@@ -91,11 +105,16 @@ def build_clickup_status(row: pd.Series) -> str:
 
 
 def build_account_status(row: pd.Series) -> str:
+    reply_outcome = normalize_text(row.get("reply_outcome")).lower()
+    if reply_outcome not in {"", "no_reply", "pending"}:
+        return "Activated"
+    if normalize_text(row.get("non_icp_but_keep")).lower() == "yes":
+        return "Not a Fit"
     if normalize_text(row.get("review_flag")) == "yes":
         return "Researching"
     if normalize_text(row.get("priority_band")) in {"High", "Medium-High"}:
         return "Prioritized"
-    return "Backlog"
+    return "Parked"
 
 
 def build_clickup_notes(row: pd.Series) -> str:
@@ -198,6 +217,9 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     export_df["account_status"] = export_df.apply(build_account_status, axis=1)
     export_df["contact_phone"] = export_df["phone"]
     export_df["contact_website"] = export_df["website"]
+    export_df["source"] = export_df["source_file"].apply(
+        lambda value: f"Raw lead sheet: {value}" if normalize_text(value) else "Raw lead sheet"
+    )
     export_df["task_notes"] = export_df.apply(build_clickup_notes, axis=1)
     export_df["rooms_range"] = "Verejne nepotvrdené"
     export_df["priority_level"] = export_df["priority_band"]
@@ -223,7 +245,7 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "city_region",
             "hotel_type_class",
             "rooms_range",
-            "city",
+            "source",
             "priority_score",
             "priority_level",
             "icp_fit",
@@ -264,7 +286,7 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "city_region": "City / Region",
             "hotel_type_class": "Hotel Type",
             "rooms_range": "Rooms Range",
-            "city": "City",
+            "source": "Source",
             "priority_score": "Priority score",
             "priority_level": "Priority Level",
             "icp_fit": "ICP Fit",
@@ -301,19 +323,19 @@ def build_clickup_phase1_minimal_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         "Task name",
         "Status",
         "Priority",
-        "Account ID",
         "Account Status",
         "Hotel name",
         "Country",
         "City / Region",
+        "Hotel Type",
+        "Rooms Range",
+        "Contact website",
+        "Source",
         "Priority score",
         "Priority Level",
         "ICP Fit",
-        "Rank bucket",
-        "Rank bucket reason",
-        "Why not top tier",
-        "Chain signal confidence",
-        "Ranking reason",
+        "OTA Dependency Signal",
+        "Direct Booking Weakness",
         "Main Pain Hypothesis",
         "Subject line",
         "Source file",
