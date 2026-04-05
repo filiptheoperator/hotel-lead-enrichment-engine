@@ -91,8 +91,28 @@ Hlavné nastavenia sú v:
 - `configs/enrichment.yaml`
 - `configs/email.yaml`
 - `configs/qa.yaml`
+- `configs/make_api.yaml`
 
 Environment premenné sú mimo kódu v `.env`.
+
+## Make scenario provisioning
+
+Make scenár už nemusí zostať len ručne naklikaný.
+
+Pripravený je aj repo-first provisioning základ:
+
+- `configs/make_api.yaml` - Make API deploy nastavenia
+- `configs/make_scenario_blueprint.json` - blueprint template pre scenár
+- `src/make_scenario_deploy.py` - create / update / activate flow
+- `src/make_scenario_test_run.py` - run / interface / logs test flow
+
+Bezpečný prvý krok:
+
+```bash
+python3 src/make_scenario_deploy.py --mode plan
+```
+
+Tento krok nič neposiela do Make. Len skontroluje config, `.env` a pripraví deploy plán.
 
 ## Poznámky k dátam
 

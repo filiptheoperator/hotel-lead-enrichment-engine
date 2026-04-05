@@ -1,0 +1,19 @@
+make_api:
+  contract_version: 1
+  base_url_env_var: MAKE_API_BASE_URL
+  token_env_var: MAKE_API_TOKEN
+  team_id_env_var: MAKE_TEAM_ID
+  scenario_id_env_var: MAKE_SCENARIO_ID
+  region_default: eu1
+  timeout_seconds: 30
+  scenario_name: Hotel Lead Enrichment Engine OS
+  scenario_folder_id: null
+  activate_after_deploy: false
+  confirmed_installations: false
+  blueprint_path: configs/make_scenario_blueprint.json
+  deploy_result_path: data/qa/make_scenario_deploy_result.json
+  test_result_path: data/qa/make_scenario_test_result.json
+  required_blueprint_placeholders:
+    - UNVERIFIED_CONNECTION_ID
+    - UNVERIFIED_WEBHOOK_NAME
+    - UNVERIFIED_OUTPUT_MAPPING

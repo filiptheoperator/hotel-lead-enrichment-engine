@@ -51,10 +51,18 @@ Tento dokument uzamyká payload, ktorý má lokálny Python workflow odovzdať d
 
 - všetky path hodnoty ostávajú relatívne voči rootu repo
 - Make iba číta artifacty, nič neprepočítava
+- Make scenario provisioning vrstva má nasadiť iba tento uzamknutý contract
 - pri `decision = NO_GO` nesmie nastať pokus o live ClickUp execution
 - chýbajúci required artifact je hard stop
 - Make nevymýšľa outbound copy, iba pracuje s artifactmi pripravenými lokálnym Python flow
 - outreach testing polia cestujú v `clickup_import_csv`, nie ako samostatná Make business logika
+
+## Provisioning poznámka
+
+- Make scenario blueprint musí zostať tenký
+- trigger vrstva iba prijme payload a odovzdá artifact paths ďalej
+- connections a secrets môžu vyžadovať jednorazový manuálny bind v Make
+- blueprint template je v [configs/make_scenario_blueprint.json](/Users/aios/Desktop/Codex/hotel-lead-enrichment-engine/configs/make_scenario_blueprint.json)
 
 ## Neoverené
 

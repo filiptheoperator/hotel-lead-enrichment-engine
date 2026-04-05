@@ -12,6 +12,8 @@
 8. Make nemení outbound copy discipliny, iba prenáša existujúce artifacty
 9. testing polia pre outreach varianty ostanú zachované v exportoch
 10. pri `NO_GO` nevznikne live send ani agresívny CTA push
+11. Make scenario provisioning z repa nevytvorí novú business logiku mimo uzamknutého payload contractu
+12. blueprint template ostane jasne označený ako `Neoverené`, kým neprejde live deploy test
 
 ## Pass condition
 

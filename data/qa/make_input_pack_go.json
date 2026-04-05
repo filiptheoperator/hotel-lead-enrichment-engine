@@ -1,0 +1,15 @@
+{
+  "scenario_label": "make_input_pack_go",
+  "decision": "GO",
+  "run_manifest_json": "data/qa/simulated_go/run_manifest_go.json",
+  "clickup_import_gate_json": "data/qa/simulated_go/clickup_import_gate_go.json",
+  "clickup_import_csv": "outputs/clickup/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored_enriched_email_drafts_clickup_import.csv",
+  "clickup_import_dry_run_sample_csv": "data/qa/clickup_import_dry_run_sample.csv",
+  "high_leads_preimport_checklist_csv": "data/qa/high_leads_preimport_checklist.csv",
+  "operator_decision_summary_txt": "data/qa/operator_decision_summary.txt",
+  "archive_dir": "data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-05__00-14-09_02-00",
+  "clickup_import_gate_high_only_json": "data/qa/clickup_import_gate_high_only.json",
+  "operator_decision_summary_high_txt": "data/qa/operator_decision_summary_high.txt",
+  "batch_readiness_explanation_json": "data/qa/batch_readiness_explanation.json",
+  "clickup_api_mapping_validation_json": "data/qa/clickup_api_mapping_validation.json"
+}

@@ -1,0 +1,83 @@
+{
+  "blueprint_status": "UNVERIFIED_TEMPLATE",
+  "project": "Hotel Lead Enrichment Engine OS",
+  "scenario_name": "Hotel Lead Enrichment Engine OS",
+  "purpose": "Prijať uzamknutý Make execution payload a posunúť ho do tenkej integračnej vrstvy.",
+  "trigger": {
+    "type": "custom_webhook",
+    "name": "UNVERIFIED_WEBHOOK_NAME"
+  },
+  "payload_contract": {
+    "source": "configs/make_execution_payload_contract.yaml",
+    "accepted_decisions": [
+      "GO",
+      "NO_GO"
+    ],
+    "required_fields": [
+      "decision",
+      "run_manifest_json",
+      "clickup_import_gate_json",
+      "clickup_import_csv",
+      "clickup_import_dry_run_sample_csv",
+      "high_leads_preimport_checklist_csv",
+      "operator_decision_summary_txt",
+      "archive_dir"
+    ]
+  },
+  "modules": [
+    {
+      "step": 1,
+      "role": "trigger",
+      "app": "webhooks",
+      "note": "Prijme uzamknutý payload contract bez prepočítania business logiky."
+    },
+    {
+      "step": 2,
+      "role": "validator",
+      "app": "tools",
+      "note": "Overí decision a required artifact keys.",
+      "mapping": "UNVERIFIED_OUTPUT_MAPPING"
+    },
+    {
+      "step": 3,
+      "role": "router",
+      "app": "tools",
+      "note": "Rozdelí GO / NO_GO vetvu bez dopĺňania novej logiky."
+    },
+    {
+      "step": 4,
+      "role": "clickup_handoff",
+      "app": "clickup",
+      "connection_id": "UNVERIFIED_CONNECTION_ID",
+      "note": "Len tenká integračná vrstva nad existujúcim exportom a mappingom."
+    },
+    {
+      "step": 5,
+      "role": "evidence_logger",
+      "app": "tools",
+      "note": "Zapíše response a output reference pre operator review."
+    }
+  ],
+  "constraints": [
+    "one_locked_payload_contract",
+    "no_new_business_logic",
+    "no_copy_generation_inside_make",
+    "no_go_means_no_live_execution"
+  ],
+  "response_contract": {
+    "success_statuses": [
+      200,
+      201,
+      202
+    ],
+    "retryable_classes": [
+      "network_error",
+      "server_error"
+    ],
+    "non_retryable_classes": [
+      "client_error",
+      "cloudflare_block",
+      "invalid_payload"
+    ]
+  ]
+}
