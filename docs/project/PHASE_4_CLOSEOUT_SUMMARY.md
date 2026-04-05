@@ -18,9 +18,7 @@ Fáza 4 výrazne posunula integračnú pripravenosť, ale ostáva otvorená.
 
 ## Otvorené externé blockery
 
-- ClickUp plan limit `FIELD_033`
-- partial write risk po vytvorení test tasku `869ct12ah`
-- controlled rehearsal zatiaľ neskončil `PASS`
+- Make API access blocker `HTTP 403 / Cloudflare 1010`
 
 ## Interpretácia
 

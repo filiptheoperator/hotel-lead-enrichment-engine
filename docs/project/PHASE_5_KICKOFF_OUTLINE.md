@@ -25,3 +25,10 @@ Začať ďalšiu fázu až po tom, čo bude jasné, čo je hotové interne a čo
 
 Fáza 5 sa nemá opierať o neoverené domnienky.
 Externé blockery ostávajú explicitne oddelené od interného implementation scope.
+
+## Stav po lokálnom dopracovaní
+
+- Make provisioning prep existuje
+- Make resume point existuje
+- success a failure output contract existujú
+- live Make retest ostáva blokovaný iba sieťou
