@@ -8,12 +8,359 @@ Tento dokument uzamyká aktuálny output contract pre:
 
 - `data/processed`
 - `outputs/enrichment`
+- `outputs/ranked`
 - `outputs/email_drafts`
 - `outputs/master`
 - `outputs/clickup`
+- `outputs/hotel_markdown`
 - `data/qa`
 
 Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je to označené ako `Neoverené`.
+
+## outputs/source_bundles
+
+### Súborový pattern
+
+- `outputs/source_bundles/<source_file_stem>/<account_id>.json`
+
+### Účel
+
+- 1 hotel = 1 `source_bundle`
+- drží source-of-truth pre factual enrichment mimo CSV vrstvy
+- oddeľuje `zdrojové dôkazy` od `vyťažených factual polí`
+- pripravuje miesto pre neskorší `Google Places` input bez zmeny CSV contractu
+
+### Minimálny JSON contract
+
+- `schema_version`
+- `generated_at_utc`
+- `account_id`
+- `source_file`
+- `hotel_identity`
+- `raw_contact_hints`
+- `sources.google_places.status`
+- `sources.google_places.place_id`
+- `sources.google_places.google_maps_url`
+- `sources.google_places.fields_requested[]`
+- `sources.google_places.result`
+- `sources.official_website.base_url`
+- `sources.official_website.fetch_status`
+- `sources.official_website.reachable`
+- `sources.official_website.pages[]`
+- `extracted_candidates.hotel_opening_hours`
+- `extracted_candidates.checkin_checkout`
+- `extracted_candidates.ownership_company`
+
+### `sources.official_website.pages[]`
+
+- `url`
+- `source_type`
+- `jsonld_detected`
+- `text_length`
+- `opening_hours_candidate`
+- `opening_hours_origin`
+- `opening_hours_valid`
+- `checkin_checkout_candidate`
+- `checkin_checkout_origin`
+- `checkin_checkout_valid`
+
+### Poznámky
+
+- `google_places` je optional collector na `Places API (New)`; bez enable flagu alebo API key ostáva explicitne `not_enabled` / `not_configured`.
+- CSV enrichment zatiaľ ostáva backward-compatible; `source_bundle` je side artifact.
+- extractor má v ďalšom kroku čítať primárne z `source_bundle`, nie znova fetchovať HTML logiku ad hoc.
+
+## outputs/factual_enrichment
+
+### Súborový pattern
+
+- `outputs/factual_enrichment/<source_file_stem>/<account_id>.json`
+
+### Účel
+
+- strojovo čitateľný factual block per hotel
+- číta primárne z `source_bundle` + `processed row`
+- drží len grounded alebo raw-confirmed údaje
+
+### Minimálny JSON contract
+
+- `schema_version`
+- `generated_at_utc`
+- `account_id`
+- `source_file`
+- `source_bundle_ref`
+- `identity`
+- `contacts`
+- `address`
+- `operating_hours`
+- `checkin_checkout`
+- `room_count_signal`
+- `service_mix`
+- `review_trust_signal`
+- `google_review_signal`
+- `ownership_company_signal`
+- `source_reachability`
+
+### Poznámky
+
+- `room_count_signal` je zatiaľ len `processed-row` signal alebo explicitne `verejne nepotvrdené`.
+- `service_mix` je v tejto verzii minimálny heuristic layer z raw kategórií a web URL markerov.
+- `service_mix` vie byť zosilnený cez Google Places `types` a `primaryType`, ak sú dostupné.
+- `google_review_signal` a časť identity/contact/address sa doplní len ak `sources.google_places.status = ok`.
+- `ownership_company_signal` preferuje official web JSON-LD kandidáta pred raw ownership labelom.
+- tento artifact je pripravený ako vstup pre neskorší `commercial_synthesizer`.
+
+## outputs/commercial_synthesis
+
+### Súborový pattern
+
+- `outputs/commercial_synthesis/<source_file_stem>/<account_id>.json`
+
+### Účel
+
+- structured-first commercial layer nad `processed row` + `source_bundle` + `factual_enrichment`
+- canonical Wave 3 output layer pre commercial reasoning
+- grounded-only, s explicitným uncertainty outputom
+- heuristický `v1` ostáva už len ako fallback / legacy
+
+### Minimálny JSON contract
+
+- `schema_version`
+- `generated_at_utc`
+- `account_id`
+- `source_file`
+- `source_bundle_ref`
+- `factual_enrichment_ref`
+- `business_interest_summary`
+- `why_commercially_interesting`
+- `property_positioning_summary`
+- `strengths[]`
+- `opportunity_gaps[]`
+- `main_bottleneck_hypothesis`
+- `pain_point_hypothesis`
+- `best_entry_angle`
+- `personalization_angles[]`
+- `recommended_hook`
+- `recommended_first_contact_route`
+- `likely_decision_maker_hypothesis`
+- `demand_mix_hypothesis[]`
+- `service_complexity_read`
+- `commercial_complexity_read`
+- `direct_booking_friction_hypothesis`
+- `contact_route_friction_hypothesis`
+- `call_hypothesis`
+- `verdict`
+- `uncertainty_notes[]`
+
+### Poznámky
+
+- canonical verzia je `commercial_synthesis/v3-lite`.
+- `commercial_synthesis/v1` je legacy fallback a nemá sa ďalej rozširovať.
+- LLM vstup je compact grounded view nad `processed row` + `source_bundle` + `factual_enrichment`.
+- finálny style contract pre `v3-lite`:
+  - `business_interest_summary`: max 1 veta
+  - `why_commercially_interesting`: max 2 vety
+  - `property_positioning_summary`: max 1 veta
+  - `best_entry_angle`: max 1 veta
+  - `recommended_hook`: max 1 veta
+  - `main_bottleneck_hypothesis`: max 1 veta, sales-practical
+  - `pain_point_hypothesis`: max 1 veta
+- `recommended_first_contact_route` a `likely_decision_maker_hypothesis` majú byť krátke, praktické a explicitne opatrné.
+- generic sales fluff sa má pri `v2` odfiltrovať.
+- verdict ostáva striktne len `silný prospect` / `zaujímavý prospect` / `opatrný prospect`.
+- pri API/quota blockeri môže v outputs ešte dočasne ostať starší heuristický artifact.
+
+## outputs/ranked
+
+### Súborový pattern
+
+- `outputs/ranked/<enrichment_stem>_ranking_refreshed*.csv`
+
+### Účel
+
+- samostatná post-enrichment ranking refresh vrstva
+- používa `commercial_synthesis` + factual confidence namiesto inline logiky v `master_exports.py`
+- canonical Wave 4 decision engine
+- rozhoduje `outreach_now` / `manual_review` / `hold_later`
+
+### Minimálne finálne polia
+
+- `commercial_bonus`
+- `factual_completeness_score`
+- `ranking_score_final`
+- `priority_level_final`
+- `rank_bucket_final`
+- `ranking_refresh_reason`
+- `ranking_upside_reasons`
+- `ranking_downside_reasons`
+- `ranking_missingness_notes`
+- `uncertainty_penalty`
+- `decision_status`
+- `manual_review_needed`
+- `review_queue_reason_codes`
+- `outreach_ready`
+- `shortlist_candidate`
+
+### Scoring policy contract
+
+- scoring sa má čítať z `configs/ranking_tuning.yaml`
+- explicitné skupiny váh:
+  - `weights.commercial_verdict`
+  - `weights.ownership_confidence`
+  - `weights.factual_completeness`
+  - `weights.review_strength`
+  - `weights.missingness_penalties`
+  - `weights.uncertainty_penalties`
+- explicitné thresholdy:
+  - `thresholds.priority_levels`
+  - `thresholds.rank_buckets`
+  - `thresholds.review_score_strong_min`
+  - `thresholds.review_score_weak_max`
+- shortlist policy:
+  - `shortlist.operator_shortlist_priority_levels`
+  - `shortlist.operator_shortlist_limit`
+  - `shortlist.top_export_limit`
+- review queue policy:
+  - `review_queue.low_factual_completeness_max`
+  - `review_queue.weak_ownership_statuses`
+  - `review_queue.review_queue_limit`
+
+## outputs/hotel_markdown
+
+### Súborový pattern
+
+- `outputs/hotel_markdown/<source_file_stem>/<account_id>.md`
+- `outputs/hotel_markdown/<source_file_stem>/operator_shortlist_summary.md`
+- `outputs/hotel_markdown/<source_file_stem>/review_queue_summary.md`
+- `outputs/hotel_markdown/<source_file_stem>/top_export_summary.md`
+- `outputs/hotel_markdown/<source_file_stem>/wave5_render_qa_report.csv`
+
+### Účel
+
+- Wave 5 renderer
+- 1 hotel = 1 markdown summary
+- renderuje len z existujúcich structured artifactov a ranked vrstvy
+- canonical final operator presentation layer
+- renderer nesmie robiť nové inferencie; len skladá už existujúce structured fields
+
+### Canonical renderer input
+
+- `outputs/source_bundles/<source_file_stem>/<account_id>.json`
+- `outputs/factual_enrichment/<source_file_stem>/<account_id>.json`
+- `outputs/commercial_synthesis/<source_file_stem>/<account_id>.json`
+- `outputs/ranked/<enrichment_stem>_ranking_refreshed*.csv`
+- optional: `outputs/email_drafts/*_email_drafts.csv`
+
+### Per-hotel section schema
+
+- `Header`
+- `operator_brief`:
+  - `Executive Summary`
+  - `Decision Block`
+  - `Factual Block`
+  - `Evidence Block`
+  - `Uncertainty Block`
+  - `Outreach Block`
+  - `Operator Action Block`
+- `old_template_full`:
+  - `Základný profil hotela`
+  - `Kontaktné údaje`
+  - `Prevádzkové hodiny a dôležité časy`
+  - `Čo je na hoteli obchodne zaujímavé`
+  - `Dôvera a recenzie`
+  - `Rýchle zhodnotenie`
+  - `Personalizačné uhly`
+  - `Odporúčaný háčik`
+  - `Návrh prvého e-mailu`
+  - `Návrh následného e-mailu`
+  - `Hypotéza na krátky úvodný rozhovor`
+  - `Verdikt`
+  - `Neistoty a čo treba overiť`
+
+### Rendering rules
+
+- section order musí byť fixný a diff-friendly
+- renderer má explicitne označovať:
+  - `Overené vo verejnom zdroji`
+  - `raw_confirmed`
+  - `Verejne nepotvrdené`
+- prázdne alebo noisy fields sa nemajú umelo nafukovať
+- uncertainty block musí byť oddelený od factual blocku
+- dlhé texty sa majú skracovať, nie prepisovať
+
+### Mandatory vs optional fields
+
+- mandatory pre per-hotel render:
+  - `account_id`
+  - `hotel_name`
+  - `city`
+  - `country_code`
+  - `priority_level_final`
+  - `decision_status`
+  - `ranking_score_final`
+  - `ranking_refresh_reason`
+  - `commercial.verdict`
+  - `commercial.business_interest_summary`
+  - `commercial.main_bottleneck_hypothesis`
+- optional:
+  - `email_drafts` block
+  - `source URLs`
+  - `uncertainty notes`
+  - `review queue reasons`
+  - `service mix` evidence detail
+
+### Batch modes
+
+- `single`
+- `batch`
+- `shortlist`
+- `review_queue`
+- `top_export`
+- `all`
+
+### Template modes
+
+- `MARKDOWN_TEMPLATE=operator_brief`
+- `MARKDOWN_TEMPLATE=old_template_full`
+
+### Poznámky
+
+- `operator_shortlist_summary.md` má renderovať len `decision_status = outreach_now`
+- `review_queue_summary.md` má renderovať len `decision_status = manual_review`
+- `top_export_summary.md` je lightweight executive pack
+- `wave5_render_qa_report.csv` je malý QA artifact pre renderer stabilitu a readability
+- `old_template_full` má byť bohatší presentation mode, ale stále len render nad structured artifactmi
+
+## outputs/master
+
+### Wave 4 relevant exports
+
+- `*_accounts_master*.csv`
+- `*_operator_shortlist*.csv`
+- `*_review_queue*.csv`
+- `*_top_20_export*.csv`
+
+### Poznámky
+
+- `operator_shortlist` je primary operator view pre `outreach_now`
+- `review_queue` je primary operator view pre `manual_review`
+- `top_20_export` ostáva lightweight export view
+
+## Wave 4 Run Order
+
+- `python3 src/commercial_synthesizer.py`
+- `python3 src/ranking_refresh.py`
+- `python3 src/email_drafts.py`
+- `python3 src/master_exports.py`
+- `python3 src/clickup_export.py`
+
+## Wave 5 Run Order
+
+- `python3 src/commercial_synthesizer.py`
+- `python3 src/ranking_refresh.py`
+- `python3 src/email_drafts.py`
+- `python3 src/master_exports.py`
+- `python3 src/render_full_enrichment_md.py`
 
 ## data/processed
 
@@ -104,39 +451,47 @@ Ak niečo nie je potvrdené existujúcim súborom alebo runtime správaním, je 
 30. `owner_gm_decision_cycle_signal`
 31. `contact_discovery_likelihood`
 32. `ota_visibility_signal`
-33. `ranking_reason`
-34. `ranking_score`
-35. `priority_score`
-36. `priority_band`
-37. `manual_merge_candidate`
-38. `active_icp_profile`
-39. `hotel_opening_hours`
-34. `hotel_opening_hours_status`
-35. `hotel_opening_hours_source_url`
-36. `hotel_opening_hours_source_type`
-37. `checkin_checkout_info`
-38. `checkin_checkout_status`
-39. `checkin_checkout_source_url`
-40. `checkin_checkout_source_type`
-41. `checkin_checkout_source_origin`
-42. `checkin_checkout_completeness`
-43. `public_source_reachable`
-44. `public_source_fetch_status`
-45. `contact_status`
-46. `factual_summary`
-47. `give_first_insight`
-48. `main_observed_issue`
-49. `email_hook`
-50. `micro_cta`
-51. `primary_email_goal`
-52. `proof_snippet`
-53. `email_angle`
-54. `cta_type`
-55. `variant_id`
-56. `test_batch`
-57. `reply_outcome`
-58. `source_url`
-59. `source_file`
+33. `rooms_range`
+34. `room_count_value`
+35. `room_count_status`
+36. `ranking_reason`
+37. `ranking_score`
+38. `priority_score`
+39. `priority_band`
+40. `manual_merge_candidate`
+41. `active_icp_profile`
+42. `hotel_opening_hours`
+43. `hotel_opening_hours_status`
+44. `hotel_opening_hours_source_url`
+45. `hotel_opening_hours_source_type`
+46. `checkin_checkout_info`
+47. `checkin_checkout_status`
+48. `checkin_checkout_source_url`
+49. `checkin_checkout_source_type`
+50. `checkin_checkout_source_origin`
+51. `checkin_checkout_completeness`
+52. `public_source_reachable`
+53. `public_source_fetch_status`
+54. `contact_status`
+55. `factual_summary`
+56. `business_interest_summary`
+57. `main_bottleneck_hypothesis`
+58. `pain_point_hypothesis`
+59. `recommended_hook`
+60. `commercial_verdict`
+61. `give_first_insight`
+62. `main_observed_issue`
+63. `email_hook`
+64. `micro_cta`
+65. `primary_email_goal`
+66. `proof_snippet`
+67. `email_angle`
+68. `cta_type`
+69. `variant_id`
+70. `test_batch`
+71. `reply_outcome`
+72. `source_url`
+73. `source_file`
 
 ### Poznámky
 

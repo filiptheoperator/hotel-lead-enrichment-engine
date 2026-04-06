@@ -1,0 +1,6 @@
+account_id,schema_version,has_why_commercially_interesting,has_property_positioning_summary,has_best_entry_angle,has_recommended_first_contact_route,has_likely_decision_maker_hypothesis,has_service_complexity_read,has_commercial_complexity_read,has_direct_booking_friction_hypothesis,has_contact_route_friction_hypothesis
+acc_462634ba1b0d,commercial_synthesis/v3-lite,1,1,1,1,1,1,1,1,1
+acc_d7e3595aefb6,commercial_synthesis/v3-lite,1,1,1,1,1,1,1,1,1
+acc_9f2cb7250cf5,commercial_synthesis/v3-lite,1,1,1,1,1,1,1,1,1
+acc_5970be661818,commercial_synthesis/v3-lite,1,1,1,1,1,1,1,1,1
+acc_50ce289c9223,commercial_synthesis/v3-lite,1,1,1,1,1,1,1,1,1

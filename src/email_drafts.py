@@ -1,4 +1,7 @@
+import json
+import os
 from pathlib import Path
+from typing import Optional
 
 import pandas as pd
 import yaml
@@ -6,19 +9,34 @@ import yaml
 
 ENRICHMENT_OUTPUT_DIR = Path("outputs/enrichment")
 EMAIL_OUTPUT_DIR = Path("outputs/email_drafts")
+FACTUAL_ENRICHMENT_DIR = Path("outputs/factual_enrichment")
+COMMERCIAL_SYNTHESIS_DIR = Path("outputs/commercial_synthesis")
+RANKED_DIR = Path("outputs/ranked")
 EMAIL_CONFIG_PATH = Path("configs/email.yaml")
+UNKNOWN_VALUE_LABEL = "Verejne nepotvrdené"
 
 
 def list_enriched_files(enrichment_dir: Path = ENRICHMENT_OUTPUT_DIR) -> list[Path]:
     if not enrichment_dir.exists():
         return []
-    return sorted(enrichment_dir.glob("*_enriched.csv"), key=lambda path: path.stat().st_mtime)
+    return sorted(enrichment_dir.glob("*_enriched*.csv"), key=lambda path: path.stat().st_mtime)
 
 
 def normalize_text(value: object) -> str:
     if pd.isna(value):
         return ""
     return str(value).strip()
+
+
+def load_json(path: Path) -> dict:
+    if not path.exists():
+        return {}
+    try:
+        with path.open("r", encoding="utf-8") as file:
+            payload = json.load(file)
+    except Exception:
+        return {}
+    return payload if isinstance(payload, dict) else {}
 
 
 def load_email_config() -> dict:
@@ -28,16 +46,43 @@ def load_email_config() -> dict:
         return yaml.safe_load(file) or {}
 
 
-def is_verified_public(value: str) -> bool:
-    return normalize_text(value) == "Overené vo verejnom zdroji"
+def ensure_column(df: pd.DataFrame, column: str, default_value: str = "") -> None:
+    if column not in df.columns:
+        df[column] = default_value
 
 
-def format_score(value: object) -> str:
-    try:
-        number = float(value)
-    except (TypeError, ValueError):
-        return ""
-    return f"{number:.2f}".rstrip("0").rstrip(".")
+def build_source_batch_stem(value: str) -> str:
+    stem = Path(normalize_text(value)).stem
+    for marker in [
+        "_normalized_scored_enriched",
+        "_normalized_scored",
+        "_enriched",
+    ]:
+        if marker in stem:
+            return stem.split(marker, 1)[0]
+    return stem
+
+
+def get_latest_ranked_file() -> Optional[Path]:
+    files = sorted(RANKED_DIR.glob("*_ranking_refreshed*.csv"), key=lambda path: path.stat().st_mtime)
+    return files[-1] if files else None
+
+
+def get_ranked_file_for_enrichment(enrichment_file_name: str) -> Optional[Path]:
+    preferred_ranked_file = normalize_text(os.getenv("EMAIL_RANKED_SOURCE_FILE"))
+    if preferred_ranked_file:
+        ranked_path = RANKED_DIR / preferred_ranked_file
+        if ranked_path.exists():
+            return ranked_path
+
+    enrichment_stem = Path(enrichment_file_name).stem
+    matching = sorted(
+        RANKED_DIR.glob(f"{enrichment_stem}_ranking_refreshed*.csv"),
+        key=lambda path: path.stat().st_mtime,
+    )
+    if matching:
+        return matching[-1]
+    return get_latest_ranked_file()
 
 
 def build_short_factual_line(row: pd.Series) -> str:
@@ -45,24 +90,33 @@ def build_short_factual_line(row: pd.Series) -> str:
 
     if row["city"]:
         facts.append(f"v lokalite {row['city']}")
-    if row["priority_band"]:
-        score = format_score(row.get("priority_score"))
-        if score:
-            facts.append(f"s prioritou {row['priority_band']} ({score})")
+
+    priority_level_final = normalize_text(row.get("priority_level_final"))
+    ranking_score_final = format_score(row.get("ranking_score_final"))
+    priority_band = normalize_text(row.get("priority_band"))
+    priority_score = format_score(row.get("priority_score"))
+    if priority_level_final and ranking_score_final:
+        facts.append(f"s finálnou prioritou {priority_level_final} ({ranking_score_final})")
+    elif priority_band:
+        if priority_score:
+            facts.append(f"s prioritou {priority_band} ({priority_score})")
         else:
-            facts.append(f"s prioritou {row['priority_band']}")
+            facts.append(f"s prioritou {priority_band}")
 
-    try:
-        review_score = float(row.get("review_score", 0) or 0)
-    except (TypeError, ValueError):
-        review_score = 0
-    try:
-        reviews_count = int(float(row.get("reviews_count", 0) or 0))
-    except (TypeError, ValueError):
-        reviews_count = 0
-
-    if review_score > 0 and reviews_count > 0:
-        facts.append(f"s hodnotením {review_score:.1f}/5 z {reviews_count} recenzií")
+    review_signal = normalize_text(row.get("review_signal_summary"))
+    if review_signal:
+        facts.append(f"so signalom hodnotení {review_signal}")
+    else:
+        try:
+            review_score = float(row.get("review_score", 0) or 0)
+        except (TypeError, ValueError):
+            review_score = 0
+        try:
+            reviews_count = int(float(row.get("reviews_count", 0) or 0))
+        except (TypeError, ValueError):
+            reviews_count = 0
+        if review_score > 0 and reviews_count > 0:
+            facts.append(f"s hodnotením {review_score:.1f}/5 z {reviews_count} recenzií")
 
     if not facts:
         return "Pozrel som si váš verejný profil a základné údaje."
@@ -72,15 +126,33 @@ def build_short_factual_line(row: pd.Series) -> str:
 
 def build_subject_line(row: pd.Series) -> str:
     hotel_name = row["hotel_name"] or "váš hotel"
-    email_angle = normalize_text(row.get("email_angle"))
-    if email_angle == "opening_hours_clarity":
-        return f"{hotel_name}: krátky postreh"
-    if email_angle == "checkin_checkout_clarity":
-        return f"{hotel_name}: krátky postreh"
+    best_entry_angle = normalize_text(row.get("best_entry_angle")).lower()
+    why_commercially_interesting = normalize_text(row.get("why_commercially_interesting")).lower()
+    contact_route = normalize_text(row.get("recommended_first_contact_route")).lower()
+    recommended_hook = normalize_text(row.get("recommended_hook")).lower()
+    main_bottleneck = normalize_text(row.get("main_bottleneck_hypothesis")).lower()
+
+    if "event" in best_entry_angle or "kongres" in best_entry_angle or "event" in why_commercially_interesting:
+        return f"{hotel_name}: krátky postreh k event dopytu"
+    if "recepci" in contact_route or "kontakt" in contact_route:
+        return f"{hotel_name}: krátky postreh k prvému kontaktu"
+    if "prevádz" in recommended_hook or "kapacit" in recommended_hook or "prevádz" in main_bottleneck:
+        return f"{hotel_name}: krátky postreh k prevádzkovým info"
+    if "praktick" in recommended_hook or "inform" in recommended_hook:
+        return f"{hotel_name}: krátky postreh k praktickým info"
+    if "event" in recommended_hook or "kongres" in recommended_hook:
+        return f"{hotel_name}: krátky postreh k event dopytu"
+    if "check-in" in recommended_hook or "check in" in recommended_hook:
+        return f"{hotel_name}: krátky postreh k check-in info"
+    if normalize_text(row.get("email_angle")) == "checkin_checkout_clarity":
+        return f"{hotel_name}: krátky postreh k pobytovým info"
     return f"{hotel_name}: krátky nápad"
 
 
 def build_hook(row: pd.Series) -> str:
+    recommended_hook = normalize_text(row.get("recommended_hook"))
+    if recommended_hook:
+        return recommended_hook
     if normalize_text(row.get("email_hook")):
         return normalize_text(row.get("email_hook"))
     if row["hotel_name"] and row["city"]:
@@ -88,6 +160,69 @@ def build_hook(row: pd.Series) -> str:
     if row["hotel_name"]:
         return f"Pozeral som sa na {row['hotel_name']}."
     return "Pozeral som sa na váš hotel pri rýchlom verejnom prehľade."
+
+
+def build_personalization_line(row: pd.Series) -> str:
+    return build_hook(row)
+
+
+def build_give_first_line(row: pd.Series) -> str:
+    insight = (
+        normalize_text(row.get("best_entry_angle"))
+        or normalize_text(row.get("recommended_hook"))
+        or normalize_text(row.get("business_interest_summary"))
+        or normalize_text(row.get("give_first_insight"))
+    )
+    if insight:
+        return insight
+    return "Pri rýchlom pozretí verejných údajov som si všimol jeden stručný praktický detail."
+
+
+def build_relevance_line(row: pd.Series) -> str:
+    why_interesting = normalize_text(row.get("why_commercially_interesting"))
+    if why_interesting:
+        return why_interesting
+    main_issue = normalize_text(row.get("main_bottleneck_hypothesis")) or normalize_text(row.get("main_observed_issue"))
+    if main_issue:
+        return main_issue
+    factual_line = build_short_factual_line(row)
+    if normalize_text(row.get("business_interest_summary")):
+        return normalize_text(row.get("business_interest_summary"))
+    return factual_line
+
+
+def build_low_friction_cta(row: pd.Series) -> str:
+    micro_cta = normalize_text(row.get("micro_cta"))
+    if micro_cta:
+        return micro_cta
+    first_contact_route = normalize_text(row.get("recommended_first_contact_route"))
+    if first_contact_route:
+        return "Ak chcete, pošlem 3 stručné postrehy priamo k tejto kontaktnej a dopytovej ceste."
+    call_hypothesis = normalize_text(row.get("call_hypothesis"))
+    if call_hypothesis:
+        return "Ak chcete, pošlem to stručne v 3 bodoch alebo to prejdeme v krátkom 10-min hovore."
+    return "Ak chcete, pošlem 3 stručné postrehy v krátkej forme."
+
+
+def build_proof_line(row: pd.Series) -> str:
+    proof_snippet = normalize_text(row.get("proof_snippet"))
+    if proof_snippet:
+        return proof_snippet
+
+    review_signal = normalize_text(row.get("review_signal_summary"))
+    if review_signal:
+        return f"Vychádzal som z verejných signálov ako {review_signal}."
+
+    if normalize_text(row.get("hotel_opening_hours_status")) == "Overené vo verejnom zdroji":
+        return f"Verejne sa mi podarilo potvrdiť operating hours: {normalize_text(row.get('hotel_opening_hours'))}."
+
+    if normalize_text(row.get("checkin_checkout_status")) == "Overené vo verejnom zdroji":
+        return f"Verejne sa mi podarilo potvrdiť check-in/check-out: {normalize_text(row.get('checkin_checkout_info'))}."
+
+    if normalize_text(row.get("business_interest_summary")):
+        return build_short_factual_line(row)
+
+    return ""
 
 
 def build_cold_email(row: pd.Series) -> str:
@@ -123,45 +258,9 @@ def build_followup_email(row: pd.Series) -> str:
     )
 
 
-def ensure_column(df: pd.DataFrame, column: str, default_value: str = "") -> None:
-    if column not in df.columns:
-        df[column] = default_value
-
-
-def build_personalization_line(row: pd.Series) -> str:
-    return build_hook(row)
-
-
-def build_give_first_line(row: pd.Series) -> str:
-    insight = normalize_text(row.get("give_first_insight"))
-    if insight:
-        return insight
-    return "Pri rýchlom pozretí verejných údajov som si všimol jeden stručný praktický detail."
-
-
-def build_relevance_line(row: pd.Series) -> str:
-    factual_line = build_short_factual_line(row)
-    main_issue = normalize_text(row.get("main_observed_issue"))
-    if main_issue:
-        return f"{main_issue} {factual_line}"
-    return factual_line
-
-
-def build_low_friction_cta(row: pd.Series) -> str:
-    micro_cta = normalize_text(row.get("micro_cta"))
-    if micro_cta:
-        return micro_cta
-    return "Ak chcete, pošlem 3 stručné postrehy v krátkej forme."
-
-
-def build_proof_line(row: pd.Series) -> str:
-    return normalize_text(row.get("proof_snippet"))
-
-
 def fallback_contact_gap_count(row: pd.Series) -> int:
     try:
-        value = int(float(row.get("contact_gap_count", 0)))
-        return value
+        return int(float(row.get("contact_gap_count", 0)))
     except (TypeError, ValueError):
         pass
     gap_reason = normalize_text(row.get("contact_gap_reason"))
@@ -181,7 +280,111 @@ def fallback_rank_bucket_reason(row: pd.Series) -> str:
     return normalize_text(row.get("why_not_top_tier")) or normalize_text(row.get("ranking_reason")) or "lower_rank_bucket"
 
 
-def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+def format_score(value: object) -> str:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return ""
+    return f"{number:.2f}".rstrip("0").rstrip(".")
+
+
+def build_factual_summary_from_artifact(factual: dict) -> str:
+    parts: list[str] = []
+    review_summary = normalize_text(factual.get("review_trust_signal", {}).get("summary"))
+    if review_summary:
+        parts.append(f"review signal {review_summary}")
+
+    room_range = normalize_text(factual.get("room_count_signal", {}).get("rooms_range"))
+    if room_range:
+        parts.append(f"rooms range {room_range}")
+
+    services = factual.get("service_mix", {})
+    active_services = [
+        name.replace("_", " ")
+        for name, payload in services.items()
+        if normalize_text(payload.get("available")) == "yes"
+    ]
+    if active_services:
+        parts.append("service mix " + ", ".join(active_services[:3]))
+
+    if not parts:
+        return ""
+    return "; ".join(parts)
+
+
+def build_row_artifact_context(
+    row: pd.Series,
+    source_batch_stem: str,
+    ranked_lookup: dict[str, dict],
+) -> dict[str, str]:
+    account_id = normalize_text(row.get("account_id"))
+    factual = load_json(FACTUAL_ENRICHMENT_DIR / source_batch_stem / f"{account_id}.json") if account_id else {}
+    commercial = load_json(COMMERCIAL_SYNTHESIS_DIR / source_batch_stem / f"{account_id}.json") if account_id else {}
+    ranked_row = ranked_lookup.get(account_id, {})
+
+    operating_hours = factual.get("operating_hours", {})
+    checkin_checkout = factual.get("checkin_checkout", {})
+    room_count_signal = factual.get("room_count_signal", {})
+    review_trust_signal = factual.get("review_trust_signal", {})
+    ownership_signal = factual.get("ownership_company_signal", {})
+
+    return {
+        "factual_summary": build_factual_summary_from_artifact(factual),
+        "hotel_opening_hours": normalize_text(operating_hours.get("hotel_opening_hours")),
+        "hotel_opening_hours_status": normalize_text(operating_hours.get("status")),
+        "checkin_checkout_info": normalize_text(checkin_checkout.get("value")),
+        "checkin_checkout_status": normalize_text(checkin_checkout.get("status")),
+        "rooms_range": normalize_text(room_count_signal.get("rooms_range")),
+        "room_count_value": normalize_text(room_count_signal.get("value")),
+        "room_count_status": normalize_text(room_count_signal.get("status")),
+        "review_signal_summary": normalize_text(review_trust_signal.get("summary")),
+        "ownership_status": normalize_text(ownership_signal.get("status")),
+        "business_interest_summary": normalize_text(commercial.get("business_interest_summary")),
+        "why_commercially_interesting": normalize_text(commercial.get("why_commercially_interesting")),
+        "property_positioning_summary": normalize_text(commercial.get("property_positioning_summary")),
+        "main_bottleneck_hypothesis": normalize_text(commercial.get("main_bottleneck_hypothesis")),
+        "pain_point_hypothesis": normalize_text(commercial.get("pain_point_hypothesis")),
+        "best_entry_angle": normalize_text(commercial.get("best_entry_angle")),
+        "recommended_hook": normalize_text(commercial.get("recommended_hook")),
+        "recommended_first_contact_route": normalize_text(commercial.get("recommended_first_contact_route")),
+        "likely_decision_maker_hypothesis": normalize_text(commercial.get("likely_decision_maker_hypothesis")),
+        "service_complexity_read": normalize_text(commercial.get("service_complexity_read")),
+        "commercial_complexity_read": normalize_text(commercial.get("commercial_complexity_read")),
+        "direct_booking_friction_hypothesis": normalize_text(commercial.get("direct_booking_friction_hypothesis")),
+        "contact_route_friction_hypothesis": normalize_text(commercial.get("contact_route_friction_hypothesis")),
+        "call_hypothesis": normalize_text(commercial.get("call_hypothesis")),
+        "commercial_verdict": normalize_text(commercial.get("verdict")),
+        "ranking_score_final": normalize_text(ranked_row.get("ranking_score_final")),
+        "priority_level_final": normalize_text(ranked_row.get("priority_level_final")),
+        "rank_bucket_final": normalize_text(ranked_row.get("rank_bucket_final")),
+        "ranking_refresh_reason": normalize_text(ranked_row.get("ranking_refresh_reason")),
+        "ranking_upside_reasons": normalize_text(ranked_row.get("ranking_upside_reasons")),
+        "ranking_downside_reasons": normalize_text(ranked_row.get("ranking_downside_reasons")),
+        "ranking_missingness_notes": normalize_text(ranked_row.get("ranking_missingness_notes")),
+        "decision_status": normalize_text(ranked_row.get("decision_status")),
+        "manual_review_needed": normalize_text(ranked_row.get("manual_review_needed")),
+        "review_queue_reason_codes": normalize_text(ranked_row.get("review_queue_reason_codes")),
+    }
+
+
+def load_ranked_lookup(enrichment_source_file: str) -> dict[str, dict]:
+    ranked_path = get_ranked_file_for_enrichment(enrichment_source_file)
+    if ranked_path is None or not ranked_path.exists():
+        return {}
+    ranked_df = pd.read_csv(ranked_path)
+    for column in ranked_df.columns:
+        if ranked_df[column].dtype == object:
+            ranked_df[column] = ranked_df[column].apply(normalize_text)
+    if "account_id" not in ranked_df.columns:
+        return {}
+    return {
+        normalize_text(row["account_id"]): row.to_dict()
+        for _, row in ranked_df.iterrows()
+        if normalize_text(row.get("account_id"))
+    }
+
+
+def build_email_dataframe(df: pd.DataFrame, enrichment_source_file: str) -> pd.DataFrame:
     emails = df.copy()
     email_config = load_email_config().get("email", {})
 
@@ -236,8 +439,57 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         "variant_id",
         "test_batch",
         "reply_outcome",
+        "factual_summary",
+        "hotel_opening_hours",
+        "hotel_opening_hours_status",
+        "checkin_checkout_info",
+        "checkin_checkout_status",
+        "rooms_range",
+        "room_count_value",
+        "room_count_status",
+        "review_signal_summary",
+        "ownership_status",
+        "business_interest_summary",
+        "why_commercially_interesting",
+        "property_positioning_summary",
+        "main_bottleneck_hypothesis",
+        "pain_point_hypothesis",
+        "best_entry_angle",
+        "recommended_hook",
+        "recommended_first_contact_route",
+        "likely_decision_maker_hypothesis",
+        "service_complexity_read",
+        "commercial_complexity_read",
+        "direct_booking_friction_hypothesis",
+        "contact_route_friction_hypothesis",
+        "call_hypothesis",
+        "commercial_verdict",
+        "ranking_score_final",
+        "priority_level_final",
+        "rank_bucket_final",
+        "ranking_refresh_reason",
+        "ranking_upside_reasons",
+        "ranking_downside_reasons",
+        "ranking_missingness_notes",
+        "decision_status",
+        "manual_review_needed",
+        "review_queue_reason_codes",
     ]:
         ensure_column(emails, column, "")
+
+    source_batch_stem = build_source_batch_stem(enrichment_source_file)
+    ranked_lookup = load_ranked_lookup(enrichment_source_file)
+    structured_context = emails.apply(
+        lambda row: pd.Series(build_row_artifact_context(row, source_batch_stem, ranked_lookup)),
+        axis=1,
+    )
+    for column in structured_context.columns:
+        if column not in emails.columns:
+            emails[column] = ""
+        emails[column] = structured_context[column].where(
+            structured_context[column].fillna("").astype(str).str.strip().ne(""),
+            emails[column],
+        )
 
     emails["subject_line"] = emails.apply(build_subject_line, axis=1)
     emails["hook"] = emails.apply(build_hook, axis=1)
@@ -264,6 +516,16 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "priority_band",
             "priority_score",
             "ranking_score",
+            "ranking_score_final",
+            "priority_level_final",
+            "rank_bucket_final",
+            "ranking_refresh_reason",
+            "ranking_upside_reasons",
+            "ranking_downside_reasons",
+            "ranking_missingness_notes",
+            "decision_status",
+            "manual_review_needed",
+            "review_queue_reason_codes",
             "icp_fit_score",
             "icp_fit_class",
             "non_icp_but_keep",
@@ -291,6 +553,7 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "geography_fit",
             "independent_chain_class",
             "ownership_type",
+            "ownership_status",
             "direct_booking_weakness",
             "ota_dependency_signal_label",
             "dedupe_status",
@@ -299,6 +562,29 @@ def build_email_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "manual_merge_candidate",
             "active_icp_profile",
             "factual_summary",
+            "hotel_opening_hours",
+            "hotel_opening_hours_status",
+            "checkin_checkout_info",
+            "checkin_checkout_status",
+            "review_signal_summary",
+            "rooms_range",
+            "room_count_value",
+            "room_count_status",
+            "business_interest_summary",
+            "why_commercially_interesting",
+            "property_positioning_summary",
+            "main_bottleneck_hypothesis",
+            "pain_point_hypothesis",
+            "best_entry_angle",
+            "recommended_hook",
+            "recommended_first_contact_route",
+            "likely_decision_maker_hypothesis",
+            "service_complexity_read",
+            "commercial_complexity_read",
+            "direct_booking_friction_hypothesis",
+            "contact_route_friction_hypothesis",
+            "call_hypothesis",
+            "commercial_verdict",
             "subject_line",
             "hook",
             "give_first_insight",
@@ -333,12 +619,17 @@ def save_email_file(df: pd.DataFrame, source_file: str) -> Path:
 
 def main() -> None:
     enriched_files = list_enriched_files()
-
     if not enriched_files:
         print("V priečinku outputs/enrichment nie je žiadny enriched CSV súbor.")
         return
 
+    preferred_enrichment_file = normalize_text(os.getenv("EMAIL_ENRICHMENT_SOURCE_FILE"))
     first_file = enriched_files[-1]
+    if preferred_enrichment_file:
+        for candidate in enriched_files:
+            if candidate.name == preferred_enrichment_file:
+                first_file = candidate
+                break
 
     try:
         enriched_df = pd.read_csv(first_file)
@@ -347,7 +638,7 @@ def main() -> None:
         print(f"Dôvod: {error}")
         return
 
-    email_df = build_email_dataframe(enriched_df)
+    email_df = build_email_dataframe(enriched_df, first_file.name)
     output_path = save_email_file(email_df, first_file.name)
 
     print(f"Načítaný enrichment súbor: {first_file.name}")
@@ -359,7 +650,7 @@ def main() -> None:
             [
                 "hotel_name",
                 "subject_line",
-                "give_first_insight",
+                "business_interest_summary",
             ]
         ]
         .head(5)
