@@ -155,8 +155,96 @@ def get_master_file(kind: str) -> Optional[Path]:
 
 
 def build_status_suffix(status: str) -> str:
-    normalized = normalize_text(status)
+    normalized = humanize_status(status)
     return f" [{normalized}]" if normalized else ""
+
+
+def humanize_status(status: object) -> str:
+    normalized = normalize_text(status)
+    mapping = {
+        "public_confirmed": "Overené vo verejnom zdroji",
+        "raw_confirmed": "",
+        "Overené vo verejnom zdroji": "Overené vo verejnom zdroji",
+        UNKNOWN_VALUE_LABEL: UNKNOWN_VALUE_LABEL,
+    }
+    return mapping.get(normalized, "")
+
+
+def humanize_ranking_reason(value: object) -> str:
+    raw = collapse_whitespace(value)
+    if not raw:
+        return ""
+    parts = [part.strip() for part in raw.split("|") if part.strip()]
+    humanized: list[str] = []
+    for part in parts:
+        if ":" in part:
+            key, detail = part.split(":", 1)
+            key = key.strip()
+            detail = detail.strip()
+        else:
+            key, detail = part.strip(), ""
+        if key == "commercial_verdict" and detail:
+            humanized.append(f"commercial read zatiaľ vychádza na {detail}")
+        elif key == "ownership":
+            if detail:
+                humanized.append("owner-side signál je verejne podložený")
+        elif key == "factual_completeness" and detail:
+            humanized.append(f"faktická úplnosť je zatiaľ na úrovni {detail}")
+        elif key == "entry_angle" and detail == "present":
+            humanized.append("entry angle je už použiteľný")
+        elif key == "commercial_read" and detail == "present":
+            humanized.append("commercial read je už dosť konkrétny")
+        elif key == "service_complexity" and detail == "present":
+            humanized.append("širšia ponuka služieb si pýta presnejšiu komunikáciu")
+        elif key == "checkin_missing":
+            humanized.append("chýbajú potvrdené pobytové časy")
+        elif key.startswith("uncertainty_notes"):
+            continue
+        else:
+            reason = humanize_reason_code(key)
+            if reason:
+                humanized.append(reason)
+    return "; ".join(dict.fromkeys([item for item in humanized if item]))
+
+
+def humanize_reason_code(value: str) -> str:
+    mapping = {
+        "opening_hours_missing": "chýbajú jasné prevádzkové hodiny",
+        "checkin_missing": "chýbajú potvrdené časy check-in / check-out",
+        "room_count_missing": "chýba potvrdený room signal",
+        "low_factual_completeness": "profil ešte nie je dosť fakticky kompletný",
+        "weak_ownership_confidence": "nie je jasný owner-side kontakt alebo company signal",
+        "ambiguous_commercial_hook": "commercial angle ešte treba sprísniť",
+        "high_uncertainty": "ostáva viac neistých bodov vo verejných dátach",
+        "cautious_verdict": "verdikt je zatiaľ opatrný",
+    }
+    normalized = normalize_text(value)
+    if normalized.startswith("uncertainty_notes:"):
+        return ""
+    return mapping.get(normalized, normalized.replace("_", " "))
+
+
+def polish_human_text(value: object, max_len: int = 220) -> str:
+    text = collapse_whitespace(value)
+    if not text:
+        return ""
+    replacements = {
+        "ICP": "",
+        "atraktívny cieľ pre spoluprácu": "zaujímavý hlavne cez konkrétnu prevádzkovú logiku",
+        "komerčne zaujímavý": "zaujímavý hlavne tým, kde môže vznikať friction",
+        "komerčne zaujímavé": "zaujímavé hlavne tým, kde môže vznikať friction",
+        "raw_confirmed": "",
+        "public_confirmed": "",
+        "čo by sme mohli pomôcť": "čo sa oplatí preveriť",
+        "s našimi riešeniami": "",
+        "našimi riešeniami": "",
+        "silnú zhodu": "dobrú zhodu",
+        "atraktívny cieľ": "prevádzku, kde sa oplatí preveriť konkrétne miesto trenia",
+    }
+    for source, target in replacements.items():
+        text = text.replace(source, target)
+    text = " ".join(text.split())
+    return truncate_text(text, max_len=max_len)
 
 
 def filter_rows_by_decision(rows: pd.DataFrame, decision_status: str) -> pd.DataFrame:
@@ -189,15 +277,26 @@ def build_summary_frames(
 
 
 def format_fact_line(label: str, value: object, status: str = "", max_len: int = 180) -> str:
-    text = collapse_whitespace(value) or UNKNOWN_VALUE_LABEL
+    text = polish_human_text(value, max_len=max_len) or UNKNOWN_VALUE_LABEL
     return f"- {label}: {truncate_text(text, max_len=max_len)}{build_status_suffix(status)}"
 
 
 def format_list_block(items: list[str], fallback: str = UNKNOWN_VALUE_LABEL, max_len: int = 140) -> list[str]:
-    values = [truncate_text(item, max_len=max_len) for item in items if collapse_whitespace(item)]
+    values = [polish_human_text(item, max_len=max_len) for item in items if collapse_whitespace(item)]
     if not values:
         return [f"- {fallback}"]
     return [f"- {value}" for value in values]
+
+
+def format_paragraph_block(items: list[str], fallback: str = UNKNOWN_VALUE_LABEL, max_len: int = 300) -> list[str]:
+    values = [polish_human_text(item, max_len=max_len) for item in items if collapse_whitespace(item)]
+    if not values:
+        return [fallback]
+    lines: list[str] = []
+    for value in values:
+        lines.append(value)
+        lines.append("")
+    return lines[:-1]
 
 
 def collect_service_mix_lines(service_mix: dict) -> list[str]:
@@ -205,6 +304,8 @@ def collect_service_mix_lines(service_mix: dict) -> list[str]:
     for key, payload in service_mix.items():
         availability = normalize_text(payload.get("available"))
         if availability in {"yes", "unknown"}:
+            if availability == "unknown":
+                continue
             evidence = truncate_text(payload.get("evidence"), max_len=120) or UNKNOWN_VALUE_LABEL
             origin = normalize_text(payload.get("source_origin"))
             label = key.replace("_", " ")
@@ -241,13 +342,13 @@ def collect_verified_lines(factual: dict) -> list[str]:
     room_signal = factual.get("room_count_signal", {})
     ownership = factual.get("ownership_company_signal", {})
     if normalize_text(operating.get("status")) == "Overené vo verejnom zdroji":
-        lines.append(f"Operating hours: {normalize_text(operating.get('hotel_opening_hours'))}")
+        lines.append(f"Prevádzkové hodiny: {normalize_text(operating.get('hotel_opening_hours'))}")
     if normalize_text(checkin.get("status")) == "Overené vo verejnom zdroji":
         lines.append(f"Check-in / check-out: {normalize_text(checkin.get('value'))}")
     if normalize_text(room_signal.get("status")) == "public_confirmed":
-        lines.append(f"Room signal: {normalize_text(room_signal.get('value'))} / {normalize_text(room_signal.get('rooms_range'))}")
+        lines.append(f"Kapacita izieb: {normalize_text(room_signal.get('value'))} / {normalize_text(room_signal.get('rooms_range'))}")
     if normalize_text(ownership.get("status")) == "public_confirmed":
-        lines.append(f"Ownership: {normalize_text(ownership.get('value'))}")
+        lines.append(f"Owner / company: {normalize_text(ownership.get('value'))}")
     return lines
 
 
@@ -256,9 +357,9 @@ def collect_raw_lines(factual: dict) -> list[str]:
     review_signal = factual.get("review_trust_signal", {})
     ownership = factual.get("ownership_company_signal", {})
     if normalize_text(review_signal.get("status")) == "raw_confirmed":
-        lines.append(f"Review signal: {normalize_text(review_signal.get('summary'))}")
+        lines.append(f"Review signal je podložený verejnými dátami: {normalize_text(review_signal.get('summary'))}")
     if normalize_text(ownership.get("status")) == "raw_confirmed":
-        lines.append(f"Ownership: {normalize_text(ownership.get('value'))}")
+        lines.append(f"Owner / company signal je podložený verejnými dátami: {normalize_text(ownership.get('value'))}")
     return lines
 
 
@@ -306,8 +407,8 @@ def build_header_section(row: dict) -> list[str]:
         "",
         format_fact_line("Account ID", row.get("account_id")),
         format_fact_line("Mesto / krajina", f"{normalize_text(row.get('city'))} / {normalize_text(row.get('country_code'))}".strip(" /")),
-        format_fact_line("Final priority", row.get("priority_level_final")),
-        format_fact_line("Decision status", row.get("decision_status")),
+        format_fact_line("Finálna priorita", row.get("priority_level_final")),
+        format_fact_line("Stav rozhodnutia", row.get("decision_status")),
     ]
 
 
@@ -332,8 +433,8 @@ def build_old_template_markdown(row: dict, source_bundle: dict, factual: dict, c
     review_signal = factual.get("review_trust_signal", {})
     ownership = factual.get("ownership_company_signal", {})
     uncertainty_notes = commercial.get("uncertainty_notes", []) or []
-    missingness_notes = [part.strip() for part in normalize_text(row.get("ranking_missingness_notes")).split("|") if part.strip()]
-    review_queue_reasons = [part.strip() for part in normalize_text(row.get("review_queue_reason_codes")).split("|") if part.strip()]
+    missingness_notes = [humanize_reason_code(part.strip()) for part in normalize_text(row.get("ranking_missingness_notes")).split("|") if part.strip()]
+    review_queue_reasons = [humanize_reason_code(part.strip()) for part in normalize_text(row.get("review_queue_reason_codes")).split("|") if part.strip()]
     operator_action, verify_list, _ = build_operator_action(row)
 
     lines: list[str] = []
@@ -342,30 +443,30 @@ def build_old_template_markdown(row: dict, source_bundle: dict, factual: dict, c
         [
             "",
             "## Základný profil hotela",
-            format_fact_line("Property positioning", build_natural_hotel_label(identity, commercial), max_len=220),
+            format_fact_line("Profil hotela", build_natural_hotel_label(identity, commercial), max_len=220),
             format_fact_line("Typ hotela", identity.get("category_name")),
             format_fact_line("Hviezdy", star_signal.get("value"), star_signal.get("status")),
-            format_fact_line("Room signal", f"{normalize_text(room_signal.get('value'))} / {normalize_text(room_signal.get('rooms_range'))}".strip(" /"), room_signal.get("status")),
+            format_fact_line("Kapacita izieb", f"{normalize_text(room_signal.get('value'))} / {normalize_text(room_signal.get('rooms_range'))}".strip(" /"), room_signal.get("status")),
             format_fact_line("Owner / company", ownership.get("value"), ownership.get("status")),
             "",
             "## Kontaktné údaje",
             format_fact_line("Web", contacts.get("website")),
-            format_fact_line("Phone", contacts.get("phone")),
+            format_fact_line("Telefón", contacts.get("phone")),
             format_fact_line("Adresa", address.get("formatted")),
             format_fact_line("Odporúčaný prvý kontakt", commercial.get("recommended_first_contact_route")),
-            format_fact_line("Likely decision maker", commercial.get("likely_decision_maker_hypothesis")),
+            format_fact_line("Pravdepodobný decision maker", commercial.get("likely_decision_maker_hypothesis")),
             "",
             "## Prevádzkové hodiny a dôležité časy",
-            format_fact_line("Opening hours", operating.get("hotel_opening_hours"), operating.get("status"), max_len=220),
+            format_fact_line("Prevádzkové hodiny", operating.get("hotel_opening_hours"), operating.get("status"), max_len=220),
             format_fact_line("Check-in / check-out", checkin.get("value"), checkin.get("status")),
             "",
             "## Čo je na hoteli obchodne zaujímavé",
-            format_fact_line("Commercial summary", commercial.get("business_interest_summary"), max_len=220),
-            format_fact_line("Why commercially interesting", commercial.get("why_commercially_interesting"), max_len=240),
-            format_fact_line("Service complexity", commercial.get("service_complexity_read"), max_len=220),
-            format_fact_line("Commercial complexity", commercial.get("commercial_complexity_read"), max_len=220),
+            format_fact_line("Krátke zhrnutie", commercial.get("business_interest_summary"), max_len=220),
+            format_fact_line("Prečo to stojí za pozretie", commercial.get("why_commercially_interesting"), max_len=240),
+            format_fact_line("Šírka služieb", commercial.get("service_complexity_read"), max_len=220),
+            format_fact_line("Obchodná komplexita", commercial.get("commercial_complexity_read"), max_len=220),
             "",
-            "- Demand mix hypothesis:",
+            "- Typy dopytu:",
         ]
     )
     lines.extend(format_list_block(commercial.get("demand_mix_hypothesis", []) or [], max_len=180))
@@ -385,52 +486,52 @@ def build_old_template_markdown(row: dict, source_bundle: dict, factual: dict, c
     lines.extend(
         [
             "",
-            format_fact_line("Main bottleneck", commercial.get("main_bottleneck_hypothesis"), max_len=220),
+            format_fact_line("Hlavný bottleneck", commercial.get("main_bottleneck_hypothesis"), max_len=220),
             format_fact_line("Pain point", commercial.get("pain_point_hypothesis"), max_len=220),
-            format_fact_line("Direct booking friction", commercial.get("direct_booking_friction_hypothesis"), max_len=220),
-            format_fact_line("Contact route friction", commercial.get("contact_route_friction_hypothesis"), max_len=220),
+            format_fact_line("Direct-booking friction", commercial.get("direct_booking_friction_hypothesis"), max_len=220),
+            format_fact_line("Contact-route friction", commercial.get("contact_route_friction_hypothesis"), max_len=220),
             "",
             "## Personalizačné uhly",
         ]
     )
-    lines.extend(format_list_block(commercial.get("personalization_angles", []) or [], max_len=180))
+    lines.extend(format_paragraph_block(commercial.get("personalization_angles", []) or [], max_len=320))
     lines.extend(
         [
             "",
             "## Odporúčaný háčik",
-            format_fact_line("Best entry angle", commercial.get("best_entry_angle"), max_len=220),
-            format_fact_line("Recommended hook", commercial.get("recommended_hook"), max_len=220),
+            format_fact_line("Najlepší entry angle", commercial.get("best_entry_angle"), max_len=220),
+            format_fact_line("Odporúčaný hook", commercial.get("recommended_hook"), max_len=220),
             "",
             "## Návrh prvého e-mailu",
-            format_fact_line("Subject", email_row.get("subject_line")),
-            format_fact_line("Give first line", email_row.get("give_first_line"), max_len=220),
-            format_fact_line("Relevance line", email_row.get("relevance_line"), max_len=220),
+            format_fact_line("Predmet", email_row.get("subject_line")),
+            format_fact_line("Úvodná veta", email_row.get("give_first_line"), max_len=220),
+            format_fact_line("Prečo sa ozvať", email_row.get("relevance_line"), max_len=220),
             format_fact_line("CTA", email_row.get("low_friction_cta"), max_len=200),
             "",
             "## Návrh následného e-mailu",
             format_fact_line("Follow-up", email_row.get("followup_email"), max_len=260),
             "",
             "## Hypotéza na krátky úvodný rozhovor",
-            format_fact_line("Call hypothesis", commercial.get("call_hypothesis"), max_len=220),
+            polish_human_text(commercial.get("call_hypothesis"), max_len=340) or UNKNOWN_VALUE_LABEL,
             "",
             "## Verdikt",
-            format_fact_line("Verdict", commercial.get("verdict")),
-            format_fact_line("Decision status", row.get("decision_status")),
-            format_fact_line("Ranking reason", row.get("ranking_refresh_reason"), max_len=220),
-            format_fact_line("Recommended operator action", operator_action),
+            format_fact_line("Verdikt", commercial.get("verdict")),
+            format_fact_line("Stav rozhodnutia", row.get("decision_status")),
+            format_fact_line("Prečo teraz", humanize_ranking_reason(row.get("ranking_refresh_reason")), max_len=220),
+            format_fact_line("Odporúčaná akcia", operator_action),
             "",
             "## Neistoty a čo treba overiť",
-            "- Uncertainty notes:",
+            "- Neistoty:",
         ]
     )
     lines.extend(format_list_block(uncertainty_notes, max_len=180))
-    lines.extend(["", "- Missingness notes:"])
-    lines.extend(format_list_block(missingness_notes))
-    lines.extend(["", "- Review queue reasons:"])
-    lines.extend(format_list_block(review_queue_reasons))
+    lines.extend(["", "- Čo ešte chýba:"])
+    lines.extend(format_list_block([item for item in missingness_notes if item], fallback="Bez väčších chýbajúcich bodov."))
+    lines.extend(["", "- Review queue dôvody:"])
+    lines.extend(format_list_block([item for item in review_queue_reasons if item], fallback="Bez dodatočných review dôvodov."))
     lines.extend(["", "- Manuálne overiť:"])
     lines.extend(format_list_block(verify_list, fallback="Nič kritické navyše."))
-    lines.extend(["", "- Source URLs:"])
+    lines.extend(["", "- Zdrojové URL:"])
     lines.extend(format_list_block(collect_source_urls(source_bundle), max_len=220))
     return "\n".join(lines).strip() + "\n"
 
@@ -451,16 +552,8 @@ def build_operator_brief_markdown(row: dict, source_bundle: dict, factual: dict,
     raw_lines = collect_raw_lines(factual)
     source_urls = collect_source_urls(source_bundle)
     uncertainty_notes = commercial.get("uncertainty_notes", []) or []
-    missingness_notes = [
-        part.strip()
-        for part in normalize_text(row.get("ranking_missingness_notes")).split("|")
-        if part.strip()
-    ]
-    review_queue_reasons = [
-        part.strip()
-        for part in normalize_text(row.get("review_queue_reason_codes")).split("|")
-        if part.strip()
-    ]
+    missingness_notes = [humanize_reason_code(part.strip()) for part in normalize_text(row.get("ranking_missingness_notes")).split("|") if part.strip()]
+    review_queue_reasons = [humanize_reason_code(part.strip()) for part in normalize_text(row.get("review_queue_reason_codes")).split("|") if part.strip()]
     operator_action, verify_list, ignore_list = build_operator_action(row)
 
     lines: list[str] = []
@@ -479,19 +572,19 @@ def build_operator_brief_markdown(row: dict, source_bundle: dict, factual: dict,
             format_fact_line("Score up", row.get("ranking_upside_reasons")),
             format_fact_line("Score down", row.get("ranking_downside_reasons")),
             format_fact_line("Ranking score final", row.get("ranking_score_final")),
-            format_fact_line("Rank bucket final", row.get("rank_bucket_final")),
+            format_fact_line("Finálny rank bucket", row.get("rank_bucket_final")),
             "",
             "## Factual Block",
             format_fact_line("Hotel", identity.get("hotel_name")),
-            format_fact_line("Hotel type", identity.get("hotel_type_class")),
+            format_fact_line("Typ hotela", identity.get("hotel_type_class")),
             format_fact_line("Category", identity.get("category_name")),
-            format_fact_line("Website", contacts.get("website")),
-            format_fact_line("Phone", contacts.get("phone")),
-            format_fact_line("Address", address.get("formatted")),
-            format_fact_line("Opening hours", operating.get("hotel_opening_hours"), operating.get("status")),
+            format_fact_line("Web", contacts.get("website")),
+            format_fact_line("Telefón", contacts.get("phone")),
+            format_fact_line("Adresa", address.get("formatted")),
+            format_fact_line("Prevádzkové hodiny", operating.get("hotel_opening_hours"), operating.get("status")),
             format_fact_line("Check-in / check-out", checkin.get("value"), checkin.get("status")),
             format_fact_line("Room signal", f"{normalize_text(room_signal.get('value'))} / {normalize_text(room_signal.get('rooms_range'))}".strip(" /"), room_signal.get("status")),
-            format_fact_line("Star signal", star_signal.get("value"), star_signal.get("status")),
+            format_fact_line("Hviezdy", star_signal.get("value"), star_signal.get("status")),
             format_fact_line("Review signal", review_signal.get("summary"), review_signal.get("status")),
             format_fact_line("Ownership signal", ownership.get("value"), ownership.get("status")),
             "",
@@ -527,9 +620,9 @@ def build_operator_brief_markdown(row: dict, source_bundle: dict, factual: dict,
         [
             "",
             "## Outreach Block",
-            format_fact_line("Subject", email_row.get("subject_line")),
-            format_fact_line("Give first line", email_row.get("give_first_line"), max_len=180),
-            format_fact_line("Relevance line", email_row.get("relevance_line"), max_len=180),
+            format_fact_line("Predmet", email_row.get("subject_line")),
+            format_fact_line("Úvodná veta", email_row.get("give_first_line"), max_len=180),
+            format_fact_line("Prečo sa ozvať", email_row.get("relevance_line"), max_len=180),
             format_fact_line("CTA", email_row.get("low_friction_cta"), max_len=160),
             "",
             "## Operator Action Block",
@@ -556,8 +649,8 @@ def build_summary_markdown(title: str, rows: pd.DataFrame) -> str:
         return "\n".join(lines) + "\n"
     for _, row in rows.iterrows():
         top_reason = (
-            normalize_text(row.get("best_entry_angle"))
-            or normalize_text(row.get("why_commercially_interesting"))
+            polish_human_text(row.get("best_entry_angle"), max_len=180)
+            or polish_human_text(row.get("why_commercially_interesting"), max_len=180)
             or normalize_text(row.get("ranking_upside_reasons"))
             or normalize_text(row.get("review_queue_reason_codes"))
             or normalize_text(row.get("ranking_refresh_reason"))
@@ -566,11 +659,11 @@ def build_summary_markdown(title: str, rows: pd.DataFrame) -> str:
         lines.extend(
             [
                 f"## {normalize_text(row.get('hotel_name'))}",
-                format_fact_line("Final score", row.get("ranking_score_final")),
-                format_fact_line("Decision status", row.get("decision_status")),
+                format_fact_line("Finálne skóre", row.get("ranking_score_final")),
+                format_fact_line("Stav rozhodnutia", row.get("decision_status")),
                 format_fact_line("Commercial verdict", row.get("commercial_verdict")),
-                format_fact_line("Top reason", top_reason, max_len=180),
-                format_fact_line("Operator next step", operator_action, max_len=180),
+                format_fact_line("Hlavný dôvod", top_reason, max_len=180),
+                format_fact_line("Ďalší krok", operator_action, max_len=180),
                 "",
             ]
         )

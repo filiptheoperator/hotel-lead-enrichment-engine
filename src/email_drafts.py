@@ -51,6 +51,50 @@ def ensure_column(df: pd.DataFrame, column: str, default_value: str = "") -> Non
         df[column] = default_value
 
 
+def collapse_whitespace(value: object) -> str:
+    return " ".join(normalize_text(value).split())
+
+
+def truncate_text(value: object, max_len: int = 180) -> str:
+    text = collapse_whitespace(value)
+    if len(text) <= max_len:
+        return text
+    return text[: max_len - 1].rstrip(" ,;:-") + "…"
+
+
+def humanize_outreach_text(value: object, max_len: int = 220) -> str:
+    text = collapse_whitespace(value)
+    if not text:
+        return ""
+    replacements = {
+        "ICP": "",
+        "silnú zhodu": "dobrú zhodu",
+        "atraktívny cieľ pre spoluprácu": "prevádzku, kde sa oplatí preveriť konkrétne miesto trenia",
+        "atraktívny cieľ": "prevádzku, kde sa oplatí preveriť konkrétne miesto trenia",
+        "s našimi riešeniami": "",
+        "našimi riešeniami": "",
+        "čo by sme mohli pomôcť preveriť": "čo sa oplatí preveriť",
+        "čo by sme mohli pomôcť": "čo sa oplatí preveriť",
+        "Zaujímalo by nás": "Pri rýchlom pozretí nás zaujalo",
+        "Váš vysoký rating a nezávislý status sú ideálnym základom": "Vidno tu dobrú verejnú spätnú väzbu a nezávislý model prevádzky",
+        "Vaša silná pozícia": "Vidno silnú pozíciu",
+        "obchodné možnosti": "miesta, kde sa môže strácať časť záujmu pred dopytom",
+        "rozšírenie eventových a reštauračných služieb": "koordináciu eventového, gastro a pobytového dopytu",
+        "príležitosti na zlepšenie": "miesta, kde sa môže strácať časť záujmu pred dopytom",
+        "môžeme pomôcť lepšie zvládnuť": "sa oplatí presnejšie preveriť",
+        "môžeme pomôcť": "sa oplatí preveriť",
+    }
+    for source, target in replacements.items():
+        text = text.replace(source, target)
+    text = " ".join(text.split())
+    return truncate_text(text, max_len=max_len)
+
+
+def starts_with_observation(value: str) -> bool:
+    lowered = collapse_whitespace(value).lower()
+    return lowered.startswith(("všimli sme si", "pri takomto type hotela", "často sa tu", "oplatí sa preveriť", "vidno"))
+
+
 def build_source_batch_stem(value: str) -> str:
     stem = Path(normalize_text(value)).stem
     for marker in [
@@ -150,7 +194,7 @@ def build_subject_line(row: pd.Series) -> str:
 
 
 def build_hook(row: pd.Series) -> str:
-    recommended_hook = normalize_text(row.get("recommended_hook"))
+    recommended_hook = humanize_outreach_text(row.get("recommended_hook"), max_len=170)
     if recommended_hook:
         return recommended_hook
     if normalize_text(row.get("email_hook")):
@@ -163,31 +207,37 @@ def build_hook(row: pd.Series) -> str:
 
 
 def build_personalization_line(row: pd.Series) -> str:
+    angle = humanize_outreach_text(row.get("personalization_angle_1"), max_len=300)
+    if angle:
+        return angle
     return build_hook(row)
 
 
 def build_give_first_line(row: pd.Series) -> str:
-    insight = (
-        normalize_text(row.get("best_entry_angle"))
-        or normalize_text(row.get("recommended_hook"))
-        or normalize_text(row.get("business_interest_summary"))
-        or normalize_text(row.get("give_first_insight"))
-    )
+    insight = humanize_outreach_text(row.get("best_entry_angle"), max_len=180)
+    if not insight:
+        insight = humanize_outreach_text(row.get("recommended_hook"), max_len=180)
+    if not insight:
+        insight = humanize_outreach_text(row.get("business_interest_summary"), max_len=180)
+    if not insight:
+        insight = humanize_outreach_text(row.get("give_first_insight"), max_len=180)
     if insight:
+        if not starts_with_observation(insight):
+            insight = f"Všimli sme si, že {insight[:1].lower() + insight[1:]}"
         return insight
     return "Pri rýchlom pozretí verejných údajov som si všimol jeden stručný praktický detail."
 
 
 def build_relevance_line(row: pd.Series) -> str:
-    why_interesting = normalize_text(row.get("why_commercially_interesting"))
+    why_interesting = humanize_outreach_text(row.get("why_commercially_interesting"), max_len=220)
     if why_interesting:
         return why_interesting
-    main_issue = normalize_text(row.get("main_bottleneck_hypothesis")) or normalize_text(row.get("main_observed_issue"))
+    main_issue = humanize_outreach_text(row.get("main_bottleneck_hypothesis"), max_len=220) or humanize_outreach_text(row.get("main_observed_issue"), max_len=220)
     if main_issue:
         return main_issue
     factual_line = build_short_factual_line(row)
     if normalize_text(row.get("business_interest_summary")):
-        return normalize_text(row.get("business_interest_summary"))
+        return humanize_outreach_text(row.get("business_interest_summary"), max_len=220)
     return factual_line
 
 
@@ -226,14 +276,19 @@ def build_proof_line(row: pd.Series) -> str:
 
 
 def build_cold_email(row: pd.Series) -> str:
+    personalization = normalize_text(row.get("personalization_line"))
+    give_first_line = normalize_text(row.get("give_first_line"))
+    relevance_line = normalize_text(row.get("relevance_line"))
+    if personalization and give_first_line and personalization == give_first_line:
+        personalization = ""
     parts = [
         "Dobrý deň,",
         "",
-        normalize_text(row.get("personalization_line")),
-        normalize_text(row.get("give_first_line")),
-        normalize_text(row.get("relevance_line")),
+        personalization,
+        give_first_line,
+        relevance_line,
     ]
-    proof_line = normalize_text(row.get("proof_line"))
+    proof_line = humanize_outreach_text(row.get("proof_line"), max_len=220)
     if proof_line:
         parts.append(proof_line)
     parts.extend(
@@ -312,6 +367,16 @@ def build_factual_summary_from_artifact(factual: dict) -> str:
     return "; ".join(parts)
 
 
+def first_personalization_angle(commercial: dict) -> str:
+    angles = commercial.get("personalization_angles", []) or []
+    if isinstance(angles, list):
+        for item in angles:
+            text = truncate_text(item, max_len=280)
+            if text:
+                return text
+    return ""
+
+
 def build_row_artifact_context(
     row: pd.Series,
     source_batch_stem: str,
@@ -345,6 +410,7 @@ def build_row_artifact_context(
         "main_bottleneck_hypothesis": normalize_text(commercial.get("main_bottleneck_hypothesis")),
         "pain_point_hypothesis": normalize_text(commercial.get("pain_point_hypothesis")),
         "best_entry_angle": normalize_text(commercial.get("best_entry_angle")),
+        "personalization_angle_1": first_personalization_angle(commercial),
         "recommended_hook": normalize_text(commercial.get("recommended_hook")),
         "recommended_first_contact_route": normalize_text(commercial.get("recommended_first_contact_route")),
         "likely_decision_maker_hypothesis": normalize_text(commercial.get("likely_decision_maker_hypothesis")),
@@ -455,6 +521,7 @@ def build_email_dataframe(df: pd.DataFrame, enrichment_source_file: str) -> pd.D
         "main_bottleneck_hypothesis",
         "pain_point_hypothesis",
         "best_entry_angle",
+        "personalization_angle_1",
         "recommended_hook",
         "recommended_first_contact_route",
         "likely_decision_maker_hypothesis",
