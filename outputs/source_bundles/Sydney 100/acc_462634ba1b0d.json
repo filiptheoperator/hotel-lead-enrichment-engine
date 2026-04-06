@@ -1,0 +1,99 @@
+{
+  "schema_version": "source_bundle/v1",
+  "generated_at_utc": "2026-04-05T21:10:22.083613+00:00",
+  "account_id": "acc_462634ba1b0d",
+  "source_file": "Sydney 100.csv",
+  "hotel_identity": {
+    "hotel_name": "The Hornsby Inn",
+    "city": "Hornsby",
+    "country_code": "AU",
+    "website": "https://hornsbyinn.com.au/",
+    "website_domain": "hornsbyinn.com.au"
+  },
+  "raw_contact_hints": {
+    "phone": "+61 2 5302 9307",
+    "source_url": "https://www.google.com/maps/search/?api=1&query=The%20Hornsby%20Inn&query_place_id=ChIJ-XMpqYanEmsRzT9mWWJ5AOI",
+    "fallback_opening_hours": "",
+    "fallback_checkin_checkout": ""
+  },
+  "sources": {
+    "google_places": {
+      "status": "not_enabled",
+      "place_id": "ChIJ-XMpqYanEmsRzT9mWWJ5AOI",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=The%20Hornsby%20Inn&query_place_id=ChIJ-XMpqYanEmsRzT9mWWJ5AOI",
+      "fields_requested": [
+        "displayName",
+        "primaryType",
+        "primaryTypeDisplayName",
+        "types",
+        "businessStatus",
+        "formattedAddress",
+        "websiteUri",
+        "internationalPhoneNumber",
+        "rating",
+        "userRatingCount",
+        "regularOpeningHours",
+        "googleMapsUri"
+      ],
+      "result": {}
+    },
+    "official_website": {
+      "base_url": "https://hornsbyinn.com.au/",
+      "fetch_status": "ok",
+      "reachable": true,
+      "pages": [
+        {
+          "url": "https://hornsbyinn.com.au/",
+          "source_type": "homepage",
+          "jsonld_detected": true,
+          "text_length": 3767,
+          "opening_hours_candidate": "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday: 10:00-03:00; Sunday: 10:00-22:00",
+          "opening_hours_origin": "jsonld",
+          "opening_hours_valid": true,
+          "checkin_checkout_candidate": "",
+          "checkin_checkout_origin": "",
+          "checkin_checkout_valid": false
+        },
+        {
+          "url": "https://hornsbyinn.com.au/contact",
+          "source_type": "contact_page",
+          "jsonld_detected": true,
+          "text_length": 1163,
+          "opening_hours_candidate": "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday: 10:00-03:00; Sunday: 10:00-22:00",
+          "opening_hours_origin": "jsonld",
+          "opening_hours_valid": false,
+          "checkin_checkout_candidate": "",
+          "checkin_checkout_origin": "",
+          "checkin_checkout_valid": false
+        }
+      ]
+    }
+  },
+  "extracted_candidates": {
+    "hotel_opening_hours": {
+      "value": "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday: 10:00-03:00; Sunday: 10:00-22:00",
+      "origin": "jsonld",
+      "source_url": "https://hornsbyinn.com.au/",
+      "source_type": "homepage"
+    },
+    "checkin_checkout": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    },
+    "ownership_company": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": "",
+      "raw_type": ""
+    },
+    "room_count": {
+      "value": "10",
+      "origin": "text",
+      "source_url": "https://hornsbyinn.com.au/",
+      "source_type": "homepage"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+account_id,hotel_name,decision_status,groundedness_check,uncertainty_check,explainability_check,shortlist_balance_check,outreach_priority_check,generic_fluff_check
+acc_d7e3595aefb6,Billabong Retreat,manual_review,pass,pass,pass,pass,pass,pass
+acc_462634ba1b0d,The Hornsby Inn,outreach_now,pass,pass,pass,pass,pass,pass
+acc_9f2cb7250cf5,Miramare Gardens,manual_review,pass,pass,pass,pass,fail,pass
+acc_85a1025fc0d6,Quest Bella Vista,manual_review,review,review,pass,pass,fail,pass
+acc_401880adbecd,Quest Penrith,manual_review,review,review,pass,pass,fail,pass
+acc_5970be661818,Jonah’s Restaurant & Boutique Hotel,manual_review,pass,pass,pass,pass,fail,pass
+acc_50ce289c9223,Spicers Sangoma Retreat,manual_review,pass,pass,pass,pass,fail,pass
+acc_6bb4cbb1a3e4,Seranin | Gordon,manual_review,review,review,pass,pass,pass,pass
+acc_30048fcea764,Royal Hotel,manual_review,review,review,pass,pass,pass,pass
+acc_40da1daa32cc,Doonside Hotel,manual_review,review,review,pass,pass,fail,pass

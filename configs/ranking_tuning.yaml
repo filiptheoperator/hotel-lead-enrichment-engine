@@ -1,8 +1,68 @@
 ranking_tuning:
   enabled: true
   non_icp_keep_threshold: 45
-  operator_shortlist_limit: 100
-  operator_shortlist_priority_bands:
-    - High
-    - Medium-High
-  operator_shortlist_include_review_flag: true
+  weights:
+    commercial_verdict:
+      silný prospect: 6.0
+      zaujímavý prospect: 3.0
+      opatrný prospect: -2.0
+    ownership_confidence:
+      public_confirmed: 1.5
+      raw_confirmed: 0.5
+      Verejne nepotvrdené: -0.5
+    factual_completeness:
+      "0": -1.0
+      "1": 0.5
+      "2": 1.5
+      "3": 2.0
+    review_strength:
+      strong: 1.0
+      weak: -1.0
+    missingness_penalties:
+      opening_hours_missing: -0.5
+      checkin_missing: -0.5
+      room_count_missing: -0.5
+    uncertainty_penalties:
+      per_note: -0.2
+      max_penalty: -1.0
+      ambiguous_hook: -0.5
+  thresholds:
+    priority_levels:
+      High: 85
+      Medium-High: 75
+      Medium: 65
+    rank_buckets:
+      A: 85
+      B: 75
+      C: 65
+    review_score_strong_min: 4.5
+    review_score_weak_max: 4.0
+  shortlist:
+    operator_shortlist_limit: 100
+    operator_shortlist_priority_levels:
+      - High
+      - Medium-High
+    top_export_limit: 20
+  review_queue:
+    enabled: true
+    low_factual_completeness_max: 0
+    weak_ownership_statuses:
+      - Verejne nepotvrdené
+      - ""
+      - unknown
+    high_uncertainty_notes_min: 4
+    ambiguous_hook_factual_max: 0
+    force_manual_review_verdicts:
+      - opatrný prospect
+    review_queue_limit: 100
+    outreach_override:
+      enabled: true
+      allowed_priority_levels:
+        - High
+        - Medium-High
+      allowed_verdicts:
+        - zaujímavý prospect
+        - silný prospect
+      max_uncertainty_notes: 0
+      allow_only_reason_codes:
+        - low_factual_completeness

@@ -1,0 +1,99 @@
+{
+  "schema_version": "source_bundle/v1",
+  "generated_at_utc": "2026-04-05T21:10:29.146657+00:00",
+  "account_id": "acc_6bb4cbb1a3e4",
+  "source_file": "Sydney 100.csv",
+  "hotel_identity": {
+    "hotel_name": "Seranin | Gordon",
+    "city": "Gordon",
+    "country_code": "AU",
+    "website": "http://www.seranin.com.au/",
+    "website_domain": "seranin.com.au"
+  },
+  "raw_contact_hints": {
+    "phone": "+61 1300 821 332",
+    "source_url": "https://www.google.com/maps/search/?api=1&query=Seranin%20%7C%20Gordon&query_place_id=ChIJ-T05l4eoEmsRLpVkxu2vKdg",
+    "fallback_opening_hours": "",
+    "fallback_checkin_checkout": ""
+  },
+  "sources": {
+    "google_places": {
+      "status": "not_enabled",
+      "place_id": "ChIJ-T05l4eoEmsRLpVkxu2vKdg",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Seranin%20%7C%20Gordon&query_place_id=ChIJ-T05l4eoEmsRLpVkxu2vKdg",
+      "fields_requested": [
+        "displayName",
+        "primaryType",
+        "primaryTypeDisplayName",
+        "types",
+        "businessStatus",
+        "formattedAddress",
+        "websiteUri",
+        "internationalPhoneNumber",
+        "rating",
+        "userRatingCount",
+        "regularOpeningHours",
+        "googleMapsUri"
+      ],
+      "result": {}
+    },
+    "official_website": {
+      "base_url": "http://www.seranin.com.au/",
+      "fetch_status": "ok",
+      "reachable": true,
+      "pages": [
+        {
+          "url": "http://www.seranin.com.au/",
+          "source_type": "homepage",
+          "jsonld_detected": true,
+          "text_length": 1044,
+          "opening_hours_candidate": "",
+          "opening_hours_origin": "",
+          "opening_hours_valid": false,
+          "checkin_checkout_candidate": "",
+          "checkin_checkout_origin": "",
+          "checkin_checkout_valid": false
+        },
+        {
+          "url": "https://www.seranin.com.au/contact",
+          "source_type": "contact_page",
+          "jsonld_detected": false,
+          "text_length": 1224,
+          "opening_hours_candidate": "",
+          "opening_hours_origin": "",
+          "opening_hours_valid": false,
+          "checkin_checkout_candidate": "",
+          "checkin_checkout_origin": "",
+          "checkin_checkout_valid": false
+        }
+      ]
+    }
+  },
+  "extracted_candidates": {
+    "hotel_opening_hours": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    },
+    "checkin_checkout": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    },
+    "ownership_company": {
+      "value": "Seranin Group",
+      "origin": "jsonld",
+      "source_url": "http://www.seranin.com.au/",
+      "source_type": "homepage",
+      "raw_type": "localbusiness"
+    },
+    "room_count": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    }
+  }
+}

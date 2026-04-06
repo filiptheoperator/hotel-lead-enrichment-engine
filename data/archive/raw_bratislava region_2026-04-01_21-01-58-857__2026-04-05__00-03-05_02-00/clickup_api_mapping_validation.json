@@ -1,0 +1,6 @@
+{
+  "valid": true,
+  "preview_row_count": 3,
+  "issues": [],
+  "note": "Validation len nad preview payloadom, nie nad živou ClickUp API odpoveďou."
+}

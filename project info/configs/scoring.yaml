@@ -1,0 +1,13 @@
+scoring:
+  weights:
+    direct_booking_strength: 0.20
+    ota_dependency_signal: 0.20
+    digital_maturity: 0.15
+    operational_complexity: 0.15
+    review_signal: 0.10
+    contact_quality: 0.10
+    fit_to_icp: 0.10
+priority_bands:
+  high_min: 8.5
+  medium_high_min: 7.5
+  medium_min: 6.5

@@ -10,6 +10,20 @@ enrichment:
   partial_raw_label: Čiastočne overené z raw vstupu
   request_timeout_seconds: 4
   max_public_pages_per_hotel: 2
+  google_places_enabled: false
+  google_places_fields:
+    - displayName
+    - primaryType
+    - primaryTypeDisplayName
+    - types
+    - businessStatus
+    - formattedAddress
+    - websiteUri
+    - internationalPhoneNumber
+    - rating
+    - userRatingCount
+    - regularOpeningHours
+    - googleMapsUri
   public_page_keywords:
     - check
     - arrival

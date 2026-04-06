@@ -1,0 +1,50 @@
+account_id,hotel_name,column,full_value,batch10_value
+acc_5970be661818,Jonah’s Restaurant & Boutique Hotel,room_count_status,,Verejne nepotvrdené
+acc_5970be661818,Jonah’s Restaurant & Boutique Hotel,business_interest_summary,,Jonah’s Restaurant & Boutique Hotel v Palm Beach je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.
+acc_5970be661818,Jonah’s Restaurant & Boutique Hotel,main_bottleneck_hypothesis,,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie."
+acc_5970be661818,Jonah’s Restaurant & Boutique Hotel,commercial_verdict,,zaujímavý prospect
+acc_9f2cb7250cf5,Miramare Gardens,hotel_opening_hours,Verejne nepotvrdené,"Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00"
+acc_9f2cb7250cf5,Miramare Gardens,hotel_opening_hours_status,Verejne nepotvrdené,Overené vo verejnom zdroji
+acc_9f2cb7250cf5,Miramare Gardens,room_count_status,,Verejne nepotvrdené
+acc_9f2cb7250cf5,Miramare Gardens,business_interest_summary,,Miramare Gardens v Terrey Hills pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.
+acc_9f2cb7250cf5,Miramare Gardens,main_bottleneck_hypothesis,,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie."
+acc_9f2cb7250cf5,Miramare Gardens,commercial_verdict,,zaujímavý prospect
+acc_462634ba1b0d,The Hornsby Inn,hotel_opening_hours,Verejne nepotvrdené,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday: 10:00-03:00; Sunday: 10:00-22:00"
+acc_462634ba1b0d,The Hornsby Inn,hotel_opening_hours_status,Verejne nepotvrdené,Overené vo verejnom zdroji
+acc_462634ba1b0d,The Hornsby Inn,rooms_range,,1-15
+acc_462634ba1b0d,The Hornsby Inn,room_count_status,,public_confirmed
+acc_462634ba1b0d,The Hornsby Inn,business_interest_summary,,The Hornsby Inn v Hornsby je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.
+acc_462634ba1b0d,The Hornsby Inn,main_bottleneck_hypothesis,,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie."
+acc_462634ba1b0d,The Hornsby Inn,commercial_verdict,,zaujímavý prospect
+acc_d7e3595aefb6,Billabong Retreat,checkin_checkout_info,Verejne nepotvrdené,Check-in od 08:30
+acc_d7e3595aefb6,Billabong Retreat,checkin_checkout_status,Verejne nepotvrdené,Overené vo verejnom zdroji
+acc_d7e3595aefb6,Billabong Retreat,room_count_status,,Verejne nepotvrdené
+acc_d7e3595aefb6,Billabong Retreat,business_interest_summary,,Billabong Retreat v Maraylya pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.
+acc_d7e3595aefb6,Billabong Retreat,main_bottleneck_hypothesis,,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie."
+acc_d7e3595aefb6,Billabong Retreat,commercial_verdict,,zaujímavý prospect
+acc_50ce289c9223,Spicers Sangoma Retreat,room_count_status,,Verejne nepotvrdené
+acc_50ce289c9223,Spicers Sangoma Retreat,business_interest_summary,,Spicers Sangoma Retreat v Bowen Mountain pôsobí obchodne zaujímavo najmä pre širší service mix a viac typov dopytu.
+acc_50ce289c9223,Spicers Sangoma Retreat,main_bottleneck_hypothesis,,Pri širšom service mixe sa môže časť dopytu strácať medzi typom záujmu a správnym ďalším krokom.
+acc_50ce289c9223,Spicers Sangoma Retreat,commercial_verdict,,zaujímavý prospect
+acc_6bb4cbb1a3e4,Seranin | Gordon,room_count_status,,Verejne nepotvrdené
+acc_6bb4cbb1a3e4,Seranin | Gordon,business_interest_summary,,Seranin | Gordon v Gordon je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.
+acc_6bb4cbb1a3e4,Seranin | Gordon,main_bottleneck_hypothesis,,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie."
+acc_6bb4cbb1a3e4,Seranin | Gordon,commercial_verdict,,zaujímavý prospect
+acc_85a1025fc0d6,Quest Bella Vista,room_count_status,,Verejne nepotvrdené
+acc_85a1025fc0d6,Quest Bella Vista,business_interest_summary,,Quest Bella Vista v Bella Vista pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.
+acc_85a1025fc0d6,Quest Bella Vista,main_bottleneck_hypothesis,,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie."
+acc_85a1025fc0d6,Quest Bella Vista,commercial_verdict,,zaujímavý prospect
+acc_30048fcea764,Royal Hotel,hotel_opening_hours,Verejne nepotvrdené,Opening hours: (subject to change) Mon - Wed 10:00 am - 11:00 pm Thursday 10:00 am - 1:00 am Fri - Sat 10:00 am - 1:30 am Sunday 10:00 am
+acc_30048fcea764,Royal Hotel,hotel_opening_hours_status,Verejne nepotvrdené,Overené vo verejnom zdroji
+acc_30048fcea764,Royal Hotel,room_count_status,,Verejne nepotvrdené
+acc_30048fcea764,Royal Hotel,business_interest_summary,,Royal Hotel v Springwood je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.
+acc_30048fcea764,Royal Hotel,main_bottleneck_hypothesis,,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie."
+acc_30048fcea764,Royal Hotel,commercial_verdict,,opatrný prospect
+acc_401880adbecd,Quest Penrith,room_count_status,,Verejne nepotvrdené
+acc_401880adbecd,Quest Penrith,business_interest_summary,,Quest Penrith v Penrith pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.
+acc_401880adbecd,Quest Penrith,main_bottleneck_hypothesis,,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie."
+acc_401880adbecd,Quest Penrith,commercial_verdict,,zaujímavý prospect
+acc_40da1daa32cc,Doonside Hotel,room_count_status,,Verejne nepotvrdené
+acc_40da1daa32cc,Doonside Hotel,business_interest_summary,,Doonside Hotel v Doonside je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.
+acc_40da1daa32cc,Doonside Hotel,main_bottleneck_hypothesis,,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie."
+acc_40da1daa32cc,Doonside Hotel,commercial_verdict,,opatrný prospect

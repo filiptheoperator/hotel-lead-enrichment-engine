@@ -1,0 +1,48 @@
+{
+  "schema_version": "commercial_synthesis/v3-lite",
+  "generated_at_utc": "2026-04-06T07:27:04.991075+00:00",
+  "account_id": "acc_9f2cb7250cf5",
+  "source_file": "Sydney 100.csv",
+  "source_bundle_ref": "outputs/source_bundles/Sydney 100/acc_9f2cb7250cf5.json",
+  "factual_enrichment_ref": "outputs/factual_enrichment/Sydney 100/acc_9f2cb7250cf5.json",
+  "model": "gpt-4.1-mini",
+  "business_interest_summary": "Miramare Gardens je nezávislý hotel v Terrey Hills s dobrou reputáciou a ponukou kongresových služieb.",
+  "why_commercially_interesting": "Hotel má silnú recenziu 4,4 z 790 hodnotení a ponúka priestory pre eventy, čo môže prilákať firemných klientov. Neexistujú verejné informácie o počte izieb ani o ďalších službách, čo môže ovplyvniť presnú segmentáciu dopytu.",
+  "property_positioning_summary": "Miramare Gardens je nezávislý hotel v pokojnej lokalite Terrey Hills s dôrazom na kongresové a eventové služby.",
+  "strengths": [
+    "Vysoké hodnotenie 4,4 z 790 recenzií naznačuje dobrú spokojnosť hostí.",
+    "Hotel je nezávislý prevádzkovateľ, čo môže znamenať flexibilitu v rozhodovaní.",
+    "Ponuka eventových a kongresových priestorov je verejne potvrdená."
+  ],
+  "opportunity_gaps": [
+    "Presný počet izieb nie je verejne dostupný, čo komplikuje odhad kapacity.",
+    "Chýbajú verejné informácie o check-in/check-out podmienkach.",
+    "Nie je potvrdená dostupnosť wellness, reštaurácie, spa alebo parkovania."
+  ],
+  "main_bottleneck_hypothesis": "Možný bottleneck je nejasnosť ohľadom kapacity a služieb, čo môže komplikovať presné zacielenie ponúk.",
+  "pain_point_hypothesis": "Neistota v dostupnosti a rozsahu služieb môže viesť k zmiešanému dopytu a manuálnej záťaži pri komunikácii.",
+  "best_entry_angle": "Oplatí sa preveriť možnosti eventových priestorov a flexibilitu nezávislého prevádzkovateľa pri spolupráci.",
+  "personalization_angles": [
+    "Všimli sme si, že Miramare Gardens má silné hodnotenia a ponúka eventové priestory, čo často znamená záujem o optimalizáciu rezervácií a služieb pre firemných klientov. Pri takomto profile sa často mieša viac typov záujmu naraz. Pri takomto type hotela býva užitočné preveriť, či možný bottleneck je nejasnosť ohľadom k…",
+    "Často sa pri nezávislých hoteloch stráca dopyt kvôli nejasnostiam v kapacitách a službách, čo môže byť príležitosťou na zlepšenie. Pri takomto profile sa často mieša viac typov záujmu naraz. Pri takomto type hotela býva užitočné preveriť, či možný bottleneck je nejasnosť ohľadom kapacity a služieb, čo môže komplikovať…",
+    "Oplatí sa preveriť, ako riešia check-in/check-out procesy, keďže tieto informácie nie sú verejne dostupné, čo môže byť zdrojom manuálnej záťaže. Pri takomto profile sa často mieša viac typov záujmu naraz. Pri takomto type hotela býva užitočné preveriť, či možný bottleneck je nejasnosť ohľadom kapacity a služieb, čo mô…"
+  ],
+  "recommended_hook": "Všimli sme si, že pri hoteloch s eventovými priestormi často vznikajú miesta, kde sa môže strácať časť záujmu pred dopytom správy rezervácií.",
+  "recommended_first_contact_route": "Kontaktujte recepciu na +61 2 9450 2000 a opýtajte sa na možnosti spolupráce v oblasti eventových služieb.",
+  "likely_decision_maker_hypothesis": "Pravdepodobne rozhoduje manažér hotela alebo prevádzkovateľ nezávislého hotela, ktorý má na starosti eventové priestory.",
+  "demand_mix_hypothesis": [
+    "Dopyt môže byť kombináciou firemných eventov a individuálnych pobytov, čo môže viesť k zmiešaným požiadavkám.",
+    "Eventové služby môžu tvoriť významnú časť dopytu, ale presný pomer nie je verejne známy."
+  ],
+  "service_complexity_read": "Hotel ponúka eventové služby, ale chýbajú verejné informácie o ďalších službách, čo naznačuje strednú komplexnosť ponuky.",
+  "commercial_complexity_read": "Nezávislý prevádzkovateľ s eventovým zameraním môže mať jednoduchšiu obchodnú štruktúru, no zmiešaný dopyt môže vyžadovať viac manuálnej komunikácie.",
+  "direct_booking_friction_hypothesis": "Možný friction môže vzniknúť kvôli nejasnostiam v dostupnosti služieb a kapacít pred priamou rezerváciou.",
+  "contact_route_friction_hypothesis": "Friction môže byť v identifikácii správneho kontaktného rozhodovateľa vzhľadom na nezávislú prevádzku a rôzne typy dopytu.",
+  "call_hypothesis": "Pri prvom hovore by bolo vhodné overiť presný počet izieb a dostupnosť služieb ako wellness alebo reštaurácia, ktoré nie sú verejne potvrdené. Zároveň sa oplatí zistiť, ako manažujú eventové rezervácie a či majú záujem o optimalizáciu tohto segmentu. Pravdepodobne rozhoduje manažér hotela, ktorý môže poskytnúť detailnejšie informácie o prevádzke. Popri tom dáva zmysel zistiť…",
+  "verdict": "zaujímavý prospect",
+  "uncertainty_notes": [
+    "Presný počet izieb nie je verejne dostupný.",
+    "Chýbajú informácie o check-in/check-out podmienkach.",
+    "Nie je potvrdená dostupnosť wellness, reštaurácie, spa alebo parkovania."
+  ]
+}

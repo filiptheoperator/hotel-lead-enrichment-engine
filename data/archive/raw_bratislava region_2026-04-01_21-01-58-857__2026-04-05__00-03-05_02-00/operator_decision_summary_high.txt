@@ -1,0 +1,19 @@
+Operator Decision Summary - High Leads
+
+- batch_source: raw_bratislava region_2026-04-01_21-01-58-857.csv
+- batch_readiness_score: 10
+- batch_readiness_band: red
+- high_shortlist_rows: 34
+- high_leads_requiring_manual_review: 32
+
+Top High Leads
+- Loft Hotel Bratislava | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.37
+- Areál vodných športov Čunovo | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.35
+- WX Hotel | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.32
+- HOTEL BRATISLAVA | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.31
+- Hotel Gracia Bratislava | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.29
+- BAROK Hotel a Apartmany | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.1
+- SKARITZ Hotel & Residence | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.06
+- YACHTER CLUB Modrá Čajka | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.06
+- LILAWADI - Wellness & Spa | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.04
+- Apollo Hotel | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.04

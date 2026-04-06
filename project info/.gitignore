@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.DS_Store
+data/raw/*
+data/processed/*
+data/qa/*
+outputs/ranked/*
+outputs/enrichment/*
+outputs/hotel_markdown/*
+outputs/email_drafts/*
+outputs/clickup/*

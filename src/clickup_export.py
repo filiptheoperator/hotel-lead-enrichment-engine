@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 from typing import Optional
 
 import pandas as pd
@@ -41,8 +42,13 @@ def list_email_draft_files(email_dir: Path = EMAIL_OUTPUT_DIR) -> list[Path]:
 
 
 def get_preferred_email_draft_file() -> Optional[Path]:
+    preferred_email_file = normalize_text(os.getenv("CLICKUP_EMAIL_SOURCE_FILE"))
+    if preferred_email_file:
+        candidate = EMAIL_OUTPUT_DIR / preferred_email_file
+        if candidate.exists():
+            return candidate
     enrichment_files = sorted(
-        ENRICHMENT_OUTPUT_DIR.glob("*_enriched.csv"),
+        ENRICHMENT_OUTPUT_DIR.glob("*_enriched*.csv"),
         key=lambda path: path.stat().st_mtime,
     )
     if enrichment_files:
@@ -171,11 +177,15 @@ def build_account_status(row: pd.Series) -> str:
     reply_outcome = normalize_text(row.get("reply_outcome")).lower()
     if reply_outcome not in {"", "no_reply", "pending"}:
         return "Activated"
+    if normalize_text(row.get("manual_review_needed")).lower() == "yes":
+        return "Researching"
+    if normalize_text(row.get("decision_status")) == "outreach_now":
+        return "Prioritized"
     if normalize_text(row.get("non_icp_but_keep")).lower() == "yes":
         return "Not a Fit"
     if normalize_text(row.get("review_flag")) == "yes":
         return "Researching"
-    if normalize_text(row.get("priority_band")) in {"High", "Medium-High"}:
+    if normalize_text(row.get("priority_level_final")) in {"High", "Medium-High"}:
         return "Prioritized"
     return "Parked"
 
@@ -189,9 +199,12 @@ def build_clickup_notes(row: pd.Series) -> str:
         f"Hotel type: {normalize_text(row.get('hotel_type_class', ''))}",
         f"Independent / Chain: {normalize_text(row.get('independent_chain_class', ''))}",
         f"Priorita band: {normalize_text(row.get('priority_band', ''))}",
+        f"Priority level final: {normalize_text(row.get('priority_level_final', ''))}",
         f"Skóre: {normalize_text(row.get('priority_score', ''))}",
         f"Ranking score: {normalize_text(row.get('ranking_score', ''))}",
+        f"Ranking score final: {normalize_text(row.get('ranking_score_final', ''))}",
         f"Rank bucket: {normalize_text(row.get('rank_bucket', ''))}",
+        f"Rank bucket final: {normalize_text(row.get('rank_bucket_final', ''))}",
         f"ICP fit score: {normalize_text(row.get('icp_fit_score', ''))}",
         f"ICP fit class: {normalize_text(row.get('icp_fit_class', ''))}",
         f"Fit confidence: {normalize_text(row.get('fit_confidence', ''))}",
@@ -206,6 +219,17 @@ def build_clickup_notes(row: pd.Series) -> str:
         f"Telefón: {normalize_text(row.get('phone', '')) or 'Verejne nepotvrdené'}",
         f"OTA dependency signal: {normalize_text(row.get('ota_dependency_signal_label', ''))}",
         f"Direct booking weakness: {normalize_text(row.get('direct_booking_weakness', ''))}",
+        f"Commercial verdict: {normalize_text(row.get('commercial_verdict', ''))}",
+        f"Business interest summary: {normalize_text(row.get('business_interest_summary', ''))}",
+        f"Main bottleneck hypothesis: {normalize_text(row.get('main_bottleneck_hypothesis', ''))}",
+        f"Pain point hypothesis: {normalize_text(row.get('pain_point_hypothesis', ''))}",
+        f"Recommended hook: {normalize_text(row.get('recommended_hook', ''))}",
+        f"Decision status: {normalize_text(row.get('decision_status', ''))}",
+        f"Manual review needed: {normalize_text(row.get('manual_review_needed', ''))}",
+        f"Review queue reason codes: {normalize_text(row.get('review_queue_reason_codes', ''))}",
+        f"Ranking upside reasons: {normalize_text(row.get('ranking_upside_reasons', ''))}",
+        f"Ranking downside reasons: {normalize_text(row.get('ranking_downside_reasons', ''))}",
+        f"Ranking missingness notes: {normalize_text(row.get('ranking_missingness_notes', ''))}",
         f"Email angle: {normalize_text(row.get('email_angle', ''))}",
         f"CTA type: {normalize_text(row.get('cta_type', ''))}",
         f"Variant ID: {normalize_text(row.get('variant_id', ''))}",
@@ -236,6 +260,11 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             export_df[column] = export_df[column].apply(normalize_text)
 
     for column in [
+        "main_bottleneck_hypothesis",
+        "commercial_verdict",
+        "business_interest_summary",
+        "pain_point_hypothesis",
+        "recommended_hook",
         "account_id",
         "country_code",
         "hotel_type_class",
@@ -254,6 +283,15 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         "rank_bucket_reason",
         "why_not_top_tier",
         "chain_signal_confidence",
+        "ranking_score_final",
+        "priority_level_final",
+        "rank_bucket_final",
+        "decision_status",
+        "manual_review_needed",
+        "review_queue_reason_codes",
+        "ranking_upside_reasons",
+        "ranking_downside_reasons",
+        "ranking_missingness_notes",
     ]:
         if column not in export_df.columns:
             export_df[column] = ""
@@ -270,12 +308,20 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         "micro_cta",
         "proof_snippet",
         "primary_email_goal",
+        "commercial_verdict",
+        "business_interest_summary",
+        "main_bottleneck_hypothesis",
+        "pain_point_hypothesis",
+        "recommended_hook",
     ]:
         if column in export_df.columns:
             export_df[column] = export_df[column].apply(normalize_text)
 
     export_df["task_name"] = export_df.apply(build_clickup_task_name, axis=1)
-    export_df["clickup_priority"] = export_df["priority_band"].apply(map_clickup_priority)
+    export_df["clickup_priority"] = export_df["priority_level_final"].where(
+        export_df["priority_level_final"].fillna("").astype(str).str.strip().ne(""),
+        export_df["priority_band"],
+    ).apply(map_clickup_priority)
     export_df["clickup_status"] = export_df.apply(build_clickup_status, axis=1)
     export_df["account_status"] = export_df.apply(build_account_status, axis=1)
     export_df["contact_phone"] = export_df["phone"]
@@ -285,14 +331,20 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     )
     export_df["task_notes"] = export_df.apply(build_clickup_notes, axis=1)
     export_df["rooms_range"] = export_df.apply(normalize_rooms_range, axis=1)
-    export_df["priority_level"] = export_df["priority_band"]
+    export_df["priority_level"] = export_df["priority_level_final"].where(
+        export_df["priority_level_final"].fillna("").astype(str).str.strip().ne(""),
+        export_df["priority_band"],
+    )
     export_df["icp_fit"] = export_df["icp_fit_class"]
     export_df["ota_dependency_signal"] = export_df["ota_dependency_signal_label"].apply(normalize_ota_dependency_signal)
     export_df["city_region"] = export_df.apply(normalize_city_region, axis=1)
     export_df["direct_booking_weakness"] = export_df["direct_booking_weakness"].apply(normalize_direct_booking_weakness)
-    export_df["main_pain_hypothesis"] = export_df["main_observed_issue"]
+    export_df["main_pain_hypothesis"] = export_df["main_bottleneck_hypothesis"].where(
+        export_df["main_bottleneck_hypothesis"].fillna("").astype(str).str.strip().ne(""),
+        export_df["main_observed_issue"],
+    )
     export_df = export_df.sort_values(
-        by=["ranking_score", "priority_score", "hotel_name"],
+        by=["ranking_score_final", "priority_score", "hotel_name"],
         ascending=[False, False, True],
     ).reset_index(drop=True)
 
@@ -312,15 +364,21 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "source",
             "priority_score",
             "priority_level",
+            "ranking_score_final",
             "icp_fit",
             "rank_bucket",
             "rank_bucket_reason",
+            "rank_bucket_final",
             "why_not_top_tier",
             "chain_signal_confidence",
             "ranking_reason",
             "ota_dependency_signal",
             "direct_booking_weakness",
             "main_pain_hypothesis",
+            "commercial_verdict",
+            "decision_status",
+            "manual_review_needed",
+            "review_queue_reason_codes",
             "contact_phone",
             "contact_website",
             "subject_line",
@@ -353,15 +411,20 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "source": "Source",
             "priority_score": "Priority score",
             "priority_level": "Priority Level",
+            "ranking_score_final": "Ranking score final",
             "icp_fit": "ICP Fit",
             "rank_bucket": "Rank bucket",
             "rank_bucket_reason": "Rank bucket reason",
+            "rank_bucket_final": "Rank bucket final",
             "why_not_top_tier": "Why not top tier",
             "chain_signal_confidence": "Chain signal confidence",
             "ranking_reason": "Ranking reason",
             "ota_dependency_signal": "OTA Dependency Signal",
             "direct_booking_weakness": "Direct Booking Weakness",
             "main_pain_hypothesis": "Main Pain Hypothesis",
+            "decision_status": "Decision Status",
+            "manual_review_needed": "Manual Review Needed",
+            "review_queue_reason_codes": "Review Queue Reason Codes",
             "contact_phone": "Contact phone",
             "contact_website": "Contact website",
             "subject_line": "Subject line",
@@ -377,6 +440,7 @@ def build_clickup_dataframe(df: pd.DataFrame) -> pd.DataFrame:
             "micro_cta": "Micro CTA",
             "proof_snippet": "Proof snippet",
             "primary_email_goal": "Primary email goal",
+            "commercial_verdict": "Commercial Verdict",
         }
     ).copy()
 
@@ -401,6 +465,7 @@ def build_clickup_phase1_minimal_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         "OTA Dependency Signal",
         "Direct Booking Weakness",
         "Main Pain Hypothesis",
+        "Commercial Verdict",
         "Subject line",
         "Source file",
     ]

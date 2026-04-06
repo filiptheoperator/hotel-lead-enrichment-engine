@@ -1,0 +1,99 @@
+{
+  "schema_version": "source_bundle/v1",
+  "generated_at_utc": "2026-04-05T21:10:16.898469+00:00",
+  "account_id": "acc_9f2cb7250cf5",
+  "source_file": "Sydney 100.csv",
+  "hotel_identity": {
+    "hotel_name": "Miramare Gardens",
+    "city": "Terrey Hills",
+    "country_code": "AU",
+    "website": "https://www.miramaregardens.com.au/?utm_source=google&utm_medium=organic&utm_campaign=gmb",
+    "website_domain": "miramaregardens.com.au"
+  },
+  "raw_contact_hints": {
+    "phone": "+61 2 9450 2000",
+    "source_url": "https://www.google.com/maps/search/?api=1&query=Miramare%20Gardens&query_place_id=ChIJEW_AMH1WDWsRzza2mFxAUdo",
+    "fallback_opening_hours": "",
+    "fallback_checkin_checkout": ""
+  },
+  "sources": {
+    "google_places": {
+      "status": "not_enabled",
+      "place_id": "ChIJEW_AMH1WDWsRzza2mFxAUdo",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Miramare%20Gardens&query_place_id=ChIJEW_AMH1WDWsRzza2mFxAUdo",
+      "fields_requested": [
+        "displayName",
+        "primaryType",
+        "primaryTypeDisplayName",
+        "types",
+        "businessStatus",
+        "formattedAddress",
+        "websiteUri",
+        "internationalPhoneNumber",
+        "rating",
+        "userRatingCount",
+        "regularOpeningHours",
+        "googleMapsUri"
+      ],
+      "result": {}
+    },
+    "official_website": {
+      "base_url": "https://www.miramaregardens.com.au/?utm_source=google&utm_medium=organic&utm_campaign=gmb",
+      "fetch_status": "ok",
+      "reachable": true,
+      "pages": [
+        {
+          "url": "https://www.miramaregardens.com.au/?utm_source=google&utm_medium=organic&utm_campaign=gmb",
+          "source_type": "homepage",
+          "jsonld_detected": true,
+          "text_length": 6074,
+          "opening_hours_candidate": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00",
+          "opening_hours_origin": "jsonld",
+          "opening_hours_valid": true,
+          "checkin_checkout_candidate": "",
+          "checkin_checkout_origin": "",
+          "checkin_checkout_valid": false
+        },
+        {
+          "url": "https://www.miramaregardens.com.au/hotel",
+          "source_type": "subpage_general",
+          "jsonld_detected": true,
+          "text_length": 4655,
+          "opening_hours_candidate": "",
+          "opening_hours_origin": "",
+          "opening_hours_valid": false,
+          "checkin_checkout_candidate": "",
+          "checkin_checkout_origin": "",
+          "checkin_checkout_valid": false
+        }
+      ]
+    }
+  },
+  "extracted_candidates": {
+    "hotel_opening_hours": {
+      "value": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00",
+      "origin": "jsonld",
+      "source_url": "https://www.miramaregardens.com.au/?utm_source=google&utm_medium=organic&utm_campaign=gmb",
+      "source_type": "homepage"
+    },
+    "checkin_checkout": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    },
+    "ownership_company": {
+      "value": "Miramare Gardens",
+      "origin": "jsonld",
+      "source_url": "https://www.miramaregardens.com.au/?utm_source=google&utm_medium=organic&utm_campaign=gmb",
+      "source_type": "homepage",
+      "raw_type": "localbusiness, organization"
+    },
+    "room_count": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    }
+  }
+}

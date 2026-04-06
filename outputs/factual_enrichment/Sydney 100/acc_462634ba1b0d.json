@@ -1,0 +1,112 @@
+{
+  "schema_version": "factual_enrichment/v1",
+  "generated_at_utc": "2026-04-05T21:10:22.496261+00:00",
+  "account_id": "acc_462634ba1b0d",
+  "source_file": "Sydney 100.csv",
+  "source_bundle_ref": "outputs/source_bundles/Sydney 100/acc_462634ba1b0d.json",
+  "identity": {
+    "hotel_name": "The Hornsby Inn",
+    "city": "Hornsby",
+    "state": "NSW",
+    "country_code": "AU",
+    "hotel_type_class": "Preferred hotel",
+    "category_name": "Pub",
+    "ownership_type": "Independent operator candidate",
+    "google_place_name": "",
+    "google_primary_type": "",
+    "google_primary_type_display_name": "",
+    "google_types": []
+  },
+  "contacts": {
+    "website": "https://hornsbyinn.com.au/",
+    "website_domain": "hornsbyinn.com.au",
+    "phone": "+61 2 5302 9307",
+    "source_origin": "processed_row"
+  },
+  "address": {
+    "street": "Burdett St &, 37 Hunter St",
+    "city": "Hornsby",
+    "state": "NSW",
+    "country_code": "AU",
+    "formatted": "Burdett St &, 37 Hunter St, Hornsby, NSW, AU",
+    "source_origin": "processed_row"
+  },
+  "operating_hours": {
+    "hotel_opening_hours": "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday: 10:00-03:00; Sunday: 10:00-22:00",
+    "status": "Overené vo verejnom zdroji",
+    "source_url": "https://hornsbyinn.com.au/",
+    "source_type": "homepage",
+    "google_places_weekday_text": ""
+  },
+  "checkin_checkout": {
+    "value": "Verejne nepotvrdené",
+    "status": "Verejne nepotvrdené",
+    "source_url": "",
+    "source_type": "",
+    "source_origin": "",
+    "completeness": "none"
+  },
+  "room_count_signal": {
+    "value": "10",
+    "rooms_range": "1-15",
+    "status": "public_confirmed",
+    "source_origin": "text",
+    "note": "Room count candidate z official webu: 10 | source_type: homepage"
+  },
+  "service_mix": {
+    "wellness": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "restaurant": {
+      "available": "yes",
+      "source_origin": "raw_categories",
+      "evidence": "restaurant, reštaur, restaurac, gastro, dining"
+    },
+    "event_congress": {
+      "available": "yes",
+      "source_origin": "raw_categories",
+      "evidence": "event, kongres, congress, conference, meeting, wedding, function room"
+    },
+    "spa": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "parking": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "bowling": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    }
+  },
+  "review_trust_signal": {
+    "summary": "4/5 z 682 recenzií",
+    "score": "4",
+    "reviews_count": "682",
+    "status": "raw_confirmed",
+    "source_origin": "processed_row"
+  },
+  "google_review_signal": {
+    "rating": "",
+    "user_ratings_total": "",
+    "status": "Verejne nepotvrdené",
+    "source_origin": ""
+  },
+  "ownership_company_signal": {
+    "value": "Independent operator candidate",
+    "status": "raw_confirmed",
+    "source_origin": "processed_row",
+    "note": "Processed ownership_type: Independent operator candidate"
+  },
+  "source_reachability": {
+    "public_source_reachable": "yes",
+    "public_source_fetch_status": "ok",
+    "google_places_status": "not_enabled"
+  }
+}

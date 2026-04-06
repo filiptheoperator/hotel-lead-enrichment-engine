@@ -1,0 +1,25 @@
+Operator Decision Summary
+
+- batch_source: raw_bratislava region_2026-04-01_21-01-58-857.csv
+- clickup_decision: NO_GO
+- operator_action: Neimportovať do ClickUp. Najprv odstrániť stop conditions.
+- batch_readiness_score: 10
+- batch_readiness_band: red
+- fetch_incident_flag: yes
+- qa_blocking_rows: 3
+- clickup_import_ready_rows: 129
+- verified_checkin_checkout: 9
+- single_side_checkin_checkout_verified: 2
+- manual_review_shortlist_rows: 99
+
+Stop conditions
+- global_fetch_incident
+- qa_blocking_rows_present
+- high_leads_require_manual_review
+
+Top High Leads Preview
+- Loft Hotel Bratislava | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.37
+- Areál vodných športov Čunovo | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.35
+- WX Hotel | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.32
+- HOTEL BRATISLAVA | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.31
+- Hotel Gracia Bratislava | reachable_missing_checkin_checkout | manual_review_before_clickup | 9.29

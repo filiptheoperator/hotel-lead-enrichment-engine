@@ -1,0 +1,35 @@
+hotel_name,priority_score,review_bucket,operator_triage_action,preimport_check_status
+Loft Hotel Bratislava,9.37,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+Areál vodných športov Čunovo,9.35,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+WX Hotel,9.32,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+HOTEL BRATISLAVA,9.31,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+Hotel Gracia Bratislava,9.29,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+BAROK Hotel a Apartmany,9.1,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+SKARITZ Hotel & Residence,9.06,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+YACHTER CLUB Modrá Čajka,9.06,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+LILAWADI - Wellness & Spa,9.04,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+Apollo Hotel,9.04,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+Dunajský Pivovar,8.98,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+Penzion Zlatá Noha,8.97,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+HOTEL DEVÍN,8.75,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+FanatiX Squash & Fitness Center,8.73,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+Hotel Color,8.73,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+Hotel Divoká voda,8.71,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+RAJ zdravia,8.68,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+Saunička,8.62,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+Hotel Hradná brána,8.6,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+AUROOM - Spa Moments,8.6,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+Penzión Carpatia,8.59,reachable_missing_checkin_checkout,manual_review_before_clickup,BLOCKED
+CHORS like a hotel | Capsule & NFT Boutique Hostel Bratislava,9.34,single_side_verified_needs_review,manual_spotcheck_then_clickup,READY_FOR_REVIEW
+Melrose Apartments,9.12,single_side_verified_needs_review,manual_spotcheck_then_clickup,READY_FOR_REVIEW
+Crowne Plaza Bratislava,8.75,reachable_missing_opening_hours,manual_review_before_clickup,BLOCKED
+Falkensteiner Hotel Bratislava,8.74,reachable_missing_opening_hours,manual_review_before_clickup,BLOCKED
+"Radisson Blu Carlton Hotel, Bratislava",9.36,dns_fetch_blocked,hold_batch_due_to_dns_incident,BLOCKED
+AC Hotel Bratislava Old Town,9.35,dns_fetch_blocked,hold_batch_due_to_dns_incident,BLOCKED
+Park Inn by Radisson Danube Bratislava,9.33,dns_fetch_blocked,hold_batch_due_to_dns_incident,BLOCKED
+Cabin Devín,8.92,dns_fetch_blocked,hold_batch_due_to_dns_incident,BLOCKED
+William's apartments s.r.o,8.91,dns_fetch_blocked,hold_batch_due_to_dns_incident,BLOCKED
+"Grand Hotel River Park, a Luxury Collection Hotel",8.76,dns_fetch_blocked,hold_batch_due_to_dns_incident,BLOCKED
+Sheraton Bratislava,8.76,dns_fetch_blocked,hold_batch_due_to_dns_incident,BLOCKED
+DoubleTree by Hilton Bratislava,8.75,dns_fetch_blocked,hold_batch_due_to_dns_incident,BLOCKED
+Aston Business hotel,8.64,dns_fetch_blocked,hold_batch_due_to_dns_incident,BLOCKED

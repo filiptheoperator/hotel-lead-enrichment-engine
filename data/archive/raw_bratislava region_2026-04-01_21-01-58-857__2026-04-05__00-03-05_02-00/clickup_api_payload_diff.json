@@ -1,0 +1,12 @@
+{
+  "full_preview_row_count": 3,
+  "high_only_preview_row_count": 3,
+  "same_top_level_keys": [
+    "custom_fields",
+    "description",
+    "name",
+    "priority",
+    "status"
+  ],
+  "note": "Diff porovnáva shape payloadu, nie business obsah všetkých riadkov."
+}

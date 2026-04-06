@@ -1,0 +1,99 @@
+{
+  "schema_version": "source_bundle/v1",
+  "generated_at_utc": "2026-04-05T21:10:22.496896+00:00",
+  "account_id": "acc_d7e3595aefb6",
+  "source_file": "Sydney 100.csv",
+  "hotel_identity": {
+    "hotel_name": "Billabong Retreat",
+    "city": "Maraylya",
+    "country_code": "AU",
+    "website": "http://www.billabongretreat.com.au/",
+    "website_domain": "billabongretreat.com.au"
+  },
+  "raw_contact_hints": {
+    "phone": "+61 2 4573 6080",
+    "source_url": "https://www.google.com/maps/search/?api=1&query=Billabong%20Retreat&query_place_id=ChIJu5AHR15gDWsRWOs3jV7Cb6w",
+    "fallback_opening_hours": "",
+    "fallback_checkin_checkout": ""
+  },
+  "sources": {
+    "google_places": {
+      "status": "not_enabled",
+      "place_id": "ChIJu5AHR15gDWsRWOs3jV7Cb6w",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Billabong%20Retreat&query_place_id=ChIJu5AHR15gDWsRWOs3jV7Cb6w",
+      "fields_requested": [
+        "displayName",
+        "primaryType",
+        "primaryTypeDisplayName",
+        "types",
+        "businessStatus",
+        "formattedAddress",
+        "websiteUri",
+        "internationalPhoneNumber",
+        "rating",
+        "userRatingCount",
+        "regularOpeningHours",
+        "googleMapsUri"
+      ],
+      "result": {}
+    },
+    "official_website": {
+      "base_url": "http://www.billabongretreat.com.au/",
+      "fetch_status": "ok",
+      "reachable": true,
+      "pages": [
+        {
+          "url": "http://www.billabongretreat.com.au/",
+          "source_type": "homepage",
+          "jsonld_detected": true,
+          "text_length": 5371,
+          "opening_hours_candidate": "",
+          "opening_hours_origin": "",
+          "opening_hours_valid": false,
+          "checkin_checkout_candidate": "",
+          "checkin_checkout_origin": "",
+          "checkin_checkout_valid": false
+        },
+        {
+          "url": "http://www.billabongretreat.com.au/faqs",
+          "source_type": "faq_page",
+          "jsonld_detected": true,
+          "text_length": 14573,
+          "opening_hours_candidate": "",
+          "opening_hours_origin": "",
+          "opening_hours_valid": false,
+          "checkin_checkout_candidate": "Check-in od 08:30",
+          "checkin_checkout_origin": "text",
+          "checkin_checkout_valid": true
+        }
+      ]
+    }
+  },
+  "extracted_candidates": {
+    "hotel_opening_hours": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    },
+    "checkin_checkout": {
+      "value": "Check-in od 08:30",
+      "origin": "text",
+      "source_url": "http://www.billabongretreat.com.au/faqs",
+      "source_type": "faq_page"
+    },
+    "ownership_company": {
+      "value": "Billabong Retreat",
+      "origin": "jsonld",
+      "source_url": "http://www.billabongretreat.com.au/",
+      "source_type": "homepage",
+      "raw_type": "organization"
+    },
+    "room_count": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    }
+  }
+}

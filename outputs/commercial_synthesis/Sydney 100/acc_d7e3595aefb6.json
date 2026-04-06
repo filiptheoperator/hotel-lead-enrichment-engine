@@ -1,0 +1,49 @@
+{
+  "schema_version": "commercial_synthesis/v3-lite",
+  "generated_at_utc": "2026-04-06T07:27:30.045519+00:00",
+  "account_id": "acc_d7e3595aefb6",
+  "source_file": "Sydney 100.csv",
+  "source_bundle_ref": "outputs/source_bundles/Sydney 100/acc_d7e3595aefb6.json",
+  "factual_enrichment_ref": "outputs/factual_enrichment/Sydney 100/acc_d7e3595aefb6.json",
+  "model": "gpt-4.1-mini",
+  "business_interest_summary": "Billabong Retreat je nezávislý rezortný hotel v Maraylya s vysokým hodnotením a overeným check-in časom od 08:30.",
+  "why_commercially_interesting": "Hotel má silnú ICP zhodu a preferovaný typ hotela, no nachádza sa mimo bežného geografického profilu, čo môže ovplyvniť dopyt a komunikáciu. Overenie presného počtu izieb a rozsahu služieb by pomohlo lepšie zacieliť ponuku.",
+  "property_positioning_summary": "Billabong Retreat je nezávislý rezortný hotel s wellness službami a vysokým hodnotením hostí v lokalite Maraylya, Nový Južný Wales.",
+  "strengths": [
+    "Vysoké hodnotenie 4.7 z 5 na základe 286 recenzií.",
+    "Nezávislý prevádzkovateľ s preferovaným typom hotela.",
+    "Overený čas check-in od 08:30.",
+    "Dostupnosť oficiálnej webovej stránky a telefónneho kontaktu."
+  ],
+  "opportunity_gaps": [
+    "Presný počet izieb nie je verejne dostupný, čo komplikuje odhad kapacity.",
+    "Nie sú potvrdené ďalšie služby ako reštaurácia, wellness okrem spa.",
+    "Chýbajú verejné informácie o otváracích hodinách hotela."
+  ],
+  "main_bottleneck_hypothesis": "Možný bottleneck je nejasnosť v presnej veľkosti hotela a rozsahu služieb, čo môže komplikovať personalizáciu ponuky.",
+  "pain_point_hypothesis": "Recepcia alebo manažment môže mať manuálnu záťaž pri správe dopytov kvôli neúplným verejným informáciám.",
+  "best_entry_angle": "Všimli sme si, že pri nezávislých rezortoch ako Billabong Retreat často chýbajú detailné verejné informácie o kapacitách a službách, oplatí sa to preveriť.",
+  "personalization_angles": [
+    "Váš hotel Billabong Retreat má výborné hodnotenia a overený check-in čas, čo naznačuje kvalitnú prevádzku, rád by som sa dozvedel viac o vašej kapacite a službách spa. Pri takomto profile sa často mieša viac typov záujmu naraz. Pri takomto type hotela býva užitočné preveriť, či možný bottleneck je nejasnosť v presnej…",
+    "Všimli sme si, že verejné informácie o počte izieb a ďalších službách sú obmedzené, čo môže ovplyvniť efektívnosť dopytov a rezervácií. Pri takomto profile sa často mieša viac typov záujmu naraz. Pri takomto type hotela býva užitočné preveriť, či možný bottleneck je nejasnosť v presnej veľkosti hotela a rozsahu služie…",
+    "Chcel by som lepšie pochopiť, ako riešite správu dopytov a či by sme sa oplatí preveriť zjednodušiť komunikáciu s potenciálnymi hosťami. Pri takomto profile sa často mieša viac typov záujmu naraz. Pri takomto type hotela býva užitočné preveriť, či možný bottleneck je nejasnosť v presnej veľkosti hotela a rozsahu služi…"
+  ],
+  "recommended_hook": "Pri takomto type hotela býva dôležité preveriť, či možný bottleneck je nejasnosť v presnej veľkosti hotela a rozsahu služieb, čo môže komplikovať per…",
+  "recommended_first_contact_route": "Kontaktujte recepciu alebo manažéra cez telefón +61 2 4573 6080 s otázkami o kapacitách a službách.",
+  "likely_decision_maker_hypothesis": "Prvým rozhodujúcim kontaktom bude pravdepodobne manažér hotela alebo vedúci recepcie, vzhľadom na nezávislú prevádzku.",
+  "demand_mix_hypothesis": [
+    "Dopyt môže byť mix wellness a rekreačných pobytov vďaka spa službám.",
+    "Môže sa miešať dopyt na individuálne pobyty a menšie skupiny, vzhľadom na rezortný charakter."
+  ],
+  "service_complexity_read": "Hotel ponúka spa služby, no ďalšie služby ako reštaurácia alebo wellness nie sú potvrdené, čo naznačuje strednú komplexnosť ponuky.",
+  "commercial_complexity_read": "Nezávislá prevádzka s preferovaným typom hotela, čo môže znamenať priame rozhodovanie manažmentu bez väčších korporátnych štruktúr.",
+  "direct_booking_friction_hypothesis": "Možný friction pred priamou rezerváciou môže byť nejasnosť v dostupnosti izieb a služieb kvôli obmedzeným verejným informáciám.",
+  "contact_route_friction_hypothesis": "Friction v prvom kontakte môže vzniknúť, ak nie je jasné, kto presne rozhoduje o spolupráci v nezávislom hoteli.",
+  "call_hypothesis": "Pri prvom hovore overíme presný počet izieb a dostupnosť služieb spa a wellness, zároveň zisťujeme, kto je rozhodujúci kontakt pre obchodné ponuky. Môže sa miešať dopyt na wellness a rekreačné pobyty, čo treba zohľadniť. Zároveň je potrebné zistiť, ako manažment rieši správu dopytov a či je manuálna záťaž na recepcii vysoká. Popri tom dáva zmysel zistiť, či to rieši skôr manaž…",
+  "verdict": "zaujímavý prospect",
+  "uncertainty_notes": [
+    "Presný počet izieb nie je verejne potvrdený.",
+    "Otvorené hodiny hotela nie sú verejne dostupné.",
+    "Nie je potvrdený kompletný rozsah služieb okrem spa."
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schema_version": "factual_enrichment/v1",
+  "generated_at_utc": "2026-04-05T21:10:16.897237+00:00",
+  "account_id": "acc_5970be661818",
+  "source_file": "Sydney 100.csv",
+  "source_bundle_ref": "outputs/source_bundles/Sydney 100/acc_5970be661818.json",
+  "identity": {
+    "hotel_name": "Jonah’s Restaurant & Boutique Hotel",
+    "city": "Palm Beach",
+    "state": "New South Wales",
+    "country_code": "AU",
+    "hotel_type_class": "Preferred hotel",
+    "category_name": "Restaurant",
+    "ownership_type": "Independent operator candidate",
+    "google_place_name": "",
+    "google_primary_type": "",
+    "google_primary_type_display_name": "",
+    "google_types": []
+  },
+  "contacts": {
+    "website": "http://www.jonahs.com.au/",
+    "website_domain": "jonahs.com.au",
+    "phone": "+61 2 9974 5599",
+    "source_origin": "processed_row"
+  },
+  "address": {
+    "street": "69 Bynya Rd",
+    "city": "Palm Beach",
+    "state": "New South Wales",
+    "country_code": "AU",
+    "formatted": "69 Bynya Rd, Palm Beach, New South Wales, AU",
+    "source_origin": "processed_row"
+  },
+  "operating_hours": {
+    "hotel_opening_hours": "Verejne nepotvrdené",
+    "status": "Verejne nepotvrdené",
+    "source_url": "",
+    "source_type": "",
+    "google_places_weekday_text": ""
+  },
+  "checkin_checkout": {
+    "value": "Verejne nepotvrdené",
+    "status": "Verejne nepotvrdené",
+    "source_url": "",
+    "source_type": "",
+    "source_origin": "",
+    "completeness": "none"
+  },
+  "room_count_signal": {
+    "value": "",
+    "rooms_range": "",
+    "status": "Verejne nepotvrdené",
+    "source_origin": "",
+    "note": "Presný počet izieb je verejne nepotvrdený v aktuálnom source bundle."
+  },
+  "service_mix": {
+    "wellness": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "restaurant": {
+      "available": "yes",
+      "source_origin": "raw_categories",
+      "evidence": "restaurant, reštaur, restaurac, gastro, dining"
+    },
+    "event_congress": {
+      "available": "yes",
+      "source_origin": "raw_categories",
+      "evidence": "event, kongres, congress, conference, meeting, wedding, function room"
+    },
+    "spa": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "parking": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "bowling": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    }
+  },
+  "review_trust_signal": {
+    "summary": "4.6/5 z 946 recenzií",
+    "score": "4.6",
+    "reviews_count": "946",
+    "status": "raw_confirmed",
+    "source_origin": "processed_row"
+  },
+  "google_review_signal": {
+    "rating": "",
+    "user_ratings_total": "",
+    "status": "Verejne nepotvrdené",
+    "source_origin": ""
+  },
+  "ownership_company_signal": {
+    "value": "Independent operator candidate",
+    "status": "raw_confirmed",
+    "source_origin": "processed_row",
+    "note": "Processed ownership_type: Independent operator candidate"
+  },
+  "source_reachability": {
+    "public_source_reachable": "yes",
+    "public_source_fetch_status": "ok",
+    "google_places_status": "not_enabled"
+  }
+}

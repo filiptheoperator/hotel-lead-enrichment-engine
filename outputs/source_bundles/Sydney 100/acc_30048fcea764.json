@@ -1,0 +1,99 @@
+{
+  "schema_version": "source_bundle/v1",
+  "generated_at_utc": "2026-04-05T21:10:30.987544+00:00",
+  "account_id": "acc_30048fcea764",
+  "source_file": "Sydney 100.csv",
+  "hotel_identity": {
+    "hotel_name": "Royal Hotel",
+    "city": "Springwood",
+    "country_code": "AU",
+    "website": "http://www.royalhotelspringwood.com.au/",
+    "website_domain": "royalhotelspringwood.com.au"
+  },
+  "raw_contact_hints": {
+    "phone": "+61 2 4751 1021",
+    "source_url": "https://www.google.com/maps/search/?api=1&query=Royal%20Hotel&query_place_id=ChIJuz9szj6HEmsRYRAG5sSsr6c",
+    "fallback_opening_hours": "",
+    "fallback_checkin_checkout": ""
+  },
+  "sources": {
+    "google_places": {
+      "status": "not_enabled",
+      "place_id": "ChIJuz9szj6HEmsRYRAG5sSsr6c",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Royal%20Hotel&query_place_id=ChIJuz9szj6HEmsRYRAG5sSsr6c",
+      "fields_requested": [
+        "displayName",
+        "primaryType",
+        "primaryTypeDisplayName",
+        "types",
+        "businessStatus",
+        "formattedAddress",
+        "websiteUri",
+        "internationalPhoneNumber",
+        "rating",
+        "userRatingCount",
+        "regularOpeningHours",
+        "googleMapsUri"
+      ],
+      "result": {}
+    },
+    "official_website": {
+      "base_url": "http://www.royalhotelspringwood.com.au/",
+      "fetch_status": "ok",
+      "reachable": true,
+      "pages": [
+        {
+          "url": "http://www.royalhotelspringwood.com.au/",
+          "source_type": "homepage",
+          "jsonld_detected": false,
+          "text_length": 2016,
+          "opening_hours_candidate": "Opening hours: (subject to change) Mon - Wed 10:00 am - 11:00 pm Thursday 10:00 am - 1:00 am Fri - Sat 10:00 am - 1:30 am Sunday 10:00 am",
+          "opening_hours_origin": "text",
+          "opening_hours_valid": true,
+          "checkin_checkout_candidate": "",
+          "checkin_checkout_origin": "",
+          "checkin_checkout_valid": false
+        },
+        {
+          "url": "https://www.royalhotelspringwood.com.au/",
+          "source_type": "homepage",
+          "jsonld_detected": false,
+          "text_length": 2016,
+          "opening_hours_candidate": "Opening hours: (subject to change) Mon - Wed 10:00 am - 11:00 pm Thursday 10:00 am - 1:00 am Fri - Sat 10:00 am - 1:30 am Sunday 10:00 am",
+          "opening_hours_origin": "text",
+          "opening_hours_valid": true,
+          "checkin_checkout_candidate": "",
+          "checkin_checkout_origin": "",
+          "checkin_checkout_valid": false
+        }
+      ]
+    }
+  },
+  "extracted_candidates": {
+    "hotel_opening_hours": {
+      "value": "Opening hours: (subject to change) Mon - Wed 10:00 am - 11:00 pm Thursday 10:00 am - 1:00 am Fri - Sat 10:00 am - 1:30 am Sunday 10:00 am",
+      "origin": "text",
+      "source_url": "http://www.royalhotelspringwood.com.au/",
+      "source_type": "homepage"
+    },
+    "checkin_checkout": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    },
+    "ownership_company": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": "",
+      "raw_type": ""
+    },
+    "room_count": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    }
+  }
+}

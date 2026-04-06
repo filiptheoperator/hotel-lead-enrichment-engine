@@ -1,0 +1,14 @@
+# .env.example content
+
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+APIFY_API_TOKEN=your_apify_token_here
+CLICKUP_API_TOKEN=your_clickup_token_here
+CLICKUP_WORKSPACE_ID=your_clickup_workspace_id_here
+MAKE_WEBHOOK_URL=your_make_webhook_here
+PROJECT_ENV=local
+```
+
+## Rule
+- Nikdy necommitovať reálny `.env`.
+- Commitovať iba `.env.example`.

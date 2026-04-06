@@ -1,0 +1,151 @@
+account_id,hotel_name,city,subject_line,hook,personalization_line,give_first_line,relevance_line,proof_line,low_friction_cta,cold_email,followup_email,primary_email_goal,business_interest_summary,main_bottleneck_hypothesis,recommended_hook,call_hypothesis,commercial_verdict,email_angle,cta_type,variant_id,test_batch,reply_outcome,ranking_score,priority_band,why_not_top_tier,rank_bucket,rank_bucket_reason,ranking_reason,review_bucket,review_flag,review_reason,active_icp_profile,source_file,ranking_score_final,priority_level_final,rank_bucket_final
+acc_d7e3595aefb6,Billabong Retreat,Maraylya,Billabong Retreat: krátky nápad,"Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.","Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.",Billabong Retreat v Maraylya pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Maraylya, s prioritou Medium-High (8.1), so signalom hodnotení 4.7/5 z 286 recenzií.",Vychádzal som z verejne uvedeného check-in/check-out: Check-in od 08:30.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.
+Billabong Retreat v Maraylya pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Maraylya, s prioritou Medium-High (8.1), so signalom hodnotení 4.7/5 z 286 recenzií.
+Vychádzal som z verejne uvedeného check-in/check-out: Check-in od 08:30.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Billabong Retreat.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,Billabong Retreat v Maraylya pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.","Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.","Na krátkom hovore sa oplatí overiť, ktoré typy dopytu dnes dominujú a kde vzniká najväčšie váhanie pred kontaktom alebo rezerváciou.",zaujímavý prospect,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,81.01,Medium-High,geo_mismatch,A,top_ranked,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv,87.01,High,A
+acc_9f2cb7250cf5,Miramare Gardens,Terrey Hills,Miramare Gardens: krátky postreh k pobytovým info,"Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.","Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.",Miramare Gardens v Terrey Hills pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Terrey Hills, s prioritou Medium-High (8.14), so signalom hodnotení 4.4/5 z 790 recenzií.","Vychádzal som z verejne uvedených hodín: Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00.","Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.
+Miramare Gardens v Terrey Hills pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Terrey Hills, s prioritou Medium-High (8.14), so signalom hodnotení 4.4/5 z 790 recenzií.
+Vychádzal som z verejne uvedených hodín: Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Miramare Gardens.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,Miramare Gardens v Terrey Hills pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.","Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.","Na krátkom hovore sa oplatí overiť, ktoré typy dopytu dnes dominujú a kde vzniká najväčšie váhanie pred kontaktom alebo rezerváciou.",zaujímavý prospect,checkin_checkout_clarity,low_friction_permission,A2,Sydney 100,,81.38,Medium-High,geo_mismatch,A,top_ranked,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv,86.38,High,A
+acc_462634ba1b0d,The Hornsby Inn,Hornsby,The Hornsby Inn: krátky postreh k praktickým info,"Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.","Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.",The Hornsby Inn v Hornsby je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Hornsby, s prioritou Medium-High (8.13), so signalom hodnotení 4/5 z 682 recenzií.","Vychádzal som z verejne uvedených hodín: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday: 10:00-03:00; Sunday: 10:00-22:00.","Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.
+The Hornsby Inn v Hornsby je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Hornsby, s prioritou Medium-High (8.13), so signalom hodnotení 4/5 z 682 recenzií.
+Vychádzal som z verejne uvedených hodín: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday: 10:00-03:00; Sunday: 10:00-22:00.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre The Hornsby Inn.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,The Hornsby Inn v Hornsby je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.","Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.","Na krátkom hovore sa oplatí overiť, ktoré typy dopytu dnes dominujú a kde vzniká najväčšie váhanie pred kontaktom alebo rezerváciou.",zaujímavý prospect,checkin_checkout_clarity,low_friction_permission,A2,Sydney 100,,81.3,Medium-High,geo_mismatch,A,top_ranked,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv,86.3,High,A
+acc_5970be661818,Jonah’s Restaurant & Boutique Hotel,Palm Beach,Jonah’s Restaurant & Boutique Hotel: krátky postreh k praktickým info,"Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.","Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.",Jonah’s Restaurant & Boutique Hotel v Palm Beach je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Palm Beach, s prioritou Medium-High (8.14), so signalom hodnotení 4.6/5 z 946 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.
+Jonah’s Restaurant & Boutique Hotel v Palm Beach je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Palm Beach, s prioritou Medium-High (8.14), so signalom hodnotení 4.6/5 z 946 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Jonah’s Restaurant & Boutique Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,Jonah’s Restaurant & Boutique Hotel v Palm Beach je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.","Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.","Na krátkom hovore sa oplatí overiť, ktoré typy dopytu dnes dominujú a kde vzniká najväčšie váhanie pred kontaktom alebo rezerváciou.",zaujímavý prospect,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,81.42,Medium-High,geo_mismatch,A,top_ranked,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv,85.92,High,A
+acc_50ce289c9223,Spicers Sangoma Retreat,Bowen Mountain,Spicers Sangoma Retreat: krátky nápad,"Krátky pohľad na to, či má každý typ hosťa okamžite jasné, čo má spraviť ako prvé.","Krátky pohľad na to, či má každý typ hosťa okamžite jasné, čo má spraviť ako prvé.",Spicers Sangoma Retreat v Bowen Mountain pôsobí obchodne zaujímavo najmä pre širší service mix a viac typov dopytu.,"Pri širšom service mixe sa môže časť dopytu strácať medzi typom záujmu a správnym ďalším krokom. Pozrel som si váš verejný profil v lokalite Bowen Mountain, s prioritou Medium-High (8.1), so signalom hodnotení 4.8/5 z 248 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Krátky pohľad na to, či má každý typ hosťa okamžite jasné, čo má spraviť ako prvé.
+Spicers Sangoma Retreat v Bowen Mountain pôsobí obchodne zaujímavo najmä pre širší service mix a viac typov dopytu.
+Pri širšom service mixe sa môže časť dopytu strácať medzi typom záujmu a správnym ďalším krokom. Pozrel som si váš verejný profil v lokalite Bowen Mountain, s prioritou Medium-High (8.1), so signalom hodnotení 4.8/5 z 248 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Spicers Sangoma Retreat.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,Spicers Sangoma Retreat v Bowen Mountain pôsobí obchodne zaujímavo najmä pre širší service mix a viac typov dopytu.,Pri širšom service mixe sa môže časť dopytu strácať medzi typom záujmu a správnym ďalším krokom.,"Krátky pohľad na to, či má každý typ hosťa okamžite jasné, čo má spraviť ako prvé.","Na krátkom hovore sa oplatí overiť, ktoré typy dopytu dnes dominujú a kde vzniká najväčšie váhanie pred kontaktom alebo rezerváciou.",zaujímavý prospect,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,80.96,Medium-High,geo_mismatch,A,top_ranked,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv,85.46,High,A
+acc_85a1025fc0d6,Quest Bella Vista,Bella Vista,Quest Bella Vista: krátky nápad,"Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.","Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.",Quest Bella Vista v Bella Vista pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Bella Vista, s prioritou Medium-High (7.98), so signalom hodnotení 4.5/5 z 1537 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.
+Quest Bella Vista v Bella Vista pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Bella Vista, s prioritou Medium-High (7.98), so signalom hodnotení 4.5/5 z 1537 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Quest Bella Vista.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,Quest Bella Vista v Bella Vista pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.","Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.","Na krátkom hovore sa oplatí overiť, ktoré typy dopytu dnes dominujú a kde vzniká najväčšie váhanie pred kontaktom alebo rezerváciou.",zaujímavý prospect,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,79.8,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv,85.3,High,A
+acc_401880adbecd,Quest Penrith,Penrith,Quest Penrith: krátky nápad,"Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.","Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.",Quest Penrith v Penrith pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Medium-High (7.96), so signalom hodnotení 4.6/5 z 375 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.
+Quest Penrith v Penrith pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Medium-High (7.96), so signalom hodnotení 4.6/5 z 375 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Quest Penrith.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,Quest Penrith v Penrith pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.","Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.","Na krátkom hovore sa oplatí overiť, ktoré typy dopytu dnes dominujú a kde vzniká najväčšie váhanie pred kontaktom alebo rezerváciou.",zaujímavý prospect,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,79.57,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv,85.07,High,A
+acc_6bb4cbb1a3e4,Seranin | Gordon,Gordon,Seranin | Gordon: krátky postreh k praktickým info,"Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.","Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.",Seranin | Gordon v Gordon je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Gordon, s prioritou Medium-High (8.03), so signalom hodnotení 3.5/5 z 65 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.
+Seranin | Gordon v Gordon je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Gordon, s prioritou Medium-High (8.03), so signalom hodnotení 3.5/5 z 65 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Seranin | Gordon.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,Seranin | Gordon v Gordon je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.","Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.","Na krátkom hovore sa oplatí overiť, ktoré typy dopytu dnes dominujú a kde vzniká najväčšie váhanie pred kontaktom alebo rezerváciou.",zaujímavý prospect,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,80.33,Medium-High,geo_mismatch,A,top_ranked,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv,83.83,Medium-High,B
+acc_30048fcea764,Royal Hotel,Springwood,Royal Hotel: krátky postreh k praktickým info,"Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.","Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.",Royal Hotel v Springwood je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Springwood, s prioritou Medium-High (7.97), so signalom hodnotení 4.1/5 z 539 recenzií.",Vychádzal som z verejne uvedených hodín: Opening hours: (subject to change) Mon - Wed 10:00 am - 11:00 pm Thursday 10:00 am - 1:00 am Fri - Sat 10:00 am - 1:30 am Sunday 10:00 am.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.
+Royal Hotel v Springwood je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Springwood, s prioritou Medium-High (7.97), so signalom hodnotení 4.1/5 z 539 recenzií.
+Vychádzal som z verejne uvedených hodín: Opening hours: (subject to change) Mon - Wed 10:00 am - 11:00 pm Thursday 10:00 am - 1:00 am Fri - Sat 10:00 am - 1:30 am Sunday 10:00 am.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Royal Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,Royal Hotel v Springwood je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.","Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.","Na krátkom hovore sa oplatí overiť, ktoré typy dopytu dnes dominujú a kde vzniká najväčšie váhanie pred kontaktom alebo rezerváciou.",opatrný prospect,checkin_checkout_clarity,low_friction_permission,A2,Sydney 100,,79.72,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv,78.72,Medium-High,B
+acc_40da1daa32cc,Doonside Hotel,Doonside,Doonside Hotel: krátky postreh k praktickým info,"Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.","Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.",Doonside Hotel v Doonside je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Doonside, s prioritou Medium-High (7.94), so signalom hodnotení 3.8/5 z 363 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.
+Doonside Hotel v Doonside je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie. Pozrel som si váš verejný profil v lokalite Doonside, s prioritou Medium-High (7.94), so signalom hodnotení 3.8/5 z 363 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Doonside Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,Doonside Hotel v Doonside je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.","Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.","Na krátkom hovore sa oplatí overiť, ktoré typy dopytu dnes dominujú a kde vzniká najväčšie váhanie pred kontaktom alebo rezerváciou.",opatrný prospect,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,79.39,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv,76.89,Medium-High,B

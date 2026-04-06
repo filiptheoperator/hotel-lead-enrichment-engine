@@ -1,0 +1,112 @@
+{
+  "schema_version": "factual_enrichment/v1",
+  "generated_at_utc": "2026-04-05T21:10:32.954623+00:00",
+  "account_id": "acc_401880adbecd",
+  "source_file": "Sydney 100.csv",
+  "source_bundle_ref": "outputs/source_bundles/Sydney 100/acc_401880adbecd.json",
+  "identity": {
+    "hotel_name": "Quest Penrith",
+    "city": "Penrith",
+    "state": "New South Wales",
+    "country_code": "AU",
+    "hotel_type_class": "Preferred hotel",
+    "category_name": "Hotel",
+    "ownership_type": "Independent operator candidate",
+    "google_place_name": "",
+    "google_primary_type": "",
+    "google_primary_type_display_name": "",
+    "google_types": []
+  },
+  "contacts": {
+    "website": "https://www.questapartments.com.au/properties/nsw/penrith/quest-penrith",
+    "website_domain": "questapartments.com.au",
+    "phone": "+61 2 9136 1100",
+    "source_origin": "processed_row"
+  },
+  "address": {
+    "street": "83 Lord Sheffield Cct",
+    "city": "Penrith",
+    "state": "New South Wales",
+    "country_code": "AU",
+    "formatted": "83 Lord Sheffield Cct, Penrith, New South Wales, AU",
+    "source_origin": "processed_row"
+  },
+  "operating_hours": {
+    "hotel_opening_hours": "Verejne nepotvrdené",
+    "status": "Verejne nepotvrdené",
+    "source_url": "",
+    "source_type": "",
+    "google_places_weekday_text": ""
+  },
+  "checkin_checkout": {
+    "value": "Verejne nepotvrdené",
+    "status": "Verejne nepotvrdené",
+    "source_url": "",
+    "source_type": "",
+    "source_origin": "",
+    "completeness": "none"
+  },
+  "room_count_signal": {
+    "value": "",
+    "rooms_range": "",
+    "status": "Verejne nepotvrdené",
+    "source_origin": "",
+    "note": "Presný počet izieb je verejne nepotvrdený v aktuálnom source bundle."
+  },
+  "service_mix": {
+    "wellness": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "restaurant": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "event_congress": {
+      "available": "yes",
+      "source_origin": "raw_categories",
+      "evidence": "event, kongres, congress, conference, meeting, wedding, function room"
+    },
+    "spa": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "parking": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "bowling": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    }
+  },
+  "review_trust_signal": {
+    "summary": "4.6/5 z 375 recenzií",
+    "score": "4.6",
+    "reviews_count": "375",
+    "status": "raw_confirmed",
+    "source_origin": "processed_row"
+  },
+  "google_review_signal": {
+    "rating": "",
+    "user_ratings_total": "",
+    "status": "Verejne nepotvrdené",
+    "source_origin": ""
+  },
+  "ownership_company_signal": {
+    "value": "Quest Penrith",
+    "status": "public_confirmed",
+    "source_origin": "official_web_jsonld",
+    "note": "JSON-LD názov: Quest Penrith | typ: hotel"
+  },
+  "source_reachability": {
+    "public_source_reachable": "yes",
+    "public_source_fetch_status": "ok",
+    "google_places_status": "not_enabled"
+  }
+}

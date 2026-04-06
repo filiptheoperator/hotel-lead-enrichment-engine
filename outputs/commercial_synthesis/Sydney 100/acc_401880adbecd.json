@@ -1,0 +1,40 @@
+{
+  "schema_version": "commercial_synthesis/v1",
+  "generated_at_utc": "2026-04-05T21:10:32.955778+00:00",
+  "account_id": "acc_401880adbecd",
+  "source_file": "Sydney 100.csv",
+  "source_bundle_ref": "outputs/source_bundles/Sydney 100/acc_401880adbecd.json",
+  "factual_enrichment_ref": "outputs/factual_enrichment/Sydney 100/acc_401880adbecd.json",
+  "business_interest_summary": "Quest Penrith v Penrith pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.",
+  "strengths": [
+    "Silný review trust signal: 4.6/5 z 375 recenzií.",
+    "Ownership/company signal je verejne potvrdený z official webu."
+  ],
+  "opportunity_gaps": [
+    "Chýbajú jasné hotelové operating hours na prvý pohľad.",
+    "Chýba jasný check-in / check-out signal vo verejných zdrojoch.",
+    "Presný room count alebo rooms range ostáva verejne nepotvrdený."
+  ],
+  "main_bottleneck_hypothesis": "Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.",
+  "pain_point_hypothesis": "Hosť nemusí mať rýchlo jasno v praktických pobytových pravidlách pred rezerváciou.",
+  "personalization_angles": [
+    "Silný reputačný základ (4.6/5) dáva priestor riešiť skôr konverznú jasnosť než reputačný problém.",
+    "Vo verejných zdrojoch chýbajú niektoré praktické pobytové informácie, čo vie byť prirodzený vstup do konverzácie."
+  ],
+  "recommended_hook": "Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.",
+  "call_hypothesis": "Na krátkom hovore sa oplatí overiť, ktoré typy dopytu dnes dominujú a kde vzniká najväčšie váhanie pred kontaktom alebo rezerváciou.",
+  "verdict": "zaujímavý prospect",
+  "grounding": {
+    "active_services": [
+      "event_congress"
+    ],
+    "service_count": 1,
+    "opening_hours_missing": true,
+    "checkin_checkout_missing": true,
+    "room_count_missing": true,
+    "review_score": "4.6",
+    "review_count": "375",
+    "ownership_status": "public_confirmed",
+    "priority_band": "Medium-High"
+  }
+}

@@ -1,0 +1,11 @@
+account_id,hotel_name,google_places_status,public_source_fetch_status,opening_hours_source_type,opening_hours_status,checkin_checkout_status,ownership_status,ownership_source_origin,google_primary_type,google_rating
+acc_5970be661818,Jonah’s Restaurant & Boutique Hotel,ok,ok,google_places,Overené vo verejnom zdroji,Verejne nepotvrdené,raw_confirmed,processed_row,restaurant,4.6
+acc_9f2cb7250cf5,Miramare Gardens,ok,ok,homepage,Overené vo verejnom zdroji,Verejne nepotvrdené,public_confirmed,official_web_jsonld,wedding_venue,4.4
+acc_462634ba1b0d,The Hornsby Inn,ok,ok,homepage,Overené vo verejnom zdroji,Verejne nepotvrdené,raw_confirmed,processed_row,pub,4
+acc_d7e3595aefb6,Billabong Retreat,ok,ok,,Verejne nepotvrdené,Overené vo verejnom zdroji,public_confirmed,official_web_jsonld,resort_hotel,4.7
+acc_50ce289c9223,Spicers Sangoma Retreat,ok,http_error,google_places,Overené vo verejnom zdroji,Verejne nepotvrdené,raw_confirmed,processed_row,hotel,4.8
+acc_6bb4cbb1a3e4,Seranin | Gordon,ok,ok,,Verejne nepotvrdené,Verejne nepotvrdené,public_confirmed,official_web_jsonld,motel,3.5
+acc_85a1025fc0d6,Quest Bella Vista,ok,ok,google_places,Overené vo verejnom zdroji,Verejne nepotvrdené,public_confirmed,official_web_jsonld,hotel,4.5
+acc_30048fcea764,Royal Hotel,ok,ok,homepage,Overené vo verejnom zdroji,Verejne nepotvrdené,raw_confirmed,processed_row,pub,4.1
+acc_401880adbecd,Quest Penrith,ok,ok,,Verejne nepotvrdené,Verejne nepotvrdené,public_confirmed,official_web_jsonld,hotel,4.6
+acc_40da1daa32cc,Doonside Hotel,ok,ok,google_places,Overené vo verejnom zdroji,Verejne nepotvrdené,raw_confirmed,processed_row,hotel,3.8

@@ -1,0 +1,8 @@
+Batch Readiness Explanation
+
+- batch_readiness_score: 10
+- batch_readiness_band: red
+- fetch_incident_flag: value=yes impact=-40 reason=Globálny fetch incident znižuje dôveru v batch.
+- qa_blocking_rows: value=3 impact=-30 reason=Blocking QA issues blokujú import.
+- clickup_import_ready_ratio: value=129/129 impact=0 reason=Neúplne pripravený ClickUp CSV znižuje readiness.
+- high_leads_requiring_manual_review: value=32 impact=-20 reason=High leady čakajúce na review znižujú readiness.

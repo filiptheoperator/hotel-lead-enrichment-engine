@@ -1,0 +1,99 @@
+{
+  "schema_version": "source_bundle/v1",
+  "generated_at_utc": "2026-04-05T21:10:32.956439+00:00",
+  "account_id": "acc_40da1daa32cc",
+  "source_file": "Sydney 100.csv",
+  "hotel_identity": {
+    "hotel_name": "Doonside Hotel",
+    "city": "Doonside",
+    "country_code": "AU",
+    "website": "https://www.doonsidehotel.com/",
+    "website_domain": "doonsidehotel.com"
+  },
+  "raw_contact_hints": {
+    "phone": "+61 2 9622 6585",
+    "source_url": "https://www.google.com/maps/search/?api=1&query=Doonside%20Hotel&query_place_id=ChIJ0dMcYoKZEmsRxIqUVwGiYWk",
+    "fallback_opening_hours": "",
+    "fallback_checkin_checkout": ""
+  },
+  "sources": {
+    "google_places": {
+      "status": "not_enabled",
+      "place_id": "ChIJ0dMcYoKZEmsRxIqUVwGiYWk",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Doonside%20Hotel&query_place_id=ChIJ0dMcYoKZEmsRxIqUVwGiYWk",
+      "fields_requested": [
+        "displayName",
+        "primaryType",
+        "primaryTypeDisplayName",
+        "types",
+        "businessStatus",
+        "formattedAddress",
+        "websiteUri",
+        "internationalPhoneNumber",
+        "rating",
+        "userRatingCount",
+        "regularOpeningHours",
+        "googleMapsUri"
+      ],
+      "result": {}
+    },
+    "official_website": {
+      "base_url": "https://www.doonsidehotel.com/",
+      "fetch_status": "ok",
+      "reachable": true,
+      "pages": [
+        {
+          "url": "https://www.doonsidehotel.com/",
+          "source_type": "homepage",
+          "jsonld_detected": true,
+          "text_length": 1406,
+          "opening_hours_candidate": "",
+          "opening_hours_origin": "",
+          "opening_hours_valid": false,
+          "checkin_checkout_candidate": "",
+          "checkin_checkout_origin": "",
+          "checkin_checkout_valid": false
+        },
+        {
+          "url": "https://www.doonsidehotel.com/cart",
+          "source_type": "subpage_general",
+          "jsonld_detected": true,
+          "text_length": 1406,
+          "opening_hours_candidate": "",
+          "opening_hours_origin": "",
+          "opening_hours_valid": false,
+          "checkin_checkout_candidate": "",
+          "checkin_checkout_origin": "",
+          "checkin_checkout_valid": false
+        }
+      ]
+    }
+  },
+  "extracted_candidates": {
+    "hotel_opening_hours": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    },
+    "checkin_checkout": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    },
+    "ownership_company": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": "",
+      "raw_type": ""
+    },
+    "room_count": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    }
+  }
+}

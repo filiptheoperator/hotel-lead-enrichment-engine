@@ -1,0 +1,1501 @@
+account_id,hotel_name,city,subject_line,hook,personalization_line,give_first_line,relevance_line,proof_line,low_friction_cta,cold_email,followup_email,primary_email_goal,email_angle,cta_type,variant_id,test_batch,reply_outcome,ranking_score,priority_band,why_not_top_tier,rank_bucket,rank_bucket_reason,ranking_reason,review_bucket,review_flag,review_reason,active_icp_profile,source_file
+acc_5970be661818,Jonah’s Restaurant & Boutique Hotel,Palm Beach,Jonah’s Restaurant & Boutique Hotel: krátky postreh,Pozeral som sa na Jonah’s Restaurant & Boutique Hotel v lokalite Palm Beach.,Pozeral som sa na Jonah’s Restaurant & Boutique Hotel v lokalite Palm Beach.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Palm Beach, s prioritou Medium-High (8.14), s hodnotením 4.6/5 z 946 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Jonah’s Restaurant & Boutique Hotel v lokalite Palm Beach.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Palm Beach, s prioritou Medium-High (8.14), s hodnotením 4.6/5 z 946 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Jonah’s Restaurant & Boutique Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,81.42,Medium-High,geo_mismatch,A,top_ranked,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_9f2cb7250cf5,Miramare Gardens,Terrey Hills,Miramare Gardens: krátky postreh,Pozeral som sa na Miramare Gardens v lokalite Terrey Hills.,Pozeral som sa na Miramare Gardens v lokalite Terrey Hills.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Terrey Hills, s prioritou Medium-High (8.14), s hodnotením 4.4/5 z 790 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Miramare Gardens v lokalite Terrey Hills.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Terrey Hills, s prioritou Medium-High (8.14), s hodnotením 4.4/5 z 790 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Miramare Gardens.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,81.38,Medium-High,geo_mismatch,A,top_ranked,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_462634ba1b0d,The Hornsby Inn,Hornsby,The Hornsby Inn: krátky postreh,Pozeral som sa na The Hornsby Inn v lokalite Hornsby.,Pozeral som sa na The Hornsby Inn v lokalite Hornsby.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Hornsby, s prioritou Medium-High (8.13), s hodnotením 4.0/5 z 682 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na The Hornsby Inn v lokalite Hornsby.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Hornsby, s prioritou Medium-High (8.13), s hodnotením 4.0/5 z 682 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre The Hornsby Inn.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,81.3,Medium-High,geo_mismatch,A,top_ranked,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_d7e3595aefb6,Billabong Retreat,Maraylya,Billabong Retreat: krátky postreh,Pozeral som sa na Billabong Retreat v lokalite Maraylya.,Pozeral som sa na Billabong Retreat v lokalite Maraylya.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Maraylya, s prioritou Medium-High (8.1), s hodnotením 4.7/5 z 286 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Billabong Retreat v lokalite Maraylya.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Maraylya, s prioritou Medium-High (8.1), s hodnotením 4.7/5 z 286 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Billabong Retreat.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,81.01,Medium-High,geo_mismatch,A,top_ranked,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_50ce289c9223,Spicers Sangoma Retreat,Bowen Mountain,Spicers Sangoma Retreat: krátky postreh,Pozeral som sa na Spicers Sangoma Retreat v lokalite Bowen Mountain.,Pozeral som sa na Spicers Sangoma Retreat v lokalite Bowen Mountain.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Bowen Mountain, s prioritou Medium-High (8.1), s hodnotením 4.8/5 z 248 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Spicers Sangoma Retreat v lokalite Bowen Mountain.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Bowen Mountain, s prioritou Medium-High (8.1), s hodnotením 4.8/5 z 248 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Spicers Sangoma Retreat.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,80.96,Medium-High,geo_mismatch,A,top_ranked,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_6bb4cbb1a3e4,Seranin | Gordon,Gordon,Seranin | Gordon: krátky postreh,Pozeral som sa na Seranin | Gordon v lokalite Gordon.,Pozeral som sa na Seranin | Gordon v lokalite Gordon.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Gordon, s prioritou Medium-High (8.03), s hodnotením 3.5/5 z 65 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Seranin | Gordon v lokalite Gordon.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Gordon, s prioritou Medium-High (8.03), s hodnotením 3.5/5 z 65 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Seranin | Gordon.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,80.33,Medium-High,geo_mismatch,A,top_ranked,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_85a1025fc0d6,Quest Bella Vista,Bella Vista,Quest Bella Vista: krátky postreh,Pozeral som sa na Quest Bella Vista v lokalite Bella Vista.,Pozeral som sa na Quest Bella Vista v lokalite Bella Vista.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Bella Vista, s prioritou Medium-High (7.98), s hodnotením 4.5/5 z 1537 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Quest Bella Vista v lokalite Bella Vista.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Bella Vista, s prioritou Medium-High (7.98), s hodnotením 4.5/5 z 1537 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Quest Bella Vista.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,79.8,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_30048fcea764,Royal Hotel,Springwood,Royal Hotel: krátky postreh,Pozeral som sa na Royal Hotel v lokalite Springwood.,Pozeral som sa na Royal Hotel v lokalite Springwood.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Springwood, s prioritou Medium-High (7.97), s hodnotením 4.1/5 z 539 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Royal Hotel v lokalite Springwood.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Springwood, s prioritou Medium-High (7.97), s hodnotením 4.1/5 z 539 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Royal Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,79.72,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_401880adbecd,Quest Penrith,Penrith,Quest Penrith: krátky postreh,Pozeral som sa na Quest Penrith v lokalite Penrith.,Pozeral som sa na Quest Penrith v lokalite Penrith.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Medium-High (7.96), s hodnotením 4.6/5 z 375 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Quest Penrith v lokalite Penrith.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Medium-High (7.96), s hodnotením 4.6/5 z 375 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Quest Penrith.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,79.57,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_40da1daa32cc,Doonside Hotel,Doonside,Doonside Hotel: krátky postreh,Pozeral som sa na Doonside Hotel v lokalite Doonside.,Pozeral som sa na Doonside Hotel v lokalite Doonside.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Doonside, s prioritou Medium-High (7.94), s hodnotením 3.8/5 z 363 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Doonside Hotel v lokalite Doonside.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Doonside, s prioritou Medium-High (7.94), s hodnotením 3.8/5 z 363 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Doonside Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,79.39,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_42f76f030265,Lucky Australian Hotel,North St Marys,Lucky Australian Hotel: krátky postreh,Pozeral som sa na Lucky Australian Hotel v lokalite North St Marys.,Pozeral som sa na Lucky Australian Hotel v lokalite North St Marys.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite North St Marys, s prioritou Medium-High (7.82), s hodnotením 4.3/5 z 669 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Lucky Australian Hotel v lokalite North St Marys.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite North St Marys, s prioritou Medium-High (7.82), s hodnotením 4.3/5 z 669 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Lucky Australian Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,78.16,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_2dcdede0d879,Overlander Hotel,Cambridge Gardens,Overlander Hotel: krátky postreh,Pozeral som sa na Overlander Hotel v lokalite Cambridge Gardens.,Pozeral som sa na Overlander Hotel v lokalite Cambridge Gardens.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Cambridge Gardens, s prioritou Medium-High (7.81), s hodnotením 3.8/5 z 694 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Overlander Hotel v lokalite Cambridge Gardens.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Cambridge Gardens, s prioritou Medium-High (7.81), s hodnotením 3.8/5 z 694 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Overlander Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,78.06,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_b00f68991e06,The Tropicana Hotel,Wilberforce,The Tropicana Hotel: krátky postreh,Pozeral som sa na The Tropicana Hotel v lokalite Wilberforce.,Pozeral som sa na The Tropicana Hotel v lokalite Wilberforce.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Wilberforce, s prioritou Medium-High (7.8), s hodnotením 4.3/5 z 401 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na The Tropicana Hotel v lokalite Wilberforce.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Wilberforce, s prioritou Medium-High (7.8), s hodnotením 4.3/5 z 401 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre The Tropicana Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,77.96,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_ea167e4b5929,Silkari Mirage at Newport,Newport,Silkari Mirage at Newport: krátky postreh,Pozeral som sa na Silkari Mirage at Newport v lokalite Newport.,Pozeral som sa na Silkari Mirage at Newport v lokalite Newport.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Newport, s prioritou Medium-High (7.77), s hodnotením 3.2/5 z 396 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Silkari Mirage at Newport v lokalite Newport.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Newport, s prioritou Medium-High (7.77), s hodnotením 3.2/5 z 396 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Silkari Mirage at Newport.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,77.73,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_f0cd815b5279,St Marys Hotel,St Marys,St Marys Hotel: krátky postreh,Pozeral som sa na St Marys Hotel v lokalite St Marys.,Pozeral som sa na St Marys Hotel v lokalite St Marys.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite St Marys, s prioritou Medium-High (7.76), s hodnotením 4.0/5 z 241 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na St Marys Hotel v lokalite St Marys.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite St Marys, s prioritou Medium-High (7.76), s hodnotením 4.0/5 z 241 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre St Marys Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,77.58,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_0b282bf71426,Hornsby Railway Hotel,Hornsby,Hornsby Railway Hotel: krátky postreh,Pozeral som sa na Hornsby Railway Hotel v lokalite Hornsby.,Pozeral som sa na Hornsby Railway Hotel v lokalite Hornsby.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Hornsby, s prioritou Medium-High (7.75), s hodnotením 3.9/5 z 215 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Hornsby Railway Hotel v lokalite Hornsby.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Hornsby, s prioritou Medium-High (7.75), s hodnotením 3.9/5 z 215 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Hornsby Railway Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,77.51,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_a3552dd1f448,Wisemans Retreat,Wisemans Ferry,Wisemans Retreat: krátky postreh,Pozeral som sa na Wisemans Retreat v lokalite Wisemans Ferry.,Pozeral som sa na Wisemans Retreat v lokalite Wisemans Ferry.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Wisemans Ferry, s prioritou Medium-High (7.65), s hodnotením 4.2/5 z 816 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Wisemans Retreat v lokalite Wisemans Ferry.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Wisemans Ferry, s prioritou Medium-High (7.65), s hodnotením 4.2/5 z 816 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Wisemans Retreat.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,76.54,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_de8718696d9d,Blacktown Tavern,Blacktown,Blacktown Tavern: krátky postreh,Pozeral som sa na Blacktown Tavern v lokalite Blacktown.,Pozeral som sa na Blacktown Tavern v lokalite Blacktown.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Blacktown, s prioritou Medium-High (7.65), s hodnotením 4.1/5 z 615 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Blacktown Tavern v lokalite Blacktown.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Blacktown, s prioritou Medium-High (7.65), s hodnotením 4.1/5 z 615 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Blacktown Tavern.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,76.52,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_6a836cfd34df,Time and Tide Hotel,Dee Why,Time and Tide Hotel: krátky postreh,Pozeral som sa na Time and Tide Hotel v lokalite Dee Why.,Pozeral som sa na Time and Tide Hotel v lokalite Dee Why.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Dee Why, s prioritou Medium-High (7.65), s hodnotením 4.0/5 z 557 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Time and Tide Hotel v lokalite Dee Why.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Dee Why, s prioritou Medium-High (7.65), s hodnotením 4.0/5 z 557 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Time and Tide Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,76.5,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_d8b3b2ae1818,Wallacia Hotel,Wallacia,Wallacia Hotel: krátky postreh,Pozeral som sa na Wallacia Hotel v lokalite Wallacia.,Pozeral som sa na Wallacia Hotel v lokalite Wallacia.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Wallacia, s prioritou Medium-High (7.65), s hodnotením 3.9/5 z 801 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Wallacia Hotel v lokalite Wallacia.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Wallacia, s prioritou Medium-High (7.65), s hodnotením 3.9/5 z 801 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Wallacia Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,76.48,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_98f1c261dbe2,Gateway Motel,Vineyard,Gateway Motel: krátky postreh,Pozeral som sa na Gateway Motel v lokalite Vineyard.,Pozeral som sa na Gateway Motel v lokalite Vineyard.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Vineyard, s prioritou Medium-High (7.6), s hodnotením 4.3/5 z 245 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Gateway Motel v lokalite Vineyard.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Vineyard, s prioritou Medium-High (7.6), s hodnotením 4.3/5 z 245 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Gateway Motel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,76.05,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_0896e3e596db,Killara Hotel & Suites,Killara,Killara Hotel & Suites: krátky postreh,Pozeral som sa na Killara Hotel & Suites v lokalite Killara.,Pozeral som sa na Killara Hotel & Suites v lokalite Killara.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Killara, s prioritou Medium-High (7.6), s hodnotením 3.6/5 z 292 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Killara Hotel & Suites v lokalite Killara.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Killara, s prioritou Medium-High (7.6), s hodnotením 3.6/5 z 292 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Killara Hotel & Suites.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,76.0,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_1d8f04b549ce,Nesuto Pennant Hills Apartment Hotel,Pennant Hills,Nesuto Pennant Hills Apartment Hotel: krátky postreh,Pozeral som sa na Nesuto Pennant Hills Apartment Hotel v lokalite Pennant Hills.,Pozeral som sa na Nesuto Pennant Hills Apartment Hotel v lokalite Pennant Hills.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Pennant Hills, s prioritou Medium-High (7.58), s hodnotením 3.6/5 z 184 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Nesuto Pennant Hills Apartment Hotel v lokalite Pennant Hills.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Pennant Hills, s prioritou Medium-High (7.58), s hodnotením 3.6/5 z 184 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Nesuto Pennant Hills Apartment Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,75.79,Medium-High,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_cf3b7806b0c4,The Select Inn Penrith | Hotel in Penrith,Penrith,The Select Inn Penrith | Hotel in Penrith: krátky postreh,Pozeral som sa na The Select Inn Penrith | Hotel in Penrith v lokalite Penrith.,Pozeral som sa na The Select Inn Penrith | Hotel in Penrith v lokalite Penrith.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Medium (7.49), s hodnotením 4.0/5 z 523 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na The Select Inn Penrith | Hotel in Penrith v lokalite Penrith.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Medium (7.49), s hodnotením 4.0/5 z 523 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre The Select Inn Penrith | Hotel in Penrith.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,74.9,Medium,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_800415c6d08f,Littomore Suites Kingswood,Kingswood,Littomore Suites Kingswood: krátky postreh,Pozeral som sa na Littomore Suites Kingswood v lokalite Kingswood.,Pozeral som sa na Littomore Suites Kingswood v lokalite Kingswood.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Kingswood, s prioritou Medium (7.45), s hodnotením 4.8/5 z 232 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Littomore Suites Kingswood v lokalite Kingswood.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Kingswood, s prioritou Medium (7.45), s hodnotením 4.8/5 z 232 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Littomore Suites Kingswood.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,74.52,Medium,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_e6298bd0feb2,Astina Suites,Penrith,Astina Suites: krátky postreh,Pozeral som sa na Astina Suites v lokalite Penrith.,Pozeral som sa na Astina Suites v lokalite Penrith.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Medium (7.44), s hodnotením 4.6/5 z 212 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Astina Suites v lokalite Penrith.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Medium (7.44), s hodnotením 4.6/5 z 212 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Astina Suites.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,74.44,Medium,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_55f6a716cc6b,Quality Inn Penrith,Jamisontown,Quality Inn Penrith: krátky postreh,Pozeral som sa na Quality Inn Penrith v lokalite Jamisontown.,Pozeral som sa na Quality Inn Penrith v lokalite Jamisontown.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Jamisontown, s prioritou Medium (7.44), s hodnotením 4.2/5 z 217 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Quality Inn Penrith v lokalite Jamisontown.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Jamisontown, s prioritou Medium (7.44), s hodnotením 4.2/5 z 217 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Quality Inn Penrith.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,74.37,Medium,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_1af3327afca6,Checkers Resort & Conference Centre,Terrey Hills,Checkers Resort & Conference Centre: krátky postreh,Pozeral som sa na Checkers Resort & Conference Centre v lokalite Terrey Hills.,Pozeral som sa na Checkers Resort & Conference Centre v lokalite Terrey Hills.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Terrey Hills, s prioritou Medium (7.44), s hodnotením 3.7/5 z 264 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Checkers Resort & Conference Centre v lokalite Terrey Hills.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Terrey Hills, s prioritou Medium (7.44), s hodnotením 3.7/5 z 264 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Checkers Resort & Conference Centre.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,74.37,Medium,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_bfbf05dbd84f,Punthill Apartment Hotels | Norwest,Norwest,Punthill Apartment Hotels | Norwest: krátky postreh,Pozeral som sa na Punthill Apartment Hotels | Norwest v lokalite Norwest.,Pozeral som sa na Punthill Apartment Hotels | Norwest v lokalite Norwest.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Norwest, s prioritou Medium (7.42), s hodnotením 4.1/5 z 137 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Punthill Apartment Hotels | Norwest v lokalite Norwest.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Norwest, s prioritou Medium (7.42), s hodnotením 4.1/5 z 137 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Punthill Apartment Hotels | Norwest.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,74.19,Medium,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_d7ac2de6e992,Parkway Hotel,Frenchs Forest,Parkway Hotel: krátky postreh,Pozeral som sa na Parkway Hotel v lokalite Frenchs Forest.,Pozeral som sa na Parkway Hotel v lokalite Frenchs Forest.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Frenchs Forest, s prioritou Medium (7.42), s hodnotením 3.3/5 z 353 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Parkway Hotel v lokalite Frenchs Forest.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Frenchs Forest, s prioritou Medium (7.42), s hodnotením 3.3/5 z 353 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Parkway Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,74.17,Medium,geo_mismatch | phone_missing,B,geo_mismatch | phone_missing,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_68987c26bd89,Relaxin,Middle Dural,Relaxin: krátky postreh,Pozeral som sa na Relaxin v lokalite Middle Dural.,Pozeral som sa na Relaxin v lokalite Middle Dural.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Middle Dural, s prioritou Medium (7.4), s hodnotením 4.3/5 z 35 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Relaxin v lokalite Middle Dural.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Middle Dural, s prioritou Medium (7.4), s hodnotením 4.3/5 z 35 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Relaxin.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,74.03,Medium,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_c5612afb14a2,The Lodge Blacktown,Rooty Hill,The Lodge Blacktown: krátky postreh,Pozeral som sa na The Lodge Blacktown v lokalite Rooty Hill.,Pozeral som sa na The Lodge Blacktown v lokalite Rooty Hill.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Rooty Hill, s prioritou Medium (7.4), s hodnotením 4.2/5 z 37 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na The Lodge Blacktown v lokalite Rooty Hill.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Rooty Hill, s prioritou Medium (7.4), s hodnotením 4.2/5 z 37 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre The Lodge Blacktown.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,74.01,Medium,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_8e953d323791,Quality Apartments Castle Hill,Castle Hill,Quality Apartments Castle Hill: krátky postreh,Pozeral som sa na Quality Apartments Castle Hill v lokalite Castle Hill.,Pozeral som sa na Quality Apartments Castle Hill v lokalite Castle Hill.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Castle Hill, s prioritou Medium (7.4), s hodnotením 4.0/5 z 25 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Quality Apartments Castle Hill v lokalite Castle Hill.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Castle Hill, s prioritou Medium (7.4), s hodnotením 4.0/5 z 25 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Quality Apartments Castle Hill.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,73.95,Medium,geo_mismatch,B,geo_mismatch,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_2072ec7b168b,Plumpton Hotel,Glendenning,Plumpton Hotel: krátky postreh,Pozeral som sa na Plumpton Hotel v lokalite Glendenning.,Pozeral som sa na Plumpton Hotel v lokalite Glendenning.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Glendenning, s prioritou Medium (6.78), s hodnotením 3.9/5 z 551 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Plumpton Hotel v lokalite Glendenning.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Glendenning, s prioritou Medium (6.78), s hodnotením 3.9/5 z 551 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Plumpton Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,67.78,Medium,chain_signal | geo_mismatch,B,chain_signal | geo_mismatch,review_fit | preferred_hotel_type | out_of_profile_geography | has_website,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_a51c4a1421b7,Colonial Hotel,Werrington,Colonial Hotel: krátky postreh,Pozeral som sa na Colonial Hotel v lokalite Werrington.,Pozeral som sa na Colonial Hotel v lokalite Werrington.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Werrington, s prioritou Medium (6.74), s hodnotením 4.3/5 z 1118 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Colonial Hotel v lokalite Werrington.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Werrington, s prioritou Medium (6.74), s hodnotením 4.3/5 z 1118 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Colonial Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,67.36,Medium,geo_mismatch,B,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_f89af8b01963,Dee Why Hotel,Dee Why,Dee Why Hotel: krátky postreh,Pozeral som sa na Dee Why Hotel v lokalite Dee Why.,Pozeral som sa na Dee Why Hotel v lokalite Dee Why.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Dee Why, s prioritou Medium (6.73), s hodnotením 4.2/5 z 1386 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Dee Why Hotel v lokalite Dee Why.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Dee Why, s prioritou Medium (6.73), s hodnotením 4.2/5 z 1386 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Dee Why Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,67.34,Medium,geo_mismatch,B,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_f73d32cce994,Bella Vista Hotel,Bella Vista,Bella Vista Hotel: krátky postreh,Pozeral som sa na Bella Vista Hotel v lokalite Bella Vista.,Pozeral som sa na Bella Vista Hotel v lokalite Bella Vista.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Bella Vista, s prioritou Medium (6.73), s hodnotením 4.1/5 z 3389 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Bella Vista Hotel v lokalite Bella Vista.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Bella Vista, s prioritou Medium (6.73), s hodnotením 4.1/5 z 3389 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Bella Vista Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,67.32,Medium,geo_mismatch,B,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_cf3638bb6905,The Greengate Hotel,Killara,The Greengate Hotel: krátky postreh,Pozeral som sa na The Greengate Hotel v lokalite Killara.,Pozeral som sa na The Greengate Hotel v lokalite Killara.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Killara, s prioritou Medium (6.73), s hodnotením 4.1/5 z 1916 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na The Greengate Hotel v lokalite Killara.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Killara, s prioritou Medium (6.73), s hodnotením 4.1/5 z 1916 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre The Greengate Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,67.32,Medium,geo_mismatch,B,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_3690acc80b5c,Ingenia Holidays Nepean River,Emu Plains,Ingenia Holidays Nepean River: krátky postreh,Pozeral som sa na Ingenia Holidays Nepean River v lokalite Emu Plains.,Pozeral som sa na Ingenia Holidays Nepean River v lokalite Emu Plains.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Emu Plains, s prioritou Medium (6.72), s hodnotením 3.8/5 z 448 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Ingenia Holidays Nepean River v lokalite Emu Plains.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Emu Plains, s prioritou Medium (6.72), s hodnotením 3.8/5 z 448 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Ingenia Holidays Nepean River.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,67.16,Medium,geo_mismatch,B,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_ed7ca1394f41,Mullane's Hotel,Baulkham Hills,Mullane's Hotel: krátky postreh,Pozeral som sa na Mullane's Hotel v lokalite Baulkham Hills.,Pozeral som sa na Mullane's Hotel v lokalite Baulkham Hills.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Baulkham Hills, s prioritou Medium (6.68), s hodnotením 4.4/5 z 202 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Mullane's Hotel v lokalite Baulkham Hills.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Baulkham Hills, s prioritou Medium (6.68), s hodnotením 4.4/5 z 202 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Mullane's Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,66.78,Medium,geo_mismatch,B,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_4ac34b0098ea,Blue Cattle Dog Hotel,St Clair,Blue Cattle Dog Hotel: krátky postreh,Pozeral som sa na Blue Cattle Dog Hotel v lokalite St Clair.,Pozeral som sa na Blue Cattle Dog Hotel v lokalite St Clair.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite St Clair, s prioritou Medium (6.57), s hodnotením 4.1/5 z 1264 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Blue Cattle Dog Hotel v lokalite St Clair.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite St Clair, s prioritou Medium (6.57), s hodnotením 4.1/5 z 1264 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Blue Cattle Dog Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,65.72,Medium,geo_mismatch,B,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_29358c6e001f,Hotel Pennant Hills,Pennant Hills,Hotel Pennant Hills: krátky postreh,Pozeral som sa na Hotel Pennant Hills v lokalite Pennant Hills.,Pozeral som sa na Hotel Pennant Hills v lokalite Pennant Hills.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Pennant Hills, s prioritou Medium (6.57), s hodnotením 4.0/5 z 1496 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Hotel Pennant Hills v lokalite Pennant Hills.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Pennant Hills, s prioritou Medium (6.57), s hodnotením 4.0/5 z 1496 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Hotel Pennant Hills.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,65.7,Medium,geo_mismatch,B,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_08daa0dc47d6,The Richmond Inn,Richmond,The Richmond Inn: krátky postreh,Pozeral som sa na The Richmond Inn v lokalite Richmond.,Pozeral som sa na The Richmond Inn v lokalite Richmond.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Richmond, s prioritou Medium (6.56), s hodnotením 4.0/5 z 434 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na The Richmond Inn v lokalite Richmond.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Richmond, s prioritou Medium (6.56), s hodnotením 4.0/5 z 434 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre The Richmond Inn.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,65.57,Medium,geo_mismatch,B,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_35a59e1c0f4f,Pymble Hotel,Pymble,Pymble Hotel: krátky postreh,Pozeral som sa na Pymble Hotel v lokalite Pymble.,Pozeral som sa na Pymble Hotel v lokalite Pymble.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Pymble, s prioritou Medium (6.54), s hodnotením 4.4/5 z 296 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Pymble Hotel v lokalite Pymble.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Pymble, s prioritou Medium (6.54), s hodnotením 4.4/5 z 296 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Pymble Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,65.37,Medium,geo_mismatch,B,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_91cfbc59d9f8,Crowne Plaza Hawkesbury Valley by IHG,Windsor,Crowne Plaza Hawkesbury Valley by IHG: krátky postreh,Pozeral som sa na Crowne Plaza Hawkesbury Valley by IHG v lokalite Windsor.,Pozeral som sa na Crowne Plaza Hawkesbury Valley by IHG v lokalite Windsor.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (6.47), s hodnotením 4.6/5 z 1611 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Crowne Plaza Hawkesbury Valley by IHG v lokalite Windsor.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (6.47), s hodnotením 4.6/5 z 1611 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Crowne Plaza Hawkesbury Valley by IHG.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,64.72,Low,chain_signal | geo_mismatch,C,chain_signal | geo_mismatch,review_fit | preferred_hotel_type | out_of_profile_geography | has_website,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_6f9db68d40da,Peppers The Hills Lodge,Castle Hill,Peppers The Hills Lodge: krátky postreh,Pozeral som sa na Peppers The Hills Lodge v lokalite Castle Hill.,Pozeral som sa na Peppers The Hills Lodge v lokalite Castle Hill.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Castle Hill, s prioritou Low (6.47), s hodnotením 4.5/5 z 964 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Peppers The Hills Lodge v lokalite Castle Hill.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Castle Hill, s prioritou Low (6.47), s hodnotením 4.5/5 z 964 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Peppers The Hills Lodge.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,64.7,Low,chain_signal | geo_mismatch,C,chain_signal | geo_mismatch,review_fit | preferred_hotel_type | out_of_profile_geography | has_website,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_7cf13a7555c0,Wisemans Inn Hotel,Wisemans Ferry,Wisemans Inn Hotel: krátky postreh,Pozeral som sa na Wisemans Inn Hotel v lokalite Wisemans Ferry.,Pozeral som sa na Wisemans Inn Hotel v lokalite Wisemans Ferry.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Wisemans Ferry, s prioritou Low (6.46), s hodnotením 4.1/5 z 1015 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Wisemans Inn Hotel v lokalite Wisemans Ferry.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Wisemans Ferry, s prioritou Low (6.46), s hodnotením 4.1/5 z 1015 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Wisemans Inn Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,64.62,Low,chain_signal | geo_mismatch,C,chain_signal | geo_mismatch,review_fit | preferred_hotel_type | out_of_profile_geography | has_website,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_22932a8c5c1f,Holiday Inn Sydney St Marys by IHG,St Marys,Holiday Inn Sydney St Marys by IHG: krátky postreh,Pozeral som sa na Holiday Inn Sydney St Marys by IHG v lokalite St Marys.,Pozeral som sa na Holiday Inn Sydney St Marys by IHG v lokalite St Marys.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite St Marys, s prioritou Low (6.45), s hodnotením 4.5/5 z 405 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Holiday Inn Sydney St Marys by IHG v lokalite St Marys.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite St Marys, s prioritou Low (6.45), s hodnotením 4.5/5 z 405 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Holiday Inn Sydney St Marys by IHG.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,64.51,Low,chain_signal | geo_mismatch,C,chain_signal | geo_mismatch,review_fit | preferred_hotel_type | out_of_profile_geography | has_website,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_1abca1cd9222,Barrenjoey House Palm Beach,Palm Beach,Barrenjoey House Palm Beach: krátky postreh,Pozeral som sa na Barrenjoey House Palm Beach v lokalite Palm Beach.,Pozeral som sa na Barrenjoey House Palm Beach v lokalite Palm Beach.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Palm Beach, s prioritou Low (6.41), s hodnotením 4.2/5 z 1047 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Barrenjoey House Palm Beach v lokalite Palm Beach.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Palm Beach, s prioritou Low (6.41), s hodnotením 4.2/5 z 1047 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Barrenjoey House Palm Beach.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,64.14,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_727b4954e412,BIG4 Sydney Lakeside Holiday Park,North Narrabeen,BIG4 Sydney Lakeside Holiday Park: krátky postreh,Pozeral som sa na BIG4 Sydney Lakeside Holiday Park v lokalite North Narrabeen.,Pozeral som sa na BIG4 Sydney Lakeside Holiday Park v lokalite North Narrabeen.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite North Narrabeen, s prioritou Low (6.41), s hodnotením 4.1/5 z 1253 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na BIG4 Sydney Lakeside Holiday Park v lokalite North Narrabeen.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite North Narrabeen, s prioritou Low (6.41), s hodnotením 4.1/5 z 1253 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre BIG4 Sydney Lakeside Holiday Park.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,64.12,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_87d2aa7bb561,Bull and Bush Hotel Baulkham Hills,Baulkham Hills,Bull and Bush Hotel Baulkham Hills: krátky postreh,Pozeral som sa na Bull and Bush Hotel Baulkham Hills v lokalite Baulkham Hills.,Pozeral som sa na Bull and Bush Hotel Baulkham Hills v lokalite Baulkham Hills.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Baulkham Hills, s prioritou Low (6.41), s hodnotením 4.0/5 z 972 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Bull and Bush Hotel Baulkham Hills v lokalite Baulkham Hills.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Baulkham Hills, s prioritou Low (6.41), s hodnotením 4.0/5 z 972 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Bull and Bush Hotel Baulkham Hills.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,64.1,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_f435eb19e1d3,Hillside Hotel,Castle Hill,Hillside Hotel: krátky postreh,Pozeral som sa na Hillside Hotel v lokalite Castle Hill.,Pozeral som sa na Hillside Hotel v lokalite Castle Hill.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Castle Hill, s prioritou Low (6.41), s hodnotením 4.0/5 z 1794 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Hillside Hotel v lokalite Castle Hill.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Castle Hill, s prioritou Low (6.41), s hodnotením 4.0/5 z 1794 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Hillside Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,64.1,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_7a3fa6f07b12,The Marayong Hotel,Kings Park,The Marayong Hotel: krátky postreh,Pozeral som sa na The Marayong Hotel v lokalite Kings Park.,Pozeral som sa na The Marayong Hotel v lokalite Kings Park.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Kings Park, s prioritou Low (6.25), s hodnotením 4.2/5 z 1090 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na The Marayong Hotel v lokalite Kings Park.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Kings Park, s prioritou Low (6.25), s hodnotením 4.2/5 z 1090 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre The Marayong Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,62.54,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_75064e18b339,The Royal Richmond,Richmond,The Royal Richmond: krátky postreh,Pozeral som sa na The Royal Richmond v lokalite Richmond.,Pozeral som sa na The Royal Richmond v lokalite Richmond.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Richmond, s prioritou Low (6.25), s hodnotením 4.2/5 z 840 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na The Royal Richmond v lokalite Richmond.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Richmond, s prioritou Low (6.25), s hodnotením 4.2/5 z 840 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre The Royal Richmond.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,62.54,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_a45804deeb65,Macquarie Arms Hotel,Windsor,Macquarie Arms Hotel: krátky postreh,Pozeral som sa na Macquarie Arms Hotel v lokalite Windsor.,Pozeral som sa na Macquarie Arms Hotel v lokalite Windsor.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (6.25), s hodnotením 4.1/5 z 813 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Macquarie Arms Hotel v lokalite Windsor.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (6.25), s hodnotením 4.1/5 z 813 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Macquarie Arms Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,62.52,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_991c2d13f4ad,Ingenia Holidays Sydney Hills,Dural,Ingenia Holidays Sydney Hills: krátky postreh,Pozeral som sa na Ingenia Holidays Sydney Hills v lokalite Dural.,Pozeral som sa na Ingenia Holidays Sydney Hills v lokalite Dural.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Dural, s prioritou Low (6.24), s hodnotením 3.8/5 z 478 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Ingenia Holidays Sydney Hills v lokalite Dural.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Dural, s prioritou Low (6.24), s hodnotením 3.8/5 z 478 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Ingenia Holidays Sydney Hills.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,62.42,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_978130043152,Tates Hotel Windsor,Windsor,Tates Hotel Windsor: krátky postreh,Pozeral som sa na Tates Hotel Windsor v lokalite Windsor.,Pozeral som sa na Tates Hotel Windsor v lokalite Windsor.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (6.21), s hodnotením 4.2/5 z 434 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Tates Hotel Windsor v lokalite Windsor.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (6.21), s hodnotením 4.2/5 z 434 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Tates Hotel Windsor.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,62.11,Low,geo_mismatch | phone_missing,C,geo_mismatch | phone_missing,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_ee0f95b7a919,Pullman Sydney Penrith,Penrith,Pullman Sydney Penrith: krátky postreh,Pozeral som sa na Pullman Sydney Penrith v lokalite Penrith.,Pozeral som sa na Pullman Sydney Penrith v lokalite Penrith.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Low (6.16), s hodnotením 4.8/5 z 627 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Pullman Sydney Penrith v lokalite Penrith.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Low (6.16), s hodnotením 4.8/5 z 627 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Pullman Sydney Penrith.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,61.56,Low,chain_signal | geo_mismatch,C,chain_signal | geo_mismatch,review_fit | preferred_hotel_type | out_of_profile_geography | has_website,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_21961e9eeea9,Novotel Sydney West HQ,Rooty Hill,Novotel Sydney West HQ: krátky postreh,Pozeral som sa na Novotel Sydney West HQ v lokalite Rooty Hill.,Pozeral som sa na Novotel Sydney West HQ v lokalite Rooty Hill.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Rooty Hill, s prioritou Low (6.15), s hodnotením 4.4/5 z 941 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Novotel Sydney West HQ v lokalite Rooty Hill.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Rooty Hill, s prioritou Low (6.15), s hodnotením 4.4/5 z 941 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Novotel Sydney West HQ.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,61.48,Low,chain_signal | geo_mismatch,C,chain_signal | geo_mismatch,review_fit | preferred_hotel_type | out_of_profile_geography | has_website,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_8f0ed8a64ea7,Mercure Penrith,Penrith,Mercure Penrith: krátky postreh,Pozeral som sa na Mercure Penrith v lokalite Penrith.,Pozeral som sa na Mercure Penrith v lokalite Penrith.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Low (6.14), s hodnotením 4.2/5 z 1143 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Mercure Penrith v lokalite Penrith.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Low (6.14), s hodnotením 4.2/5 z 1143 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Mercure Penrith.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,61.44,Low,chain_signal | geo_mismatch,C,chain_signal | geo_mismatch,review_fit | preferred_hotel_type | out_of_profile_geography | has_website,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_214896beb3fb,ibis Sydney Thornleigh,Thornleigh,ibis Sydney Thornleigh: krátky postreh,Pozeral som sa na ibis Sydney Thornleigh v lokalite Thornleigh.,Pozeral som sa na ibis Sydney Thornleigh v lokalite Thornleigh.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Thornleigh, s prioritou Low (6.14), s hodnotením 3.8/5 z 709 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na ibis Sydney Thornleigh v lokalite Thornleigh.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Thornleigh, s prioritou Low (6.14), s hodnotením 3.8/5 z 709 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre ibis Sydney Thornleigh.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,61.36,Low,chain_signal | geo_mismatch,C,chain_signal | geo_mismatch,review_fit | preferred_hotel_type | out_of_profile_geography | has_website,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_d793d3777664,L'Auberge Angara - Bed and Breakfast,Glenwood,L'Auberge Angara - Bed and Breakfast: krátky postreh,Pozeral som sa na L'Auberge Angara - Bed and Breakfast v lokalite Glenwood.,Pozeral som sa na L'Auberge Angara - Bed and Breakfast v lokalite Glenwood.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Glenwood, s prioritou Low (6.13), s hodnotením 3.9/5 z 43 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na L'Auberge Angara - Bed and Breakfast v lokalite Glenwood.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Glenwood, s prioritou Low (6.13), s hodnotením 3.9/5 z 43 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre L'Auberge Angara - Bed and Breakfast.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,61.27,Low,geo_mismatch | website_missing | website_missing,C,geo_mismatch | website_missing | website_missing,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_37177bb7e317,Mercure Sydney Manly Warringah,Brookvale,Mercure Sydney Manly Warringah: krátky postreh,Pozeral som sa na Mercure Sydney Manly Warringah v lokalite Brookvale.,Pozeral som sa na Mercure Sydney Manly Warringah v lokalite Brookvale.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Brookvale, s prioritou Low (6.11), s hodnotením 3.8/5 z 351 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Mercure Sydney Manly Warringah v lokalite Brookvale.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Brookvale, s prioritou Low (6.11), s hodnotením 3.8/5 z 351 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Mercure Sydney Manly Warringah.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,61.06,Low,chain_signal | geo_mismatch,C,chain_signal | geo_mismatch,review_fit | preferred_hotel_type | out_of_profile_geography | has_website,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_edda49a86c53,Mercure Sydney Rouse Hill,Rouse Hill,Mercure Sydney Rouse Hill: krátky postreh,Pozeral som sa na Mercure Sydney Rouse Hill v lokalite Rouse Hill.,Pozeral som sa na Mercure Sydney Rouse Hill v lokalite Rouse Hill.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Rouse Hill, s prioritou Low (6.1), s hodnotením 4.4/5 z 281 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Mercure Sydney Rouse Hill v lokalite Rouse Hill.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Rouse Hill, s prioritou Low (6.1), s hodnotením 4.4/5 z 281 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Mercure Sydney Rouse Hill.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,61.04,Low,chain_signal | geo_mismatch,C,chain_signal | geo_mismatch,review_fit | preferred_hotel_type | out_of_profile_geography | has_website,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_502d8dcb07c3,Riverstone Hotel,Riverstone,Riverstone Hotel: krátky postreh,Pozeral som sa na Riverstone Hotel v lokalite Riverstone.,Pozeral som sa na Riverstone Hotel v lokalite Riverstone.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Riverstone, s prioritou Low (6.1), s hodnotením 4.3/5 z 648 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Riverstone Hotel v lokalite Riverstone.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Riverstone, s prioritou Low (6.1), s hodnotením 4.3/5 z 648 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Riverstone Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.96,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_0fd3e0234b8d,Bligh Park Hotel,South Windsor,Bligh Park Hotel: krátky postreh,Pozeral som sa na Bligh Park Hotel v lokalite South Windsor.,Pozeral som sa na Bligh Park Hotel v lokalite South Windsor.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite South Windsor, s prioritou Low (6.1), s hodnotením 4.3/5 z 672 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Bligh Park Hotel v lokalite South Windsor.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite South Windsor, s prioritou Low (6.1), s hodnotením 4.3/5 z 672 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Bligh Park Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.96,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_6e11102e1c2e,Blue Gum Hotel,Waitara,Blue Gum Hotel: krátky postreh,Pozeral som sa na Blue Gum Hotel v lokalite Waitara.,Pozeral som sa na Blue Gum Hotel v lokalite Waitara.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Waitara, s prioritou Low (6.09), s hodnotením 4.1/5 z 1669 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Blue Gum Hotel v lokalite Waitara.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Waitara, s prioritou Low (6.09), s hodnotením 4.1/5 z 1669 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Blue Gum Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.92,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_3e28893ce61c,Bidwill Hotels,Bidwill,Bidwill Hotels: krátky postreh,Pozeral som sa na Bidwill Hotels v lokalite Bidwill.,Pozeral som sa na Bidwill Hotels v lokalite Bidwill.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Bidwill, s prioritou Low (6.09), s hodnotením 4.1/5 z 579 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Bidwill Hotels v lokalite Bidwill.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Bidwill, s prioritou Low (6.09), s hodnotením 4.1/5 z 579 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Bidwill Hotels.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.92,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_a4468cb61d99,The Woodstock Hotel,Rooty Hill,The Woodstock Hotel: krátky postreh,Pozeral som sa na The Woodstock Hotel v lokalite Rooty Hill.,Pozeral som sa na The Woodstock Hotel v lokalite Rooty Hill.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Rooty Hill, s prioritou Low (6.09), s hodnotením 4.5/5 z 449 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na The Woodstock Hotel v lokalite Rooty Hill.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Rooty Hill, s prioritou Low (6.09), s hodnotením 4.5/5 z 449 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre The Woodstock Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.9,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_9c4955491ff6,Visy Dior Hotels International,Norwest,Visy Dior Hotels International: krátky postreh,Pozeral som sa na Visy Dior Hotels International v lokalite Norwest.,Pozeral som sa na Visy Dior Hotels International v lokalite Norwest.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Norwest, s prioritou Low (6.09), s hodnotením 4.0/5 z 954 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Visy Dior Hotels International v lokalite Norwest.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Norwest, s prioritou Low (6.09), s hodnotením 4.0/5 z 954 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Visy Dior Hotels International.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.9,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_96ae5651c834,St Marys Park View Motel,St Marys,St Marys Park View Motel: krátky postreh,Pozeral som sa na St Marys Park View Motel v lokalite St Marys.,Pozeral som sa na St Marys Park View Motel v lokalite St Marys.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite St Marys, s prioritou Low (6.09), s hodnotením 4.3/5 z 455 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na St Marys Park View Motel v lokalite St Marys.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite St Marys, s prioritou Low (6.09), s hodnotením 4.3/5 z 455 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre St Marys Park View Motel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.87,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_613ba00d1541,Kingswood Hotel,Kingswood,Kingswood Hotel: krátky postreh,Pozeral som sa na Kingswood Hotel v lokalite Kingswood.,Pozeral som sa na Kingswood Hotel v lokalite Kingswood.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Kingswood, s prioritou Low (6.07), s hodnotením 4.0/5 z 392 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Kingswood Hotel v lokalite Kingswood.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Kingswood, s prioritou Low (6.07), s hodnotením 4.0/5 z 392 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Kingswood Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.68,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_4d0b43ae151e,ValueSuites Penrith,Emu Plains,ValueSuites Penrith: krátky postreh,Pozeral som sa na ValueSuites Penrith v lokalite Emu Plains.,Pozeral som sa na ValueSuites Penrith v lokalite Emu Plains.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Emu Plains, s prioritou Low (6.06), s hodnotením 4.1/5 z 315 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na ValueSuites Penrith v lokalite Emu Plains.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Emu Plains, s prioritou Low (6.06), s hodnotením 4.1/5 z 315 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre ValueSuites Penrith.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.55,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_5d20c32aa7ce,Hawkesbury Race Club Motel,Richmond,Hawkesbury Race Club Motel: krátky postreh,Pozeral som sa na Hawkesbury Race Club Motel v lokalite Richmond.,Pozeral som sa na Hawkesbury Race Club Motel v lokalite Richmond.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Richmond, s prioritou Low (6.05), s hodnotením 4.5/5 z 253 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Hawkesbury Race Club Motel v lokalite Richmond.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Richmond, s prioritou Low (6.05), s hodnotením 4.5/5 z 253 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Hawkesbury Race Club Motel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.51,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_e893732ee4d6,The Ascot Motel,Wahroonga,The Ascot Motel: krátky postreh,Pozeral som sa na The Ascot Motel v lokalite Wahroonga.,Pozeral som sa na The Ascot Motel v lokalite Wahroonga.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Wahroonga, s prioritou Low (6.05), s hodnotením 3.5/5 z 328 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na The Ascot Motel v lokalite Wahroonga.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Wahroonga, s prioritou Low (6.05), s hodnotením 3.5/5 z 328 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre The Ascot Motel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.46,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_25634bed3c64,Brooklyn Motel,Brooklyn,Brooklyn Motel: krátky postreh,Pozeral som sa na Brooklyn Motel v lokalite Brooklyn.,Pozeral som sa na Brooklyn Motel v lokalite Brooklyn.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Brooklyn, s prioritou Low (6.04), s hodnotením 4.5/5 z 193 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Brooklyn Motel v lokalite Brooklyn.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Brooklyn, s prioritou Low (6.04), s hodnotením 4.5/5 z 193 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Brooklyn Motel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.39,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_142e3a282630,Colonial Motel Richmond,Richmond,Colonial Motel Richmond: krátky postreh,Pozeral som sa na Colonial Motel Richmond v lokalite Richmond.,Pozeral som sa na Colonial Motel Richmond v lokalite Richmond.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Richmond, s prioritou Low (6.04), s hodnotením 4.3/5 z 210 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Colonial Motel Richmond v lokalite Richmond.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Richmond, s prioritou Low (6.04), s hodnotením 4.3/5 z 210 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Colonial Motel Richmond.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.38,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_e3e1814d5b4c,Palm Beach Bed and Breakfast,Palm Beach,Palm Beach Bed and Breakfast: krátky postreh,Pozeral som sa na Palm Beach Bed and Breakfast v lokalite Palm Beach.,Pozeral som sa na Palm Beach Bed and Breakfast v lokalite Palm Beach.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Palm Beach, s prioritou Low (6.03), s hodnotením 4.9/5 z 131 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Palm Beach Bed and Breakfast v lokalite Palm Beach.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Palm Beach, s prioritou Low (6.03), s hodnotením 4.9/5 z 131 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Palm Beach Bed and Breakfast.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.34,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_cef51d675be9,Pioneer Way Motel,Faulconbridge,Pioneer Way Motel: krátky postreh,Pozeral som sa na Pioneer Way Motel v lokalite Faulconbridge.,Pozeral som sa na Pioneer Way Motel v lokalite Faulconbridge.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Faulconbridge, s prioritou Low (6.01), s hodnotením 3.9/5 z 116 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Pioneer Way Motel v lokalite Faulconbridge.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Faulconbridge, s prioritou Low (6.01), s hodnotením 3.9/5 z 116 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Pioneer Way Motel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,60.11,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_44c910b68c36,Windsor Riverview Inn,Windsor,Windsor Riverview Inn: krátky postreh,Pozeral som sa na Windsor Riverview Inn v lokalite Windsor.,Pozeral som sa na Windsor Riverview Inn v lokalite Windsor.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (6), s hodnotením 3.1/5 z 117 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Windsor Riverview Inn v lokalite Windsor.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (6), s hodnotením 3.1/5 z 117 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Windsor Riverview Inn.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,59.95,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_452613701470,"Kaban Power 7, 7 Kaban St Doonside NSW 2767",Doonside,"Kaban Power 7, 7 Kaban St Doonside NSW 2767: krátky postreh","Pozeral som sa na Kaban Power 7, 7 Kaban St Doonside NSW 2767 v lokalite Doonside.","Pozeral som sa na Kaban Power 7, 7 Kaban St Doonside NSW 2767 v lokalite Doonside.",Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Doonside, s prioritou Low (5.99), s hodnotením 3.8/5 z 25 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Kaban Power 7, 7 Kaban St Doonside NSW 2767 v lokalite Doonside.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Doonside, s prioritou Low (5.99), s hodnotením 3.8/5 z 25 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Kaban Power 7, 7 Kaban St Doonside NSW 2767.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,59.91,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_275ceeb98a65,Fitzroy Hotel Windsor,Windsor,Fitzroy Hotel Windsor: krátky postreh,Pozeral som sa na Fitzroy Hotel Windsor v lokalite Windsor.,Pozeral som sa na Fitzroy Hotel Windsor v lokalite Windsor.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (5.84), s hodnotením 3.9/5 z 203 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Fitzroy Hotel Windsor v lokalite Windsor.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (5.84), s hodnotením 3.9/5 z 203 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Fitzroy Hotel Windsor.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,58.39,Low,geo_mismatch | website_missing | website_missing,C,geo_mismatch | website_missing | website_missing,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_1b4eca29f1ed,North Richmond Hotel,North Richmond,North Richmond Hotel: krátky postreh,Pozeral som sa na North Richmond Hotel v lokalite North Richmond.,Pozeral som sa na North Richmond Hotel v lokalite North Richmond.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite North Richmond, s prioritou Low (5.84), s hodnotením 4.2/5 z 153 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na North Richmond Hotel v lokalite North Richmond.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite North Richmond, s prioritou Low (5.84), s hodnotením 4.2/5 z 153 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre North Richmond Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,58.35,Low,geo_mismatch | website_missing | website_missing,C,geo_mismatch | website_missing | website_missing,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_e0a86a2b4d49,Nightcap at Colyton Hotel,Colyton,Nightcap at Colyton Hotel: krátky postreh,Pozeral som sa na Nightcap at Colyton Hotel v lokalite Colyton.,Pozeral som sa na Nightcap at Colyton Hotel v lokalite Colyton.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Colyton, s prioritou Low (5.82), s hodnotením 4.0/5 z 97 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Nightcap at Colyton Hotel v lokalite Colyton.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Colyton, s prioritou Low (5.82), s hodnotením 4.0/5 z 97 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Nightcap at Colyton Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,58.19,Low,geo_mismatch | website_missing | website_missing,C,geo_mismatch | website_missing | website_missing,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_1c67b87dedcc,Nightcap at Blue Cattle Dog Hotel,St Clair,Nightcap at Blue Cattle Dog Hotel: krátky postreh,Pozeral som sa na Nightcap at Blue Cattle Dog Hotel v lokalite St Clair.,Pozeral som sa na Nightcap at Blue Cattle Dog Hotel v lokalite St Clair.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite St Clair, s prioritou Low (5.82), s hodnotením 4.0/5 z 76 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Nightcap at Blue Cattle Dog Hotel v lokalite St Clair.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite St Clair, s prioritou Low (5.82), s hodnotením 4.0/5 z 76 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Nightcap at Blue Cattle Dog Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,58.15,Low,geo_mismatch | website_missing | website_missing,C,geo_mismatch | website_missing | website_missing,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_a927a1c8a090,Nightcap at Jamison Hotel,Penrith,Nightcap at Jamison Hotel: krátky postreh,Pozeral som sa na Nightcap at Jamison Hotel v lokalite Penrith.,Pozeral som sa na Nightcap at Jamison Hotel v lokalite Penrith.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Low (5.8), s hodnotením 3.7/5 z 42 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Nightcap at Jamison Hotel v lokalite Penrith.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Low (5.8), s hodnotením 3.7/5 z 42 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Nightcap at Jamison Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,58.02,Low,geo_mismatch | website_missing | website_missing,C,geo_mismatch | website_missing | website_missing,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_f68809b1efe2,"Kaban Power 39, 39 Weber Crescent Emerton",Emerton,"Kaban Power 39, 39 Weber Crescent Emerton: krátky postreh","Pozeral som sa na Kaban Power 39, 39 Weber Crescent Emerton v lokalite Emerton.","Pozeral som sa na Kaban Power 39, 39 Weber Crescent Emerton v lokalite Emerton.",Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Emerton, s prioritou Low (5.78), s hodnotením 3.3/5 z 19 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Kaban Power 39, 39 Weber Crescent Emerton v lokalite Emerton.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Emerton, s prioritou Low (5.78), s hodnotením 3.3/5 z 19 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Kaban Power 39, 39 Weber Crescent Emerton.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,57.8,Low,geo_mismatch,C,geo_mismatch,review_fit | independent_signal | out_of_profile_geography | has_website,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_d82119e8e88e,Nightelier Narrabeen,Narrabeen,Nightelier Narrabeen: krátky postreh,Pozeral som sa na Nightelier Narrabeen v lokalite Narrabeen.,Pozeral som sa na Nightelier Narrabeen v lokalite Narrabeen.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Narrabeen, s prioritou Low (5.74), s hodnotením 4.1/5 z 887 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Nightelier Narrabeen v lokalite Narrabeen.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Narrabeen, s prioritou Low (5.74), s hodnotením 4.1/5 z 887 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Nightelier Narrabeen.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,57.42,Low,geo_mismatch | website_missing | website_missing,C,geo_mismatch | website_missing | website_missing,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_71486faac1b0,Nightcap at Pymble Hotel,Pymble,Nightcap at Pymble Hotel: krátky postreh,Pozeral som sa na Nightcap at Pymble Hotel v lokalite Pymble.,Pozeral som sa na Nightcap at Pymble Hotel v lokalite Pymble.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Pymble, s prioritou Low (5.73), s hodnotením 3.9/5 z 462 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Nightcap at Pymble Hotel v lokalite Pymble.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Pymble, s prioritou Low (5.73), s hodnotením 3.9/5 z 462 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Nightcap at Pymble Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,57.3,Low,geo_mismatch | website_missing | website_missing,C,geo_mismatch | website_missing | website_missing,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_4e12021ece22,Railway Hotel,Windsor,Railway Hotel: krátky postreh,Pozeral som sa na Railway Hotel v lokalite Windsor.,Pozeral som sa na Railway Hotel v lokalite Windsor.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (5.49), s hodnotením 4.2/5 z 38 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Railway Hotel v lokalite Windsor.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (5.49), s hodnotením 4.2/5 z 38 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Railway Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,54.92,Low,geo_mismatch | website_missing | website_missing,C,geo_mismatch | website_missing | website_missing,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_f4aa5c19fc8d,Jamison Hotel,Penrith,Jamison Hotel: krátky postreh,Pozeral som sa na Jamison Hotel v lokalite Penrith.,Pozeral som sa na Jamison Hotel v lokalite Penrith.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Low (5.38), s hodnotením 4.1/5 z 1135 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Jamison Hotel v lokalite Penrith.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Penrith, s prioritou Low (5.38), s hodnotením 4.1/5 z 1135 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Jamison Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,53.82,Low,chain_signal | geo_mismatch,C,chain_signal | geo_mismatch,low_fit | out_of_profile_geography | has_website | has_phone,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_3a4450e07e75,Colyton Hotel,Colyton,Colyton Hotel: krátky postreh,Pozeral som sa na Colyton Hotel v lokalite Colyton.,Pozeral som sa na Colyton Hotel v lokalite Colyton.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Colyton, s prioritou Low (5.22), s hodnotením 4.0/5 z 1330 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Colyton Hotel v lokalite Colyton.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Colyton, s prioritou Low (5.22), s hodnotením 4.0/5 z 1330 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Colyton Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,52.2,Low,chain_signal | geo_mismatch,C,chain_signal | geo_mismatch,low_fit | out_of_profile_geography | has_website | has_phone,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_b409c8129078,The Australian Hotel & Brewery,Rouse Hill,The Australian Hotel & Brewery: krátky postreh,Pozeral som sa na The Australian Hotel & Brewery v lokalite Rouse Hill.,Pozeral som sa na The Australian Hotel & Brewery v lokalite Rouse Hill.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Rouse Hill, s prioritou Low (4.9), s hodnotením 4.2/5 z 1239 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na The Australian Hotel & Brewery v lokalite Rouse Hill.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Rouse Hill, s prioritou Low (4.9), s hodnotením 4.2/5 z 1239 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre The Australian Hotel & Brewery.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,49.04,Low,chain_signal | geo_mismatch,D,chain_signal | geo_mismatch,low_fit | out_of_profile_geography | has_website | has_phone,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_3b17692a882f,Australian Hotel,McGraths Hill,Australian Hotel: krátky postreh,Pozeral som sa na Australian Hotel v lokalite McGraths Hill.,Pozeral som sa na Australian Hotel v lokalite McGraths Hill.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite McGraths Hill, s prioritou Low (4.86), s hodnotením 4.1/5 z 315 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Australian Hotel v lokalite McGraths Hill.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite McGraths Hill, s prioritou Low (4.86), s hodnotením 4.1/5 z 315 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Australian Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,48.65,Low,chain_signal | geo_mismatch,D,chain_signal | geo_mismatch,low_fit | out_of_profile_geography | has_website | has_phone,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_9d71e80330f1,SureStay by Best Western New Inn Richmond,Richmond,SureStay by Best Western New Inn Richmond: krátky postreh,Pozeral som sa na SureStay by Best Western New Inn Richmond v lokalite Richmond.,Pozeral som sa na SureStay by Best Western New Inn Richmond v lokalite Richmond.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Richmond, s prioritou Low (4.67), s hodnotením 4.3/5 z 108 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na SureStay by Best Western New Inn Richmond v lokalite Richmond.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Richmond, s prioritou Low (4.67), s hodnotením 4.3/5 z 108 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre SureStay by Best Western New Inn Richmond.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,46.68,Low,chain_signal | geo_mismatch,D,chain_signal | geo_mismatch,low_fit | out_of_profile_geography | has_website | has_phone,manual_review,yes,possible_chain | out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_6d16ad10e4eb,Royal Exchange Hotel,Windsor,Royal Exchange Hotel: krátky postreh,Pozeral som sa na Royal Exchange Hotel v lokalite Windsor.,Pozeral som sa na Royal Exchange Hotel v lokalite Windsor.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (4.13), s hodnotením 4.4/5 z 201 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Royal Exchange Hotel v lokalite Windsor.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Windsor, s prioritou Low (4.13), s hodnotením 4.4/5 z 201 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Royal Exchange Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,41.28,Low,geo_mismatch | website_missing | website_missing,D,geo_mismatch | website_missing | website_missing,review_fit | independent_signal | out_of_profile_geography | has_phone,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_54398ac8f17d,Mount Kuring-Gai Motel,Mount Kuring-gai,Mount Kuring-Gai Motel: krátky postreh,Pozeral som sa na Mount Kuring-Gai Motel v lokalite Mount Kuring-gai.,Pozeral som sa na Mount Kuring-Gai Motel v lokalite Mount Kuring-gai.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Mount Kuring-gai, s prioritou Low (4.12), s hodnotením 4.3/5 z 158 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Mount Kuring-Gai Motel v lokalite Mount Kuring-gai.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Mount Kuring-gai, s prioritou Low (4.12), s hodnotením 4.3/5 z 158 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Mount Kuring-Gai Motel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,41.18,Low,geo_mismatch | website_missing | website_missing,D,geo_mismatch | website_missing | website_missing,review_fit | independent_signal | out_of_profile_geography | has_phone,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_c315659e0e56,Mackerel Beach Wellness Lodge,Great Mackerel Beach,Mackerel Beach Wellness Lodge: krátky postreh,Pozeral som sa na Mackerel Beach Wellness Lodge v lokalite Great Mackerel Beach.,Pozeral som sa na Mackerel Beach Wellness Lodge v lokalite Great Mackerel Beach.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Great Mackerel Beach, s prioritou Low (4.1), s hodnotením 5.0/5 z 1 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Mackerel Beach Wellness Lodge v lokalite Great Mackerel Beach.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Great Mackerel Beach, s prioritou Low (4.1), s hodnotením 5.0/5 z 1 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Mackerel Beach Wellness Lodge.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,41.0,Low,geo_mismatch | website_missing | website_missing,D,geo_mismatch | website_missing | website_missing,review_fit | independent_signal | out_of_profile_geography | has_phone,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_aad62abe4eca,Dural Hotel/Motel,Dural,Dural Hotel/Motel: krátky postreh,Pozeral som sa na Dural Hotel/Motel v lokalite Dural.,Pozeral som sa na Dural Hotel/Motel v lokalite Dural.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Dural, s prioritou Low (4.08), s hodnotením 3.6/5 z 16 recenzií.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na Dural Hotel/Motel v lokalite Dural.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Dural, s prioritou Low (4.08), s hodnotením 3.6/5 z 16 recenzií.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Dural Hotel/Motel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,40.75,Low,geo_mismatch | website_missing | website_missing,D,geo_mismatch | website_missing | website_missing,review_fit | independent_signal | out_of_profile_geography | has_phone,manual_review,yes,out_of_profile_geography,slovakia_independent_3_4_star,Sydney 100.csv
+acc_beae7e844138,T&V Suites,Mellong,T&V Suites: krátky postreh,Pozeral som sa na T&V Suites v lokalite Mellong.,Pozeral som sa na T&V Suites v lokalite Mellong.,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,"Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Mellong, s prioritou Low (3.7), s hodnotením 3.7/5 z 7 recenzií.","Nemal som viac než verejne dostupné údaje, preto držím len opatrný a krátky postreh.","Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Dobrý deň,
+
+Pozeral som sa na T&V Suites v lokalite Mellong.
+Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Mellong, s prioritou Low (3.7), s hodnotením 3.7/5 z 7 recenzií.
+Nemal som viac než verejne dostupné údaje, preto držím len opatrný a krátky postreh.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom","Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre T&V Suites.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",reply_with_permission,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,36.95,Low,geo_mismatch | website_and_phone_missing | website_missing,D,geo_mismatch | website_and_phone_missing | website_missing,review_fit | independent_signal | out_of_profile_geography,manual_review,yes,out_of_profile_geography | missing_contact_data | low_fit_confidence,slovakia_independent_3_4_star,Sydney 100.csv

@@ -1,0 +1,87 @@
+{
+  "schema_version": "source_bundle/v1",
+  "generated_at_utc": "2026-04-05T21:10:12.563025+00:00",
+  "account_id": "acc_5970be661818",
+  "source_file": "Sydney 100.csv",
+  "hotel_identity": {
+    "hotel_name": "Jonah’s Restaurant & Boutique Hotel",
+    "city": "Palm Beach",
+    "country_code": "AU",
+    "website": "http://www.jonahs.com.au/",
+    "website_domain": "jonahs.com.au"
+  },
+  "raw_contact_hints": {
+    "phone": "+61 2 9974 5599",
+    "source_url": "https://www.google.com/maps/search/?api=1&query=Jonah%E2%80%99s%20Restaurant%20%26%20Boutique%20Hotel&query_place_id=ChIJK_oJd_GzEmsRnAc-uz6u26E",
+    "fallback_opening_hours": "",
+    "fallback_checkin_checkout": ""
+  },
+  "sources": {
+    "google_places": {
+      "status": "not_enabled",
+      "place_id": "ChIJK_oJd_GzEmsRnAc-uz6u26E",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Jonah%E2%80%99s%20Restaurant%20%26%20Boutique%20Hotel&query_place_id=ChIJK_oJd_GzEmsRnAc-uz6u26E",
+      "fields_requested": [
+        "displayName",
+        "primaryType",
+        "primaryTypeDisplayName",
+        "types",
+        "businessStatus",
+        "formattedAddress",
+        "websiteUri",
+        "internationalPhoneNumber",
+        "rating",
+        "userRatingCount",
+        "regularOpeningHours",
+        "googleMapsUri"
+      ],
+      "result": {}
+    },
+    "official_website": {
+      "base_url": "http://www.jonahs.com.au/",
+      "fetch_status": "ok",
+      "reachable": true,
+      "pages": [
+        {
+          "url": "http://www.jonahs.com.au/",
+          "source_type": "homepage",
+          "jsonld_detected": true,
+          "text_length": 3617,
+          "opening_hours_candidate": "Thursday - Sunday Lunch arrivals between 12pm - 2:30pm Dinner arrivals between 6:30pm - 8:30pm Book Online We acknowledge the Traditional Cu",
+          "opening_hours_origin": "text",
+          "opening_hours_valid": false,
+          "checkin_checkout_candidate": "",
+          "checkin_checkout_origin": "",
+          "checkin_checkout_valid": false
+        }
+      ]
+    }
+  },
+  "extracted_candidates": {
+    "hotel_opening_hours": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    },
+    "checkin_checkout": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    },
+    "ownership_company": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": "",
+      "raw_type": ""
+    },
+    "room_count": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    }
+  }
+}

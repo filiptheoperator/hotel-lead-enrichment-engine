@@ -1,0 +1,48 @@
+{
+  "schema_version": "commercial_synthesis/v3-lite",
+  "generated_at_utc": "2026-04-06T07:27:17.234883+00:00",
+  "account_id": "acc_462634ba1b0d",
+  "source_file": "Sydney 100.csv",
+  "source_bundle_ref": "outputs/source_bundles/Sydney 100/acc_462634ba1b0d.json",
+  "factual_enrichment_ref": "outputs/factual_enrichment/Sydney 100/acc_462634ba1b0d.json",
+  "model": "gpt-4.1-mini",
+  "business_interest_summary": "The Hornsby Inn je nezávislý pub s 10 izbami a reštauráciou v meste Hornsby, Austrália.",
+  "why_commercially_interesting": "Možná zložitosť v koordinácii a správe nočných prevádzkových hodín môže spôsobiť oneskorenia v reakcii na dopyty alebo rezervácie. Recepcia alebo manažment môže byť manuálne zaťažený riešením rôznorodých požiadaviek spojených s gastro, eventmi a ubytovaním.",
+  "property_positioning_summary": "The Hornsby Inn je nezávislý pub s reštauráciou a kapacitou 10 izieb, otvorený denne od 10:00 do 03:00, s možnosťou organizácie eventov.",
+  "strengths": [
+    "Silná online reputácia s hodnotením 4.0 z 682 recenzií.",
+    "Kombinácia ubytovania, gastro a event služieb.",
+    "Prevádzkové hodiny pokrývajú aj nočné hodiny, čo môže prilákať špecifickú klientelu."
+  ],
+  "opportunity_gaps": [
+    "Chýbajú verejné informácie o wellness, spa a parkovaní.",
+    "Neuverené detaily o check-in a check-out časoch.",
+    "Neistota ohľadom presného vlastníckeho subjektu, len indikácia nezávislého prevádzkovateľa."
+  ],
+  "main_bottleneck_hypothesis": "Možná zložitosť v koordinácii a správe nočných prevádzkových hodín môže spôsobiť oneskorenia v reakcii na dopyty alebo rezervácie.",
+  "pain_point_hypothesis": "Recepcia alebo manažment môže byť manuálne zaťažený riešením rôznorodých požiadaviek spojených s gastro, eventmi a ubytovaním.",
+  "best_entry_angle": "Všimli sme si, že pri hoteloch s kombináciou pubu, reštaurácie a eventov často vznikajú miesta, kde sa môže strácať časť záujmu pred dopytom riadenia rezervácií a komunikácie so zákazníkmi.",
+  "personalization_angles": [
+    "The Hornsby Inn má unikátnu kombináciu pubu a ubytovania, čo môže prinášať špecifické výzvy v manažmente nočných hodín a eventov. Pri takomto profile sa často mieša viac typov záujmu naraz.",
+    "S 10 izbami a aktívnou gastro prevádzkou je zaujímavé preskúmať, ako riešite koordináciu rezervácií a zákaznícku komunikáciu. Pri takomto profile sa často mieša viac typov záujmu naraz.",
+    "Vaša silná online reputácia naznačuje, že zákaznícka skúsenosť je pre vás dôležitá, radi by sme pochopili, kde vidíte priestor na zlepšenie. Pri takomto profile sa často mieša viac typov záujmu naraz."
+  ],
+  "recommended_hook": "Všimli sme si, že pri hoteloch s nočnými prevádzkami a eventmi často vznikajú príležitosti na zefektívnenie riadenia re….",
+  "recommended_first_contact_route": "Kontaktujte recepciu alebo manažéra prevádzky cez telefón uvedený na webstránke.",
+  "likely_decision_maker_hypothesis": "Prvým rozhodujúcim kontaktom bude pravdepodobne manažér prevádzky alebo vlastník nezávislého hotela.",
+  "demand_mix_hypothesis": [
+    "Dopyt môže byť mixom krátkodobých ubytovacích rezervácií a gastro/event služieb.",
+    "Nočné hodiny naznačujú možný záujem o eventy alebo spoločenské akcie."
+  ],
+  "service_complexity_read": "Hotel ponúka kombináciu ubytovania, reštaurácie a eventových služieb, čo zvyšuje komplexnosť prevádzky a potrebu koordinácie rôznych typov služieb.",
+  "commercial_complexity_read": "Obchodná komunikácia musí zohľadniť rôznorodý dopyt od ubytovacích hostí aj gastro/event zákazníkov, čo môže vyžadovať viacero kontaktných bodov a jasnú segmen…",
+  "direct_booking_friction_hypothesis": "Friction môže vzniknúť pri rezerváciách v nočných hodinách alebo pri koordinácii eventov, kde je potrebná rýchla a presná komunikácia.",
+  "contact_route_friction_hypothesis": "Prvý kontakt môže byť zložitejší kvôli potrebe osloviť správneho manažéra medzi gastro, event a ubytovacím tímom.",
+  "call_hypothesis": "Pri prvom hovore je vhodné overiť, ako riešia koordináciu rezervácií medzi pubom, reštauráciou a ubytovaním, a či existujú manuálne procesy, ktoré by mohli byť zjednodušené. Zároveň je dôležité pochopiť, kto rozhoduje o zmenách v procese alebo komunikácii, pravdepodobne manažér prevádzky alebo vlastník. Popri tom dáva zmysel zistiť, či to rieši skôr manažér prevádzky alebo vla…",
+  "verdict": "zaujímavý prospect",
+  "uncertainty_notes": [
+    "Presné check-in a check-out časy nie sú verejne dostupné.",
+    "Nie je potvrdená dostupnosť wellness, spa a parkovania.",
+    "Presná štruktúra vlastníctva a manažmentu nie je detailne známa."
+  ]
+}

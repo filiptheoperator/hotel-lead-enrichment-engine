@@ -1,0 +1,74 @@
+{
+  "schema_version": "source_bundle/v1",
+  "generated_at_utc": "2026-04-05T21:10:29.031081+00:00",
+  "account_id": "acc_50ce289c9223",
+  "source_file": "Sydney 100.csv",
+  "hotel_identity": {
+    "hotel_name": "Spicers Sangoma Retreat",
+    "city": "Bowen Mountain",
+    "country_code": "AU",
+    "website": "https://spicersretreats.com/retreats/spicers-sangoma-retreat/?utm_source=google&utm_medium=organic&utm_campaign=gmb",
+    "website_domain": "spicersretreats.com"
+  },
+  "raw_contact_hints": {
+    "phone": "+61 1300 352 190",
+    "source_url": "https://www.google.com/maps/search/?api=1&query=Spicers%20Sangoma%20Retreat&query_place_id=ChIJna5tG9SBEmsRlVuGo7Un5yc",
+    "fallback_opening_hours": "",
+    "fallback_checkin_checkout": ""
+  },
+  "sources": {
+    "google_places": {
+      "status": "not_enabled",
+      "place_id": "ChIJna5tG9SBEmsRlVuGo7Un5yc",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Spicers%20Sangoma%20Retreat&query_place_id=ChIJna5tG9SBEmsRlVuGo7Un5yc",
+      "fields_requested": [
+        "displayName",
+        "primaryType",
+        "primaryTypeDisplayName",
+        "types",
+        "businessStatus",
+        "formattedAddress",
+        "websiteUri",
+        "internationalPhoneNumber",
+        "rating",
+        "userRatingCount",
+        "regularOpeningHours",
+        "googleMapsUri"
+      ],
+      "result": {}
+    },
+    "official_website": {
+      "base_url": "https://spicersretreats.com/retreats/spicers-sangoma-retreat/?utm_source=google&utm_medium=organic&utm_campaign=gmb",
+      "fetch_status": "http_error",
+      "reachable": false,
+      "pages": []
+    }
+  },
+  "extracted_candidates": {
+    "hotel_opening_hours": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    },
+    "checkin_checkout": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    },
+    "ownership_company": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": "",
+      "raw_type": ""
+    },
+    "room_count": {
+      "value": "",
+      "origin": "",
+      "source_url": "",
+      "source_type": ""
+    }
+  }
+}

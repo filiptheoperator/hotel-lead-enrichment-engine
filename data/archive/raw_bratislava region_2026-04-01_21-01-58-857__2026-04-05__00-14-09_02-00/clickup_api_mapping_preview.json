@@ -1,0 +1,51 @@
+{
+  "source_csv": "outputs/clickup/raw_bratislava region_2026-04-01_21-01-58-857_normalized_scored_enriched_email_drafts_clickup_import.csv",
+  "preview_rows": [
+    {
+      "name": "Lead outreach - Loft Hotel Bratislava",
+      "description": "Hotel: Loft Hotel Bratislava\nMesto: Bratislava\nPriorita band: High\nSkóre: 9.37\nWeb: https://www.lofthotel.sk/?utm_source=google&utm_medium=knowledge&utm_campaign=knowledgegraph\nTelefón: +421 901 902 680\nEmail angle: opening_hours_clarity\nCTA type: low_friction_permission\nVariant ID: A1\nTest batch: raw_bratislava region_2026-04-01_21-01-58-857\nReply outcome: nan\n\nEmail hook: Pozeral som sa na Loft Hotel Bratislava v lokalite Bratislava.\nGive-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.\nMain observed issue: Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.\nProof snippet: Pozeral som len verejne dostupný profil a základné kontaktné údaje.\nMicro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.\nPrimary email goal: reply_with_permission\n\nCold email:\nDobrý deň,\n\nPozeral som sa na Loft Hotel Bratislava v lokalite Bratislava.\nPri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.\nNa webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Bratislava, s prioritou High (9.37), s hodnotením 4.7/5 z 1252 recenzií.\nPozeral som len verejne dostupný profil a základné kontaktné údaje.\n\nAk chcete, pošlem 3 stručné postrehy v krátkej forme.\n\nS pozdravom\n\nFollow-up email:\nDobrý deň,\n\njemne sa pripomínam k predošlej správe pre Loft Hotel Bratislava.\nAk chcete, pošlem 3 stručné postrehy v krátkej forme.\n\nS pozdravom",
+      "status": "to do",
+      "priority": "2.0",
+      "custom_fields": {
+        "custom.hotel_name": "Loft Hotel Bratislava",
+        "custom.city": "Bratislava",
+        "custom.priority_score": "9.37",
+        "custom.contact_phone": "+421 901 902 680",
+        "custom.contact_website": "https://www.lofthotel.sk/?utm_source=google&utm_medium=knowledge&utm_campaign=knowledgegraph",
+        "custom.subject_line": "Loft Hotel Bratislava: krátky postreh",
+        "custom.source_file": "raw_bratislava region_2026-04-01_21-01-58-857.csv"
+      }
+    },
+    {
+      "name": "Lead outreach - Radisson Blu Carlton Hotel, Bratislava",
+      "description": "Hotel: Radisson Blu Carlton Hotel, Bratislava\nMesto: Bratislava\nPriorita band: High\nSkóre: 9.36\nWeb: https://www.radissonhotels.com/en-us/hotels/radisson-blu-bratislava-carlton?cid=a:se+b:gmb+c:emea+i:local+e:rdb+d:cese+h:SKBTSCAR\nTelefón: +421 2/593 905 00\nEmail angle: opening_hours_clarity\nCTA type: low_friction_permission\nVariant ID: A1\nTest batch: raw_bratislava region_2026-04-01_21-01-58-857\nReply outcome: nan\n\nEmail hook: Pozeral som sa na Radisson Blu Carlton Hotel, Bratislava v lokalite Bratislava.\nGive-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.\nMain observed issue: Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.\nProof snippet: Pozeral som len verejne dostupný profil a základné kontaktné údaje.\nMicro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.\nPrimary email goal: reply_with_permission\n\nCold email:\nDobrý deň,\n\nPozeral som sa na Radisson Blu Carlton Hotel, Bratislava v lokalite Bratislava.\nPri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.\nNa webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Bratislava, s prioritou High (9.36), s hodnotením 4.6/5 z 2892 recenzií.\nPozeral som len verejne dostupný profil a základné kontaktné údaje.\n\nAk chcete, pošlem 3 stručné postrehy v krátkej forme.\n\nS pozdravom\n\nFollow-up email:\nDobrý deň,\n\njemne sa pripomínam k predošlej správe pre Radisson Blu Carlton Hotel, Bratislava.\nAk chcete, pošlem 3 stručné postrehy v krátkej forme.\n\nS pozdravom",
+      "status": "to do",
+      "priority": "2.0",
+      "custom_fields": {
+        "custom.hotel_name": "Radisson Blu Carlton Hotel, Bratislava",
+        "custom.city": "Bratislava",
+        "custom.priority_score": "9.36",
+        "custom.contact_phone": "+421 2/593 905 00",
+        "custom.contact_website": "https://www.radissonhotels.com/en-us/hotels/radisson-blu-bratislava-carlton?cid=a:se+b:gmb+c:emea+i:local+e:rdb+d:cese+h:SKBTSCAR",
+        "custom.subject_line": "Radisson Blu Carlton Hotel, Bratislava: krátky postreh",
+        "custom.source_file": "raw_bratislava region_2026-04-01_21-01-58-857.csv"
+      }
+    },
+    {
+      "name": "Lead outreach - Areál vodných športov Čunovo",
+      "description": "Hotel: Areál vodných športov Čunovo\nMesto: Čunovo\nPriorita band: High\nSkóre: 9.35\nWeb: http://www.divokavoda.sk/\nTelefón: +421 905 313 429\nEmail angle: opening_hours_clarity\nCTA type: low_friction_permission\nVariant ID: A1\nTest batch: raw_bratislava region_2026-04-01_21-01-58-857\nReply outcome: nan\n\nEmail hook: Pozeral som sa na Areál vodných športov Čunovo v lokalite Čunovo.\nGive-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.\nMain observed issue: Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.\nProof snippet: Pozeral som len verejne dostupný profil a základné kontaktné údaje.\nMicro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.\nPrimary email goal: reply_with_permission\n\nCold email:\nDobrý deň,\n\nPozeral som sa na Areál vodných športov Čunovo v lokalite Čunovo.\nPri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.\nNa webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Čunovo, s prioritou High (9.35), s hodnotením 4.5/5 z 931 recenzií.\nPozeral som len verejne dostupný profil a základné kontaktné údaje.\n\nAk chcete, pošlem 3 stručné postrehy v krátkej forme.\n\nS pozdravom\n\nFollow-up email:\nDobrý deň,\n\njemne sa pripomínam k predošlej správe pre Areál vodných športov Čunovo.\nAk chcete, pošlem 3 stručné postrehy v krátkej forme.\n\nS pozdravom",
+      "status": "to do",
+      "priority": "2.0",
+      "custom_fields": {
+        "custom.hotel_name": "Areál vodných športov Čunovo",
+        "custom.city": "Čunovo",
+        "custom.priority_score": "9.35",
+        "custom.contact_phone": "+421 905 313 429",
+        "custom.contact_website": "http://www.divokavoda.sk/",
+        "custom.subject_line": "Areál vodných športov Čunovo: krátky postreh",
+        "custom.source_file": "raw_bratislava region_2026-04-01_21-01-58-857.csv"
+      }
+    }
+  ],
+  "note": "Návrh mapping preview bez ostrej ClickUp API integrácie."
+}

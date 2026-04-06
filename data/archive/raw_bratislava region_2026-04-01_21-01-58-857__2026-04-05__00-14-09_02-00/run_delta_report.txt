@@ -1,0 +1,27 @@
+Hotel Lead Enrichment Engine OS - Run Delta Report
+
+Check-in / Check-out Delta
+- verified_before: 9
+- verified_after: 9
+- verified_delta: 0
+- unverified_before: 120
+- unverified_after: 120
+- unverified_delta: 0
+
+Fetch Delta
+- dns_fallback_previous_before: 0
+- dns_fallback_previous_after: 99
+- dns_fallback_previous_delta: 99
+- dns_resolution_failed_before: 0
+- dns_resolution_failed_after: 16
+- dns_resolution_failed_delta: 16
+
+Current Run Interpretation
+- current_run_note: DNS/fallback incident ovplyvnil verejný web fetch; quality delta treba čítať spolu s fetch metrikami.
+
+Shortlist Bucket Delta
+- dns_fetch_blocked: before=0, after=15, delta=15
+- reachable_missing_checkin_checkout: before=78, after=78, delta=0
+- reachable_missing_opening_hours: before=5, after=4, delta=-1
+- single_side_verified_needs_review: before=0, after=2, delta=2
+- source_unreachable_or_lower_signal: before=15, after=0, delta=-15

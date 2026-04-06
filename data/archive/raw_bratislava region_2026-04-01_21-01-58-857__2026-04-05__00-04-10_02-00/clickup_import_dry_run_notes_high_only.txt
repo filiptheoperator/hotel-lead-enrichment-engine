@@ -1,0 +1,4 @@
+High-only dry run sample.
+Vybraná veľkosť High-only sample: 5
+Field-by-field check template platí rovnako ako pre full sample.
+Neoverené: správanie konkrétneho ClickUp workspace pri importe.

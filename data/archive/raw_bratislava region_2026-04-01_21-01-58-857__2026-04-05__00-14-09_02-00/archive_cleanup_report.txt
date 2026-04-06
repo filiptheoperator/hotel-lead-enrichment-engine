@@ -1,0 +1,16 @@
+Archive Cleanup Report
+
+- archive_root: data/archive
+- keep_last_batches: 5
+- removed_dirs_count: 0
+- remaining_dirs_count: 5
+
+Removed dirs
+- none
+
+Remaining dirs
+- data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-31-15_02-00
+- data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-31-24_02-00
+- data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-04__22-36-44_02-00
+- data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-05__00-03-05_02-00
+- data/archive/raw_bratislava region_2026-04-01_21-01-58-857__2026-04-05__00-04-10_02-00

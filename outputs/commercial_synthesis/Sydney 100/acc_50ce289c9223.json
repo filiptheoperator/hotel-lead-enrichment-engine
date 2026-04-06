@@ -1,0 +1,49 @@
+{
+  "schema_version": "commercial_synthesis/v3-lite",
+  "generated_at_utc": "2026-04-06T07:27:40.314583+00:00",
+  "account_id": "acc_50ce289c9223",
+  "source_file": "Sydney 100.csv",
+  "source_bundle_ref": "outputs/source_bundles/Sydney 100/acc_50ce289c9223.json",
+  "factual_enrichment_ref": "outputs/factual_enrichment/Sydney 100/acc_50ce289c9223.json",
+  "model": "gpt-4.1-mini",
+  "business_interest_summary": "Spicers Sangoma Retreat je nezávislý hotel s vysokým hodnotením a ponukou reštaurácie, spa a kongresových služieb v Bowen Mountain.",
+  "why_commercially_interesting": "Hotel má veľmi dobré recenzie (4,8 z 5) a ponúka komplexné služby vrátane spa a eventových priestorov, čo môže prilákať rôzne segmenty klientely. Je však potrebné preveriť dostupnosť a kapacity, keďže počet izieb a otváracie hodiny nie sú verejne potvrdené.",
+  "property_positioning_summary": "Spicers Sangoma Retreat je nezávislý hotel v prírodnom prostredí Bowen Mountain s kvalitnou gastronómiou, spa a priestorom pre konferencie a svadby.",
+  "strengths": [
+    "Vysoké hodnotenie 4,8 z 5 na základe 248 recenzií.",
+    "Ponuka reštaurácie, spa a eventových priestorov.",
+    "Nezávislý prevádzkovateľ, čo môže znamenať flexibilitu v rozhodovaní."
+  ],
+  "opportunity_gaps": [
+    "Presný počet izieb nie je verejne dostupný, čo komplikuje odhad kapacity.",
+    "Chýbajú verejne dostupné informácie o otváracích hodinách a check-in/check-out podmienkach.",
+    "Dostupnosť parkovania a wellness služieb nie je potvrdená."
+  ],
+  "main_bottleneck_hypothesis": "Možný bottleneck môže byť v nejasnostiach ohľadom kapacity a prevádzkových hodín, čo komplikuje plánovanie a predaj.",
+  "pain_point_hypothesis": "Recepcia alebo manažment môžu mať manuálnu záťaž pri správe rôznorodých služieb bez jasne definovaných procesov.",
+  "best_entry_angle": "Všimli sme si, že pri hoteloch s komplexnou ponukou služieb často pomáha audit prevádzkových procesov a kapacitného manažmentu.",
+  "personalization_angles": [
+    "Váš hotel s vysokým hodnotením a širokou ponukou služieb je skvelým miestom pre rôzne typy klientov, zaujímalo by nás, ako riešite plánovanie kapacít a rezervácií v praxi. Pri takomto profile sa často mieša viac typov záujmu naraz. Pri takomto type hotela býva užitočné preveriť, či možný bottleneck môže byť v nejasnos…",
+    "Vzhľadom na nejasnosti ohľadom otváracích hodín a počtu izieb by sme radi pochopili, ako tieto informácie ovplyvňujú vašu každodennú prevádzku a komunikáciu so zákazníkmi. Pri takomto profile sa často mieša viac typov záujmu naraz. Pri takomto type hotela býva užitočné preveriť, či možný bottleneck môže byť v nejasnos…",
+    "Zaujíma nás, či máte zavedené nástroje na zjednodušenie správy eventov a spa služieb, ktoré sú súčasťou vášho portfólia. Pri takomto profile sa často mieša viac typov záujmu naraz. Pri takomto type hotela býva užitočné preveriť, či možný bottleneck môže byť v nejasnostiach ohľadom kapacity a prevádzkových hodín, čo ko…"
+  ],
+  "recommended_hook": "Všimli sme si, že pri hoteloch s podobnou ponukou často pomáha detailný audit prevádzkových procesov.",
+  "recommended_first_contact_route": "Kontaktujte recepciu alebo manažéra prevádzky cez telefón +61 1300 352 190.",
+  "likely_decision_maker_hypothesis": "Prvým rozhodujúcim kontaktom bude pravdepodobne manažér prevádzky alebo generálny manažér hotela.",
+  "demand_mix_hypothesis": [
+    "Dopyt môže byť mixom wellness klientely, firemných eventov a svadieb.",
+    "Môže sa miešať individuálny rekreačný dopyt s korporátnymi zákazkami na kongresy a eventy."
+  ],
+  "service_complexity_read": "Hotel ponúka komplexné služby vrátane reštaurácie, spa a eventových priestorov, čo zvyšuje nároky na koordináciu a správu.",
+  "commercial_complexity_read": "Obchodná komunikácia môže byť zložitá kvôli rôznorodosti služieb a nejasnostiam v prevádzkových detailoch.",
+  "direct_booking_friction_hypothesis": "Friction môže vzniknúť kvôli nejasnostiam v dostupnosti izieb a otváracích hodinách, ktoré nie sú verejne dostupné.",
+  "contact_route_friction_hypothesis": "Prvý kontakt môže byť zložitejší, ak nie je jasné, kto presne rozhoduje o spolupráci alebo ak recepcia má vysokú manuálnu záťaž.",
+  "call_hypothesis": "Pri prvom hovore by bolo vhodné overiť, ako riešia plánovanie kapacít a rezervácií, či majú jasne definované otváracie hodiny a počet izieb. Zároveň je dôležité pochopiť, kto rozhoduje o prípadnej spolupráci a aké sú ich priority v oblasti služieb a zákazníckej skúsenosti. Popri tom dáva zmysel zistiť, či to rieši skôr manažér prevádzky alebo generálny manažér hotela alebo iný…",
+  "verdict": "zaujímavý prospect",
+  "uncertainty_notes": [
+    "Presný počet izieb nie je verejne potvrdený.",
+    "Otváracie hodiny a check-in/check-out podmienky nie sú verejne dostupné.",
+    "Dostupnosť parkovania a wellness služieb je nejasná.",
+    "Oficiálna webová stránka momentálne nie je dostupná, čo obmedzuje overenie informácií."
+  ]
+}

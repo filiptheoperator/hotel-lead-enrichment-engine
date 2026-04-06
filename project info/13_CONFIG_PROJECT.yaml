@@ -1,0 +1,13 @@
+project_name: Hotel Lead Enrichment Engine OS
+language: sk
+default_country: Slovakia
+primary_crm: ClickUp
+preferred_orchestrator: local_python_first
+glue_layer: make
+raw_input_folder: data/raw
+processed_folder: data/processed
+output_folder: outputs
+qa_folder: data/qa
+review_required_priorities:
+  - High
+  - Medium-High

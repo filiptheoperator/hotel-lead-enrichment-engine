@@ -4,6 +4,11 @@ orchestration:
   make_webhook_enabled_env_var: MAKE_WEBHOOK_ENABLED
   make_webhook_url_env_var: MAKE_WEBHOOK_URL
   make_webhook_timeout_seconds: 30
+  make_webhook_max_attempts: 3
+  make_webhook_backoff_seconds:
+    - 5
+    - 30
+    - 120
   make_payload_path: data/qa/make_execution_payload.json
   failure_notification_path: data/qa/make_failure_notification.json
   evidence_log_path: data/qa/integration_evidence_log.json
@@ -23,6 +28,11 @@ orchestration:
   response_capture_template_path: data/qa/make_response_capture_template.json
   handoff_txt_bundle_path: data/qa/operator_handoff_bundle.txt
   launch_checklist_path: data/qa/pre_make_launch_checklist.json
+  launch_checklist_txt_path: data/qa/pre_make_launch_checklist.txt
+  launch_gating_summary_path: data/qa/launch_gating_summary.txt
+  post_webhook_reconciliation_path: data/qa/post_webhook_reconciliation.json
+  runtime_metrics_snapshot_path: data/qa/runtime_metrics_snapshot.json
+  lock_contention_test_path: data/qa/orchestration_lock_contention_test.json
   dry_run_result_path: data/qa/orchestration_dry_run.json
   required_artifact_keys:
     - run_manifest_json
@@ -52,4 +62,7 @@ orchestration:
     no_go_batch: no_go_batch
     clickup_external_blocker: clickup_external_blocker
     partial_write_risk: partial_write_risk
+    http_client_error: http_client_error
+    http_server_error: http_server_error
+    network_error: network_error
     unknown_external_error: unknown_external_error

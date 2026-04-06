@@ -1,0 +1,4 @@
+High Leads Pre-Import Checklist
+
+- rows: 34
+- blocked_rows: 32

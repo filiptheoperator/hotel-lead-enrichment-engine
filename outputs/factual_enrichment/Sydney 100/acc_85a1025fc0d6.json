@@ -1,0 +1,112 @@
+{
+  "schema_version": "factual_enrichment/v1",
+  "generated_at_utc": "2026-04-05T21:10:30.986719+00:00",
+  "account_id": "acc_85a1025fc0d6",
+  "source_file": "Sydney 100.csv",
+  "source_bundle_ref": "outputs/source_bundles/Sydney 100/acc_85a1025fc0d6.json",
+  "identity": {
+    "hotel_name": "Quest Bella Vista",
+    "city": "Bella Vista",
+    "state": "New South Wales",
+    "country_code": "AU",
+    "hotel_type_class": "Preferred hotel",
+    "category_name": "Hotel",
+    "ownership_type": "Independent operator candidate",
+    "google_place_name": "",
+    "google_primary_type": "",
+    "google_primary_type_display_name": "",
+    "google_types": []
+  },
+  "contacts": {
+    "website": "http://www.questapartments.com.au/properties/nsw/bella-vista/quest-bella-vista/overview?utm_source=GoogleMyBusiness&utm_medium=organic&utm_campaign=bellavista",
+    "website_domain": "questapartments.com.au",
+    "phone": "+61 2 8818 9300",
+    "source_origin": "processed_row"
+  },
+  "address": {
+    "street": "24 Norbrik Dr",
+    "city": "Bella Vista",
+    "state": "New South Wales",
+    "country_code": "AU",
+    "formatted": "24 Norbrik Dr, Bella Vista, New South Wales, AU",
+    "source_origin": "processed_row"
+  },
+  "operating_hours": {
+    "hotel_opening_hours": "Verejne nepotvrdené",
+    "status": "Verejne nepotvrdené",
+    "source_url": "",
+    "source_type": "",
+    "google_places_weekday_text": ""
+  },
+  "checkin_checkout": {
+    "value": "Verejne nepotvrdené",
+    "status": "Verejne nepotvrdené",
+    "source_url": "",
+    "source_type": "",
+    "source_origin": "",
+    "completeness": "none"
+  },
+  "room_count_signal": {
+    "value": "",
+    "rooms_range": "",
+    "status": "Verejne nepotvrdené",
+    "source_origin": "",
+    "note": "Presný počet izieb je verejne nepotvrdený v aktuálnom source bundle."
+  },
+  "service_mix": {
+    "wellness": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "restaurant": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "event_congress": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "spa": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "parking": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "bowling": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    }
+  },
+  "review_trust_signal": {
+    "summary": "4.5/5 z 1537 recenzií",
+    "score": "4.5",
+    "reviews_count": "1537",
+    "status": "raw_confirmed",
+    "source_origin": "processed_row"
+  },
+  "google_review_signal": {
+    "rating": "",
+    "user_ratings_total": "",
+    "status": "Verejne nepotvrdené",
+    "source_origin": ""
+  },
+  "ownership_company_signal": {
+    "value": "Quest Bella Vista",
+    "status": "public_confirmed",
+    "source_origin": "official_web_jsonld",
+    "note": "JSON-LD názov: Quest Bella Vista | typ: hotel"
+  },
+  "source_reachability": {
+    "public_source_reachable": "yes",
+    "public_source_fetch_status": "ok",
+    "google_places_status": "not_enabled"
+  }
+}

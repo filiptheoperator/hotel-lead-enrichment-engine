@@ -1,0 +1,12 @@
+enrichment:
+  require_opening_hours: true
+  require_checkin_checkout: true
+  require_contact_data: true
+  require_commercial_summary: true
+  require_clickup_fields: true
+  require_personalization_angles: true
+  require_cold_email_draft: true
+  require_followup_draft: true
+  require_discovery_hypothesis: true
+  per_hotel_markdown: true
+  unknown_value_label: Verejne nepotvrdené

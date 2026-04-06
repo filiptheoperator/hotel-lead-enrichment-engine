@@ -1,0 +1,112 @@
+{
+  "schema_version": "factual_enrichment/v1",
+  "generated_at_utc": "2026-04-05T21:10:22.083204+00:00",
+  "account_id": "acc_9f2cb7250cf5",
+  "source_file": "Sydney 100.csv",
+  "source_bundle_ref": "outputs/source_bundles/Sydney 100/acc_9f2cb7250cf5.json",
+  "identity": {
+    "hotel_name": "Miramare Gardens",
+    "city": "Terrey Hills",
+    "state": "New South Wales",
+    "country_code": "AU",
+    "hotel_type_class": "Preferred hotel",
+    "category_name": "Hotel",
+    "ownership_type": "Independent operator candidate",
+    "google_place_name": "",
+    "google_primary_type": "",
+    "google_primary_type_display_name": "",
+    "google_types": []
+  },
+  "contacts": {
+    "website": "https://www.miramaregardens.com.au/?utm_source=google&utm_medium=organic&utm_campaign=gmb",
+    "website_domain": "miramaregardens.com.au",
+    "phone": "+61 2 9450 2000",
+    "source_origin": "processed_row"
+  },
+  "address": {
+    "street": "48 Myoora Rd",
+    "city": "Terrey Hills",
+    "state": "New South Wales",
+    "country_code": "AU",
+    "formatted": "48 Myoora Rd, Terrey Hills, New South Wales, AU",
+    "source_origin": "processed_row"
+  },
+  "operating_hours": {
+    "hotel_opening_hours": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00",
+    "status": "Overené vo verejnom zdroji",
+    "source_url": "https://www.miramaregardens.com.au/?utm_source=google&utm_medium=organic&utm_campaign=gmb",
+    "source_type": "homepage",
+    "google_places_weekday_text": ""
+  },
+  "checkin_checkout": {
+    "value": "Verejne nepotvrdené",
+    "status": "Verejne nepotvrdené",
+    "source_url": "",
+    "source_type": "",
+    "source_origin": "",
+    "completeness": "none"
+  },
+  "room_count_signal": {
+    "value": "",
+    "rooms_range": "",
+    "status": "Verejne nepotvrdené",
+    "source_origin": "",
+    "note": "Presný počet izieb je verejne nepotvrdený v aktuálnom source bundle."
+  },
+  "service_mix": {
+    "wellness": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "restaurant": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "event_congress": {
+      "available": "yes",
+      "source_origin": "raw_categories",
+      "evidence": "event, kongres, congress, conference, meeting, wedding, function room"
+    },
+    "spa": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "parking": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    },
+    "bowling": {
+      "available": "unknown",
+      "source_origin": "",
+      "evidence": "Verejne nepotvrdené"
+    }
+  },
+  "review_trust_signal": {
+    "summary": "4.4/5 z 790 recenzií",
+    "score": "4.4",
+    "reviews_count": "790",
+    "status": "raw_confirmed",
+    "source_origin": "processed_row"
+  },
+  "google_review_signal": {
+    "rating": "",
+    "user_ratings_total": "",
+    "status": "Verejne nepotvrdené",
+    "source_origin": ""
+  },
+  "ownership_company_signal": {
+    "value": "Miramare Gardens",
+    "status": "public_confirmed",
+    "source_origin": "official_web_jsonld",
+    "note": "JSON-LD názov: Miramare Gardens | typ: localbusiness, organization"
+  },
+  "source_reachability": {
+    "public_source_reachable": "yes",
+    "public_source_fetch_status": "ok",
+    "google_places_status": "not_enabled"
+  }
+}

@@ -1,0 +1,6 @@
+account_id,hotel_name,google_places_status,room_count_value,rooms_range,room_count_status,checkin_checkout_status,opening_hours_source_type,ownership_status,service_count,verdict,recommended_hook
+acc_5970be661818,Jonah’s Restaurant & Boutique Hotel,ok,,,Verejne nepotvrdené,Verejne nepotvrdené,google_places,raw_confirmed,2,zaujímavý prospect,"Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad."
+acc_9f2cb7250cf5,Miramare Gardens,ok,,,Verejne nepotvrdené,Verejne nepotvrdené,homepage,public_confirmed,1,zaujímavý prospect,"Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad."
+acc_462634ba1b0d,The Hornsby Inn,ok,10,1-15,public_confirmed,Verejne nepotvrdené,homepage,raw_confirmed,2,zaujímavý prospect,"Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad."
+acc_d7e3595aefb6,Billabong Retreat,ok,,,Verejne nepotvrdené,Overené vo verejnom zdroji,,public_confirmed,2,zaujímavý prospect,"Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad."
+acc_50ce289c9223,Spicers Sangoma Retreat,ok,,,Verejne nepotvrdené,Verejne nepotvrdené,google_places,raw_confirmed,4,zaujímavý prospect,"Krátky pohľad na to, či má každý typ hosťa okamžite jasné, čo má spraviť ako prvé."

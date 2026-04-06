@@ -1,0 +1,36 @@
+{
+  "schema_version": "commercial_synthesis/v1",
+  "generated_at_utc": "2026-04-05T21:10:33.977406+00:00",
+  "account_id": "acc_40da1daa32cc",
+  "source_file": "Sydney 100.csv",
+  "source_bundle_ref": "outputs/source_bundles/Sydney 100/acc_40da1daa32cc.json",
+  "factual_enrichment_ref": "outputs/factual_enrichment/Sydney 100/acc_40da1daa32cc.json",
+  "business_interest_summary": "Doonside Hotel v Doonside je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.",
+  "strengths": [],
+  "opportunity_gaps": [
+    "Chýbajú jasné hotelové operating hours na prvý pohľad.",
+    "Chýba jasný check-in / check-out signal vo verejných zdrojoch.",
+    "Presný room count alebo rooms range ostáva verejne nepotvrdený."
+  ],
+  "main_bottleneck_hypothesis": "Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.",
+  "pain_point_hypothesis": "Hosť nemusí mať rýchlo jasno v praktických pobytových pravidlách pred rezerváciou.",
+  "personalization_angles": [
+    "Vo verejných zdrojoch chýbajú niektoré praktické pobytové informácie, čo vie byť prirodzený vstup do konverzácie."
+  ],
+  "recommended_hook": "Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.",
+  "call_hypothesis": "Na krátkom hovore sa oplatí overiť, ktoré typy dopytu dnes dominujú a kde vzniká najväčšie váhanie pred kontaktom alebo rezerváciou.",
+  "verdict": "opatrný prospect",
+  "grounding": {
+    "active_services": [
+      "restaurant"
+    ],
+    "service_count": 1,
+    "opening_hours_missing": true,
+    "checkin_checkout_missing": true,
+    "room_count_missing": true,
+    "review_score": "3.8",
+    "review_count": "363",
+    "ownership_status": "raw_confirmed",
+    "priority_band": "Medium-High"
+  }
+}

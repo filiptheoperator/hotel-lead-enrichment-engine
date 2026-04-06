@@ -1,0 +1,10 @@
+metric,value,group
+batch_source,raw_bratislava region_2026-04-01_21-01-58-857.csv,batch
+clickup_decision,NO_GO,decision
+operator_action,Neimportovať do ClickUp. Najprv odstrániť stop conditions.,decision
+batch_readiness_score,10,decision
+batch_readiness_band,red,decision
+fetch_incident_flag,yes,fetch
+qa_blocking_rows,3,import
+clickup_import_ready_rows,129,import
+manual_review_shortlist_rows,99,review
