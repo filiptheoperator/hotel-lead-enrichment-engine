@@ -19,6 +19,7 @@ SOURCE_BUNDLE_DIR = Path("outputs/source_bundles")
 FACTUAL_ENRICHMENT_DIR = Path("outputs/factual_enrichment")
 COMMERCIAL_SYNTHESIS_DIR = Path("outputs/commercial_synthesis")
 ENRICHMENT_CONFIG_PATH = Path("configs/enrichment.yaml")
+LEGACY_COMMERCIAL_FALLBACK_ENV = "ENRICHMENT_ENABLE_LEGACY_COMMERCIAL_FALLBACK"
 DEFAULT_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (compatible; HotelLeadEnrichmentEngine/1.0; "
@@ -73,6 +74,11 @@ def load_enrichment_config(config_path: Path = ENRICHMENT_CONFIG_PATH) -> dict:
 
 def load_environment(env_path: Path = Path(".env")) -> None:
     load_dotenv(dotenv_path=env_path, override=False)
+
+
+def is_legacy_commercial_fallback_enabled() -> bool:
+    value = normalize_text(os.getenv(LEGACY_COMMERCIAL_FALLBACK_ENV)).lower()
+    return value in {"1", "true", "yes", "on"}
 
 
 def list_processed_files(processed_dir: Path = PROCESSED_DIR) -> list[Path]:
@@ -1917,7 +1923,9 @@ def load_json_artifact(artifact_path: Path) -> dict:
 
 def build_selected_commercial_csv_fields(row: pd.Series, unknown_value_label: str) -> dict[str, str]:
     factual_artifact = load_json_artifact(build_row_artifact_path(FACTUAL_ENRICHMENT_DIR, row))
-    commercial_artifact = load_json_artifact(build_row_artifact_path(COMMERCIAL_SYNTHESIS_DIR, row))
+    commercial_artifact = {}
+    if is_legacy_commercial_fallback_enabled():
+        commercial_artifact = load_json_artifact(build_row_artifact_path(COMMERCIAL_SYNTHESIS_DIR, row))
 
     room_count_signal = factual_artifact.get("room_count_signal", {})
     return {
@@ -2028,13 +2036,16 @@ def enrich_public_web_fields(
         verified_public_label=verified_public_label,
     )
     save_factual_enrichment_artifact(factual_enrichment, row)
-    commercial_synthesis = build_commercial_synthesis_artifact(
-        row,
-        source_bundle=source_bundle,
-        factual_enrichment=factual_enrichment,
-        unknown_value_label=unknown_value_label,
-    )
-    save_commercial_synthesis_artifact(commercial_synthesis, row)
+    # Canonical commercial truth is produced later by src/commercial_synthesizer.py.
+    # The heuristic commercial layer in this file remains fallback-only and is disabled by default.
+    if is_legacy_commercial_fallback_enabled():
+        commercial_synthesis = build_commercial_synthesis_artifact(
+            row,
+            source_bundle=source_bundle,
+            factual_enrichment=factual_enrichment,
+            unknown_value_label=unknown_value_label,
+        )
+        save_commercial_synthesis_artifact(commercial_synthesis, row)
     return enrich_public_web_fields_from_bundle(
         row,
         source_bundle=source_bundle,
@@ -2515,6 +2526,7 @@ def main() -> None:
     ]
     batch_limit_raw = normalize_text(os.getenv("ENRICHMENT_BATCH_LIMIT"))
     output_suffix = normalize_text(os.getenv("ENRICHMENT_OUTPUT_SUFFIX"))
+    legacy_commercial_fallback_enabled = is_legacy_commercial_fallback_enabled()
 
     try:
         scored_df = pd.read_csv(first_file)
@@ -2566,6 +2578,16 @@ def main() -> None:
     print(f"Načítaný processed súbor: {first_file.name}")
     print(f"Počet riadkov: {len(enriched_df)}")
     print(f"Výstup uložený do: {output_path}")
+    if legacy_commercial_fallback_enabled:
+        print(
+            "Legacy heuristic commercial fallback bol povolený cez "
+            f"{LEGACY_COMMERCIAL_FALLBACK_ENV}=true."
+        )
+    else:
+        print(
+            "Legacy heuristic commercial fallback ostal vypnutý; "
+            "kanonická commercial truth sa očakáva zo src/commercial_synthesizer.py."
+        )
     if reused_previous_rows:
         print(
             f"Použitý fallback z predchádzajúceho enrichment artifactu pre {reused_previous_rows} riadkov."

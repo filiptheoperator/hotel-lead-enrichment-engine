@@ -2,8 +2,11 @@ from normalize_score import main as run_normalize_score
 from functools import partial
 
 from enrich_hotels import main as run_enrich
+from commercial_synthesizer import main as run_commercial_synthesizer
+from ranking_refresh import main as run_ranking_refresh
 from email_drafts import main as run_email_drafts
 from master_exports import main as run_master_exports
+from render_full_enrichment_md import main as run_render_full_enrichment_md
 from clickup_export import main as run_clickup_export
 from qa_checks import main as run_qa_checks
 from run_report import main as run_report
@@ -23,10 +26,13 @@ def build_pipeline_steps(
     orchestration_mode: str = "dry_run",
 ) -> list[tuple[str, object]]:
     steps = [
-        ("normalize + score", run_normalize_score),
-        ("enrich", run_enrich),
+        ("normalize", run_normalize_score),
+        ("factual/source_bundle", run_enrich),
+        ("commercial_synthesizer (v3-lite)", run_commercial_synthesizer),
+        ("ranking refresh", run_ranking_refresh),
         ("email drafts", run_email_drafts),
         ("master exports", run_master_exports),
+        ("render full enrichment markdown", run_render_full_enrichment_md),
         ("ClickUp export", run_clickup_export),
         ("QA", run_qa_checks),
         ("run summary", run_report),
@@ -54,7 +60,7 @@ def main(
     include_orchestration: bool = True,
     orchestration_mode: str = "dry_run",
 ) -> None:
-    print("Spúšťam pipeline Hotel Lead Enrichment Engine OS.")
+    print("Spúšťam kanonický pipeline Hotel Lead Enrichment Engine OS.")
 
     for step_name, step_function in build_pipeline_steps(
         include_orchestration=include_orchestration,
