@@ -1,0 +1,9 @@
+{
+  "column": "website_quality",
+  "counts": {
+    "Strong": 61,
+    "Weak": 22,
+    "Missing": 14,
+    "Basic": 3
+  }
+}

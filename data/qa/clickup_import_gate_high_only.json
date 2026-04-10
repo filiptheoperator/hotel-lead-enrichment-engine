@@ -1,0 +1,16 @@
+{
+  "decision": "NO_GO",
+  "operator_action": "High leady nie sú pripravené na ClickUp import.",
+  "batch_readiness_score": 30,
+  "batch_readiness_band": "red",
+  "checks": {
+    "high_shortlist_rows": 0,
+    "high_leads_requiring_manual_review": 0,
+    "fetch_incident_flag": "yes",
+    "qa_blocking_rows": 1
+  },
+  "stop_conditions": [
+    "global_fetch_incident",
+    "qa_blocking_rows_present"
+  ]
+}

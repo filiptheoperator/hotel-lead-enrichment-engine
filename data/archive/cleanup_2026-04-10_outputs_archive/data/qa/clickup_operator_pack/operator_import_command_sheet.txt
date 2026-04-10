@@ -1,0 +1,13 @@
+python3 src/normalize_score.py
+python3 src/enrich_hotels.py
+python3 src/email_drafts.py
+python3 src/master_exports.py
+python3 src/clickup_export.py
+python3 src/clickup_dry_run_sample.py
+python3 src/clickup_api_mapping_preview.py
+python3 src/clickup_import_support_artifacts.py
+python3 src/clickup_import_preflight.py
+python3 src/clickup_import_operator_pack.py
+python3 src/run_report.py
+python3 src/run_manifest.py
+python3 src/clickup_import_gate.py

@@ -1,0 +1,7 @@
+{
+  "mode": "phase1_minimal",
+  "artifact": "outputs/clickup/Sydney 100_normalized_scored_enriched_email_drafts_clickup_phase1_minimal.csv",
+  "decision": "PASS",
+  "failed_checks": [],
+  "note": "Phase1 import decision artifact"
+}

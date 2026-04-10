@@ -1,0 +1,31 @@
+{
+  "batch_readiness_score": 30,
+  "batch_readiness_band": "red",
+  "factors": [
+    {
+      "factor": "fetch_incident_flag",
+      "value": "yes",
+      "impact": -40,
+      "reason": "Globálny fetch incident znižuje dôveru v batch."
+    },
+    {
+      "factor": "qa_blocking_rows",
+      "value": 1,
+      "impact": -30,
+      "reason": "Blocking QA issues blokujú import."
+    },
+    {
+      "factor": "clickup_import_ready_ratio",
+      "value": "100/100",
+      "impact": 0,
+      "reason": "Neúplne pripravený ClickUp CSV znižuje readiness."
+    },
+    {
+      "factor": "high_leads_requiring_manual_review",
+      "value": 0,
+      "impact": 0,
+      "reason": "High leady čakajúce na review znižujú readiness."
+    }
+  ],
+  "note": "Score je interný operátorský signál, nie business KPI."
+}

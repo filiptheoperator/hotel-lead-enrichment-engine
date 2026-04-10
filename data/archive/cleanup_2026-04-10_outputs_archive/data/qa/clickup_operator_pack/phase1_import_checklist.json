@@ -1,0 +1,30 @@
+{
+  "artifact": "outputs/clickup/Sydney 100_normalized_scored_enriched_email_drafts_clickup_phase1_minimal.csv",
+  "required_checks": [
+    {
+      "check": "task_name_present",
+      "result": true
+    },
+    {
+      "check": "status_present",
+      "result": true
+    },
+    {
+      "check": "priority_present",
+      "result": true
+    },
+    {
+      "check": "rank_bucket_present",
+      "result": true
+    },
+    {
+      "check": "rank_bucket_reason_present",
+      "result": true
+    },
+    {
+      "check": "chain_signal_confidence_present",
+      "result": true
+    }
+  ],
+  "note": "Phase1 import checklist pre krátky ClickUp import."
+}

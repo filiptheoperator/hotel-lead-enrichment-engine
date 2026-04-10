@@ -1,0 +1,31 @@
+{
+  "ready": true,
+  "checks": {
+    "phase1_preview": true,
+    "full_preview": true,
+    "phase1_validation": true,
+    "full_validation": true,
+    "export_mode_diff": true,
+    "phase1_checklist": true,
+    "full_review_checklist": true,
+    "phase1_decision": true,
+    "full_review_decision": true,
+    "phase1_pass_fail": true,
+    "full_review_pass_fail": true,
+    "top20_summary": true,
+    "review_bucket_summary": true,
+    "top20_notes_template": true,
+    "review_followup_queue": true,
+    "packet_index": true,
+    "operator_pack_health": true,
+    "phase1_row_sample": true,
+    "full_row_sample": true,
+    "rank_bucket_examples": true,
+    "review_bucket_examples": true,
+    "rank_bucket_summary": true,
+    "website_quality_summary": true,
+    "contact_gap_summary": true,
+    "operator_command_sheet": true
+  },
+  "note": "Preflight len pre ClickUp operator pack a dry run packet."
+}

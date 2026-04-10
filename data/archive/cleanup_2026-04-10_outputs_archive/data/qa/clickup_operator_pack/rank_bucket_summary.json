@@ -1,0 +1,9 @@
+{
+  "column": "rank_bucket",
+  "counts": {
+    "C": 48,
+    "B": 38,
+    "D": 8,
+    "A": 6
+  }
+}

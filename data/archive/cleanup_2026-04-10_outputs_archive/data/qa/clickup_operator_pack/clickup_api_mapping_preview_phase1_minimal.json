@@ -1,0 +1,51 @@
+{
+  "source_csv": "outputs/clickup/Sydney 100_normalized_scored_enriched_email_drafts_clickup_phase1_minimal.csv",
+  "preview_rows": [
+    {
+      "name": "Lead outreach - Jonah’s Restaurant & Boutique Hotel",
+      "description": "",
+      "status": "to do",
+      "priority": "nan",
+      "custom_fields": {
+        "custom.hotel_name": "Jonah’s Restaurant & Boutique Hotel",
+        "custom.city": "",
+        "custom.priority_score": "8.14",
+        "custom.contact_phone": "",
+        "custom.contact_website": "",
+        "custom.subject_line": "Jonah’s Restaurant & Boutique Hotel: krátky postreh",
+        "custom.source_file": "Sydney 100.csv"
+      }
+    },
+    {
+      "name": "Lead outreach - Miramare Gardens",
+      "description": "",
+      "status": "to do",
+      "priority": "nan",
+      "custom_fields": {
+        "custom.hotel_name": "Miramare Gardens",
+        "custom.city": "",
+        "custom.priority_score": "8.14",
+        "custom.contact_phone": "",
+        "custom.contact_website": "",
+        "custom.subject_line": "Miramare Gardens: krátky postreh",
+        "custom.source_file": "Sydney 100.csv"
+      }
+    },
+    {
+      "name": "Lead outreach - The Hornsby Inn",
+      "description": "",
+      "status": "to do",
+      "priority": "nan",
+      "custom_fields": {
+        "custom.hotel_name": "The Hornsby Inn",
+        "custom.city": "",
+        "custom.priority_score": "8.13",
+        "custom.contact_phone": "",
+        "custom.contact_website": "",
+        "custom.subject_line": "The Hornsby Inn: krátky postreh",
+        "custom.source_file": "Sydney 100.csv"
+      }
+    }
+  ],
+  "note": "Phase1 minimal preview bez ostrej ClickUp API integrácie."
+}

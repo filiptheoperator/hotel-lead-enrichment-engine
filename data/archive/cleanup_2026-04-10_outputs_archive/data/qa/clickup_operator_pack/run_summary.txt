@@ -1,0 +1,84 @@
+Hotel Lead Enrichment Engine OS - Run Summary
+
+Operator Start
+- primary_operator_artifact: data/qa/run_manifest.json
+- clickup_import_gate_artifact: data/qa/clickup_import_gate.txt
+- batch_readiness_score: 30
+
+Processed
+- processed_rows: 100
+- enrichment_rows: 100
+- email_rows: 100
+- clickup_rows: 100
+- accounts_master_rows: 100
+- dedupe_review_rows: 0
+- operator_shortlist_rows: 100
+- top_20_export_rows: 20
+- top_20_high_rows: 0
+
+Verified
+- verified_opening_hours: 0
+- verified_checkin_checkout: 0
+- paired_checkin_checkout_verified: 0
+- single_side_checkin_checkout_verified: 0
+
+Unverified
+- unverified_opening_hours: 100
+- unverified_checkin_checkout: 100
+
+Source Coverage
+- leads_with_website: 86
+- public_source_reachable: 0
+- usable_public_source: 0
+- reachable_but_missing_opening_hours: 0
+- reachable_but_missing_checkin_checkout: 0
+- checkin_checkout_source_origin_jsonld: 0
+- checkin_checkout_source_origin_text: 0
+- checkin_checkout_source_origin_text_homepage: 0
+- checkin_checkout_source_origin_text_subpage_general: 0
+
+Fetch Health
+- fetch_incident_flag: yes
+- fetch_live_success: 0
+- fetch_blocked_total: 86
+- fetch_dns_resolution_failed: 86
+- fetch_dns_resolution_failed_fallback_previous: 0
+- fetch_blocked_without_fallback: 86
+- fetch_effective_reachable_after_fallback: 0
+- fetch_request_timeout: 0
+- fetch_missing_website: 14
+
+Import Ready
+- clickup_export_mode: phase1_minimal
+- phase1_vs_full_row_parity: yes
+- operator_pack_ready: yes
+- clickup_import_ready_rows: 100
+- clickup_not_ready_rows: 0
+
+Review Bucket Summary
+- review_bucket_unique: 1
+- review_bucket_largest: manual_review
+
+Needs Manual Review
+- qa_needs_manual_review_rows: 101
+- manual_merge_candidates: 0
+- qa_blocking_rows: 2
+- qa_medium_rows: 1
+- qa_low_rows: 100
+
+Rank Bucket Distribution
+- rank_bucket_C: 48
+- rank_bucket_B: 38
+- rank_bucket_D: 8
+- rank_bucket_A: 6
+
+Website Quality Distribution
+- website_quality_Strong: 61
+- website_quality_Weak: 22
+- website_quality_Missing: 14
+- website_quality_Basic: 3
+
+Contact Gap Count Distribution
+- contact_gap_count_0: 84
+- contact_gap_count_1: 15
+- contact_gap_count_2: 1

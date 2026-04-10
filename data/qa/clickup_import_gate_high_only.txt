@@ -1,0 +1,10 @@
+ClickUp Import Gate - High Only
+
+- decision: NO_GO
+- operator_action: High leady nie sú pripravené na ClickUp import.
+- batch_readiness_score: 30
+- batch_readiness_band: red
+- high_shortlist_rows: 0
+- high_leads_requiring_manual_review: 0
+- global_fetch_incident
+- qa_blocking_rows_present

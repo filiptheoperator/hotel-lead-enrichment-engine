@@ -1,0 +1,11 @@
+Full ranked review pass/fail summary
+
+status: PASS
+passed_checks: 5
+failed_checks: 0
+
+- description_present: pass
+- contact_phone_present: pass
+- contact_website_present: pass
+- main_observed_issue_present: pass
+- proof_snippet_present: pass

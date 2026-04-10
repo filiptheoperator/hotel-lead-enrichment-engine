@@ -1,0 +1,29 @@
+Rank bucket top examples
+
+C
+- Crowne Plaza Hawkesbury Valley by IHG: review_fit | preferred_hotel_type | out_of_profile_geography | has_website
+- Peppers The Hills Lodge: review_fit | preferred_hotel_type | out_of_profile_geography | has_website
+- Wisemans Inn Hotel: review_fit | preferred_hotel_type | out_of_profile_geography | has_website
+- Holiday Inn Sydney St Marys by IHG: review_fit | preferred_hotel_type | out_of_profile_geography | has_website
+- Barrenjoey House Palm Beach: review_fit | independent_signal | out_of_profile_geography | has_website
+
+B
+- Quest Bella Vista: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+- Royal Hotel: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+- Quest Penrith: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+- Doonside Hotel: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+- Lucky Australian Hotel: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+
+D
+- The Australian Hotel & Brewery: low_fit | out_of_profile_geography | has_website | has_phone
+- Australian Hotel: low_fit | out_of_profile_geography | has_website | has_phone
+- SureStay by Best Western New Inn Richmond: low_fit | out_of_profile_geography | has_website | has_phone
+- Royal Exchange Hotel: review_fit | independent_signal | out_of_profile_geography | has_phone
+- Mount Kuring-Gai Motel: review_fit | independent_signal | out_of_profile_geography | has_phone
+
+A
+- Jonah’s Restaurant & Boutique Hotel: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+- Miramare Gardens: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+- The Hornsby Inn: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+- Billabong Retreat: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+- Spicers Sangoma Retreat: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography

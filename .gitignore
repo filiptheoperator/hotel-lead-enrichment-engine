@@ -14,10 +14,93 @@ venv/
 data/raw/*
 data/processed/*
 data/qa/*
+!data/qa/run_manifest.json
+!data/qa/clickup_import_gate.json
+!data/qa/clickup_import_gate.txt
+!data/qa/clickup_import_gate_high_only.json
+!data/qa/clickup_import_gate_high_only.txt
+!data/qa/batch_readiness_explanation.json
+!data/qa/batch_readiness_explanation.txt
+data/archive/*
+!data/archive/cleanup_2026-04-10_outputs_archive/
+!data/archive/cleanup_2026-04-10_outputs_archive/**
 
 # Outputs
 outputs/ranked/*
+!outputs/ranked/Sydney\ 100_normalized_scored_enriched_batch10_ranking_refreshed_post_fix_regen_20260410.csv
+!outputs/ranked/Sydney\ 100_normalized_scored_enriched_batch10_ranking_refreshed_wave4_v3lite_smoke.csv
 outputs/enrichment/*
 outputs/hotel_markdown/*
+!outputs/hotel_markdown/Sydney\ 100/
+!outputs/hotel_markdown/Sydney\ 100/acc_30048fcea764.md
+!outputs/hotel_markdown/Sydney\ 100/acc_401880adbecd.md
+!outputs/hotel_markdown/Sydney\ 100/acc_40da1daa32cc.md
+!outputs/hotel_markdown/Sydney\ 100/acc_462634ba1b0d.md
+!outputs/hotel_markdown/Sydney\ 100/acc_50ce289c9223.md
+!outputs/hotel_markdown/Sydney\ 100/acc_5970be661818.md
+!outputs/hotel_markdown/Sydney\ 100/acc_6bb4cbb1a3e4.md
+!outputs/hotel_markdown/Sydney\ 100/acc_85a1025fc0d6.md
+!outputs/hotel_markdown/Sydney\ 100/acc_9f2cb7250cf5.md
+!outputs/hotel_markdown/Sydney\ 100/acc_d7e3595aefb6.md
+!outputs/hotel_markdown/Sydney\ 100/operator_shortlist_summary.md
+!outputs/hotel_markdown/Sydney\ 100/review_queue_summary.md
+!outputs/hotel_markdown/Sydney\ 100/top_export_summary.md
+!outputs/hotel_markdown/Sydney\ 100/wave5_render_qa_report.csv
 outputs/email_drafts/*
+!outputs/email_drafts/Sydney\ 100_normalized_scored_enriched_batch10_email_drafts.csv
 outputs/clickup/*
+!outputs/clickup/Sydney\ 100_normalized_scored_enriched_batch10_email_drafts_clickup_import.csv
+!outputs/clickup/Sydney\ 100_normalized_scored_enriched_batch10_email_drafts_clickup_full_ranked.csv
+!outputs/clickup/Sydney\ 100_normalized_scored_enriched_batch10_email_drafts_clickup_phase1_minimal.csv
+!outputs/clickup/Sydney\ 100_normalized_scored_enriched_batch10_email_drafts_clickup_import_high_only.csv
+outputs/master/*
+!outputs/master/Sydney\ 100_accounts_master_post_fix_regen_20260410.csv
+!outputs/master/Sydney\ 100_enrichment_master_post_fix_regen_20260410.csv
+!outputs/master/Sydney\ 100_outreach_drafts_post_fix_regen_20260410.csv
+!outputs/master/Sydney\ 100_dedupe_review_post_fix_regen_20260410.csv
+!outputs/master/Sydney\ 100_operator_shortlist_post_fix_regen_20260410.csv
+!outputs/master/Sydney\ 100_review_queue_post_fix_regen_20260410.csv
+!outputs/master/Sydney\ 100_top_20_export_post_fix_regen_20260410.csv
+!outputs/master/Sydney\ 100_accounts_master_wave4_v3lite_smoke.csv
+!outputs/master/Sydney\ 100_enrichment_master_wave4_v3lite_smoke.csv
+!outputs/master/Sydney\ 100_outreach_drafts_wave4_v3lite_smoke.csv
+!outputs/master/Sydney\ 100_dedupe_review_wave4_v3lite_smoke.csv
+!outputs/master/Sydney\ 100_operator_shortlist_wave4_v3lite_smoke.csv
+!outputs/master/Sydney\ 100_review_queue_wave4_v3lite_smoke.csv
+!outputs/master/Sydney\ 100_top_20_export_wave4_v3lite_smoke.csv
+outputs/source_bundles/*
+!outputs/source_bundles/Sydney\ 100/
+!outputs/source_bundles/Sydney\ 100/acc_30048fcea764.json
+!outputs/source_bundles/Sydney\ 100/acc_401880adbecd.json
+!outputs/source_bundles/Sydney\ 100/acc_40da1daa32cc.json
+!outputs/source_bundles/Sydney\ 100/acc_462634ba1b0d.json
+!outputs/source_bundles/Sydney\ 100/acc_50ce289c9223.json
+!outputs/source_bundles/Sydney\ 100/acc_5970be661818.json
+!outputs/source_bundles/Sydney\ 100/acc_6bb4cbb1a3e4.json
+!outputs/source_bundles/Sydney\ 100/acc_85a1025fc0d6.json
+!outputs/source_bundles/Sydney\ 100/acc_9f2cb7250cf5.json
+!outputs/source_bundles/Sydney\ 100/acc_d7e3595aefb6.json
+outputs/factual_enrichment/*
+!outputs/factual_enrichment/Sydney\ 100/
+!outputs/factual_enrichment/Sydney\ 100/acc_30048fcea764.json
+!outputs/factual_enrichment/Sydney\ 100/acc_401880adbecd.json
+!outputs/factual_enrichment/Sydney\ 100/acc_40da1daa32cc.json
+!outputs/factual_enrichment/Sydney\ 100/acc_462634ba1b0d.json
+!outputs/factual_enrichment/Sydney\ 100/acc_50ce289c9223.json
+!outputs/factual_enrichment/Sydney\ 100/acc_5970be661818.json
+!outputs/factual_enrichment/Sydney\ 100/acc_6bb4cbb1a3e4.json
+!outputs/factual_enrichment/Sydney\ 100/acc_85a1025fc0d6.json
+!outputs/factual_enrichment/Sydney\ 100/acc_9f2cb7250cf5.json
+!outputs/factual_enrichment/Sydney\ 100/acc_d7e3595aefb6.json
+outputs/commercial_synthesis/*
+!outputs/commercial_synthesis/Sydney\ 100/
+!outputs/commercial_synthesis/Sydney\ 100/acc_30048fcea764.json
+!outputs/commercial_synthesis/Sydney\ 100/acc_401880adbecd.json
+!outputs/commercial_synthesis/Sydney\ 100/acc_40da1daa32cc.json
+!outputs/commercial_synthesis/Sydney\ 100/acc_462634ba1b0d.json
+!outputs/commercial_synthesis/Sydney\ 100/acc_50ce289c9223.json
+!outputs/commercial_synthesis/Sydney\ 100/acc_5970be661818.json
+!outputs/commercial_synthesis/Sydney\ 100/acc_6bb4cbb1a3e4.json
+!outputs/commercial_synthesis/Sydney\ 100/acc_85a1025fc0d6.json
+!outputs/commercial_synthesis/Sydney\ 100/acc_9f2cb7250cf5.json
+!outputs/commercial_synthesis/Sydney\ 100/acc_d7e3595aefb6.json

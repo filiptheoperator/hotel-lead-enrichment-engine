@@ -1,0 +1,26 @@
+{
+  "mode": "phase1_minimal",
+  "row_count": 100,
+  "sample_row": {
+    "Task name": "Lead outreach - Jonah’s Restaurant & Boutique Hotel",
+    "Status": "to do",
+    "Priority": "",
+    "Account ID": "acc_5970be661818",
+    "Account Status": "Researching",
+    "Hotel name": "Jonah’s Restaurant & Boutique Hotel",
+    "Country": "AU",
+    "City / Region": "Palm Beach",
+    "Priority score": 8.14,
+    "Priority Level": "Medium-High",
+    "ICP Fit": "Keep",
+    "Rank bucket": "A",
+    "Rank bucket reason": "top_ranked",
+    "Why not top tier": "geo_mismatch",
+    "Chain signal confidence": "Low",
+    "Ranking reason": "strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography",
+    "Main Pain Hypothesis": "Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.",
+    "Subject line": "Jonah’s Restaurant & Boutique Hotel: krátky postreh",
+    "Source file": "Sydney 100.csv"
+  },
+  "note": "Prvý riadok ako operator sample."
+}

@@ -1,0 +1,119 @@
+{
+  "project": "Hotel Lead Enrichment Engine OS",
+  "manifest_version": 1,
+  "generated_at": "2026-04-05T17:38:52+02:00",
+  "batch": {
+    "source_files": [
+      "Sydney 100.csv"
+    ],
+    "source_file_count": 1
+  },
+  "artifacts": {
+    "processed_csv": "data/processed/Sydney 100_normalized_scored.csv",
+    "enrichment_csv": "outputs/enrichment/Sydney 100_normalized_scored_enriched.csv",
+    "email_drafts_csv": "outputs/email_drafts/Sydney 100_normalized_scored_enriched_email_drafts.csv",
+    "clickup_import_csv": "outputs/clickup/Sydney 100_normalized_scored_enriched_email_drafts_clickup_import.csv",
+    "clickup_import_high_only_csv": "outputs/clickup/Sydney 100_normalized_scored_enriched_email_drafts_clickup_import_high_only.csv",
+    "clickup_phase1_minimal_csv": "outputs/clickup/Sydney 100_normalized_scored_enriched_email_drafts_clickup_phase1_minimal.csv",
+    "clickup_full_ranked_csv": "outputs/clickup/Sydney 100_normalized_scored_enriched_email_drafts_clickup_full_ranked.csv",
+    "accounts_master_csv": "outputs/master/Sydney 100_accounts_master.csv",
+    "enrichment_master_csv": "outputs/master/Sydney 100_enrichment_master.csv",
+    "outreach_drafts_csv": "outputs/master/Sydney 100_outreach_drafts.csv",
+    "dedupe_review_csv": "outputs/master/Sydney 100_dedupe_review.csv",
+    "operator_shortlist_csv": "outputs/master/Sydney 100_operator_shortlist.csv",
+    "top_20_export_csv": "outputs/master/Sydney 100_top_20_export.csv",
+    "qa_issues_csv": "data/qa/qa_issues.csv",
+    "manual_review_shortlist_csv": "data/qa/manual_review_shortlist.csv",
+    "run_summary_txt": "data/qa/run_summary.txt",
+    "run_delta_report_txt": "data/qa/run_delta_report.txt",
+    "clickup_import_gate_json": "data/qa/clickup_import_gate.json",
+    "clickup_import_gate_txt": "data/qa/clickup_import_gate.txt",
+    "clickup_import_gate_high_only_json": "data/qa/clickup_import_gate_high_only.json",
+    "clickup_import_gate_high_only_txt": "data/qa/clickup_import_gate_high_only.txt",
+    "batch_readiness_explanation_json": "data/qa/batch_readiness_explanation.json",
+    "batch_readiness_explanation_txt": "data/qa/batch_readiness_explanation.txt",
+    "clickup_import_dry_run_sample_csv": "data/qa/clickup_import_dry_run_sample.csv",
+    "clickup_import_dry_run_notes_txt": "data/qa/clickup_import_dry_run_notes.txt",
+    "clickup_import_dry_run_sample_high_only_csv": "data/qa/clickup_import_dry_run_sample_high_only.csv",
+    "clickup_import_dry_run_notes_high_only_txt": "data/qa/clickup_import_dry_run_notes_high_only.txt",
+    "high_leads_preimport_checklist_csv": "data/qa/high_leads_preimport_checklist.csv",
+    "high_leads_preimport_checklist_txt": "data/qa/high_leads_preimport_checklist.txt",
+    "operator_decision_summary_txt": "data/qa/operator_decision_summary.txt",
+    "operator_decision_summary_csv": "data/qa/operator_decision_summary.csv",
+    "operator_decision_summary_high_txt": "data/qa/operator_decision_summary_high.txt",
+    "operator_decision_summary_high_csv": "data/qa/operator_decision_summary_high.csv",
+    "archive_cleanup_report_txt": "data/qa/archive_cleanup_report.txt",
+    "clickup_api_mapping_preview_json": "data/qa/clickup_api_mapping_preview.json",
+    "clickup_api_mapping_preview_phase1_json": "data/qa/clickup_api_mapping_preview_phase1_minimal.json",
+    "clickup_api_mapping_preview_full_json": "data/qa/clickup_api_mapping_preview_full_ranked.json",
+    "clickup_api_mapping_validation_json": "data/qa/clickup_api_mapping_validation.json",
+    "clickup_api_mapping_validation_phase1_json": "data/qa/clickup_api_mapping_validation_phase1_minimal.json",
+    "clickup_api_mapping_validation_full_json": "data/qa/clickup_api_mapping_validation_full_ranked.json",
+    "clickup_api_payload_diff_json": "data/qa/clickup_api_payload_diff.json",
+    "clickup_export_mode_diff_json": "data/qa/clickup_export_mode_diff.json",
+    "phase1_import_checklist_json": "data/qa/phase1_import_checklist.json",
+    "full_ranked_review_checklist_json": "data/qa/full_ranked_review_checklist.json",
+    "phase1_import_decision_json": "data/qa/phase1_import_decision.json",
+    "full_ranked_review_decision_json": "data/qa/full_ranked_review_decision.json",
+    "top_20_reasons_summary_txt": "data/qa/top_20_reasons_summary.txt",
+    "review_bucket_reasons_summary_txt": "data/qa/review_bucket_reasons_summary.txt",
+    "operator_import_command_sheet_txt": "data/qa/operator_import_command_sheet.txt",
+    "phase1_import_pass_fail_summary_txt": "data/qa/phase1_import_pass_fail_summary.txt",
+    "full_ranked_review_pass_fail_summary_txt": "data/qa/full_ranked_review_pass_fail_summary.txt",
+    "top_20_operator_notes_template_csv": "data/qa/top_20_operator_notes_template.csv",
+    "review_followup_queue_csv": "data/qa/review_followup_queue.csv",
+    "clickup_import_packet_index_txt": "data/qa/clickup_import_packet_index.txt",
+    "operator_pack_health_json": "data/qa/operator_pack_health.json",
+    "phase1_import_row_sample_json": "data/qa/phase1_import_row_sample.json",
+    "full_ranked_row_sample_json": "data/qa/full_ranked_row_sample.json",
+    "rank_bucket_top_examples_txt": "data/qa/rank_bucket_top_examples.txt",
+    "review_bucket_top_examples_txt": "data/qa/review_bucket_top_examples.txt",
+    "rank_bucket_summary_json": "data/qa/rank_bucket_summary.json",
+    "website_quality_summary_json": "data/qa/website_quality_summary.json",
+    "contact_gap_summary_json": "data/qa/contact_gap_summary.json",
+    "clickup_operator_pack_manifest_json": "data/qa/clickup_operator_pack/clickup_operator_pack_manifest.json",
+    "clickup_dry_run_packet_manifest_json": "data/qa/clickup_dry_run_packet/clickup_dry_run_packet_manifest.json"
+  },
+  "row_counts": {
+    "processed_rows": 100,
+    "enrichment_rows": 100,
+    "email_rows": 100,
+    "clickup_rows": 100,
+    "qa_issue_rows": 102,
+    "manual_review_shortlist_rows": 23
+  },
+  "quality_snapshot": {
+    "verified_opening_hours": 0,
+    "verified_checkin_checkout": 0,
+    "paired_checkin_checkout_verified": 0,
+    "single_side_checkin_checkout_verified": 0
+  },
+  "fetch_health": {
+    "fetch_incident_flag": "yes",
+    "fetch_live_success": 0,
+    "fetch_dns_resolution_failed": 86,
+    "fetch_dns_resolution_failed_fallback_previous": 0,
+    "fetch_missing_website": 14
+  },
+  "shortlist_snapshot": {
+    "operator_shortlist_limit": 100,
+    "review_bucket_counts": {
+      "dns_fetch_blocked": 23
+    },
+    "review_bucket_summary": {
+      "unique_buckets": 1,
+      "largest_bucket": "dns_fetch_blocked"
+    },
+    "operator_triage_action_counts": {
+      "hold_for_retry": 23
+    }
+  },
+  "import_snapshot": {
+    "clickup_export_mode": "phase1_minimal",
+    "clickup_import_ready_rows": 100,
+    "phase1_vs_full_row_parity": true,
+    "clickup_operator_pack_ready": true,
+    "clickup_dry_run_packet_ready": true,
+    "qa_blocking_rows": 1
+  }
+}

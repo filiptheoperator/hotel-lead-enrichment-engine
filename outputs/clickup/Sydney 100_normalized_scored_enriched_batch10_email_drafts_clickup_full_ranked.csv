@@ -1,0 +1,701 @@
+Task name,Description content,Status,Priority,Account ID,Account Status,Hotel name,Country,City / Region,Hotel Type,Rooms Range,Source,Priority score,Priority Level,Ranking score final,ICP Fit,Rank bucket,Rank bucket reason,Rank bucket final,Why not top tier,Chain signal confidence,Ranking reason,OTA Dependency Signal,Direct Booking Weakness,Main Pain Hypothesis,Commercial Verdict,Decision Status,Manual Review Needed,Review Queue Reason Codes,Contact phone,Contact website,Subject line,Source file,Email angle,CTA type,Variant ID,Test batch,Reply outcome,Give-first insight,Main observed issue,Email hook,Micro CTA,Proof snippet,Primary email goal
+Lead outreach - Billabong Retreat,"Account ID: acc_d7e3595aefb6
+Hotel: Billabong Retreat
+Krajina: AU
+Mesto: Maraylya
+Hotel type: Preferred hotel
+Independent / Chain: Independent candidate
+Priorita band: Medium-High
+Priority level final: High
+Skóre: 8.1
+Ranking score: 81.01
+Ranking score final: 85.41
+Rank bucket: A
+Rank bucket final: A
+ICP fit score: 76.0
+ICP fit class: Keep
+Fit confidence: 10.0
+Why not top tier: geo_mismatch
+Chain signal confidence: Low
+Review flag: yes
+Review reason: out_of_profile_geography
+Dedupe status: unique
+Manual merge candidate: no
+Ranking reason: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+Web: http://www.billabongretreat.com.au/
+Telefón: +61 2 4573 6080
+OTA dependency signal: Low visible
+Direct booking weakness: Needs direct booking clarity
+Commercial verdict: zaujímavý prospect
+Business interest summary: Billabong Retreat je nezávislý rezortný hotel v Maraylya s vysokým hodnotením a overeným check-in časom od 08:30.
+Main bottleneck hypothesis: Možný bottleneck je nejasnosť v presnej veľkosti hotela a rozsahu služieb, čo môže komplikovať personalizáciu ponuky.
+Pain point hypothesis: Recepcia alebo manažment môže mať manuálnu záťaž pri správe dopytov kvôli neúplným verejným informáciám.
+Recommended hook: Pri takomto type hotela býva dôležité preveriť, či možný bottleneck je nejasnosť v presnej veľkosti hotela a rozsahu služieb, čo môže komplikovať per…
+Decision status: outreach_now
+Manual review needed: no
+Review queue reason codes: 
+Ranking upside reasons: commercial_verdict:zaujímavý prospect | ownership:public_confirmed | factual_completeness:1 | review_signal:strong | entry_angle:present | commercial_read:present | service_complexity:present
+Ranking downside reasons: opening_hours_missing | room_count_missing | uncertainty_notes:3
+Ranking missingness notes: opening_hours_missing | room_count_missing | uncertainty_notes:3
+Email angle: opening_hours_clarity
+CTA type: low_friction_permission
+Variant ID: A1
+Test batch: Sydney 100
+Reply outcome: 
+
+Email hook: Pozeral som sa na Billabong Retreat v lokalite Maraylya.
+Give-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Main observed issue: Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.
+Proof snippet: Vychádzal som z verejne uvedeného check-in/check-out: Check-in od 08:30.
+Micro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+Primary email goal: reply_with_permission
+
+Cold email:
+Dobrý deň,
+
+Váš hotel Billabong Retreat má výborné hodnotenia a overený check-in čas, čo naznačuje kvalitnú prevádzku, rád by som sa dozvedel viac o vašej kapacite a službách spa. Pri takomto profile sa často mieša viac typov záujmu naraz. Pri takomto type hotela býva užitočné preveriť, či…
+Všimli sme si, že pri nezávislých rezortoch ako Billabong Retreat často chýbajú detailné verejné informácie o kapacitách a službách, oplatí sa to preveriť.
+Hotel má silnú zhodu a preferovaný typ hotela, no nachádza sa mimo bežného geografického profilu, čo môže ovplyvniť dopyt a komunikáciu. Overenie presného počtu izieb a rozsahu služieb by pomohlo lepšie zacieliť ponuku.
+Vychádzal som z verejne uvedeného check-in/check-out: Check-in od 08:30.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom
+
+Follow-up email:
+Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Billabong Retreat.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",to do,2,acc_d7e3595aefb6,Prioritized,Billabong Retreat,AU,Maraylya,Preferred hotel,,Raw lead sheet: Sydney 100.csv,8.1,High,85.41,Keep,A,top_ranked,A,geo_mismatch,Low,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,Low,Medium,"Možný bottleneck je nejasnosť v presnej veľkosti hotela a rozsahu služieb, čo môže komplikovať personalizáciu ponuky.",zaujímavý prospect,outreach_now,no,,+61 2 4573 6080,http://www.billabongretreat.com.au/,Billabong Retreat: krátky postreh k prvému kontaktu,Sydney 100.csv,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.,Pozeral som sa na Billabong Retreat v lokalite Maraylya.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.",Vychádzal som z verejne uvedeného check-in/check-out: Check-in od 08:30.,reply_with_permission
+Lead outreach - The Hornsby Inn,"Account ID: acc_462634ba1b0d
+Hotel: The Hornsby Inn
+Krajina: AU
+Mesto: Hornsby
+Hotel type: Preferred hotel
+Independent / Chain: Independent candidate
+Priorita band: Medium-High
+Priority level final: High
+Skóre: 8.13
+Ranking score: 81.3
+Ranking score final: 85.2
+Rank bucket: A
+Rank bucket final: A
+ICP fit score: 76.0
+ICP fit class: Keep
+Fit confidence: 10.0
+Why not top tier: geo_mismatch
+Chain signal confidence: Low
+Review flag: yes
+Review reason: out_of_profile_geography
+Dedupe status: unique
+Manual merge candidate: no
+Ranking reason: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+Web: https://hornsbyinn.com.au/
+Telefón: +61 2 5302 9307
+OTA dependency signal: Low visible
+Direct booking weakness: Needs direct booking clarity
+Commercial verdict: zaujímavý prospect
+Business interest summary: The Hornsby Inn je nezávislý pub s 10 izbami a reštauráciou v meste Hornsby, Austrália.
+Main bottleneck hypothesis: Možná zložitosť v koordinácii a správe nočných prevádzkových hodín môže spôsobiť oneskorenia v reakcii na dopyty alebo rezervácie.
+Pain point hypothesis: Recepcia alebo manažment môže byť manuálne zaťažený riešením rôznorodých požiadaviek spojených s gastro, eventmi a ubytovaním.
+Recommended hook: Všimli sme si, že pri hoteloch s nočnými prevádzkami a eventmi často vznikajú príležitosti na zefektívnenie riadenia re….
+Decision status: outreach_now
+Manual review needed: no
+Review queue reason codes: 
+Ranking upside reasons: commercial_verdict:zaujímavý prospect | ownership:raw_confirmed | factual_completeness:2 | entry_angle:present | commercial_read:present | service_complexity:present
+Ranking downside reasons: checkin_missing | uncertainty_notes:3
+Ranking missingness notes: checkin_missing | uncertainty_notes:3
+Email angle: checkin_checkout_clarity
+CTA type: low_friction_permission
+Variant ID: A2
+Test batch: Sydney 100
+Reply outcome: 
+
+Email hook: Pozeral som sa na The Hornsby Inn v lokalite Hornsby.
+Give-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedený check-in a check-out.
+Main observed issue: Na webe som nenašiel jasne uvedený check-in a check-out na prvý pohľad.
+Proof snippet: Vychádzal som z verejne uvedených hodín: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday: 10:00-03:00; Sunday: 10:00-22:00.
+Micro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+Primary email goal: reply_with_permission
+
+Cold email:
+Dobrý deň,
+
+The Hornsby Inn má unikátnu kombináciu pubu a ubytovania, čo môže prinášať špecifické výzvy v manažmente nočných hodín a eventov. Pri takomto profile sa často mieša viac typov záujmu naraz.
+Všimli sme si, že pri hoteloch s kombináciou pubu, reštaurácie a eventov často vznikajú miesta, kde sa môže strácať časť záujmu pred dopytom riadenia rezervácií a komunikácie so z…
+Možná zložitosť v koordinácii a správe nočných prevádzkových hodín môže spôsobiť oneskorenia v reakcii na dopyty alebo rezervácie. Recepcia alebo manažment môže byť manuálne zaťažený riešením rôznorodých požiadaviek spo…
+Vychádzal som z verejne uvedených hodín: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday: 10:00-03:00; Sunday: 10:00-22:00.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom
+
+Follow-up email:
+Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre The Hornsby Inn.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",to do,2,acc_462634ba1b0d,Prioritized,The Hornsby Inn,AU,Hornsby,Preferred hotel,1-15,Raw lead sheet: Sydney 100.csv,8.13,High,85.2,Keep,A,top_ranked,A,geo_mismatch,Low,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,Low,Medium,Možná zložitosť v koordinácii a správe nočných prevádzkových hodín môže spôsobiť oneskorenia v reakcii na dopyty alebo rezervácie.,zaujímavý prospect,outreach_now,no,,+61 2 5302 9307,https://hornsbyinn.com.au/,The Hornsby Inn: krátky postreh k event dopytu,Sydney 100.csv,checkin_checkout_clarity,low_friction_permission,A2,Sydney 100,,Pri rýchlom pozretí webu som nenašiel jasne uvedený check-in a check-out.,Na webe som nenašiel jasne uvedený check-in a check-out na prvý pohľad.,Pozeral som sa na The Hornsby Inn v lokalite Hornsby.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Vychádzal som z verejne uvedených hodín: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday: 10:00-03:00; Sunday: 10:00-22:00.",reply_with_permission
+Lead outreach - Miramare Gardens,"Account ID: acc_9f2cb7250cf5
+Hotel: Miramare Gardens
+Krajina: AU
+Mesto: Terrey Hills
+Hotel type: Preferred hotel
+Independent / Chain: Independent candidate
+Priorita band: Medium-High
+Priority level final: Medium-High
+Skóre: 8.14
+Ranking score: 81.38
+Ranking score final: 84.78
+Rank bucket: A
+Rank bucket final: B
+ICP fit score: 76.0
+ICP fit class: Keep
+Fit confidence: 10.0
+Why not top tier: geo_mismatch
+Chain signal confidence: Low
+Review flag: yes
+Review reason: out_of_profile_geography
+Dedupe status: unique
+Manual merge candidate: no
+Ranking reason: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+Web: https://www.miramaregardens.com.au/?utm_source=google&utm_medium=organic&utm_campaign=gmb
+Telefón: +61 2 9450 2000
+OTA dependency signal: Low visible
+Direct booking weakness: Needs direct booking clarity
+Commercial verdict: zaujímavý prospect
+Business interest summary: Miramare Gardens je nezávislý hotel v Terrey Hills s dobrou reputáciou a ponukou kongresových služieb.
+Main bottleneck hypothesis: Možný bottleneck je nejasnosť ohľadom kapacity a služieb, čo môže komplikovať presné zacielenie ponúk.
+Pain point hypothesis: Neistota v dostupnosti a rozsahu služieb môže viesť k zmiešanému dopytu a manuálnej záťaži pri komunikácii.
+Recommended hook: Všimli sme si, že pri hoteloch s eventovými priestormi často vznikajú miesta, kde sa môže strácať časť záujmu pred dopytom správy rezervácií.
+Decision status: outreach_now
+Manual review needed: no
+Review queue reason codes: 
+Ranking upside reasons: commercial_verdict:zaujímavý prospect | ownership:public_confirmed | factual_completeness:1 | entry_angle:present | commercial_read:present | service_complexity:present
+Ranking downside reasons: checkin_missing | room_count_missing | uncertainty_notes:3
+Ranking missingness notes: checkin_missing | room_count_missing | uncertainty_notes:3
+Email angle: checkin_checkout_clarity
+CTA type: low_friction_permission
+Variant ID: A2
+Test batch: Sydney 100
+Reply outcome: 
+
+Email hook: Pozeral som sa na Miramare Gardens v lokalite Terrey Hills.
+Give-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedený check-in a check-out.
+Main observed issue: Na webe som nenašiel jasne uvedený check-in a check-out na prvý pohľad.
+Proof snippet: Vychádzal som z verejne uvedených hodín: Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00.
+Micro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+Primary email goal: reply_with_permission
+
+Cold email:
+Dobrý deň,
+
+Všimli sme si, že Miramare Gardens má silné hodnotenia a ponúka eventové priestory, čo často znamená záujem o optimalizáciu rezervácií a služieb pre firemných klientov. Pri takomto profile sa často mieša viac typov záujmu naraz. Pri takomto type hotela býva užitočné preveriť, či…
+Oplatí sa preveriť možnosti eventových priestorov a flexibilitu nezávislého prevádzkovateľa pri spolupráci.
+Hotel má silnú recenziu 4,4 z 790 hodnotení a ponúka priestory pre eventy, čo môže prilákať firemných klientov. Neexistujú verejné informácie o počte izieb ani o ďalších službách, čo môže ovplyvniť presnú segmentáciu do…
+Vychádzal som z verejne uvedených hodín: Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom
+
+Follow-up email:
+Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Miramare Gardens.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",to do,2,acc_9f2cb7250cf5,Prioritized,Miramare Gardens,AU,Terrey Hills,Preferred hotel,,Raw lead sheet: Sydney 100.csv,8.14,Medium-High,84.78,Keep,A,top_ranked,B,geo_mismatch,Low,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,Low,Medium,"Možný bottleneck je nejasnosť ohľadom kapacity a služieb, čo môže komplikovať presné zacielenie ponúk.",zaujímavý prospect,outreach_now,no,,+61 2 9450 2000,https://www.miramaregardens.com.au/?utm_source=google&utm_medium=organic&utm_campaign=gmb,Miramare Gardens: krátky postreh k event dopytu,Sydney 100.csv,checkin_checkout_clarity,low_friction_permission,A2,Sydney 100,,Pri rýchlom pozretí webu som nenašiel jasne uvedený check-in a check-out.,Na webe som nenašiel jasne uvedený check-in a check-out na prvý pohľad.,Pozeral som sa na Miramare Gardens v lokalite Terrey Hills.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.","Vychádzal som z verejne uvedených hodín: Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00.",reply_with_permission
+Lead outreach - Jonah’s Restaurant & Boutique Hotel,"Account ID: acc_5970be661818
+Hotel: Jonah’s Restaurant & Boutique Hotel
+Krajina: AU
+Mesto: Palm Beach
+Hotel type: Preferred hotel
+Independent / Chain: Independent candidate
+Priorita band: Medium-High
+Priority level final: Medium-High
+Skóre: 8.14
+Ranking score: 81.42
+Ranking score final: 82.82
+Rank bucket: A
+Rank bucket final: B
+ICP fit score: 76.0
+ICP fit class: Keep
+Fit confidence: 10.0
+Why not top tier: geo_mismatch
+Chain signal confidence: Low
+Review flag: yes
+Review reason: out_of_profile_geography
+Dedupe status: unique
+Manual merge candidate: no
+Ranking reason: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+Web: http://www.jonahs.com.au/
+Telefón: +61 2 9974 5599
+OTA dependency signal: Low visible
+Direct booking weakness: Needs direct booking clarity
+Commercial verdict: zaujímavý prospect
+Business interest summary: Jonah’s Restaurant & Boutique Hotel je nezávislý hotel s reštauráciou a eventovými službami v Palm Beach, Austrália, s vysokým hodnotením 4,6 z 946 recenzií.
+Main bottleneck hypothesis: Možný bottleneck je nejasnosť v prevádzkových hodinách a dostupnosti služieb, čo môže sťažovať efektívnu komunikáciu s potenciálnymi zákazníkmi.
+Pain point hypothesis: Prevádzka nezávislého hotela s rôznorodými službami môže viesť k manuálnej záťaži pri správe rezervácií a eventov.
+Recommended hook: Všimli sme si, že pri hoteloch s podobným profilom často vznikajú miesta, kde sa môže strácať časť záujmu pred dopytom priamej rezervácie a komuni….
+Decision status: manual_review
+Manual review needed: yes
+Review queue reason codes: low_factual_completeness
+Ranking upside reasons: commercial_verdict:zaujímavý prospect | ownership:raw_confirmed | review_signal:strong | entry_angle:present | commercial_read:present | service_complexity:present
+Ranking downside reasons: factual_completeness:0 | opening_hours_missing | checkin_missing | room_count_missing | uncertainty_notes:3
+Ranking missingness notes: opening_hours_missing | checkin_missing | room_count_missing | uncertainty_notes:3
+Email angle: opening_hours_clarity
+CTA type: low_friction_permission
+Variant ID: A1
+Test batch: Sydney 100
+Reply outcome: 
+
+Email hook: Pozeral som sa na Jonah’s Restaurant & Boutique Hotel v lokalite Palm Beach.
+Give-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Main observed issue: Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.
+Proof snippet: Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+Micro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+Primary email goal: reply_with_permission
+
+Cold email:
+Dobrý deň,
+
+Jonah’s Boutique Hotel v Palm Beach má vynikajúce recenzie a ponúka reštauráciu aj eventové priestory, čo je skvelá kombinácia pre rozšírenie priameho predaja. Pri takomto profile sa často mieša viac typov záujmu naraz.
+Všimli sme si, že pri hoteloch s kombináciou reštaurácie a eventových služieb často vznikajú miesta, kde sa môže strácať časť záujmu pred dopytom priamej rezervácie a efektivity k…
+Možný bottleneck je nejasnosť v prevádzkových hodinách a dostupnosti služieb, čo môže sťažovať efektívnu komunikáciu s potenciálnymi zákazníkmi. Prevádzka nezávislého hotela s rôznorodými službami môže viesť k manuálnej…
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom
+
+Follow-up email:
+Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Jonah’s Restaurant & Boutique Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",to do,2,acc_5970be661818,Researching,Jonah’s Restaurant & Boutique Hotel,AU,Palm Beach,Preferred hotel,,Raw lead sheet: Sydney 100.csv,8.14,Medium-High,82.82,Keep,A,top_ranked,B,geo_mismatch,Low,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,Low,Medium,"Možný bottleneck je nejasnosť v prevádzkových hodinách a dostupnosti služieb, čo môže sťažovať efektívnu komunikáciu s potenciálnymi zákazníkmi.",zaujímavý prospect,manual_review,yes,low_factual_completeness,+61 2 9974 5599,http://www.jonahs.com.au/,Jonah’s Restaurant & Boutique Hotel: krátky postreh k event dopytu,Sydney 100.csv,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.,Pozeral som sa na Jonah’s Restaurant & Boutique Hotel v lokalite Palm Beach.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,reply_with_permission
+Lead outreach - Quest Bella Vista,"Account ID: acc_85a1025fc0d6
+Hotel: Quest Bella Vista
+Krajina: AU
+Mesto: Bella Vista
+Hotel type: Preferred hotel
+Independent / Chain: Independent candidate
+Priorita band: Medium-High
+Priority level final: Medium-High
+Skóre: 7.98
+Ranking score: 79.8
+Ranking score final: 82.8
+Rank bucket: B
+Rank bucket final: B
+ICP fit score: 76.0
+ICP fit class: Keep
+Fit confidence: 10.0
+Why not top tier: geo_mismatch
+Chain signal confidence: Low
+Review flag: yes
+Review reason: out_of_profile_geography
+Dedupe status: unique
+Manual merge candidate: no
+Ranking reason: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+Web: http://www.questapartments.com.au/properties/nsw/bella-vista/quest-bella-vista/overview?utm_source=GoogleMyBusiness&utm_medium=organic&utm_campaign=bellavista
+Telefón: +61 2 8818 9300
+OTA dependency signal: Low visible
+Direct booking weakness: Needs direct booking clarity
+Commercial verdict: zaujímavý prospect
+Business interest summary: Quest Bella Vista v Bella Vista pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.
+Main bottleneck hypothesis: Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.
+Pain point hypothesis: Hosť nemusí mať rýchlo jasno v praktických pobytových pravidlách pred rezerváciou.
+Recommended hook: Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.
+Decision status: outreach_now
+Manual review needed: yes
+Review queue reason codes: low_factual_completeness
+Ranking upside reasons: commercial_verdict:zaujímavý prospect | ownership:public_confirmed | review_signal:strong
+Ranking downside reasons: factual_completeness:0 | opening_hours_missing | checkin_missing | room_count_missing
+Ranking missingness notes: opening_hours_missing | checkin_missing | room_count_missing
+Email angle: opening_hours_clarity
+CTA type: low_friction_permission
+Variant ID: A1
+Test batch: Sydney 100
+Reply outcome: 
+
+Email hook: Pozeral som sa na Quest Bella Vista v lokalite Bella Vista.
+Give-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Main observed issue: Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.
+Proof snippet: Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+Micro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+Primary email goal: reply_with_permission
+
+Cold email:
+Dobrý deň,
+
+Silný reputačný základ (4.5/5) dáva priestor riešiť skôr konverznú jasnosť než reputačný problém.
+Všimli sme si, že krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom
+
+Follow-up email:
+Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Quest Bella Vista.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",to do,2,acc_85a1025fc0d6,Researching,Quest Bella Vista,AU,Bella Vista,Preferred hotel,,Raw lead sheet: Sydney 100.csv,7.98,Medium-High,82.8,Keep,B,geo_mismatch,B,geo_mismatch,Low,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,Low,Medium,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.",zaujímavý prospect,outreach_now,yes,low_factual_completeness,+61 2 8818 9300,http://www.questapartments.com.au/properties/nsw/bella-vista/quest-bella-vista/overview?utm_source=GoogleMyBusiness&utm_medium=organic&utm_campaign=bellavista,Quest Bella Vista: krátky nápad,Sydney 100.csv,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.,Pozeral som sa na Quest Bella Vista v lokalite Bella Vista.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,reply_with_permission
+Lead outreach - Quest Penrith,"Account ID: acc_401880adbecd
+Hotel: Quest Penrith
+Krajina: AU
+Mesto: Penrith
+Hotel type: Preferred hotel
+Independent / Chain: Independent candidate
+Priorita band: Medium-High
+Priority level final: Medium-High
+Skóre: 7.96
+Ranking score: 79.57
+Ranking score final: 82.57
+Rank bucket: B
+Rank bucket final: B
+ICP fit score: 76.0
+ICP fit class: Keep
+Fit confidence: 10.0
+Why not top tier: geo_mismatch
+Chain signal confidence: Low
+Review flag: yes
+Review reason: out_of_profile_geography
+Dedupe status: unique
+Manual merge candidate: no
+Ranking reason: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+Web: https://www.questapartments.com.au/properties/nsw/penrith/quest-penrith
+Telefón: +61 2 9136 1100
+OTA dependency signal: Low visible
+Direct booking weakness: Needs direct booking clarity
+Commercial verdict: zaujímavý prospect
+Business interest summary: Quest Penrith v Penrith pôsobí ako stabilný account s verejne čitateľným profilom a slušným review základom.
+Main bottleneck hypothesis: Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.
+Pain point hypothesis: Hosť nemusí mať rýchlo jasno v praktických pobytových pravidlách pred rezerváciou.
+Recommended hook: Krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.
+Decision status: outreach_now
+Manual review needed: yes
+Review queue reason codes: low_factual_completeness
+Ranking upside reasons: commercial_verdict:zaujímavý prospect | ownership:public_confirmed | review_signal:strong
+Ranking downside reasons: factual_completeness:0 | opening_hours_missing | checkin_missing | room_count_missing
+Ranking missingness notes: opening_hours_missing | checkin_missing | room_count_missing
+Email angle: opening_hours_clarity
+CTA type: low_friction_permission
+Variant ID: A1
+Test batch: Sydney 100
+Reply outcome: 
+
+Email hook: Pozeral som sa na Quest Penrith v lokalite Penrith.
+Give-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Main observed issue: Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.
+Proof snippet: Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+Micro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+Primary email goal: reply_with_permission
+
+Cold email:
+Dobrý deň,
+
+Silný reputačný základ (4.6/5) dáva priestor riešiť skôr konverznú jasnosť než reputačný problém.
+Všimli sme si, že krátky pohľad na to, kde sa dá ešte zjednodušiť cesta od prvého záujmu k priamemu dopytu.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom
+
+Follow-up email:
+Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Quest Penrith.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",to do,2,acc_401880adbecd,Researching,Quest Penrith,AU,Penrith,Preferred hotel,,Raw lead sheet: Sydney 100.csv,7.96,Medium-High,82.57,Keep,B,geo_mismatch,B,geo_mismatch,Low,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,Low,Medium,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.",zaujímavý prospect,outreach_now,yes,low_factual_completeness,+61 2 9136 1100,https://www.questapartments.com.au/properties/nsw/penrith/quest-penrith,Quest Penrith: krátky nápad,Sydney 100.csv,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.,Pozeral som sa na Quest Penrith v lokalite Penrith.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,reply_with_permission
+Lead outreach - Spicers Sangoma Retreat,"Account ID: acc_50ce289c9223
+Hotel: Spicers Sangoma Retreat
+Krajina: AU
+Mesto: Bowen Mountain
+Hotel type: Preferred hotel
+Independent / Chain: Independent candidate
+Priorita band: Medium-High
+Priority level final: Medium-High
+Skóre: 8.1
+Ranking score: 80.96
+Ranking score final: 82.16
+Rank bucket: A
+Rank bucket final: B
+ICP fit score: 76.0
+ICP fit class: Keep
+Fit confidence: 10.0
+Why not top tier: geo_mismatch
+Chain signal confidence: Low
+Review flag: yes
+Review reason: out_of_profile_geography
+Dedupe status: unique
+Manual merge candidate: no
+Ranking reason: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+Web: https://spicersretreats.com/retreats/spicers-sangoma-retreat/?utm_source=google&utm_medium=organic&utm_campaign=gmb
+Telefón: +61 1300 352 190
+OTA dependency signal: Low visible
+Direct booking weakness: Needs direct booking clarity
+Commercial verdict: zaujímavý prospect
+Business interest summary: Spicers Sangoma Retreat je nezávislý hotel s vysokým hodnotením a ponukou reštaurácie, spa a kongresových služieb v Bowen Mountain.
+Main bottleneck hypothesis: Možný bottleneck môže byť v nejasnostiach ohľadom kapacity a prevádzkových hodín, čo komplikuje plánovanie a predaj.
+Pain point hypothesis: Recepcia alebo manažment môžu mať manuálnu záťaž pri správe rôznorodých služieb bez jasne definovaných procesov.
+Recommended hook: Všimli sme si, že pri hoteloch s podobnou ponukou často pomáha detailný audit prevádzkových procesov.
+Decision status: manual_review
+Manual review needed: yes
+Review queue reason codes: low_factual_completeness | high_uncertainty
+Ranking upside reasons: commercial_verdict:zaujímavý prospect | ownership:raw_confirmed | review_signal:strong | entry_angle:present | commercial_read:present | service_complexity:present
+Ranking downside reasons: factual_completeness:0 | opening_hours_missing | checkin_missing | room_count_missing | uncertainty_notes:4
+Ranking missingness notes: opening_hours_missing | checkin_missing | room_count_missing | uncertainty_notes:4
+Email angle: opening_hours_clarity
+CTA type: low_friction_permission
+Variant ID: A1
+Test batch: Sydney 100
+Reply outcome: 
+
+Email hook: Pozeral som sa na Spicers Sangoma Retreat v lokalite Bowen Mountain.
+Give-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Main observed issue: Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.
+Proof snippet: Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+Micro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+Primary email goal: reply_with_permission
+
+Cold email:
+Dobrý deň,
+
+Váš hotel s vysokým hodnotením a širokou ponukou služieb je skvelým miestom pre rôzne typy klientov, zaujímalo by nás, ako riešite plánovanie kapacít a rezervácií v praxi. Pri takomto profile sa často mieša viac typov záujmu naraz. Pri takomto type hotela býva užitočné preveriť…
+Všimli sme si, že pri hoteloch s komplexnou ponukou služieb často pomáha audit prevádzkových procesov a kapacitného manažmentu.
+Hotel má veľmi dobré recenzie (4,8 z 5) a ponúka komplexné služby vrátane spa a eventových priestorov, čo môže prilákať rôzne segmenty klientely. Je však potrebné preveriť dostupnosť a kapacity, keďže počet izieb a otvá…
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom
+
+Follow-up email:
+Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Spicers Sangoma Retreat.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",to do,2,acc_50ce289c9223,Researching,Spicers Sangoma Retreat,AU,Bowen Mountain,Preferred hotel,,Raw lead sheet: Sydney 100.csv,8.1,Medium-High,82.16,Keep,A,top_ranked,B,geo_mismatch,Low,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,Low,Medium,"Možný bottleneck môže byť v nejasnostiach ohľadom kapacity a prevádzkových hodín, čo komplikuje plánovanie a predaj.",zaujímavý prospect,manual_review,yes,low_factual_completeness | high_uncertainty,+61 1300 352 190,https://spicersretreats.com/retreats/spicers-sangoma-retreat/?utm_source=google&utm_medium=organic&utm_campaign=gmb,Spicers Sangoma Retreat: krátky postreh k event dopytu,Sydney 100.csv,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.,Pozeral som sa na Spicers Sangoma Retreat v lokalite Bowen Mountain.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,reply_with_permission
+Lead outreach - Seranin | Gordon,"Account ID: acc_6bb4cbb1a3e4
+Hotel: Seranin | Gordon
+Krajina: AU
+Mesto: Gordon
+Hotel type: Preferred hotel
+Independent / Chain: Independent candidate
+Priorita band: Medium-High
+Priority level final: Medium-High
+Skóre: 8.03
+Ranking score: 80.33
+Ranking score final: 81.33
+Rank bucket: A
+Rank bucket final: B
+ICP fit score: 76.0
+ICP fit class: Keep
+Fit confidence: 10.0
+Why not top tier: geo_mismatch
+Chain signal confidence: Low
+Review flag: yes
+Review reason: out_of_profile_geography
+Dedupe status: unique
+Manual merge candidate: no
+Ranking reason: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+Web: http://www.seranin.com.au/
+Telefón: +61 1300 821 332
+OTA dependency signal: Low visible
+Direct booking weakness: Needs direct booking clarity
+Commercial verdict: zaujímavý prospect
+Business interest summary: Seranin | Gordon v Gordon je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.
+Main bottleneck hypothesis: Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.
+Pain point hypothesis: Hosť nemusí mať rýchlo jasno v praktických pobytových pravidlách pred rezerváciou.
+Recommended hook: Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.
+Decision status: outreach_now
+Manual review needed: yes
+Review queue reason codes: low_factual_completeness
+Ranking upside reasons: commercial_verdict:zaujímavý prospect | ownership:public_confirmed
+Ranking downside reasons: factual_completeness:0 | review_signal:weak | opening_hours_missing | checkin_missing | room_count_missing
+Ranking missingness notes: opening_hours_missing | checkin_missing | room_count_missing
+Email angle: opening_hours_clarity
+CTA type: low_friction_permission
+Variant ID: A1
+Test batch: Sydney 100
+Reply outcome: 
+
+Email hook: Pozeral som sa na Seranin | Gordon v lokalite Gordon.
+Give-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Main observed issue: Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.
+Proof snippet: Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+Micro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+Primary email goal: reply_with_permission
+
+Cold email:
+Dobrý deň,
+
+Vo verejných zdrojoch chýbajú niektoré praktické pobytové informácie, čo vie byť prirodzený vstup do konverzácie.
+Všimli sme si, že krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom
+
+Follow-up email:
+Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Seranin | Gordon.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",to do,2,acc_6bb4cbb1a3e4,Researching,Seranin | Gordon,AU,Gordon,Preferred hotel,,Raw lead sheet: Sydney 100.csv,8.03,Medium-High,81.33,Keep,A,top_ranked,B,geo_mismatch,Low,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,Low,Medium,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.",zaujímavý prospect,outreach_now,yes,low_factual_completeness,+61 1300 821 332,http://www.seranin.com.au/,Seranin | Gordon: krátky postreh k praktickým info,Sydney 100.csv,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.,Pozeral som sa na Seranin | Gordon v lokalite Gordon.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,reply_with_permission
+Lead outreach - Royal Hotel,"Account ID: acc_30048fcea764
+Hotel: Royal Hotel
+Krajina: AU
+Mesto: Springwood
+Hotel type: Preferred hotel
+Independent / Chain: Independent candidate
+Priorita band: Medium-High
+Priority level final: Medium-High
+Skóre: 7.97
+Ranking score: 79.72
+Ranking score final: 77.72
+Rank bucket: B
+Rank bucket final: B
+ICP fit score: 76.0
+ICP fit class: Keep
+Fit confidence: 10.0
+Why not top tier: geo_mismatch
+Chain signal confidence: Low
+Review flag: yes
+Review reason: out_of_profile_geography
+Dedupe status: unique
+Manual merge candidate: no
+Ranking reason: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+Web: http://www.royalhotelspringwood.com.au/
+Telefón: +61 2 4751 1021
+OTA dependency signal: Low visible
+Direct booking weakness: Needs direct booking clarity
+Commercial verdict: opatrný prospect
+Business interest summary: Royal Hotel v Springwood je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.
+Main bottleneck hypothesis: Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.
+Pain point hypothesis: Hosť nemusí mať rýchlo jasno v praktických pobytových pravidlách pred rezerváciou.
+Recommended hook: Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.
+Decision status: manual_review
+Manual review needed: yes
+Review queue reason codes: cautious_verdict
+Ranking upside reasons: ownership:raw_confirmed | factual_completeness:1
+Ranking downside reasons: commercial_verdict:opatrný prospect | checkin_missing | room_count_missing
+Ranking missingness notes: checkin_missing | room_count_missing
+Email angle: checkin_checkout_clarity
+CTA type: low_friction_permission
+Variant ID: A2
+Test batch: Sydney 100
+Reply outcome: 
+
+Email hook: Pozeral som sa na Royal Hotel v lokalite Springwood.
+Give-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedený check-in a check-out.
+Main observed issue: Na webe som nenašiel jasne uvedený check-in a check-out na prvý pohľad.
+Proof snippet: Vychádzal som z verejne uvedených hodín: Opening hours: (subject to change) Mon - Wed 10:00 am - 11:00 pm Thursday 10:00 am - 1:00 am Fri - Sat 10:00 am - 1:30 am Sunday 10:00 am.
+Micro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+Primary email goal: reply_with_permission
+
+Cold email:
+Dobrý deň,
+
+Vo verejných zdrojoch chýbajú niektoré praktické pobytové informácie, čo vie byť prirodzený vstup do konverzácie.
+Všimli sme si, že krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.
+Vychádzal som z verejne uvedených hodín: Opening hours: (subject to change) Mon - Wed 10:00 am - 11:00 pm Thursday 10:00 am - 1:00 am Fri - Sat 10:00 am - 1:30 am Sunday 10:00 am.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom
+
+Follow-up email:
+Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Royal Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",to do,2,acc_30048fcea764,Researching,Royal Hotel,AU,Springwood,Preferred hotel,,Raw lead sheet: Sydney 100.csv,7.97,Medium-High,77.72,Keep,B,geo_mismatch,B,geo_mismatch,Low,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,Low,Medium,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.",opatrný prospect,manual_review,yes,cautious_verdict,+61 2 4751 1021,http://www.royalhotelspringwood.com.au/,Royal Hotel: krátky postreh k praktickým info,Sydney 100.csv,checkin_checkout_clarity,low_friction_permission,A2,Sydney 100,,Pri rýchlom pozretí webu som nenašiel jasne uvedený check-in a check-out.,Na webe som nenašiel jasne uvedený check-in a check-out na prvý pohľad.,Pozeral som sa na Royal Hotel v lokalite Springwood.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.",Vychádzal som z verejne uvedených hodín: Opening hours: (subject to change) Mon - Wed 10:00 am - 11:00 pm Thursday 10:00 am - 1:00 am Fri - Sat 10:00 am - 1:30 am Sunday 10:00 am.,reply_with_permission
+Lead outreach - Doonside Hotel,"Account ID: acc_40da1daa32cc
+Hotel: Doonside Hotel
+Krajina: AU
+Mesto: Doonside
+Hotel type: Preferred hotel
+Independent / Chain: Independent candidate
+Priorita band: Medium-High
+Priority level final: Medium
+Skóre: 7.94
+Ranking score: 79.39
+Ranking score final: 74.39
+Rank bucket: B
+Rank bucket final: C
+ICP fit score: 76.0
+ICP fit class: Keep
+Fit confidence: 10.0
+Why not top tier: geo_mismatch
+Chain signal confidence: Low
+Review flag: yes
+Review reason: out_of_profile_geography
+Dedupe status: unique
+Manual merge candidate: no
+Ranking reason: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+Web: https://www.doonsidehotel.com/
+Telefón: +61 2 9622 6585
+OTA dependency signal: Low visible
+Direct booking weakness: Needs direct booking clarity
+Commercial verdict: opatrný prospect
+Business interest summary: Doonside Hotel v Doonside je zaujímavý skôr cez praktickú informačnú vrstvu a jasnosť prvého kontaktu.
+Main bottleneck hypothesis: Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.
+Pain point hypothesis: Hosť nemusí mať rýchlo jasno v praktických pobytových pravidlách pred rezerváciou.
+Recommended hook: Krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.
+Decision status: manual_review
+Manual review needed: yes
+Review queue reason codes: low_factual_completeness | cautious_verdict
+Ranking upside reasons: ownership:raw_confirmed
+Ranking downside reasons: commercial_verdict:opatrný prospect | factual_completeness:0 | review_signal:weak | opening_hours_missing | checkin_missing | room_count_missing
+Ranking missingness notes: opening_hours_missing | checkin_missing | room_count_missing
+Email angle: opening_hours_clarity
+CTA type: low_friction_permission
+Variant ID: A1
+Test batch: Sydney 100
+Reply outcome: 
+
+Email hook: Pozeral som sa na Doonside Hotel v lokalite Doonside.
+Give-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.
+Main observed issue: Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.
+Proof snippet: Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+Micro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+Primary email goal: reply_with_permission
+
+Cold email:
+Dobrý deň,
+
+Vo verejných zdrojoch chýbajú niektoré praktické pobytové informácie, čo vie byť prirodzený vstup do konverzácie.
+Všimli sme si, že krátky postreh k tomu, ktoré praktické informácie hosť nemusí nájsť hneď na prvý pohľad.
+Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.
+Pozeral som len verejne dostupný profil a základné kontaktné údaje.
+
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom
+
+Follow-up email:
+Dobrý deň,
+
+jemne sa pripomínam k predošlej správe pre Doonside Hotel.
+Ak chcete, pošlem 3 stručné postrehy v krátkej forme.
+
+S pozdravom",to do,3,acc_40da1daa32cc,Researching,Doonside Hotel,AU,Doonside,Preferred hotel,,Raw lead sheet: Sydney 100.csv,7.94,Medium,74.39,Keep,B,geo_mismatch,C,geo_mismatch,Low,strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography,Low,Medium,"Praktické informácie nie sú všade rovnako jasné, čo môže brzdiť prvý kontakt alebo rozhodnutie.",opatrný prospect,manual_review,yes,low_factual_completeness | cautious_verdict,+61 2 9622 6585,https://www.doonsidehotel.com/,Doonside Hotel: krátky postreh k praktickým info,Sydney 100.csv,opening_hours_clarity,low_friction_permission,A1,Sydney 100,,Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.,Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.,Pozeral som sa na Doonside Hotel v lokalite Doonside.,"Ak chcete, pošlem 3 stručné postrehy v krátkej forme.",Pozeral som len verejne dostupný profil a základné kontaktné údaje.,reply_with_permission

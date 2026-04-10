@@ -1,0 +1,8 @@
+Review bucket top examples
+
+manual_review
+- Jonah’s Restaurant & Boutique Hotel: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+- Miramare Gardens: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+- The Hornsby Inn: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+- Billabong Retreat: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography
+- Spicers Sangoma Retreat: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography

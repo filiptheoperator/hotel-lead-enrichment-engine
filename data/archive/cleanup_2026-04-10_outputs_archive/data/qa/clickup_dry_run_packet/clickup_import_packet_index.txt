@@ -1,0 +1,28 @@
+ClickUp import packet index
+
+Core
+- clickup_import.csv
+- clickup_phase1_minimal.csv
+- clickup_full_ranked.csv
+- top_20_export.csv
+- operator_shortlist.csv
+
+Validation
+- clickup_api_mapping_preview_phase1_minimal.json
+- clickup_api_mapping_preview_full_ranked.json
+- clickup_api_mapping_validation_phase1_minimal.json
+- clickup_api_mapping_validation_full_ranked.json
+- clickup_export_mode_diff.json
+- clickup_import_preflight.json
+
+Operator
+- phase1_import_checklist.json
+- full_ranked_review_checklist.json
+- phase1_import_decision.json
+- full_ranked_review_decision.json
+- phase1_import_pass_fail_summary.txt
+- full_ranked_review_pass_fail_summary.txt
+- top_20_operator_notes_template.csv
+- review_followup_queue.csv
+- rank_bucket_top_examples.txt
+- review_bucket_top_examples.txt

@@ -1,0 +1,12 @@
+Phase1 import pass/fail summary
+
+status: PASS
+passed_checks: 6
+failed_checks: 0
+
+- task_name_present: pass
+- status_present: pass
+- priority_present: pass
+- rank_bucket_present: pass
+- rank_bucket_reason_present: pass
+- chain_signal_confidence_present: pass

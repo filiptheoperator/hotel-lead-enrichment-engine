@@ -1,0 +1,7 @@
+{
+  "mode": "full_ranked",
+  "artifact": "outputs/clickup/Sydney 100_normalized_scored_enriched_email_drafts_clickup_full_ranked.csv",
+  "decision": "PASS",
+  "failed_checks": [],
+  "note": "Full ranked review decision artifact"
+}

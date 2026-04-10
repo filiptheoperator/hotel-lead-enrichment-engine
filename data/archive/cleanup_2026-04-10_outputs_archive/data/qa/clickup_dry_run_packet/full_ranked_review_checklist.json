@@ -1,0 +1,26 @@
+{
+  "artifact": "outputs/clickup/Sydney 100_normalized_scored_enriched_email_drafts_clickup_full_ranked.csv",
+  "required_checks": [
+    {
+      "check": "description_present",
+      "result": true
+    },
+    {
+      "check": "contact_phone_present",
+      "result": true
+    },
+    {
+      "check": "contact_website_present",
+      "result": true
+    },
+    {
+      "check": "main_observed_issue_present",
+      "result": true
+    },
+    {
+      "check": "proof_snippet_present",
+      "result": true
+    }
+  ],
+  "note": "Full ranked review checklist pre bohatý operator review export."
+}

@@ -1,0 +1,51 @@
+{
+  "source_csv": "outputs/clickup/Sydney 100_normalized_scored_enriched_email_drafts_clickup_full_ranked.csv",
+  "preview_rows": [
+    {
+      "name": "Lead outreach - Jonah’s Restaurant & Boutique Hotel",
+      "description": "Account ID: acc_5970be661818\nHotel: Jonah’s Restaurant & Boutique Hotel\nKrajina: AU\nMesto: Palm Beach\nHotel type: Preferred hotel\nIndependent / Chain: Independent candidate\nPriorita band: Medium-High\nSkóre: 8.14\nRanking score: 81.42\nRank bucket: A\nICP fit score: 76.0\nICP fit class: Keep\nFit confidence: 10.0\nWhy not top tier: geo_mismatch\nChain signal confidence: Low\nReview flag: yes\nReview reason: out_of_profile_geography\nDedupe status: unique\nManual merge candidate: no\nRanking reason: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography\nWeb: http://www.jonahs.com.au/\nTelefón: +61 2 9974 5599\nOTA dependency signal: Low visible\nDirect booking weakness: Needs direct booking clarity\nEmail angle: opening_hours_clarity\nCTA type: low_friction_permission\nVariant ID: A1\nTest batch: Sydney 100\nReply outcome: \n\nEmail hook: Pozeral som sa na Jonah’s Restaurant & Boutique Hotel v lokalite Palm Beach.\nGive-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.\nMain observed issue: Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.\nProof snippet: Pozeral som len verejne dostupný profil a základné kontaktné údaje.\nMicro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.\nPrimary email goal: reply_with_permission\n\nCold email:\nDobrý deň,\n\nPozeral som sa na Jonah’s Restaurant & Boutique Hotel v lokalite Palm Beach.\nPri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.\nNa webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Palm Beach, s prioritou Medium-High (8.14), s hodnotením 4.6/5 z 946 recenzií.\nPozeral som len verejne dostupný profil a základné kontaktné údaje.\n\nAk chcete, pošlem 3 stručné postrehy v krátkej forme.\n\nS pozdravom\n\nFollow-up email:\nDobrý deň,\n\njemne sa pripomínam k predošlej správe pre Jonah’s Restaurant & Boutique Hotel.\nAk chcete, pošlem 3 stručné postrehy v krátkej forme.\n\nS pozdravom",
+      "status": "to do",
+      "priority": "nan",
+      "custom_fields": {
+        "custom.hotel_name": "Jonah’s Restaurant & Boutique Hotel",
+        "custom.city": "Palm Beach",
+        "custom.priority_score": "8.14",
+        "custom.contact_phone": "+61 2 9974 5599",
+        "custom.contact_website": "http://www.jonahs.com.au/",
+        "custom.subject_line": "Jonah’s Restaurant & Boutique Hotel: krátky postreh",
+        "custom.source_file": "Sydney 100.csv"
+      }
+    },
+    {
+      "name": "Lead outreach - Miramare Gardens",
+      "description": "Account ID: acc_9f2cb7250cf5\nHotel: Miramare Gardens\nKrajina: AU\nMesto: Terrey Hills\nHotel type: Preferred hotel\nIndependent / Chain: Independent candidate\nPriorita band: Medium-High\nSkóre: 8.14\nRanking score: 81.38\nRank bucket: A\nICP fit score: 76.0\nICP fit class: Keep\nFit confidence: 10.0\nWhy not top tier: geo_mismatch\nChain signal confidence: Low\nReview flag: yes\nReview reason: out_of_profile_geography\nDedupe status: unique\nManual merge candidate: no\nRanking reason: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography\nWeb: https://www.miramaregardens.com.au/?utm_source=google&utm_medium=organic&utm_campaign=gmb\nTelefón: +61 2 9450 2000\nOTA dependency signal: Low visible\nDirect booking weakness: Needs direct booking clarity\nEmail angle: opening_hours_clarity\nCTA type: low_friction_permission\nVariant ID: A1\nTest batch: Sydney 100\nReply outcome: \n\nEmail hook: Pozeral som sa na Miramare Gardens v lokalite Terrey Hills.\nGive-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.\nMain observed issue: Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.\nProof snippet: Pozeral som len verejne dostupný profil a základné kontaktné údaje.\nMicro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.\nPrimary email goal: reply_with_permission\n\nCold email:\nDobrý deň,\n\nPozeral som sa na Miramare Gardens v lokalite Terrey Hills.\nPri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.\nNa webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Terrey Hills, s prioritou Medium-High (8.14), s hodnotením 4.4/5 z 790 recenzií.\nPozeral som len verejne dostupný profil a základné kontaktné údaje.\n\nAk chcete, pošlem 3 stručné postrehy v krátkej forme.\n\nS pozdravom\n\nFollow-up email:\nDobrý deň,\n\njemne sa pripomínam k predošlej správe pre Miramare Gardens.\nAk chcete, pošlem 3 stručné postrehy v krátkej forme.\n\nS pozdravom",
+      "status": "to do",
+      "priority": "nan",
+      "custom_fields": {
+        "custom.hotel_name": "Miramare Gardens",
+        "custom.city": "Terrey Hills",
+        "custom.priority_score": "8.14",
+        "custom.contact_phone": "+61 2 9450 2000",
+        "custom.contact_website": "https://www.miramaregardens.com.au/?utm_source=google&utm_medium=organic&utm_campaign=gmb",
+        "custom.subject_line": "Miramare Gardens: krátky postreh",
+        "custom.source_file": "Sydney 100.csv"
+      }
+    },
+    {
+      "name": "Lead outreach - The Hornsby Inn",
+      "description": "Account ID: acc_462634ba1b0d\nHotel: The Hornsby Inn\nKrajina: AU\nMesto: Hornsby\nHotel type: Preferred hotel\nIndependent / Chain: Independent candidate\nPriorita band: Medium-High\nSkóre: 8.13\nRanking score: 81.3\nRank bucket: A\nICP fit score: 76.0\nICP fit class: Keep\nFit confidence: 10.0\nWhy not top tier: geo_mismatch\nChain signal confidence: Low\nReview flag: yes\nReview reason: out_of_profile_geography\nDedupe status: unique\nManual merge candidate: no\nRanking reason: strong_icp_fit | independent_signal | preferred_hotel_type | out_of_profile_geography\nWeb: https://hornsbyinn.com.au/\nTelefón: +61 2 5302 9307\nOTA dependency signal: Low visible\nDirect booking weakness: Needs direct booking clarity\nEmail angle: opening_hours_clarity\nCTA type: low_friction_permission\nVariant ID: A1\nTest batch: Sydney 100\nReply outcome: \n\nEmail hook: Pozeral som sa na The Hornsby Inn v lokalite Hornsby.\nGive-first insight: Pri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.\nMain observed issue: Na webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy.\nProof snippet: Pozeral som len verejne dostupný profil a základné kontaktné údaje.\nMicro CTA: Ak chcete, pošlem 3 stručné postrehy v krátkej forme.\nPrimary email goal: reply_with_permission\n\nCold email:\nDobrý deň,\n\nPozeral som sa na The Hornsby Inn v lokalite Hornsby.\nPri rýchlom pozretí webu som nenašiel jasne uvedené otváracie hodiny alebo časy recepcie.\nNa webe som nenašiel jasne uvedené otváracie hodiny alebo recepčné časy. Pozrel som si váš verejný profil v lokalite Hornsby, s prioritou Medium-High (8.13), s hodnotením 4.0/5 z 682 recenzií.\nPozeral som len verejne dostupný profil a základné kontaktné údaje.\n\nAk chcete, pošlem 3 stručné postrehy v krátkej forme.\n\nS pozdravom\n\nFollow-up email:\nDobrý deň,\n\njemne sa pripomínam k predošlej správe pre The Hornsby Inn.\nAk chcete, pošlem 3 stručné postrehy v krátkej forme.\n\nS pozdravom",
+      "status": "to do",
+      "priority": "nan",
+      "custom_fields": {
+        "custom.hotel_name": "The Hornsby Inn",
+        "custom.city": "Hornsby",
+        "custom.priority_score": "8.13",
+        "custom.contact_phone": "+61 2 5302 9307",
+        "custom.contact_website": "https://hornsbyinn.com.au/",
+        "custom.subject_line": "The Hornsby Inn: krátky postreh",
+        "custom.source_file": "Sydney 100.csv"
+      }
+    }
+  ],
+  "note": "Full ranked preview bez ostrej ClickUp API integrácie."
+}

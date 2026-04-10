@@ -1,0 +1,15 @@
+ClickUp Import Gate
+
+- decision: NO_GO
+- operator_action: Neimportovať do ClickUp. Najprv odstrániť stop conditions.
+- batch_readiness_score: 30
+- batch_readiness_band: red
+- fetch_incident_flag: yes
+- qa_blocking_rows: 1
+- clickup_rows: 100
+- clickup_import_ready_rows: 100
+- high_leads_requiring_manual_review: 0
+
+Stop conditions
+- global_fetch_incident
+- qa_blocking_rows_present

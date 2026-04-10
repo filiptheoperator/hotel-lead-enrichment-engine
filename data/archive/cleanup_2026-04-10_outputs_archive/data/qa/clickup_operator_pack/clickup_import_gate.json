@@ -1,0 +1,66 @@
+{
+  "decision": "NO_GO",
+  "operator_action": "Neimportovať do ClickUp. Najprv odstrániť stop conditions.",
+  "batch_readiness_score": 30,
+  "batch_readiness_band": "red",
+  "inputs": {
+    "run_manifest_json": "data/qa/run_manifest.json",
+    "clickup_import_csv": "outputs/clickup/Sydney 100_normalized_scored_enriched_email_drafts_clickup_import.csv",
+    "qa_issues_csv": "data/qa/qa_issues.csv",
+    "manual_review_shortlist_csv": "data/qa/manual_review_shortlist.csv"
+  },
+  "checks": {
+    "fetch_incident_flag": "yes",
+    "qa_blocking_rows": 2,
+    "clickup_rows": 100,
+    "clickup_import_ready_rows": 100,
+    "high_leads_requiring_manual_review": 0
+  },
+  "stop_conditions": [
+    "global_fetch_incident",
+    "qa_blocking_rows_present"
+  ],
+  "go_rules": [
+    "fetch_incident_flag musí byť no",
+    "qa_blocking_rows musí byť 0",
+    "clickup_import_ready_rows musí byť rovné clickup_rows",
+    "High leady nesmú zostať v hold/manual review stave pred importom"
+  ],
+  "no_go_rules": [
+    "globálny DNS/fetch incident",
+    "akýkoľvek blocking QA issue",
+    "neúplne pripravený ClickUp CSV",
+    "High leady ešte čakajú na ručný review"
+  ],
+  "readiness_explanation": {
+    "batch_readiness_score": 30,
+    "batch_readiness_band": "red",
+    "factors": [
+      {
+        "factor": "fetch_incident_flag",
+        "value": "yes",
+        "impact": -40,
+        "reason": "Globálny fetch incident znižuje dôveru v batch."
+      },
+      {
+        "factor": "qa_blocking_rows",
+        "value": 2,
+        "impact": -30,
+        "reason": "Blocking QA issues blokujú import."
+      },
+      {
+        "factor": "clickup_import_ready_ratio",
+        "value": "100/100",
+        "impact": 0,
+        "reason": "Neúplne pripravený ClickUp CSV znižuje readiness."
+      },
+      {
+        "factor": "high_leads_requiring_manual_review",
+        "value": 0,
+        "impact": 0,
+        "reason": "High leady čakajúce na review znižujú readiness."
+      }
+    ],
+    "note": "Score je interný operátorský signál, nie business KPI."
+  }
+}
