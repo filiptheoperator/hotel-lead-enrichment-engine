@@ -13,6 +13,7 @@ COMMERCIAL_SYNTHESIS_DIR = Path("outputs/commercial_synthesis")
 RANKED_DIR = Path("outputs/ranked")
 RANKING_CONFIG_PATH = Path("configs/ranking_tuning.yaml")
 UNKNOWN_VALUE_LABEL = "Verejne nepotvrdené"
+CANONICAL_COMMERCIAL_SCHEMA_VERSION = "commercial_synthesis/v3-lite"
 
 
 def normalize_text(value: object) -> str:
@@ -169,30 +170,40 @@ def build_structured_row_context(row: pd.Series, source_batch_stem: str) -> dict
     account_id = normalize_text(row.get("account_id"))
     factual = load_json(FACTUAL_ENRICHMENT_DIR / source_batch_stem / f"{account_id}.json") if account_id else {}
     commercial = load_json(COMMERCIAL_SYNTHESIS_DIR / source_batch_stem / f"{account_id}.json") if account_id else {}
+    commercial_schema_version = normalize_text(commercial.get("schema_version"))
+    commercial_is_canonical = commercial_schema_version == CANONICAL_COMMERCIAL_SCHEMA_VERSION
+    canonical_commercial = commercial if commercial_is_canonical else {}
 
     operating_hours = factual.get("operating_hours", {})
     checkin_checkout = factual.get("checkin_checkout", {})
     room_count_signal = factual.get("room_count_signal", {})
     ownership_signal = factual.get("ownership_company_signal", {})
+    row_has_legacy_commercial_fallback = bool(normalize_text(row.get("commercial_verdict")))
 
     return {
-        "commercial_schema_version": normalize_text(commercial.get("schema_version")),
-        "commercial_verdict": normalize_text(commercial.get("verdict")),
-        "business_interest_summary": normalize_text(commercial.get("business_interest_summary")),
-        "main_bottleneck_hypothesis": normalize_text(commercial.get("main_bottleneck_hypothesis")),
-        "pain_point_hypothesis": normalize_text(commercial.get("pain_point_hypothesis")),
-        "why_commercially_interesting": normalize_text(commercial.get("why_commercially_interesting")),
-        "property_positioning_summary": normalize_text(commercial.get("property_positioning_summary")),
-        "best_entry_angle": normalize_text(commercial.get("best_entry_angle")),
-        "recommended_hook": normalize_text(commercial.get("recommended_hook")),
-        "recommended_first_contact_route": normalize_text(commercial.get("recommended_first_contact_route")),
-        "likely_decision_maker_hypothesis": normalize_text(commercial.get("likely_decision_maker_hypothesis")),
-        "service_complexity_read": normalize_text(commercial.get("service_complexity_read")),
-        "commercial_complexity_read": normalize_text(commercial.get("commercial_complexity_read")),
-        "direct_booking_friction_hypothesis": normalize_text(commercial.get("direct_booking_friction_hypothesis")),
-        "contact_route_friction_hypothesis": normalize_text(commercial.get("contact_route_friction_hypothesis")),
-        "call_hypothesis": normalize_text(commercial.get("call_hypothesis")),
-        "uncertainty_notes_count": len(commercial.get("uncertainty_notes", []) or []),
+        "commercial_schema_version": commercial_schema_version if commercial_is_canonical else "",
+        "commercial_source_mode": "canonical_v3_lite" if commercial_is_canonical else "legacy_fallback_or_missing",
+        "commercial_fallback_used": (
+            "yes"
+            if not commercial_is_canonical and row_has_legacy_commercial_fallback
+            else "no"
+        ),
+        "commercial_verdict": normalize_text(canonical_commercial.get("verdict")),
+        "business_interest_summary": normalize_text(canonical_commercial.get("business_interest_summary")),
+        "main_bottleneck_hypothesis": normalize_text(canonical_commercial.get("main_bottleneck_hypothesis")),
+        "pain_point_hypothesis": normalize_text(canonical_commercial.get("pain_point_hypothesis")),
+        "why_commercially_interesting": normalize_text(canonical_commercial.get("why_commercially_interesting")),
+        "property_positioning_summary": normalize_text(canonical_commercial.get("property_positioning_summary")),
+        "best_entry_angle": normalize_text(canonical_commercial.get("best_entry_angle")),
+        "recommended_hook": normalize_text(canonical_commercial.get("recommended_hook")),
+        "recommended_first_contact_route": normalize_text(canonical_commercial.get("recommended_first_contact_route")),
+        "likely_decision_maker_hypothesis": normalize_text(canonical_commercial.get("likely_decision_maker_hypothesis")),
+        "service_complexity_read": normalize_text(canonical_commercial.get("service_complexity_read")),
+        "commercial_complexity_read": normalize_text(canonical_commercial.get("commercial_complexity_read")),
+        "direct_booking_friction_hypothesis": normalize_text(canonical_commercial.get("direct_booking_friction_hypothesis")),
+        "contact_route_friction_hypothesis": normalize_text(canonical_commercial.get("contact_route_friction_hypothesis")),
+        "call_hypothesis": normalize_text(canonical_commercial.get("call_hypothesis")),
+        "uncertainty_notes_count": len(canonical_commercial.get("uncertainty_notes", []) or []),
         "hotel_opening_hours_status": normalize_text(operating_hours.get("status")),
         "checkin_checkout_status": normalize_text(checkin_checkout.get("status")),
         "room_count_status": normalize_text(room_count_signal.get("status")),
@@ -432,6 +443,8 @@ def build_ranked_dataframe(enrichment_df: pd.DataFrame, source_batch_stem: str, 
 
     for column in [
         "commercial_schema_version",
+        "commercial_source_mode",
+        "commercial_fallback_used",
         "commercial_verdict",
         "business_interest_summary",
         "why_commercially_interesting",
@@ -460,11 +473,19 @@ def build_ranked_dataframe(enrichment_df: pd.DataFrame, source_batch_stem: str, 
         lambda row: pd.Series(build_structured_row_context(row, source_batch_stem)),
         axis=1,
     )
+    metadata_columns = {
+        "commercial_schema_version",
+        "commercial_source_mode",
+        "commercial_fallback_used",
+    }
     for column in structured_context.columns:
-        ranked[column] = structured_context[column].where(
-            structured_context[column].fillna("").astype(str).str.strip().ne(""),
-            ranked[column],
-        )
+        if column in metadata_columns:
+            ranked[column] = structured_context[column].fillna("").astype(str)
+        else:
+            ranked[column] = structured_context[column].where(
+                structured_context[column].fillna("").astype(str).str.strip().ne(""),
+                ranked[column],
+            )
 
     scoring_breakdown = ranked.apply(
         lambda row: pd.Series(build_scoring_breakdown(row, config)),
