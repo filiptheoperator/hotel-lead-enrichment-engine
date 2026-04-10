@@ -41,9 +41,12 @@ Udržať jeden stabilný Python-first workflow, ktorý premieňa raw hotel lead 
 
 ## Current reality
 
-- kanonická architektúra je potvrdená
-- wrapper runtime ešte treba plne zosúladiť
+- kanonická architektúra je potvrdená a runtime aligned
+- canonical post-fix retained baseline existuje
+- historical regression fixture je ponechaný
+- cleanup execution a fixture retention policy už boli vykonané
 - live Make execution nie je plne uzavretý ako validated end-to-end path
+- branch je vo finálnej merge decision fáze
 
 ## Reference docs
 

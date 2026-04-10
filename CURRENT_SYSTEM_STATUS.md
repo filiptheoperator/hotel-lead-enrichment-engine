@@ -10,15 +10,18 @@
 
 ## Current stage
 
-`Canonical architecture confirmed, documentation aligned, runtime wrapper not yet fully aligned.`
+`Canonical runtime aligned, post-fix baseline established, cleanup executed, branch in final merge decision state.`
 
 Prakticky:
 
-- kanonická flow je definitívne určená
-- kanonické moduly sú známe
-- veľká časť artifact pipeline existuje
-- Make live path ostáva čiastočne nevalidovaný
-- `src/orchestrate.py` ešte musí byť zosúladený s touto pravdou
+- kanonická flow je potvrdená a zosúladená v kóde
+- `src/orchestrate.py` už nepredstavuje konkurenčnú runtime truth
+- kanonická `commercial_synthesizer(v3-lite)` vrstva je aktívna commercial truth
+- ranking boundary už neberie `commercial_synthesis/v1` ako aktívnu structured truth
+- canonical post-fix retained baseline existuje
+- jeden historical regression fixture set je ponechaný
+- cleanup execution aj fixture retention policy už boli vykonané
+- branch je pripravený na finálny owner merge verdict
 
 ## Canonical runtime flow
 
@@ -42,9 +45,9 @@ Prakticky:
 
 ### Reálna poznámka k behu
 
-- moduly existujú a sú použiteľné
-- default wrapper v `src/orchestrate.py` ešte nie je finálne zosúladený s kanonickou flow
-- teda: architektúra je potvrdená, ale wrapper truth ešte nie je úplne uprataná
+- default wrapper v `src/orchestrate.py` je zosúladený s kanonickou flow
+- fallback commercial logika v `src/enrich_hotels.py` ostáva explicitne len za env guardom
+- Make ostáva thin execution/orchestration vrstva nad uzamknutými Python artifactmi
 
 ## What is validated vs unvalidated
 
@@ -52,18 +55,20 @@ Prakticky:
 
 - normalize/scoring vrstva
 - factual/source-bundle artifact line
+- `commercial_synthesizer(v3-lite)` ako kanonická commercial vrstva
+- `ranking_refresh` boundary s pravdivým schema markerom
 - email draft generation
+- master export generation
+- markdown operator presentation layer
 - ClickUp export layers
 - QA/gate artifact generation
-- orchestration dry-run, regression a simulated scenáre
-- operator SOP/document layer pre controlled execution
+- cleanup-executed retained fixture baseline
 
 ### Čiastočne validované alebo neuzavreté
 
-- plne zosúladený canonical run order cez jeden wrapper entrypoint
 - end-to-end live Make execution
 - posledná míľa Make -> ClickUp live path v reálnych externých podmienkach
-- finálne fixture/retenčné pravidlá pre generated artifacts
+- finálny owner merge verdict pre túto branch
 
 ## Active source-of-truth files
 
@@ -97,6 +102,30 @@ Prakticky:
 - [CLICKUP_API_PAYLOAD_CONTRACT_FINAL.md](/Users/aios/Desktop/Codex/hotel-lead-enrichment-engine/docs/project/CLICKUP_API_PAYLOAD_CONTRACT_FINAL.md)
 - [RETENTION_AND_FIXTURE_POLICY.md](/Users/aios/Desktop/Codex/hotel-lead-enrichment-engine/RETENTION_AND_FIXTURE_POLICY.md)
 
+## Current retained baseline
+
+### Canonical verification baseline
+
+- `outputs/ranked/Sydney 100_normalized_scored_enriched_batch10_ranking_refreshed_post_fix_regen_20260410.csv`
+- corresponding retained downstream set v:
+  - `outputs/master/`
+  - `outputs/email_drafts/`
+  - `outputs/clickup/`
+  - `outputs/hotel_markdown/`
+- retained structured evidence set v:
+  - `outputs/source_bundles/Sydney 100/`
+  - `outputs/factual_enrichment/Sydney 100/`
+  - `outputs/commercial_synthesis/Sydney 100/`
+
+### Historical regression fixture
+
+- `outputs/ranked/Sydney 100_normalized_scored_enriched_batch10_ranking_refreshed_wave4_v3lite_smoke.csv`
+- matching retained `wave4_v3lite_smoke` family v `outputs/master/`
+
+### Archive location
+
+- `data/archive/cleanup_2026-04-10_outputs_archive/`
+
 ## Frozen / legacy / archive zones
 
 ### Frozen canonical zones
@@ -104,6 +133,7 @@ Prakticky:
 - `configs/`
 - kanonické runtime moduly v `src/`
 - root canonical docs
+- retained canonical fixture baseline
 
 ### Legacy zones
 
@@ -113,18 +143,17 @@ Prakticky:
 
 ### Historical zones
 
+- retained `wave4_v3lite_smoke` regression fixture
 - staré phase closeout docs
 - orchestration wave closeout summaries
-- historické `wave/batch/v2-v5/smoke` output variants
-- `outputs/export/` diff a QC materiál
 
-### Archive candidate zones
+### Archive zones
 
 - `data/archive/`
-- neskôr vybrané historical output families po potvrdení fixture policy
+- cleanup archive subtree v `data/archive/cleanup_2026-04-10_outputs_archive/`
 
 ## Next 3 moves
 
-1. Zosúladiť `src/orchestrate.py` na confirmed canonical flow ako tenký wrapper bez konkurenčnej runtime pravdy.
-2. Explicitne oddeliť kanonickú factual vrstvu v `src/enrich_hotels.py` od legacy heuristic commercial fallback logiky.
-3. Zaviesť minimálnu kanonickú fixture/retenčnú politiku pre `outputs/` a `data/qa/` bez okamžitého cleanupu.
+1. Urobiť finálny owner review a merge verdict pre branch.
+2. Rozhodnúť, či cleanup archive subtree má zostať dlhodobo v repo alebo sa má neskôr presunúť mimo core snapshot.
+3. Rozhodnúť, či downstream exporty majú v budúcnosti explicitne niesť aj `commercial_source_mode` a `commercial_fallback_used`.

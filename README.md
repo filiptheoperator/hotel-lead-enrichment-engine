@@ -31,10 +31,14 @@ Make nie je mozog systému. Make je len tenká execution/orchestration vrstva na
 
 ## Aktuálna realita
 
-- kanonická architektúra je týmto repom už definovaná
-- veľká časť lokálnej pipeline a artifacts vrstvy je postavená
+- kanonická runtime flow je v kóde zosúladená
+- `src/orchestrate.py` už nepredstavuje konkurenčnú runtime truth
+- `commercial_synthesizer(v3-lite)` je aktívna commercial truth
+- `ranking_refresh` už neberie `commercial_synthesis/v1` ako aktívnu structured commercial truth
+- canonical post-fix retained baseline existuje
+- historical regression fixture je ponechaný
+- cleanup execution a fixture retention policy už boli vykonané
 - Make live execution stále nie je plne validovaný end-to-end
-- niektoré staršie wrappery a historické outputy ešte v repo existujú, ale nie sú source-of-truth
 
 ## Hlavné dokumenty
 
@@ -62,10 +66,11 @@ Make nie je mozog systému. Make je len tenká execution/orchestration vrstva na
 - `prompts/` podporné prompt/policy assets
 - `data/raw/` immutable raw vstupy
 - `data/processed/` medzivrstvy po normalizácii
-- `data/qa/` QA, gate, rehearsal a orchestration artifacts
-- `outputs/` canonical output families a historical variants
+- `data/qa/` QA, gate a retained evidence artifacts
+- `outputs/` retained canonical fixture families a retained historical regression fixtures
 - `docs/project/` architektúra, contracts, SOP a historické checkpointy
 - `project info/` legacy bootstrap materiál
+- `data/archive/cleanup_2026-04-10_outputs_archive/` explicitná cleanup archive zóna
 
 ## Lokálne spustenie
 
@@ -77,5 +82,7 @@ cp .env.example .env
 python3 src/main.py
 ```
 
-Poznámka:
-Kým `src/orchestrate.py` nebude zosúladený s kanonickou flow, tento command je stále technický entrypoint, nie definitívny popis finálneho canonical run order. Presný source-of-truth pre flow je v [CANONICAL_RUNBOOK.md](/Users/aios/Desktop/Codex/hotel-lead-enrichment-engine/CANONICAL_RUNBOOK.md) a [CURRENT_SYSTEM_STATUS.md](/Users/aios/Desktop/Codex/hotel-lead-enrichment-engine/CURRENT_SYSTEM_STATUS.md).
+Presný canonical run order a retained baseline truth sú uzamknuté v:
+
+- [CANONICAL_RUNBOOK.md](/Users/aios/Desktop/Codex/hotel-lead-enrichment-engine/CANONICAL_RUNBOOK.md)
+- [CURRENT_SYSTEM_STATUS.md](/Users/aios/Desktop/Codex/hotel-lead-enrichment-engine/CURRENT_SYSTEM_STATUS.md)
