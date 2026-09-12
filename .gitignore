@@ -4,16 +4,38 @@ __pycache__/
 .venv/
 venv/
 
-# Env
+# Env / secrets
 .env
+.env.*
+!.env.example
+*.pem
+*.key
+*token*.json
+*oauth*.json
+google-oauth-client.json
 
-# OS
+# OS / editor
 .DS_Store
+.vscode/settings.local.json
+.claude/settings.local.json
+
+# Canonical Drive mirrors / runtime snapshots
+mirror/
+.drive-mirror/
+.local-drive/
+local_private/
+.cache/
+
+# Local databases / caches
+*.db
+*.sqlite
+*.sqlite3
 
 # Data
 data/raw/*
 data/processed/*
 data/qa/*
+data/private/*
 
 # Outputs
 outputs/ranked/*
@@ -21,3 +43,8 @@ outputs/enrichment/*
 outputs/hotel_markdown/*
 outputs/email_drafts/*
 outputs/clickup/*
+outputs/private/*
+
+# Keep directory placeholders/docs when present
+!data/**/.gitkeep
+!outputs/**/.gitkeep
