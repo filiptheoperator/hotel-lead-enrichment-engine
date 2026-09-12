@@ -1,24 +1,29 @@
 # HOTEL AI DISCOVERY — AGENT INSTRUCTIONS
 
 ## Role of this repository
-This repository is the **technical execution layer for the Lead Engine** of The Hotel Operator / Hotel AI Discovery phase. It is not the canonical business knowledge base and must not become a competing CRM or research store.
+This repository is the **technical execution layer for the Lead Engine and future Discovery automation** of The Hotel Operator / Hotel AI. It is not the canonical business knowledge base and must not become a competing CRM or research store.
 
 ## Canonical truth
-Google Drive is the canonical source of truth for business requirements, Market Research, Lead Engine records, Discovery Command Center, decisions and active system manifests.
+Google Drive is the canonical source of truth for business requirements, source intelligence, Market Research, Lead Engine records, Discovery Command Center, decisions, phase plans, run contracts and active system manifests.
 
-Exact Drive IDs and current manifest version must be supplied in the execution handoff. **Do not commit private Drive IDs, lead data, community data, credentials or internal hotel information to this public repository.**
+Exact Drive IDs and current manifest/run-contract references must be supplied in the execution handoff. **Do not commit private Drive IDs, lead data, community data, credentials or internal hotel information to this public repository.**
 
 ## Current business phase
 DISCOVERY.
 
-The objective is to:
-1. understand recurring hospitality pains and what works/fails;
-2. discover and enrich high-fit hotel/person leads;
-3. support evidence-based outreach and discovery conversations;
-4. feed learnings back into the canonical Market Research and Lead Engine;
-5. only later turn validated repeated pains into service hypotheses/products.
+The business architecture separates three source domains:
+- Community Intelligence
+- Hotel Intelligence
+- Competitor Intelligence
 
-Primary segment: independent / boutique / small-to-medium 3–4 star hotels. Adjacent hospitality segments may be retained when relevant.
+These feed normalized Market Research and the Lead Engine, which feed the Discovery Command Center. Do not collapse these domains into one technical table without an explicit schema handoff.
+
+## Phase gates
+- Phase 0: first 100 hotels + market-source expansion + founder operational discovery.
+- Phase 1: permitted community expansion + competitor-intelligence pilot.
+- Phase 2: CRM automation and dashboard polish.
+
+**Do not start Phase-2 backend/CRM automation merely because it is technically possible.** The task handoff must explicitly state that the current business-layer start gate is satisfied.
 
 ## Repository scope
 Use this codebase for repeatable technical work such as:
@@ -29,11 +34,13 @@ Use this codebase for repeatable technical work such as:
 - QA and run manifests;
 - approved public-source collection pipelines;
 - export/sync adapters for the canonical structured store;
+- later CRM sync/backend/dashboard infrastructure after the phase gate;
 - outreach **draft generation**, never automatic sending unless a later explicit human-approved system contract permits it.
 
 ## Non-negotiable rules
 - Raw inputs are immutable.
 - Unknown values remain unknown; never fabricate enrichment.
+- Distinguish `NOT_OBSERVED` from verified absence when modeling competitor/hotel capabilities.
 - Every consequential enriched field should retain source/provenance where practical.
 - Do not scrape sources whose terms prohibit automated collection or where authorization is unclear.
 - Do not store sensitive personal data, guest PII, credentials or private hotel secrets.
@@ -42,15 +49,20 @@ Use this codebase for repeatable technical work such as:
 - Keep code/config changes minimal and testable.
 
 ## Data contract alignment
-Technical outputs must map cleanly to the canonical conceptual entities:
+Technical outputs must map cleanly to canonical concepts supplied in the handoff, including where relevant:
 - Hotel
 - Person
 - Opportunity
 - Outreach Queue
 - Contact History
 - Enrichment Queue
+- Competitor Set / Observation / Benchmark / Opportunity Gap
+- source/provenance identifiers
 
 Market patterns and service hypotheses remain business-layer objects and should not be redefined in code without an explicit schema change handoff.
+
+## CRM direction
+During core Discovery, Google Drive/Sheets remains the business source of truth. The planned future sales CRM is HubSpot for **curated qualified** companies/contacts/deals/activity, not raw research. ClickUp may become an optional operations layer. Never create a competing canonical store from this repository.
 
 ## Tool division
 - ChatGPT: control plane, architecture, synthesis, Drive/Sheets governance and QA.
@@ -63,6 +75,7 @@ Market patterns and service hypotheses remain business-layer objects and should 
 Require an execution handoff containing:
 - objective;
 - current active manifest reference/version;
+- current phase and task-specific run contract;
 - input source;
 - allowed/forbidden actions;
 - output schema;
